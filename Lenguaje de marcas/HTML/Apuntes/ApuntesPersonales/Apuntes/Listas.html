@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <a name="ParteSuperiorListas"></a>
+    <h1>Listas</h1>
+    <p>Las listas en html permiten ordenar cosas, existen listas ordenadas y desordenadas. <br>
+        Se construyen con las etiquetas "ol", "ul" y "li". <br>
+        Tambien existe un tipo de listas especiales, llamadas listas de definiciones. <br>
+        Se construyen con las etiquetas "dl", "dt" y "dd".
+    </p>
+    <a href="../Apuntes.html">Índice</a>
+    <hr>
+
+
+    <fieldset>
+        <Legend>Listas ordenadas</Legend>
+        <p>"ol" Sirve para listas ordenadas, las cuales automaticamente generan un indice. <br>
+            Los contenidos se declaran mediante la etiqueta "li". <br>
+            Por ejemplo:</p>
+        <ol>
+            <li>Patata</li>
+            <li>Zanahoria</li>
+            <li>Tomate</li>
+            <li>Lechuga</li>
+            <li>Brocoli</li>
+        </ol>
+        <p>Aqui tenemos una lista ordenada con 5 elementos</p>
+    </fieldset>
+    <fieldset>
+        <Legend>Listas desordenadas</Legend>
+        <p>"ul" sirve para las listas desordenadas, las cuales carecen de numeracion. <br>
+            Los contenidos se declaran mediante la etiqueta "li". <br>
+            Por ejemplo:</p>
+        <ul>
+            <li>Patata</li>
+            <li>Zanahoria</li>
+            <li>Tomate</li>
+            <li>Lechuga</li>
+            <li>Brocoli</li>
+        </ul>
+        <p>Aqui tenemos una lista con los mismos elementos que la anterior pero sin numeracion</p>
+    </fieldset>
+    <fieldset>
+        <legend>Listas de definiciones</legend>
+        <p>Las listas de definiciones sirve para agrupar definiciones de manera similar a un diccionario. <br>
+            se inicializan con la etiqueta "dl", "dt" indica el termino a definir y "dd" contiene la definicion propia.
+            <br>
+            Por ejemplo:
+        </p>
+        <dl>
+            <dt> dl
+                <dd>Etiqueta que inicializa la lista de definiciones</dd>
+            </dt>
+            <dt> dt
+                <dd>Etiqueta que indica el termino que se va a definir</dd>
+            </dt>
+            <dt> dd
+                <dd>Etiqueta donde va la definicion propia del termino</dd>
+            </dt>
+        </dl>
+
+
+    </fieldset>
+
+    <fieldset>
+        <legend>Bonus</legend>
+        <p>Se pueden anidar ambos tipos de listas. <br> Por ejemplo:</p>
+        <ul>
+            <li>Patata</li>
+            <li>Zanahoria</li>
+            <li>Tomate</li>
+            <ol>
+                <li>Lechuga</li>
+                <li>Brocoli</li>
+            </ol>
+        </ul>
+    </fieldset>
+    <a href="#ParteSuperiorListas">Parte superior</a>
+
+</body>
+
+</html>
