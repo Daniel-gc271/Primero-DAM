@@ -10,7 +10,7 @@ package Ejemplos;
  */
 public class FibonacciIterativo {
     public static void main(String[] args) {
-        int serie = 1000; // Cantidad de números de la serie a generar
+        int serie = 100; // Cantidad de números de la serie a generar
         int num1 = 0, num2 = 1;
 
         System.out.println("Serie de Fibonacci (Iterativa):");
