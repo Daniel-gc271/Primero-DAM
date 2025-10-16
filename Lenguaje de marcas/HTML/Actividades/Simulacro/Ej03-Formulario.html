@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <form action="" method="get">
+        <fieldset>
+            <legend>Formulario de quejas</legend>
+            <label for="SelQueja">Seleccione el motivo de su queja</label>
+            <br> 
+            <select name="SelQueja">
+                <option value="1">Calidad del producto</option>
+                <option value="2">Tiempo de entrega</option>
+                <option value="3">Trato del repartidor</option>
+                <option value="4">Estado del producto</option>
+                <option value="5">No entrega en mano</option>
+                <option value="6">Entrega en direccion incorrecta</option>
+
+            </select>
+            <hr>
+            <label for="textarea#1">Descripccion</label>
+            <br>
+            <textarea name="DescQueja" id="textoDescQueja" cols="50" rows="20"
+                placeholder="Introduce una descripccion detallada del motivo que le ha llevado a su queja."></textarea>
+            <hr>
+            <Label>Resolucion:</Label>
+            <br>
+            <label for="ReembolsoRes">Reembolso completo</label>
+            <input type="radio" name="resolucion" id="ReembolsoRes">
+
+            <label for="ReembolsoSust">Sustiucion</label>
+            <input type="radio" name="resolucion" id="ReembolsoSust">
+
+            <label for="ReembolsoALT">Otras compensaciones</label>
+            <input type="radio" name="resolucion" id="ReembolsoALT" checked>
+
+            <hr>
+
+            <input type="submit" value="Enviar formulario">
+            <input type="reset" value="Borrar datos">
+
+
+
+        </fieldset>
+
+
+    </form>
+
+</body>
+
+</html>

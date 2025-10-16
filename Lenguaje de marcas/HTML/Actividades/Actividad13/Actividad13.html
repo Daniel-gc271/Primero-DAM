@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <form action="" method="get">
+        <fieldset>
+            <legend><b>Datos personales</b></legend>
+            <label for="provincia">Selecciona una provincia:</label>
+            <br>
+            <select id="provincia" name="provincia">
+                <optgroup label="Andalucía">
+                    <option value="almeria">Almería</option>
+                    <option value="cadiz">Cádiz</option>
+                    <option value="cordoba">Córdoba</option>
+                    <option value="granada">Granada</option>
+                    <option value="huelva">Huelva</option>
+                    <option value="jaen">Jaén</option>
+                    <option value="malaga">Málaga</option>
+                    <option value="sevilla">Sevilla</option>
+                </optgroup>
+                <optgroup label="Aragón">
+                    <option value="huesca">Huesca</option>
+                    <option value="teruel">Teruel</option>
+                    <option value="zaragoza">Zaragoza</option>
+                </optgroup>
+                <optgroup label="Asturias">
+                    <option value="asturias">Asturias</option>
+                </optgroup>
+                <optgroup label="Islas Baleares">
+                    <option value="baleares">Islas Baleares</option>
+                </optgroup>
+                <optgroup label="Canarias">
+                    <option value="las-palmas">Las Palmas</option>
+                    <option value="santa-cruz">Santa Cruz de Tenerife</option>
+                </optgroup>
+                <optgroup label="Cantabria">
+                    <option value="cantabria">Cantabria</option>
+                </optgroup>
+                <optgroup label="Castilla y León">
+                    <option value="avila">Ávila</option>
+                    <option value="burgos">Burgos</option>
+                    <option value="leon">León</option>
+                    <option value="palencia">Palencia</option>
+                    <option value="salamanca">Salamanca</option>
+                    <option value="segovia">Segovia</option>
+                    <option value="soria">Soria</option>
+                    <option value="valladolid">Valladolid</option>
+                    <option value="zamora">Zamora</option>
+                </optgroup>
+                <optgroup label="Castilla-La Mancha">
+                    <option value="albacete">Albacete</option>
+                    <option value="ciudad-real">Ciudad Real</option>
+                    <option value="cuenca">Cuenca</option>
+                    <option value="guadalajara">Guadalajara</option>
+                    <option value="toledo">Toledo</option>
+                </optgroup>
+                <optgroup label="Cataluña">
+                    <option value="barcelona">Barcelona</option>
+                    <option value="girona">Girona</option>
+                    <option value="lleida">Lleida</option>
+                    <option value="tarragona">Tarragona</option>
+                </optgroup>
+                <optgroup label="Extremadura">
+                    <option value="badajoz">Badajoz</option>
+                    <option value="caceres">Cáceres</option>
+                </optgroup>
+                <optgroup label="Galicia">
+                    <option value="a-coruna">A Coruña</option>
+                    <option value="lugo">Lugo</option>
+                    <option value="ourense">Ourense</option>
+                    <option value="pontevedra">Pontevedra</option>
+                </optgroup>
+                <optgroup label="Madrid">
+                    <option value="madrid">Madrid</option>
+                </optgroup>
+                <optgroup label="Murcia">
+                    <option value="murcia">Murcia</option>
+                </optgroup>
+                <optgroup label="Navarra">
+                    <option value="navarra">Navarra</option>
+                </optgroup>
+                <optgroup label="La Rioja">
+                    <option value="la-rioja">La Rioja</option>
+                </optgroup>
+                <optgroup label="País Vasco">
+                    <option value="alava">Álava</option>
+                    <option value="guipuzcoa">Guipúzcoa</option>
+                    <option value="vizcaya">Vizcaya</option>
+                </optgroup>
+                <optgroup label="Comunidad Valenciana">
+                    <option value="alicante">Alicante</option>
+                    <option value="castellon">Castellón</option>
+                    <option value="valencia">Valencia</option>
+                </optgroup>
+            </select>
+            <br> <br>
+            <label for=""></label>
+            
+            <br>
+            <label for="diaNacimiento">Dia</label>
+            <label for="dia"></label>
+            <input type="number" name="dia" min="0" max="31" size="5" required>
+
+            <label for="mesNacimiento">de</label>
+            <select id="mesNacimiento" name="mesNacimiento">
+                <option value="1">Enero</option>
+                <option value="2">Febrero</option>
+                <option value="3">Marzo</option>
+                <option value="4">Abril</option>
+                <option value="5">Mayo</option>
+                <option value="6">Junio</option>
+                <option value="7">Julio</option>
+                <option value="8">Agosto</option>
+                <option value="9">Septiembre</option>
+                <option value="10">Octubre</option>
+                <option value="11">Noviembre</option>
+                <option value="12">Diciembre</option>
+            </select>
+            <label for="año">de</label>
+            <input type="number" name="añoNacimiento" required>
+            <br><br>
+            <label for="temas">Temas de interés:</label>
+            <br>
+            <select id="temas" name="temasInterés" multiple size="5">
+                <option value="frontend">Frontend</option>
+                <option value="backend">Backend</option>
+                <option value="devops">DevOps</option>
+                <option value="mobile">Desarrollo móvil</option>
+                <option value="ai">Inteligencia Artificial</option>
+                <option value="cloud">Cloud Computing</option>
+                <option value="security">Seguridad</option>
+                <option value="data">Datos y Big Data</option>
+                <option value="game">Desarrollo de videojuegos</option>
+                <option value="iot">Internet de las cosas (IoT)</option>
+            </select>
+            <br><br>
+
+
+            <input type="submit" value="Enviar"> <input type="reset" value="Limpiar">
+
+
+
+
+
+
+
+
+
+
+        </fieldset>
+    </form>
+</body>
+
+</html>

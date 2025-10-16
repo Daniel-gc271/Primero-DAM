@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <form action="" method="get">
+        <fieldset>
+            <legend><b>Rellena tu cv</b></legend>
+            <label for="name">Nombre</label> <br>
+            <input type="text" name="name" required> <br>
+
+            <label for="surname">Apellido</label> <br>
+            <input type="text" name="surname" required> <br>
+
+            <label for="password">Contraseña</label> <br>
+            <input type="password" name="password" required> <br>
+
+            <label for="DNI">DNI</label> <br>
+            <input type="text" name="DNI" required> <br>
+
+            <label for="sexo">Sexo</label>
+            <br>
+            <input type="radio" id="sexo" name="genero" value="H" required>
+            <label for="generoHombre">masculino</label>
+            <br>
+            <input type="radio" id="sexo" name="genero" value="M" required>
+            <label for="generoMujer">femenino</label>
+            <br><br>
+            <label for="archivo"><b>Incluir mi foto</b></label>
+            <input type="file" name="archivo" id="archivo">
+            <br> <br>
+            <input type="checkbox" name="newsletter" id="newsletter">
+            <label for="newsletter">Suscribirme al newsletter</label>
+            <br>
+            <br>
+            <input type="submit" value="Enviar formulario">
+            <input type="reset" value="Limpiar datos">
+        </fieldset>
+    </form>
+</body>
+
+</html>
