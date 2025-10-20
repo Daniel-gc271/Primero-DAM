@@ -1,0 +1,17 @@
+span + span {
+    text-decoration: underline;
+    font-size: 32px;
+}
+div + p {
+    border: 2px solid red;
+}
+li + li {
+    background-color: thistle;
+}
+div span{
+color: blueviolet;
+}
+div>span{
+color: rgb(226, 86, 43);
+}
+
