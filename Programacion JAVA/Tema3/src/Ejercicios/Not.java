@@ -18,16 +18,15 @@ public class Not {
         Scanner scIn = new Scanner(System.in);
 
         // Pedir al usuario un numero binario y obtenerlo como string
-        System.out.print("Introduce un número binario: ");
+        System.out.print("Introduce un número binario (0 ó 1): ");
         String entrada = scIn.nextLine();
 
-        //Comprobar el numero introducido por el usuario y avisar que ha cometido un error y donde
+        //Comprobar el numero introducido por el usuario es binario y avisar si ha cometido un error
         int i = 0;
         while (i < entrada.length()) {
             char c = entrada.charAt(i);
             if (c != '0' && c != '1') {
-                System.out.println("Entrada inválida. Solo se permiten 0 y 1.");
-                System.out.printf("%s el carcater #%d es incorrecto\n",entrada,(i+1));
+                System.out.println("Entrada inválida. Solo se permiten 0 ó 1.");
                 System.exit(1);
             }
             i++;
@@ -45,19 +44,19 @@ public class Not {
         += (esta cosa rara de aqui concatena caracteres vale chavles)
         al nuevo string invBin y vicebersa
         */
-        String invBin = "";
+        String binInv = "";
         i = 0;
         while (i < entrada.length()) {
-            invBin += (entrada.charAt(i) == '0') ? '1' : '0';
+            binInv += (entrada.charAt(i) == '0') ? '1' : '0';
             i++;
         }
         //Posteriormente se cambia a base 2 base del binario pra q nos entendamos ;)
-        int decInv = Integer.parseInt(invBin, 2);
+        int decInv = Integer.parseInt(binInv, 2);
 
         // Y por ultimo pro no menos importante se imprimen los resultados
         System.out.println("Binario original: " + entrada);
         System.out.println("Decimal original: " + decOrg);
-        System.out.println("Binario invertido (NOT): " + invBin);
+        System.out.println("Binario invertido (NOT): " + binInv);
         System.out.println("Decimal invertido: " + decInv);
     }
 
