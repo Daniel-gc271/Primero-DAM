@@ -28,23 +28,14 @@ public class menuDoWhile {
         Scanner scIn = new Scanner(System.in);
         do {
             showMenu();
-        
-        opt = scIn.nextLine().toUpperCase().charAt(0);
-        
+        opt = scIn.nextLine().toUpperCase().charAt(0); 
         switch (opt) {
             case 'A' -> System.out.println("Opcion a");
             case 'B' -> System.out.println("Opcion b");
             case 'C' -> System.out.println("Opcion c");
             case 'S' -> {System.out.println("Salir"); scIn.close();}
             default -> System.err.println("Seleccion inválida");
-        }
-
-        
-        }while (opt !='S');
-                
-               
-       
-        
-        
+        }      
+        }while (opt !='S');  
     }
 }
