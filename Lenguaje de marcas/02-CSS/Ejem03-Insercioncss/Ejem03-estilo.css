@@ -1,0 +1,15 @@
+input:hover {
+    border-color: green;
+    border: 3px solid green;
+}
+input[type="text"] {
+    border: 2px solid blue;
+    padding: 5px;
+    font-size: 16px;
+}
+a:active{
+    color: red;
+}
+a:visited {
+    color: orange;
+}
