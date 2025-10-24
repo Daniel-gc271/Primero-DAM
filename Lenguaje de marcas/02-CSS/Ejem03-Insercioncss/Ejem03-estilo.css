@@ -1,7 +1,7 @@
-input:hover {
+/* input:hover {
     border-color: green;
     border: 3px solid green;
-}
+} */
 input[type="text"] {
     border: 2px solid blue;
     padding: 5px;
@@ -12,4 +12,28 @@ a:active{
 }
 a:visited {
     color: orange;
+}
+input:hover {
+  border-color:#736324;
+    border: 5px solid #736324;
+
+}
+a:hover {
+  border-color:#736324;
+    border: 5px solid #736324;
+
+}
+p::first-letter {
+    font-size: 200%;
+    color: purple;
+    font-weight: bold;
+}
+p:nth-child(2n) {
+    background-color: burlywood;
+}
+p:last-of-type {
+    font-style: italic;
+}
+p span:first-child {
+    background-color: yellow;
 }
