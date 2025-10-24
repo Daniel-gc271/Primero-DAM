@@ -16,9 +16,9 @@ public class menuWhile {
     private static void showMenu() {
         
         System.out.println("Slecciona una de las siguientes opciones: ");
-        System.out.println("Opciona A");
-        System.out.println("Opciona B");
-        System.out.println("Opciona C");
+        System.out.println("Opcion A");
+        System.out.println("Opcion B");
+        System.out.println("Opcion C");
         System.out.println("S para salir");
         
     }
