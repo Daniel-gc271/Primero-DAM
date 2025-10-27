@@ -6,8 +6,8 @@ package cacharreo;
 
 import java.util.Scanner;
 
-
 public class Cacharreo {
+
     private static float calcularDeterminante(float[][] matriz) {
         int n = matriz.length;
 
@@ -36,6 +36,7 @@ public class Cacharreo {
         }
         return determinante;
     }
+
     private static float[][] crearSubmatriz(float[][] matriz, int filaExcluida, int columnaExcluida) {
 
         int ordenSubmatriz = matriz.length;
@@ -61,10 +62,6 @@ public class Cacharreo {
         return submatriz;
 
     }
-   
-   
-
-    
 
     private static float[][] getMatrix(int orden, Scanner input) {
         float[][] coeficientes = new float[orden][orden];
@@ -121,7 +118,7 @@ public class Cacharreo {
         return soluciones;
 
     }
-    
+
     private static void imprimirMatriz(float[][] matrix) {
         for (float[] fila : matrix) {
             for (float valor : fila) {
@@ -143,9 +140,30 @@ public class Cacharreo {
 
         return matrizReemplazada;
     }
-    
-    
-    
+
+    private static int evaluarRango(float[][] matriz) {
+        int rango = matriz.length;
+        float determinante = calcularDeterminante(matriz);
+        int ordenMatriz = matriz.length;
+        if (determinante == 0) {
+            float[][] adjunta = calcularAdjunta(matriz);
+            System.out.println("\nEvaluando rango");
+            for (int j = 0; j < ordenMatriz; j++) {
+                for (int k = 0; k < ordenMatriz; k++) {
+                    
+                    if (adjunta[j][k] != 0) {
+                        
+                        rango--;
+                        return rango;
+                    }
+                }
+            }
+        } else {     
+            return rango;
+        }
+        return 0;
+    }
+
     private static float[][] calcularAdjunta(float matriz[][]) {
         int ordenMatriz = matriz.length;
         float[][] matrizAdjunta = new float[ordenMatriz][ordenMatriz];
@@ -186,25 +204,27 @@ public class Cacharreo {
     public static void main(String[] args) {
         // TODO code application logic here
         float[][] matriz = {
-            {1.0f, -1.0f, 2.0f},
-            {2.0f, 1.0f, 3.0f},
-            {1.0f, 1.0f, 1.0f}
+            {1.0f, 1.0f, 2.0f},
+            {1.0f, -2.0f, 5.0f},
+            {1.0f, 2.0f, 1.0f}
         };
 
-        Scanner input = new Scanner(System.in);
+        //Scanner input = new Scanner(System.in);
         imprimirMatriz(matriz);
+        System.out.println("\nRango de la matriz");
+        System.out.print(evaluarRango(matriz));
 
         System.out.println("\nMatriz adjunta:");
         float[][] adjunta = calcularAdjunta(matriz);
         imprimirMatriz(adjunta);
-
+        /*
         System.out.println("\nMatriz transpuesta:");
         float[][] transpuesta = calcularTraspuesta(matriz);
         imprimirMatriz(transpuesta);
 
         System.out.println("\nMatriz inversa:");
         float[][] inversa = calcularInversa(matriz);
-        imprimirMatriz(inversa);
+        imprimirMatriz(inversa);*/
 
         System.out.println("");
     }
