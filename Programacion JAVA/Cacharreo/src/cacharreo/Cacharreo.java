@@ -6,16 +6,8 @@ package cacharreo;
 
 import java.util.Scanner;
 
-/**
- *
- * @author goncalda
- */
-public class Cacharreo {
 
-    /**
-     * @param args the command line arguments
-     */
-    // Método principal para calcular el determinante
+public class Cacharreo {
     private static float calcularDeterminante(float[][] matriz) {
         int n = matriz.length;
 
@@ -44,8 +36,6 @@ public class Cacharreo {
         }
         return determinante;
     }
-
-    // Método para crear una submatriz excluyendo la primera fila y una columna específica
     private static float[][] crearSubmatriz(float[][] matriz, int filaExcluida, int columnaExcluida) {
 
         int ordenSubmatriz = matriz.length;
@@ -71,42 +61,10 @@ public class Cacharreo {
         return submatriz;
 
     }
+   
+   
 
-    private static float[][] calcularAdjunta(float matriz[][]) {
-        int ordenMatriz = matriz.length;
-        float[][] matrizAdjunta = new float[ordenMatriz][ordenMatriz];
-        for (int j = 0; j < ordenMatriz; j++) {
-            for (int k = 0; k < ordenMatriz; k++) {
-                int signo = 1 - (((j + k) & 1) << 1);
-                matrizAdjunta[j][k] = signo * calcularDeterminante(crearSubmatriz(matriz, j, k));
-            }
-        }
-        return matrizAdjunta;
-    }
-
-    private static float[][] transponerMatriz(float matriz[][]) {
-        int ordenMatriz = matriz.length;
-        float[][] matrizTraspuesta = new float[ordenMatriz][ordenMatriz];
-        for (int j = 0; j < ordenMatriz; j++) {
-            for (int k = 0; k < ordenMatriz; k++) {
-                matrizTraspuesta[j][k] = matriz[k][j];
-            }
-        }
-        return matrizTraspuesta;
-    }
-
-    private static float[][] replaceCol(float[][] matrix, float[] indepTerms, int colIndex) {
-        int orden = matrix.length;
-        float[][] matrizReemplazada = new float[orden][orden];
-
-        for (int fila = 0; fila < orden; fila++) {
-            for (int columna = 0; columna < orden; columna++) {
-                matrizReemplazada[fila][columna] = (columna == colIndex) ? indepTerms[fila] : matrix[fila][columna];
-            }
-        }
-
-        return matrizReemplazada;
-    }
+    
 
     private static float[][] getMatrix(int orden, Scanner input) {
         float[][] coeficientes = new float[orden][orden];
@@ -144,6 +102,26 @@ public class Cacharreo {
         System.out.println(")");
     }
 
+    private static float[] aplicarCramer(float[][] matrix, float[] indepTerms, float determinante) {
+        int solNum = indepTerms.length;
+        float[] soluciones = new float[solNum];
+        for (int i = 0; i < solNum; i++) {
+            float[][] rplMatrix;
+
+            rplMatrix = replaceCol(matrix, indepTerms, i);
+            //System.out.println("Matriz reemplazada #"+i);
+            //imprimirMatriz(rplMatrix);
+            if (calcularDeterminante(rplMatrix) / determinante == 0) {
+                soluciones[i] = 0;
+            } else {
+                soluciones[i] = calcularDeterminante(rplMatrix) / determinante;
+
+            }
+        }
+        return soluciones;
+
+    }
+    
     private static void imprimirMatriz(float[][] matrix) {
         for (float[] fila : matrix) {
             for (float valor : fila) {
@@ -153,18 +131,56 @@ public class Cacharreo {
         }
     }
 
+    private static float[][] replaceCol(float[][] matrix, float[] indepTerms, int colIndex) {
+        int orden = matrix.length;
+        float[][] matrizReemplazada = new float[orden][orden];
+
+        for (int fila = 0; fila < orden; fila++) {
+            for (int columna = 0; columna < orden; columna++) {
+                matrizReemplazada[fila][columna] = (columna == colIndex) ? indepTerms[fila] : matrix[fila][columna];
+            }
+        }
+
+        return matrizReemplazada;
+    }
+    
+    
+    
+    private static float[][] calcularAdjunta(float matriz[][]) {
+        int ordenMatriz = matriz.length;
+        float[][] matrizAdjunta = new float[ordenMatriz][ordenMatriz];
+        for (int j = 0; j < ordenMatriz; j++) {
+            for (int k = 0; k < ordenMatriz; k++) {
+                int signo = 1 - (((j + k) & 1) << 1);
+                matrizAdjunta[j][k] = signo * calcularDeterminante(crearSubmatriz(matriz, j, k));
+            }
+        }
+        return matrizAdjunta;
+    }
+
     private static float[][] calcularInversa(float[][] matriz) {
-        int ordenMatriz=matriz.length;
+        int ordenMatriz = matriz.length;
         float detMatriz = calcularDeterminante(matriz);
         float[][] adjT = new float[ordenMatriz][ordenMatriz];
         float[][] matrizInversa = new float[ordenMatriz][ordenMatriz];
-        adjT = transponerMatriz(calcularAdjunta(matriz));
+        adjT = calcularTraspuesta(calcularAdjunta(matriz));
         for (int j = 0; j < ordenMatriz; j++) {
             for (int k = 0; k < ordenMatriz; k++) {
-               matrizInversa[j][k]=(float) adjT[j][k]/detMatriz;
+                matrizInversa[j][k] = (float) adjT[j][k] / detMatriz;
             }
         }
         return matrizInversa;
+    }
+
+    private static float[][] calcularTraspuesta(float matriz[][]) {
+        int ordenMatriz = matriz.length;
+        float[][] matrizTraspuesta = new float[ordenMatriz][ordenMatriz];
+        for (int j = 0; j < ordenMatriz; j++) {
+            for (int k = 0; k < ordenMatriz; k++) {
+                matrizTraspuesta[j][k] = matriz[k][j];
+            }
+        }
+        return matrizTraspuesta;
     }
 
     public static void main(String[] args) {
@@ -183,11 +199,11 @@ public class Cacharreo {
         imprimirMatriz(adjunta);
 
         System.out.println("\nMatriz transpuesta:");
-        float[][] transpuesta = transponerMatriz(matriz);
+        float[][] transpuesta = calcularTraspuesta(matriz);
         imprimirMatriz(transpuesta);
-        
+
         System.out.println("\nMatriz inversa:");
-        float[][] inversa=calcularInversa(matriz);
+        float[][] inversa = calcularInversa(matriz);
         imprimirMatriz(inversa);
 
         System.out.println("");
