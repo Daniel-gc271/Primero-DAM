@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Formulario</h1>
+    <fieldset> <legend>Datos</legend>
+        <form action="" method="post">
+            <label for="selecPais">Pais de residencia</label>
+            <select name="Pais" id="selecPais" required>
+                <optgroup> Europa
+                    <option value="Espana">España</option>
+                    <option value="Francia">Francia</option>
+                    <option value="Italia">Italia</option>
+                    <option value="Portugal">Portugal</option>
+                    <option value="Alemania">Alemania</option>
+                </optgroup>
+            </select>
+            <br><br>
+            
+            <label for="Hombre">Hombre</label>
+            <input type="radio"name="genero" id="Hombre" required>
+            <label for="Mujer">Mujer</label>
+            <input type="radio"name="genero" id="Mujer">
+
+            <br><br>
+
+            <input type="submit" value="Enviar">
+            <input type="reset" value="Borarrar">
+
+        </form>
+
+
+    </fieldset>
+</body>
+</html>
