@@ -96,6 +96,27 @@ public class Cacharreo {
         System.out.println(")");
     }
 
+    private static void imprimirMatriz(float[][] matrix) {
+        int numFilas = matrix.length;
+        int numColumnas = matrix[0].length;
+        for (int i = 0; i < numFilas; i++) {
+            for (int j = 0; j < numColumnas; j++) {
+                System.out.printf(" %f", matrix[i][j]);
+            }
+            System.out.println("");
+        }
+    }
+    private static void multiplicarMatriz(float[][] matrizA, float[][] matrizB) {
+        int numFilasA = matrizA.length;
+        int numColumnasB =matrizB[0].length;
+        
+        for (int i=0;i< ;i++) {
+        for (int j=0;j< ;j++) 
+        {
+            
+        }
+    }
+
     private static float[] aplicarCramer(float[][] matrix, float[] indepTerms, float determinante) {
         int solNum = indepTerms.length;
         float[] soluciones = new float[solNum];
@@ -113,15 +134,6 @@ public class Cacharreo {
 
     }
 
-    private static void imprimirMatriz(float[][] matrix) {
-        for (float[] fila : matrix) {
-            for (float valor : fila) {
-                System.out.printf("%f ", valor);
-            }
-            System.out.println();
-        }
-    }
-
     private static float[][] replaceCol(float[][] matrix, float[] indepTerms, int colIndex) {
         int orden = matrix.length;
         float[][] matrizReemplazada = new float[orden][orden];
@@ -134,13 +146,12 @@ public class Cacharreo {
 
         return matrizReemplazada;
     }
+
     private static int evaluarRango(float[][] matriz) {
         int n = matriz.length;
-
         if (calcularDeterminante(matriz) != 0) {
             return n;
         }
-
         for (int orden = n - 1; orden >= 1; orden--) {
             for (int j = 0; j < n; j++) {
                 for (int k = 0; k < n; k++) {
@@ -151,7 +162,6 @@ public class Cacharreo {
                 }
             }
         }
-
         // Si todos los determinantes son cero, verificar si hay algún elemento distinto de cero
         for (int i = 0; i < n; i++) {
             for (int j = 0; j < n; j++) {
@@ -160,7 +170,6 @@ public class Cacharreo {
                 }
             }
         }
-
         return 0;
     }
 
@@ -179,9 +188,17 @@ public class Cacharreo {
     private static float[][] calcularInversa(float[][] matriz) {
         int ordenMatriz = matriz.length;
         float detMatriz = calcularDeterminante(matriz);
-        //float[][] adjT = new float[ordenMatriz][ordenMatriz];
-        float[][] adjT = new float[ordenMatriz][ordenMatriz];
+        if (detMatriz == 0) {
+            float[][] matrizNula = new float[ordenMatriz][ordenMatriz];
+            for (int j = 0; j < ordenMatriz; j++) {
+                for (int k = 0; k < ordenMatriz; k++) {
+                    matrizNula[j][k] = 0;
+                }
+            }
+            return matrizNula;
+        }
         float[][] matrizInversa = new float[ordenMatriz][ordenMatriz];
+        float[][] adjT = new float[ordenMatriz][ordenMatriz];
         adjT = calcularTraspuesta(calcularAdjunta(matriz));
         for (int j = 0; j < ordenMatriz; j++) {
             for (int k = 0; k < ordenMatriz; k++) {
@@ -205,11 +222,9 @@ public class Cacharreo {
     public static void main(String[] args) {
         // TODO code application logic here
         float[][] matriz = {
-            {1, 2, 3, 4, 5},
-            {2, 4, 6, 8, 10},
-            {3, 6, 9, 12, 15},
-            {4, 8, 12, 16, 20},
-            {5, 10, 15, 20, 25}
+            {1, -1, 2},
+            {2, 1, 3},
+            {1, 1, 1}
         };
 
         //Scanner input = new Scanner(System.in);
