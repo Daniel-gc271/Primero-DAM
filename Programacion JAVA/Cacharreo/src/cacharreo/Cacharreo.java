@@ -30,9 +30,6 @@ public class Cacharreo {
             int signo = 1 - ((i & 1) << 1);
 
             determinante += signo * matriz[0][i] * calcularDeterminante(submatriz);
-            System.out.println("Submatriz #" + i);
-            System.out.println("coeficiente del cofactor: " + (signo * matriz[0][i]));
-
         }
         return determinante;
     }
@@ -104,10 +101,7 @@ public class Cacharreo {
         float[] soluciones = new float[solNum];
         for (int i = 0; i < solNum; i++) {
             float[][] rplMatrix;
-
             rplMatrix = replaceCol(matrix, indepTerms, i);
-            //System.out.println("Matriz reemplazada #"+i);
-            //imprimirMatriz(rplMatrix);
             if (calcularDeterminante(rplMatrix) / determinante == 0) {
                 soluciones[i] = 0;
             } else {
@@ -140,30 +134,63 @@ public class Cacharreo {
 
         return matrizReemplazada;
     }
+    
+    /*
 
     private static int evaluarRango(float[][] matriz) {
         int rango = matriz.length;
-        float determinante = calcularDeterminante(matriz);
         int ordenMatriz = matriz.length;
-        if (determinante == 0) {
-            float[][] adjunta = calcularAdjunta(matriz);
-            System.out.println("\nEvaluando rango");
+        if (calcularDeterminante(matriz) == 0) {
             for (int j = 0; j < ordenMatriz; j++) {
                 for (int k = 0; k < ordenMatriz; k++) {
-                    
-                    if (adjunta[j][k] != 0) {
-                        
-                        rango--;
-                        return rango;
+                    float[][] submatriz = crearSubmatriz(matriz, j, k);
+                    imprimirMatriz(submatriz);
+                    System.out.println(calcularDeterminante(submatriz));
+                    if (calcularDeterminante(submatriz) != 0) {
+                        return (ordenMatriz - 1);
+                    } else {
+                        return evaluarRango(submatriz);
                     }
                 }
             }
-        } else {     
-            return rango;
         }
-        return 0;
+        return ordenMatriz;
     }
 
+
+*/
+    private static int evaluarRango(float[][] matriz) {
+    int n = matriz.length;
+
+    if (calcularDeterminante(matriz) != 0) {
+        return n;
+    }
+
+    for (int orden = n - 1; orden >= 1; orden--) {
+        for (int j = 0; j < n; j++) {
+            for (int k = 0; k < n; k++) {
+                float[][] submatriz = crearSubmatriz(matriz, j, k);
+                if (submatriz.length == orden && calcularDeterminante(submatriz) != 0) {
+                    return orden;
+                }
+            }
+        }
+    }
+
+    // Si todos los determinantes son cero, verificar si hay algún elemento distinto de cero
+    for (int i = 0; i < n; i++) {
+        for (int j = 0; j < n; j++) {
+            if (matriz[i][j] != 0) {
+                return 1;
+            }
+        }
+    }
+
+    return 0;
+}
+    
+    
+    
     private static float[][] calcularAdjunta(float matriz[][]) {
         int ordenMatriz = matriz.length;
         float[][] matrizAdjunta = new float[ordenMatriz][ordenMatriz];
@@ -179,6 +206,7 @@ public class Cacharreo {
     private static float[][] calcularInversa(float[][] matriz) {
         int ordenMatriz = matriz.length;
         float detMatriz = calcularDeterminante(matriz);
+        //float[][] adjT = new float[ordenMatriz][ordenMatriz];
         float[][] adjT = new float[ordenMatriz][ordenMatriz];
         float[][] matrizInversa = new float[ordenMatriz][ordenMatriz];
         adjT = calcularTraspuesta(calcularAdjunta(matriz));
@@ -204,10 +232,14 @@ public class Cacharreo {
     public static void main(String[] args) {
         // TODO code application logic here
         float[][] matriz = {
-            {1.0f, 1.0f, 2.0f},
-            {1.0f, -2.0f, 5.0f},
-            {1.0f, 2.0f, 1.0f}
-        };
+            
+{1, 2, 3, 4, 5},
+    {2, 4, 6, 8, 10},
+    {3, 6, 9, 12, 15},
+    {4, 8, 12, 16, 20},
+    {5, 10, 15, 20, 25}
+};
+        
 
         //Scanner input = new Scanner(System.in);
         imprimirMatriz(matriz);
@@ -217,14 +249,14 @@ public class Cacharreo {
         System.out.println("\nMatriz adjunta:");
         float[][] adjunta = calcularAdjunta(matriz);
         imprimirMatriz(adjunta);
-        /*
+
         System.out.println("\nMatriz transpuesta:");
         float[][] transpuesta = calcularTraspuesta(matriz);
         imprimirMatriz(transpuesta);
 
         System.out.println("\nMatriz inversa:");
         float[][] inversa = calcularInversa(matriz);
-        imprimirMatriz(inversa);*/
+        imprimirMatriz(inversa);
 
         System.out.println("");
     }
