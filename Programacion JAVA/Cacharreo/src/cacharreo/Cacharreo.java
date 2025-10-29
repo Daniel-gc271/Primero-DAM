@@ -227,12 +227,7 @@ public class Cacharreo {
 
     public static void main(String[] args) {
         // TODO code application logic here
-<<<<<<< HEAD
-        float[][] matriz = {
-            {1, -1, 2},
-            {2, 1, 3},
-            {1, 1, 1}
-=======
+
         float[][] matrizA = {
             {1, -1, 2},
             {2, 1, 3},
@@ -242,7 +237,6 @@ public class Cacharreo {
             {-1, 0, 0},
             {0, -1, 0},
             {0, 0, -1}
->>>>>>> origin/main
         };
 
         //Scanner input = new Scanner(System.in);
@@ -263,6 +257,7 @@ public class Cacharreo {
         float[][] inversa = calcularInversa(matrizA);
         imprimirMatriz(inversa);
         
+        System.out.println("\nMultiplicar matrices:");
         imprimirMatriz(multiplicarMatriz(matrizA, matrizB));
         System.out.println("");
     }
