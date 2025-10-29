@@ -12,34 +12,26 @@ import java.util.Scanner;
  * que no quiera mas para ello entre frase y frase debera responder a la
  * pregunra ¿Introducir otra frase? (Si o No)
  */
-public class banderas1 {
- 
-    private static boolean preguntar(Scanner scIn) {
-        System.out.println("\n¿Introducir otra frase? (Si o No)");
-        String entrada = scIn.nextLine().toUpperCase();
-        if (entrada.length()!=2) {System.err.println("Debes responder Si o No"); return preguntar(scIn);}
-        else {if (entrada.charAt(0) != 'S' && entrada.charAt(0) != 'N') {
-            System.err.println("Debes responder Si o No");
-            return preguntar(scIn);
-        }
-        
-        }
-        
-        return entrada.charAt(0) == 'S';
-    }
+public class masFrasesDoWhile {
 
     public static void main(String[] args) {
-        boolean masFrases = true;
         Scanner scIn = new Scanner(System.in);
+        boolean otraFrase = true;
+        String frase = "";
         int contFrases = 0;
-        while (masFrases) {
+        char respuesta;
+        do {
             System.out.println("Introduce una frase");
-            String frase = scIn.nextLine();
+            frase = scIn.nextLine();
             if (frase.length()!=0) {contFrases++;}
             else {System.out.println("No has introducido una frase, entonces no se cuenta");}
-            masFrases = preguntar(scIn);
-        }
-        System.out.println("Frases introducidas: "+contFrases);
+            
+            System.out.println("Introducir otra frase si o no?");
+            respuesta =scIn.nextLine().toLowerCase().charAt(0);
+            otraFrase = respuesta=='s';
+        } while (otraFrase);
+        System.out.println("Has introducido "+contFrases+" frases");
+       
     }
 
 }
