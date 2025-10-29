@@ -106,15 +106,21 @@ public class Cacharreo {
             System.out.println("");
         }
     }
-    private static void multiplicarMatriz(float[][] matrizA, float[][] matrizB) {
+
+    private static float[][] multiplicarMatriz(float[][] matrizA, float[][] matrizB) {
         int numFilasA = matrizA.length;
-        int numColumnasB =matrizB[0].length;
-        
-        for (int i=0;i< ;i++) {
-        for (int j=0;j< ;j++) 
-        {
-            
+        int numColumnasA = matrizA[0].length;
+        int numColumnasB = matrizB[0].length;
+        float[][] matrizMultiplicada = new float[numFilasA][numColumnasB];
+
+        for (int i = 0; i < numFilasA; i++) {
+            for (int j = 0; j < numColumnasB; j++) {
+                for (int k = 0; k < numColumnasA; k++) {
+                    matrizMultiplicada[i][j] += matrizA[i][k] * matrizB[k][j];
+                }
+            }
         }
+        return matrizMultiplicada;
     }
 
     private static float[] aplicarCramer(float[][] matrix, float[] indepTerms, float determinante) {
@@ -221,29 +227,43 @@ public class Cacharreo {
 
     public static void main(String[] args) {
         // TODO code application logic here
+<<<<<<< HEAD
         float[][] matriz = {
             {1, -1, 2},
             {2, 1, 3},
             {1, 1, 1}
+=======
+        float[][] matrizA = {
+            {1, -1, 2},
+            {2, 1, 3},
+            {1, 4, 1}
+        };
+        float[][] matrizB = {
+            {-1, 0, 0},
+            {0, -1, 0},
+            {0, 0, -1}
+>>>>>>> origin/main
         };
 
         //Scanner input = new Scanner(System.in);
-        imprimirMatriz(matriz);
+        
+        imprimirMatriz(matrizA);
         System.out.println("\nRango de la matriz");
-        System.out.print(evaluarRango(matriz));
+        System.out.print(evaluarRango(matrizA));
 
         System.out.println("\nMatriz adjunta:");
-        float[][] adjunta = calcularAdjunta(matriz);
+        float[][] adjunta = calcularAdjunta(matrizA);
         imprimirMatriz(adjunta);
 
         System.out.println("\nMatriz transpuesta:");
-        float[][] transpuesta = calcularTraspuesta(matriz);
+        float[][] transpuesta = calcularTraspuesta(matrizA);
         imprimirMatriz(transpuesta);
 
         System.out.println("\nMatriz inversa:");
-        float[][] inversa = calcularInversa(matriz);
+        float[][] inversa = calcularInversa(matrizA);
         imprimirMatriz(inversa);
-
+        
+        imprimirMatriz(multiplicarMatriz(matrizA, matrizB));
         System.out.println("");
     }
 }
