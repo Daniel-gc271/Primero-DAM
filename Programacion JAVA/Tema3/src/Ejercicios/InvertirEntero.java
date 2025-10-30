@@ -33,7 +33,7 @@ public class InvertirEntero {
         String numInv = ""; 
         Boolean valido = true;
         int i = numOrg.length();
-        //Bucle sescendente que permite invertir el numero 
+        //Bucle descendente que permite invertir el numero 
         //Concatenando los caracteres en el string "numInv"
         //Las condiciones hacen que el bucle se salte en caso
         //de que el numero no sea valido

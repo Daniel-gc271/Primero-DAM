@@ -17,9 +17,10 @@ public class Binario8Bit {
         System.out.println("Introduce una cifra en binario de 8 bits");
             String input = scIn.nextLine();
             scIn.close();
-            if (input.length()!= 8) {System.err.println("No has metido un numero de 8 bits");System.exit(1);}
+            while (input.length()!= 8) {System.err.println("No has metido un numero de 8 bits");System.exit(1);}
         int i = 7;
         int num=0;
+        
         while ( i >= 0) {
            
             System.out.println(i);
