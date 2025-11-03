@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package tema2;
+package Actividades;
 
 import java.util.Scanner;
 
@@ -19,14 +19,11 @@ public class TablaMultiplicar {
     System.out.println("Inserta hasta que valor quieres conocer sus productos");
     int numFinal= scIn.nextInt();
     scIn.close();
+        System.out.println("");
         for (int i =0; i<=numFinal; i++) {
-            System.out.print(i+"*"+numTable+"="+(i*numTable)+"\t");
+            System.out.print(i+"*"+numTable+"="+(i*numTable)+"\n");
             
         }
         System.out.print("\n");
-    
-    
-    
-    
     }
 }
