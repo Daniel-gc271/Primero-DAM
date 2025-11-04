@@ -10,7 +10,7 @@ import java.util.Scanner;
  *
  * @author goncalda
  */
-public class GetCharFromAsciiCode {
+public class GetCharFromAsciiCodeDanielGonzalez {
     public static void main(String[] args) {
         Scanner scIn= new Scanner(System.in);
         System.out.println("Introduce el codigo ascii del caracter que quieres conocer");
