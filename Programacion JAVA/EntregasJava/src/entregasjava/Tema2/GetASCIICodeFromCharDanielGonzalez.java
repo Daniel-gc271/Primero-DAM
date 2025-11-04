@@ -15,7 +15,6 @@ public class GetASCIICodeFromCharDanielGonzalez {
     Scanner scIn = new Scanner(System.in);
         System.out.println("Introduce el caracter del cual quieres conocer su codigo ASCII");
         char caracter=scIn.next().charAt(0);
-        scIn.close();
         int valorASCII=((int)caracter);
         System.out.printf("El caracter \"%s\" corresponde al valor: %d%n",caracter, valorASCII);
     }

@@ -11,6 +11,12 @@ import java.util.Scanner;
  * @author goncalda
  */
 public class CalculoDanielGonzalez {
+ 
+
+
+public class Calculo {
+
+
 
     public static void main(String[] args) {
         // TODO code application logic here
@@ -23,7 +29,10 @@ public class CalculoDanielGonzalez {
         System.out.println("+, -, /, *, %");
         String operacion = scIn.next();
         scIn.close();
-
+        
+        
+        
+        
         switch (operacion.charAt(0)) {
             case '+' ->
                 System.out.println(numA + "+" + numB + "=" + (numA + numB)); //Suma 43   
@@ -43,5 +52,8 @@ public class CalculoDanielGonzalez {
                 System.out.println(numA + "%" + numB + "=" + (numA % numB)); //Modulo 37
 
         }
+
     }
+
+}
 }
