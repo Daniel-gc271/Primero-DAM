@@ -29,9 +29,9 @@ public class BinarioDanielGonzalez {
             entrada[i]=scIn.next().charAt(0);}
             i++;
         } while (i<3);
-        for (int j= entrada.length,){
-        if (}
-        } 
-        System.out.println(valor);
+        for (int j=(entrada.length-1); j>=0;j-- ){
+            if (entrada[j]!='0') {valor+=1<<j;}
+        }
+        System.out.printf("El valor es %d%n",valor);
     }
 }
