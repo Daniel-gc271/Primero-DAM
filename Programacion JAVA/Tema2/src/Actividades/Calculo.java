@@ -25,13 +25,13 @@ public class Calculo {
         double numB = scIn.nextDouble();
         System.out.println("Inserte una operacion matemática");
         System.out.println("+, -, /, *, %");
-        String op = scIn.next();
+        String operacion = scIn.next();
         scIn.close();
         
         
         
         
-        switch ((int) op.charAt(0)) {
+        switch (operacion.charAt(0)) {
             case 43 ->
                 System.out.println(numA + "+" + numB + "=" + (numA + numB)); //Suma 43   
             case 45 ->

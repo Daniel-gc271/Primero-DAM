@@ -1,0 +1,47 @@
+#Parrafo_inicial {
+color: #3c3e8f83;
+letter-spacing: 2px;
+word-spacing: 3px;
+text-align: center;
+
+}
+tr td:first-of-type{
+    background-color: rgb(139, 139, 139,50%);
+    color: #736324;
+
+
+}
+.alineacion_derecha {
+    text-align: right; /*Alineacion del texto*/
+    text-decoration: underline; /*Adornos del texto*/
+
+}
+p:last-of-type{
+    text-indent: 10%; /*Sangria o margen*/
+    text-transform: capitalize; /*Transformaciones de texto*/
+    line-height: 30%; /*Altura de linea*/
+    border: #3c3e8f83 solid 2px;
+    margin: 6px 6px 6px 6px; /*Separacion entre el borde y el exterior de los componentes arriba derecha abajo izquierda*/
+    padding: 10px; /*>Separacion entre el texto y los bordes del componente*/
+}
+ul.menu > li{
+    line-height: 50px;
+    border: #3c3e8f83 dashed 2px;
+    list-style-type: none;
+    display:inline-block ;
+    width: 70px;
+}
+
+ul.menu > li > a {
+    color: #0000ff;
+    text-decoration: none;
+    display: block;
+    text-align: center;
+}
+ul.menu > li > a:hover {
+    background-color: #ff0000;
+   /* color: #3c3e8f83*/
+}
+
+
+

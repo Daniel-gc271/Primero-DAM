@@ -11,7 +11,7 @@ package Ejercicios;
 public class sumaNumerosParesPositivosMenoresQueCien {
 
     public static void main(String[] args) {
-        System.out.println("Sumrea de los numeros pas comprendidos entre el 0 y el 100 incluidos");
+        System.out.println("Sumrea de los numeros pares comprendidos entre el 0 y el 100 incluidos");
         int sigma = 0;
         for (int i = 0; i <= 100; i += 2) {
             sigma += i;

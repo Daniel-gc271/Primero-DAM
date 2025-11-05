@@ -110,7 +110,10 @@ public class Cacharreo {
     private static float[][] multiplicarMatriz(float[][] matrizA, float[][] matrizB) {
         int numFilasA = matrizA.length;
         int numColumnasA = matrizA[0].length;
+        int numFilasB = matrizB.length;
         int numColumnasB = matrizB[0].length;
+        if (numColumnasA != numFilasB) {throw new IllegalArgumentException("El número de columnas de la primera matriz ("+numColumnasA+") debe coincidir con el número de filas ("+numFilasB+") de la segunda matriz.");}
+        
         float[][] matrizMultiplicada = new float[numFilasA][numColumnasB];
 
         for (int i = 0; i < numFilasA; i++) {
@@ -230,17 +233,17 @@ public class Cacharreo {
 
         float[][] matrizA = {
             {1, -1, 2},
-            {2, 1, 3},
             {1, 4, 1}
         };
         float[][] matrizB = {
-            {-1, 0, 0},
-            {0, -1, 0},
-            {0, 0, -1}
+            {-1, 0, 0,0},
+            {0, -1, 0,0},
+            {0, 0, -1,0},
+            {0, 0, 0,-1}
         };
 
         //Scanner input = new Scanner(System.in);
-        
+        /*
         imprimirMatriz(matrizA);
         System.out.println("\nRango de la matriz");
         System.out.print(evaluarRango(matrizA));
@@ -260,5 +263,7 @@ public class Cacharreo {
         System.out.println("\nMultiplicar matrices:");
         imprimirMatriz(multiplicarMatriz(matrizA, matrizB));
         System.out.println("");
+        */
+        multiplicarMatriz(matrizA, matrizB);
     }
 }

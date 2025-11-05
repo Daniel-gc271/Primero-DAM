@@ -13,7 +13,7 @@ public class amigos {
     public static void main(String[] args) {
         int A = 284;
         int B = 220;
-        if (sumatoriodivisores(A)==B&&sumatoriodivisores(B)==A) {System.out.printf("%d y %d son numeros amigos", A, B);}
+        if (sumatoriodivisores(A)==B&&sumatoriodivisores(B)==A) {System.out.printf("%d y %d son numeros amigos%n", A, B);}
     }
 
     private static int sumatoriodivisores(int num) {
