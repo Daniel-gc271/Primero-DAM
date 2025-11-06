@@ -2,17 +2,17 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package Ejercicios;
+package entregasjava.Tema4;
 
 import java.util.Scanner;
 
 /**
  * En una cadena buscar las ocurrencias de otra cadena devuelve el total y la
- * posicion de las ocurrencias
+ * posicion de las ocurrencias nota la cadena es una palabra separada por espacios
  *
  * @author goncalda
  */
-public class BuscaCadena {
+public class BusquedaDanielGonzalez1 {
 
    
    public static void main(String[] args) {
@@ -26,24 +26,21 @@ public class BuscaCadena {
 
         System.out.println("Introduce la palabra buscada");
         String cadenaBuscada = scIn.nextLine();
-        cadenaBuscada+=" ";
+        
 
         while (!cadenaOrigen.contains(cadenaBuscada)) {
             System.err.println("La palabra buscada no está en el texto, introduce otra");
             cadenaBuscada = scIn.nextLine();
         }
-
-        while ((indiceBuscado = cadenaOrigen.indexOf(cadenaBuscada, indiceBuscado)) != -1) {
+        indiceBuscado = cadenaOrigen.indexOf(cadenaBuscada, 0);
+        System.out.printf("La palabra %s se encuentra en las posiciones: ", cadenaBuscada);
+        while (indiceBuscado != -1) {
+            System.out.printf("%d, ",indiceBuscado);
+            numOcurrencias++;   
             indiceBuscado += cadenaBuscada.length();
-            System.out.println(indiceBuscado);
-            numOcurrencias++;
-            
-            
-           
-            
+            indiceBuscado = cadenaOrigen.indexOf(cadenaBuscada, indiceBuscado);
         }
-        cadenaBuscada.strip();
-        System.out.printf("Hay %d ocurrencias de la cadena \"%s\"%n", numOcurrencias, cadenaBuscada);
+        System.out.printf("hay %d ocurrencias de la cadena\"%s\".%n", numOcurrencias, cadenaBuscada);
     }
 }
 

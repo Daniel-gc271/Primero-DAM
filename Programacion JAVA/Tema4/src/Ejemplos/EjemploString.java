@@ -31,7 +31,7 @@ public class EjemploString {
         
         String cadenaBuscada = new String();
         cadenaBuscada="gato";
-        String ejemploBuscapalabras= "Hola gato con botas";
+        String ejemploBuscapalabras= "Hola con botas gatopardo";
         int inicioPalabraGato= ejemploBuscapalabras.indexOf(cadenaBuscada);
         int finalPalabraGato=inicioPalabraGato+cadenaBuscada.length();
         System.out.printf("La palabra gato esta en el caracter numero %d%n",inicioPalabraGato+1);
