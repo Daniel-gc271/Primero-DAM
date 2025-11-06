@@ -36,11 +36,7 @@ public class BuscaCadena {
         while ((indiceBuscado = cadenaOrigen.indexOf(cadenaBuscada, indiceBuscado)) != -1) {
             indiceBuscado += cadenaBuscada.length();
             System.out.println(indiceBuscado);
-            numOcurrencias++;
-            
-            
-           
-            
+            numOcurrencias++;    
         }
         cadenaBuscada.strip();
         System.out.printf("Hay %d ocurrencias de la cadena \"%s\"%n", numOcurrencias, cadenaBuscada);
