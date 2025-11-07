@@ -1,0 +1,14 @@
+p:first-of-type {
+    font-size: large;
+    font-style: oblique;
+    font-weight: bold;
+    font-family: "Playwrite MX Guides", cursive;
+    font-variant: small-caps;
+
+}
+
+p:last-of-type {
+    background-image: url(https://picsum.photos/60/60 );
+    background-repeat: no-repeat;
+
+}

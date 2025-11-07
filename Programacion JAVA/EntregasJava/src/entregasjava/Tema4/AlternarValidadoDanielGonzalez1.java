@@ -13,18 +13,21 @@ import java.util.Scanner;
 public class AlternarValidadoDanielGonzalez1 {
 
     public static void main(String[] args) {
-        /*Scanner scIn = new Scanner(System.in);
+        Scanner scIn = new Scanner(System.in);
         System.out.println("Introduce una cadena que quieras transmutar");
         String entrada = new String();
         entrada =scIn.nextLine();
         String alternado = new String();
-        do {System.err.println("Has introducido una cadena vacía");entrada=scIn.nextLine();} while(entrada.isBlank());*/
-        
-        entrada ="Abrigo corto";
+        while(entrada.isBlank()) {System.err.println("Has introducido una cadena vacía");entrada=scIn.nextLine();} 
+        if (entrada.length()%2==0) {
         for (int i = 0; i < entrada.length()/2; i++) {
             alternado = alternado.concat(Character.toString(entrada.charAt(i)));
             alternado = alternado.concat(Character.toString(entrada.charAt(entrada.length() - i - 1)));
         }
-        System.out.printf("\"%s\"",alternado);
+        } else {for (int i = 0; i < entrada.length()/2+1; i++) {
+            alternado = alternado.concat(Character.toString(entrada.charAt(i)));
+            alternado = alternado.concat(Character.toString(entrada.charAt(entrada.length() - i - 1)));
+        }}
+        System.out.printf("\"%s\"%n",alternado);
     }
 }

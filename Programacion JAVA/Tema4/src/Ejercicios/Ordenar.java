@@ -18,13 +18,16 @@ public class Ordenar {
         String s3 = new String(scIn.nextLine());
         String s1;
         String s2;
-        while (s3.isBlank()) {System.err.println("Debes introducir una lista valida");s3=scIn.nextLine();}
-        s3=s3.strip();
-        
         //Bucle que reemplaza todas las instancias de dos espacios por un espacio y se repite hasta que no contenga dos espacios
         do {
             s3 = s3.replace("  ", " "); 
         } while (s3.contains("  "));
+        while (s3.isBlank()) {System.err.println("Debes introducir una lista valida");s3=scIn.nextLine();}
+        s3=s3.strip();
+        
+        
+        
+        
         s1=s3.substring(0, s3.indexOf(" "));
         s2=s3.substring(s3.indexOf(" "),s3.length());
         System.out.println(s1);

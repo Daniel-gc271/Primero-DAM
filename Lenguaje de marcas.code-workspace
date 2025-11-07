@@ -1,0 +1,16 @@
+{
+	"folders": [
+		{
+			"path": "Lenguaje de marcas"
+		},
+		{
+			"path": "Entornos de desarrollo"
+		},
+		{
+			"path": "Programacion IA"
+		}
+	],
+	"settings": {
+		"liveServer.settings.multiRootWorkspaceName": "Lenguaje de marcas"
+	}
+}
