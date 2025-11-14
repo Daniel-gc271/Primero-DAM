@@ -52,7 +52,11 @@ public class JuegoDelDado {
         Random numAleatorio = new Random();
         Scanner scIn = new Scanner(System.in);
         //Inicializar variables a los valores iniciales para preparar el juego
+
         boolean tuTurno;
+
+        boolean turno;
+
         int boteBanca = 0;
         int boteJugador = 100;
         int boteMaquina = 100;
