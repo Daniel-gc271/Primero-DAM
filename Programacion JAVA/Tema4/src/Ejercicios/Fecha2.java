@@ -7,51 +7,57 @@ package Ejercicios;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import static java.time.temporal.ChronoUnit.*;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.Scanner;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import static java.util.concurrent.TimeUnit.DAYS;
+
+
+
 
 /**
  *
  * @author goncalda
  */
 public class Fecha2 {
-     public static void main(String[] args) {
+
+    public static void main(String[] args) {
         Scanner scIn = new Scanner(System.in);
-        Boolean fechaIncorrecta=null;
-        Date parsedDate=null;
+        Boolean fechaIncorrecta = null;
+        Date parsedDate = null;
         DateFormat dfParse = new SimpleDateFormat("dd/MM/yyyy");
         dfParse.setLenient(false);
-        
+
         Calendar currentDate = new GregorianCalendar();
         Date fechaActual = currentDate.getTime();
-        
-        
+
         DateFormat dfShort = DateFormat.getDateInstance(DateFormat.SHORT);
         DateFormat dfLong = DateFormat.getDateInstance(DateFormat.LONG);
-        do {String rawDate = pideFecha(scIn);
+        do {
+            String rawDate = pideFecha(scIn);
             try {
                 parsedDate = dfParse.parse(rawDate);
-                fechaIncorrecta=false;
-                
-                        } catch (ParseException ex) {
-                            System.err.println("Has introducido una fecha invalida");
-                            fechaIncorrecta=true;
+                fechaIncorrecta = false;
+
+            } catch (ParseException ex) {
+                System.err.println("Has introducido una fecha invalida");
+                fechaIncorrecta = true;
             }
-            
+        } while (fechaIncorrecta);
+        long deltaFechas = fechaActual.getTime() - parsedDate.getTime();
+        long dias =deltaFechas/(3600*24000);
+        System.out.println(dias);
         
-        } while(fechaIncorrecta);
-        System.out.println((fechaActual.compareTo(parsedDate)));
-    }
-     private static String pideFecha(Scanner scIn)
-     {  String fecha=new String();
+            
+        }
+    
+
+    private static String pideFecha(Scanner scIn) {
+        String fecha = new String();
         System.out.println("Introduce la fecha en formato dd/mm/aaaa donde \"d\" es para dia \"m\" para mes y \"a\" para año");
         fecha = scIn.nextLine();
         return fecha;
-     }
-     
+    }
+
 }
