@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="Ejercicio7.css">
+</head>
+<body>
+    <h2>HOJA DE INSCRIPCIÓN</h2>
+    <form  method="post">
+        <fieldset>
+            <legend>Datos Personales</legend>
+            <label for="apellidos"><span>A</span>pellidos:</label>
+            <label for="nombre" class="uno">N<span>o</span>mbre:</label>
+            <label for="dni" class="dos"><span>D</span>NI:</label><br>
+            <input type="text" id="apellidos" name="apellidos" required>
+            <input type="text" class="uno" id="nombre" name="nombre" required>
+            <input type="text" class="dos" id="dni" name="dni" required><br>
+
+            <label for="lugar_nacimiento"><span>N</span>acido en:</label>
+            <label for="provincia" class="uno">Provincia:</label>
+            <label for="fecha_nacimiento" class="dos"><span>F</span>echa Nacimiento (dd/mm/aaaa):</label><br>
+            <input type="text" id="lugar_nacimiento" name="lugar_nacimiento" required>
+            <select name="provincia" id="provincia" class="uno" required>
+                <option value="" disabled selected>-seleccione-</option>
+                <option value="A Coruña">A Coruña</option>
+                <option value="Lugo">Lugo</option>  
+                <option value="Ourense">Ourense</option>
+                <option value="Pontevedra">Pontevedra</option>
+                <option value="Madrid">Madrid</option>
+                <option value="Barcelona">Barcelona</option>
+                <option value="Valencia">Valencia</option>
+                <option value="Sevilla">Sevilla</option>
+                <option value="Zaragoza">Zaragoza</option>
+                <option value="Málaga">Málaga</option>
+            </select>
+            <input type="text" class="dos" id="fecha_nacimiento" name="fecha_nacimiento" required placeholder="dd/mm/aaaa"><br>
+            
+            <label for="domicilio">D<span>o</span>micilio:</label>
+            <label for="codigo_postal" class="dos"><span>C</span>ódigo Postal:</label><br>
+            <select name="domicilio" id="domicilio" required>
+                <option value="" disabled selected>-seleccione-</option>
+                <option value="Calle">Calle</option>
+                <option value="Avenida">Avenida</option>  
+                <option value="Plaza">Plaza</option>
+                <option value="Camino">Camino</option>
+            </select>
+            <input type="text" id="direccion" name="direccion" required placeholder="Dirección" size="34">
+            <input type="number" class="dos" id="codigo_postal" name="codigo_postal" required placeholder="Código Postal" max="99999" min="11111"><br>
+            
+            <label for="localidad"><span>L</span>ocalidad:</label>
+            <label for="provincia2" class="uno">Provincia:</label>
+            <label for="telefono" class="dos"><span>T</span>eléfono:</label><br>
+            <input type="text" id="localidad" name="localidad" required placeholder="Localidad">
+            <select name="provincia2" id="provincia2" class="uno" required>
+                <option value="" disabled selected>-seleccione-</option>
+                <option value="A Coruña">A Coruña</option>
+                <option value="Lugo">Lugo</option>  
+                <option value="Ourense">Ourense</option>
+                <option value="Pontevedra">Pontevedra</option>
+                <option value="Madrid">Madrid</option>
+                <option value="Barcelona">Barcelona</option>
+                <option value="Valencia">Valencia</option>
+                <option value="Sevilla">Sevilla</option>
+                <option value="Zaragoza">Zaragoza</option>
+                <option value="Málaga">Málaga</option>
+            </select>
+            <input type="text" id="telefono" name="telefono" required placeholder="Teléfono" class="dos"><br>
+            <div id="botones">
+                <button class="btn" type="submit">Enviar</button>
+                <button class="btn" type="reset">Borrar</button>
+            </div>
+        </fieldset>
+    </form>
+</body>
+</html>

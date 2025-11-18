@@ -1,0 +1,22 @@
+ol>li{
+    font-weight: bold;
+
+}
+#TextoVerde {
+    color: green;
+}
+.LetraGrande { /*No se como hacer para que seleecione automaticamente el mas grande*/
+    font-size: large;
+}
+
+h1, h2, h3 {
+    background-color: lightblue;
+}
+
+p[color=”blue”] {
+    color: rgb(238, 238, 7);
+}
+
+a:visited {
+    color: purple;
+}

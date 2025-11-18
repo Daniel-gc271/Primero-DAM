@@ -1,0 +1,52 @@
+h1:nth-of-type(1) {
+    background-color: burlywood;
+    width: 300px;
+    line-height: 100px;
+    text-align: center;
+}
+h1:nth-of-type(2) {
+    background-color: rgb(104, 67, 18);
+    width: 250px;
+    height: 30px;
+
+}
+h1:nth-of-type(3) {
+    background-color: rgb(18, 38, 104);
+    width: 25px;
+    height: 30px;
+}
+ul.LSTNONE {
+    list-style: none;
+
+}
+ul.LSTURL {
+    list-style: url(https://gregoriofer.com/logo.jpg);
+    list-style-position: inside;/*Para que no se corte el logo*/
+}
+ul.LSTINLINE {
+    display: inline-block;    
+
+
+}
+.inline,.inline-block,.block {
+    background-color: lightblue;
+    width: 200px;
+    height: 50px;
+    line-height: 50px;
+    text-align: center;
+    margin: 10px;
+       list-style-type: none;
+}
+
+.inline {
+     display: inline;
+    /*list-style-image: url("https://gregoriofer.com/logo.jpg");
+    list-style-position: inside;*/
+}
+
+.inline-block {
+    display: inline-block;
+}
+.block {
+    display: block;
+} 

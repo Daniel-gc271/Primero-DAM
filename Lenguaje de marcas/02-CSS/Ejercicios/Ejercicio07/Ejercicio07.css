@@ -1,0 +1,17 @@
+body {
+    font-family: sans-serif;
+    text-align: center;
+    background-color: #fafafa;
+}
+
+form > label::first-letter {
+    color: red;
+    text-decoration: underline;
+}
+h1:first-of-type {
+    text-align: center;
+    text-transform: uppercase;
+    font-size: 125%;
+    background-color: #eaeaea;
+    
+}

@@ -1,0 +1,29 @@
+h2{
+    font-family: calibri;
+    font-size: 20px;
+    text-align: center;
+    background-color:  #EAEAEA;
+    position: relative;
+}
+fieldset{
+    background-color:  #EAEAEA;
+}
+legend{
+    background-color: white;
+}
+.uno{
+    position: absolute;
+    left: 20%;
+}
+.dos{
+    position: absolute;
+    left: 55%;
+}
+#botones{
+    text-align: right;
+    margin-top: 10px;
+}
+span{
+    text-decoration: underline;
+    color: red;
+}
