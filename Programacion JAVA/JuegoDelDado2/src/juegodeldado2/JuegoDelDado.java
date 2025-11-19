@@ -27,7 +27,17 @@ public class JuegoDelDado {
     //Metodo que se llama para explicar las reglas (Por legilibilidad del codigo y la salud mental del programador)
     private static void explainRules() {
         System.out.println("Las reglas son las siguientes: ");
-        System.out.println("Place holder explicar reglas");
+        System.out.println("Se juega con dos dados. Inicialmente cada jugador dispone de un bote de 100 €.");
+        System.out.println("Una partida comienza con una primera tirada de dados llamada ”tirada de salida”.");
+        System.out.println("Si el jugador obtiene en la \"tirada de salida\" 7 o 11 gana automáticamente y pierde si obtiene 2, 3, o 12.");
+        System.out.println("Si obtiene 4, 5, 6, 8, 9 o 10, el número obtenido se convierte en su “punto”.");
+        System.out.println("En este caso, para poder ganar debe de salir repetido el “punto” antes de sacar un 7.");
+        System.out.println("En caso de que salga 7 antes de que salga el “punto” el jugador pierde.");
+        System.out.println("Por tanto, esta ronda termina cuando el jugador lanza los dados y obtiene el “punto” o el número 7.");
+        System.out.println("Cada vez que un jugador gana incrementa su bote en 15 €, dinero que sale del bote del jugador perdedor.");
+        System.out.println("Si un jugador pierde en su turno, los 15 € se pagan a la banca.");
+        System.out.println("Cuando se inicia el juego se realizará una tirada de dados para determinar quién empieza jugando.");
+        System.out.println("Empezará el que saque mayor puntuación");
     }
 
     //Metodo para validar si el jugador introduce si o no
@@ -47,7 +57,7 @@ public class JuegoDelDado {
         } while (entrada.isBlank() || !(entrada.equalsIgnoreCase("S") || entrada.equalsIgnoreCase("N")));
         return entrada.equalsIgnoreCase("S");
     }
-    
+
     private static boolean tiradaInicial(Random numAleatorio) {
         System.out.println("Tirada inicial");
         int tiradaJugador = numAleatorio.nextInt(2, 13);
@@ -58,18 +68,21 @@ public class JuegoDelDado {
             tiradaJugador = numAleatorio.nextInt(2, 13);
         } while (tiradaJugador == tiradaMaquina);
         if (tiradaJugador > tiradaMaquina) {
-            System.out.println("Enhorabuena, sales tú");
+            System.out.printf("Enhorabuena, sales tú (%d > %d)%n ", tiradaJugador, tiradaMaquina);
             return true;
         } else {
-            System.out.println("Que pena, sale la máquina");
+            System.out.printf("Que pena, sale la máquina (%d > %d)%n ", tiradaMaquina, tiradaJugador);
             return false;
         }
     }
+
     public static void main(String[] args) {
+        long tJugado=System.currentTimeMillis();
         Random numAleatorio = new Random();
         Scanner scIn = new Scanner(System.in);
         //Inicializar variables a los valores iniciales para preparar el juego
-
+        int contVictM=0;
+        int contVictJ=0;
         boolean tuTurno;
         boolean seguirJugando = true;
         int boteBanca = 0;
@@ -94,29 +107,33 @@ public class JuegoDelDado {
         //System.out.println((tuTurno ? "Te toca a ti" : "Le toca a la máquina"));
         //quitar tb porque el metodo que se encarga de manejar la tirada inicial
         //ya indica de quien es el turno
+        
         do {
             esTiradaSalida = true;
 
             //Bucle del juego que se repite hasta que uno de los dos jugadores se queda sin dinero
-            while (tuTurno && boteJugador >= 15 && seguirJugando) {
+            while (tuTurno && boteJugador >= 15 && boteMaquina >= 15 && seguirJugando) {
                 tiradaJugador = numAleatorio.nextInt(2, 13);
                 if (esTiradaSalida) {
                     System.out.printf("Tirada inicial: %d%n", tiradaJugador);
                     if (tiradaJugador == 7 || tiradaJugador == 11 && esTiradaSalida) {
                         System.out.printf("Ganas automáticamente%n", tiradaJugador);
+                        contVictJ++;
                         boteMaquina -= 15;
                         boteJugador += 15;
-                        tuTurno = false;
                         System.out.printf("Bote jugador: %d%nBote maquina: %d%nBote banca: %d%n", boteJugador, boteMaquina, boteBanca);
-                        System.out.println("Le toca a la máquina");
+                        System.out.println("Sigues jugando (S o N)?");
+                        seguirJugando = validarEntrada(scIn);
                     } else if (tiradaJugador == 2 || tiradaJugador == 3 || tiradaJugador == 12 && esTiradaSalida) {
                         System.out.printf("Pierdes automáticamente%n", tiradaJugador);
+                        contVictM++;
                         boteJugador -= 15;
                         boteMaquina += 15;
                         tuTurno = false;
                         System.out.printf("Bote jugador: %d%nBote maquina: %d%nBote banca: %d%n", boteJugador, boteMaquina, boteBanca);
                         System.out.println("Le toca a la máquina");
-
+                        System.out.println("Juegas (S o N)?");
+                        seguirJugando = validarEntrada(scIn);
                     } else {
                         punto = tiradaJugador;
                         esTiradaSalida = false;
@@ -125,56 +142,52 @@ public class JuegoDelDado {
                     System.out.printf("Punto: %d    Tirada para el punto: %d%n", punto, tiradaJugador);
                     if (tiradaJugador == 7) {
                         System.out.printf("Has perdido%n");
+                        
                         boteJugador -= 15;
                         boteBanca += 15;
                         tuTurno = false;
                         System.out.printf("Bote jugador: %d%nBote maquina: %d%nBote banca: %d%n", boteJugador, boteMaquina, boteBanca);
-
                         System.out.println("Le toca a la máquina");
+                        System.out.println("Juegas (S o N)?");
+                        seguirJugando = validarEntrada(scIn);
                     } else if (tiradaJugador == punto) {
                         System.out.printf("Has ganado%n");
+                        contVictJ++;
                         boteJugador += 15;
                         boteMaquina -= 15;
-                        tuTurno = false;
                         System.out.printf("Bote jugador: %d%nBote maquina: %d%nBote banca: %d%n", boteJugador, boteMaquina, boteBanca);
-                        System.out.println("Le toca a la máquina");
-
+                        System.out.println("Sigues jugando (S o N)?");
+                        seguirJugando = validarEntrada(scIn);
                     }
 
                 }
 
             }
-            if (boteJugador >= 15 || boteMaquina >= 15) {
-                System.out.println("Seguir jugando (S o N)?");
-                seguirJugando = validarEntrada(scIn);
-            } else {
-            }
 
             esTiradaSalida = true;
-            while (!tuTurno && boteMaquina >= 15 && seguirJugando) {
+            while (!tuTurno && boteJugador >= 15 && boteMaquina >= 15 && seguirJugando) {
                 tiradaMaquina = numAleatorio.nextInt(2, 13);
                 if (esTiradaSalida) {
                     System.out.printf("Tirada inicial: %d%n", tiradaMaquina);
                     if (tiradaMaquina == 7 || tiradaMaquina == 11 && esTiradaSalida) {
                         System.out.printf("Gano automáticamente%n", tiradaMaquina);
+                        contVictM++;
                         boteJugador -= 15;
                         boteMaquina += 15;
-                        tuTurno = true;
                         System.out.printf("Bote jugador: %d%nBote maquina: %d%nBote banca: %d%n", boteJugador, boteMaquina, boteBanca);
-                        if (seguirJugando) {
-                            System.out.println("Le toca al jugador");
-                        }
-
+                        System.out.println("Le toca a la máquina");
+                        System.out.println("Juegas (S o N)?");
+                        seguirJugando = validarEntrada(scIn);
                     } else if (tiradaMaquina == 2 || tiradaMaquina == 3 || tiradaMaquina == 12 && esTiradaSalida) {
                         System.out.printf("Pierdo automáticamente%n");
+                        contVictJ++;
                         boteMaquina -= 15;
                         boteJugador += 15;
                         tuTurno = true;
                         System.out.printf("Bote jugador: %d%nBote maquina: %d%nBote banca: %d%n", boteJugador, boteMaquina, boteBanca);
-                        System.out.printf("Bote jugador: %d%nBote maquina: %d%nBote banca: %d%n", boteJugador, boteMaquina, boteBanca);
-                        if (seguirJugando) {
-                            System.out.println("Le toca al jugador");
-                        }
+                        System.out.println("Te toca");
+                        System.out.println("Juegas (S o N)?");
+                        seguirJugando = validarEntrada(scIn);
 
                     } else {
                         punto = tiradaMaquina;
@@ -184,37 +197,44 @@ public class JuegoDelDado {
                     System.out.printf("Punto: %d    Tirada para el punto: %d%n", punto, tiradaMaquina);
                     if (tiradaMaquina == 7) {
                         System.out.printf("He perdido%n");
+                        
                         boteMaquina -= 15;
                         boteBanca += 15;
                         tuTurno = true;
                         System.out.printf("Bote jugador: %d%nBote maquina: %d%nBote banca: %d%n", boteJugador, boteMaquina, boteBanca);
+                        System.out.println("Te toca");
+                        System.out.println("Juegas (S o N)?");
+                        seguirJugando = validarEntrada(scIn);
 
-                        if (seguirJugando) {
-                            System.out.println("Le toca al jugador");
-                        }
                     } else if (tiradaMaquina == punto) {
                         System.out.printf("He ganado%n");
+                        contVictM++;
                         boteJugador -= 15;
                         boteMaquina += 15;
                         tuTurno = true;
                         System.out.printf("Bote jugador: %d%nBote maquina: %d%nBote banca: %d%n", boteJugador, boteMaquina, boteBanca);
+                        System.out.println("Le toca a la máquina");
+                        System.out.println("Juegas (S o N)?");
+                        seguirJugando = validarEntrada(scIn);
 
-                        if (seguirJugando) {
-                            System.out.println("Le toca al jugador");
-                        }
                     }
 
                 }
 
             }
-            if (boteJugador >= 15 || boteMaquina >= 15) {
-                System.out.println("Juegas (S o N)?");
-                seguirJugando = validarEntrada(scIn);
-            } else {
-            }
-        } while ((boteJugador >= 15 || boteMaquina >= 15) && seguirJugando);
+
+        } while ((boteJugador >= 15 && boteMaquina >= 15) && seguirJugando);
+        
+        tJugado = System.currentTimeMillis()-tJugado;
+        System.out.println("***************************");
+        System.out.println("*******Estadisticas********");
+        System.out.println("***************************");
+        System.out.printf("Victorias jugador: %d%n",contVictJ);
+        System.out.printf("Victorias maquina: %d%n",contVictM);
+        
+        System.out.printf("Tiempo jugado: %dms%n",tJugado);
+        System.out.printf("Tiempo jugado: %fs%n",tJugado/1000f);
 
     }
 
-    
 }
