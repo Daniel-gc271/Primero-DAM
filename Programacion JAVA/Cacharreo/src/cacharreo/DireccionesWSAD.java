@@ -67,7 +67,7 @@ public class DireccionesWSAD extends JPanel {
 
         JFrame frame = new JFrame("Mapa WSAD");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.add(new DireccionesWSAD(matriz));
+        
         frame.pack();
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);
