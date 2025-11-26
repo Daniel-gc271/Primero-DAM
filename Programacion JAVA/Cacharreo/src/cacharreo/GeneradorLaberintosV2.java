@@ -4,6 +4,9 @@
  */
 package cacharreo;
 
+import java.util.LinkedHashSet;
+import java.util.LinkedList;
+import java.util.Queue;
 import java.util.Random;
 
 /**
@@ -11,49 +14,48 @@ import java.util.Random;
  * @author Daniel González
  */
 public class GeneradorLaberintosV2 {
+
     public static void main(String[] args) {
-        Laberinto lab = new Laberinto(10, 14);
-        lab = lab.crearLaberintoBase(lab);
+        long tEjecucion = System.currentTimeMillis();
+        Laberinto lab = new Laberinto(3, 2);
+        Random rd = new Random();
+        System.out.println(lab.getnumFilas());
+        /*lab = lab.randomizarLaberinto(lab, rd, 0xfff);
+        System.out.println("Laberinto random:");
         lab.imprimirLaberinto(lab);
+        tEjecucion = System.currentTimeMillis() - tEjecucion;
+        System.out.printf("Tiempo de ejecucion: %dms", tEjecucion);
+        /*
+        if (exitX < 0 || exitX >= numFilas || exitY < 0 || exitY >= numColumnas) {
+        System.err.println("La salida no se encuentra en los confines del laberinto");
+        System.exit(1);
+    }
+        */
     }
 
-
-    
-    
-
 }
+
 class Laberinto {
 
-    private int numFilas;
-    private int numColumnas;
+    private int numFilasY;
+    private int numColumnasX;
     private int oX;
     private int oY;
     private char[][] laberinto;
 
-<<<<<<< HEAD
-    public Laberinto( int columnas,int filas, int oX, int oY) {
-=======
-    public Laberinto( int filas, int columnas, int oX, int oY) {
->>>>>>> origin/Juegodeldado
-        this.oX = oX;
-        this.oY = oY;
-        this.numFilas = filas;
-        this.numColumnas = columnas;
-        this.laberinto = new char[filas][columnas];
-    }
-    public Laberinto(int filas, int columnas) {
-        
-        this.numFilas = filas;
-        this.numColumnas = columnas;
-        this.laberinto = new char[columnas][filas];
+    public Laberinto(int columnasX, int filasY) {
+
+        this.numFilasY = filasY;
+        this.numColumnasX = columnasX;
+        this.laberinto = new char[columnasX][filasY];
     }
 
     public int getnumFilas() {
-        return numFilas;
+        return numFilasY;
     }
 
     public int getnumColumnas() {
-        return numColumnas;
+        return numColumnasX;
     }
 
     public int getoX() {
@@ -67,11 +69,11 @@ class Laberinto {
     public char[][] getLaberinto() {
         return this.laberinto;
     }
-    
+
     public char getCeldaLaberinto(int fila, int columna) {
         return this.laberinto[fila][columna];
     }
-    
+
     public void setoX(int oX) {
         this.oX = oX;
     }
@@ -83,48 +85,110 @@ class Laberinto {
     public void setLaberinto(char[][] laberinto) {
         this.laberinto = laberinto;
     }
-<<<<<<< HEAD
+
     public void setCeldaLaberinto(int fila, int columna, char caracter) {
         this.laberinto[fila][columna] = caracter;
-=======
-    public void setCeldaLaberinto(int fila, int columna,char caracter) {
-        this.laberinto[fila][columna]=caracter;
->>>>>>> origin/Juegodeldado
     }
-    public Laberinto crearLaberintoBase(Laberinto laberinto) {
-        for (int y = 0; y < laberinto.getnumFilas();y++) {
+
+    private Laberinto crearLaberintoBase(Laberinto laberinto) {
+        for (int y = 0; y < laberinto.getnumFilas(); y++) {
             for (int x = 0; x < laberinto.getnumColumnas(); x++) {
-                System.out.printf("%d,%d ",x,y);
-<<<<<<< HEAD
-                if (y!=laberinto.getnumFilas()-1) {
-                    laberinto.setCeldaLaberinto(x, y, 'D');
-                }
-                if (y==laberinto.getnumFilas()-1) {
-=======
-                if (x==laberinto.getnumColumnas()-2) {
-                    laberinto.setCeldaLaberinto(x, y, 'D');
-                }
-                if (x==laberinto.getnumColumnas()-1) {
->>>>>>> origin/Juegodeldado
+                if (y != laberinto.getnumFilas() && y >= 0) {
                     laberinto.setCeldaLaberinto(x, y, 'S');
                 }
+
+                if (x == laberinto.getnumColumnas() - 1 && x >= 0) {
+                    laberinto.setCeldaLaberinto(x, y, 'D');
+                }
             }
-            System.out.println("");
         }
-    return laberinto;
+        laberinto.setoX(laberinto.getnumColumnas() - 1);
+        laberinto.setoY(laberinto.getnumFilas() - 1);
+        laberinto.setCeldaLaberinto(laberinto.getnumColumnas() - 1, laberinto.getnumFilas() - 1, 'O');
+        return laberinto;
     }
+
+    public Laberinto randomizarLaberinto(Laberinto lab, Random numRd, int iteraciones) {
+        lab = lab.crearLaberintoBase(lab);
+        int oX = lab.getoX(), oY = lab.getoY();
+        for (int i = 0; i <= iteraciones; i++) {
+            int mov = numRd.nextInt(4);
+            
+        }
+        lab.setoX(oX);
+        lab.setoY(oY);
+        return lab;
+    }
+
+    public Laberinto resolverLaberinto(Laberinto lab, int exitX, int exitY) {
+        int numFilas = lab.getnumFilas(), numColumnas = lab.getnumColumnas(), oX = lab.getoX(), oY = lab.getoY();
+        Laberinto distancias = new Laberinto(numFilas, numColumnas);
+       
+           
+        
+        
+    
+        
+        
+        return lab;
+    }
+
     public void imprimirLaberinto(Laberinto lab) {
-<<<<<<< HEAD
         for (int x = 0; x < lab.getnumColumnas(); x++) {
             for (int y = 0; y < lab.getnumFilas(); y++) {
-=======
-        for (int x = 0; x < 10; x++) {
-            for (int y = 0; y < 10; y++) {
->>>>>>> origin/Juegodeldado
-                System.out.printf(" %s",lab.getLaberinto()[x][y]);
+
+                System.out.printf(" %s", lab.getLaberinto()[x][y]);
             }
             System.out.println("");
         }
-        
+
     }
 }
+/*
+    private int[][] floodFill(Laberinto lab, int salidaX, int salidaY) {
+    char[][] laberinto= lab.getLaberinto();
+    int numFilas = lab.getnumFilas();
+    int numColumnas = lab.getnumColumnas();
+
+    // Validación de coordenadas
+    if (salidaX < 0 || salidaX >= numFilas || salidaY < 0 || salidaY >= numColumnas) {
+        System.err.println("La salida no se encuentra en los confines del laberinto");
+        System.exit(1);
+    }
+
+    // Inicializar matriz de distancias con -1 (no visitado)
+    int[][] distanciaSalida = new int[numFilas][numColumnas];
+    for (int i = 0; i < numFilas; i++) {
+        for (int j = 0; j < numColumnas; j++) {
+            distanciaSalida[i][j] = -1;
+        }
+    }
+
+    // Cola para BFS
+    java.util.Queue<int[]> cola = new java.util.LinkedList<>();
+    cola.add(new int[]{salidaX, salidaY});
+    distanciaSalida[salidaX][salidaY] = 0; // salida = distancia 0
+
+    // Direcciones: arriba, abajo, izquierda, derecha
+    int[][] direcciones = {{-1,0},{1,0},{0,-1},{0,1}};
+
+    while (!cola.isEmpty()) {
+        int[] actual = cola.poll();
+        int x = actual[0], y = actual[1];
+        int distanciaActual = distanciaSalida[x][y];
+
+        for (int[] d : direcciones) {
+            int nx = x + d[0], ny = y + d[1];
+            if (nx >= 0 && nx < numFilas && ny >= 0 && ny < numColumnas) {
+                // Solo avanzar si es camino y no visitado
+                if (laberinto[nx][ny] != '#' && distanciaSalida[nx][ny] == -1) {
+                    distanciaSalida[nx][ny] = distanciaActual + 1;
+                    cola.add(new int[]{nx, ny});
+                }
+            }
+        }
+    }
+
+    return distanciaSalida;
+}
+*/

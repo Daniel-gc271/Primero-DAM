@@ -1,0 +1,32 @@
+#img1 {
+    float: left;
+    margin: 0.12%;
+    border: black solid 2px;
+}
+#img2 {
+    position: fixed;
+    top: 100px;
+    left: 50px;
+    /*Es absoluta desde la esquina superior izquierda*/
+
+}
+#img3 {
+
+    position: relative;
+    top: 40px;
+    left: 80px;
+    /*Relativo desde donde deberia estar la imagen*/
+}
+#img4 {
+
+    position: sticky;
+    top: 0;
+    left: 0;
+    border: 2px solid red;
+    /*Se queda pegado como un posit*/
+}
+p {
+    width: 10%;
+}
+
+
