@@ -1,15 +1,17 @@
-body {
-    background-image: url('PlazaMayor.png') ;
-    background-repeat: no-repeat;
-    background-size: 100%;
-    z-index: 0;
-}
-img.LogoPucela {
-    position: relative;
-    top: 0.2%;
-    left: 0.2%;
-    z-index: 1;
-    width: 12%;
-    height: 12%;
 
-}
+
+        /* Estilo para que la imagen de fondo cubra toda la pantalla */
+        body {
+            margin: 0;
+            padding: 0;
+            background-image: url('PlazaMayor.png'); /* Cambia por tu imagen 1199 674 */
+            background-size: 100%;
+            background-repeat: no-repeat;
+        }
+        img.LogoPucela {
+            width: 10.5%;
+            height: 17.75%;
+
+        }
+        
+
