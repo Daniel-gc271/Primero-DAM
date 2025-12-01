@@ -11,7 +11,7 @@ import java.util.Scanner;
  *
  * @author goncalda
  */
-public class HaspaRGB {
+public class AspaRGB {
 
     public static void main(String[] args) {
         int colorSeleccionado;
