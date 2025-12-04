@@ -12,7 +12,7 @@ public class DivisorMasGrande {
 
     static int divisorMasGrande(int numero) {
         int largestDivider=1;
-        for (int i = 1; i < numero; i++) {
+        for (int i = 1; i < numero/2+1; i++) {
             if (numero % i == 0) {
                 largestDivider = i;
 

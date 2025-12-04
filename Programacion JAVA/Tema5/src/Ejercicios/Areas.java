@@ -24,23 +24,23 @@ public class Areas {
     }
 
     private static double calcularAreaCirculo(Scanner scIn) {
-        double radio= validarMedidas(scIn,"radio para calcular el area del circulo");
-        double areaCirculo ;
+        double radio = validarMedidas(scIn, "radio para calcular el area del circulo");
+        double areaCirculo;
         areaCirculo = Math.PI * Math.pow(radio, 2);
-        System.out.printf("El area del circulo es de %s u cuadradas",areaCirculo);
+        System.out.printf("El area del circulo es de %s u cuadradas", areaCirculo);
         return areaCirculo;
     }
 
-    private static double calcularAreapoligono( int eleccion, Scanner scIn) {
+    private static double calcularAreapoligono(int eleccion, Scanner scIn) {
         double base, altura;
         base = validarMedidas(scIn, "valor para la base");
         altura = validarMedidas(scIn, "valor para la altura");
         if (eleccion != 4) {
-            System.out.printf("El area del poligono es de %s u cuadradas",base*altura/1.0);
+            System.out.printf("El area del poligono es de %s u cuadradas", base * altura / 1.0);
             return base * altura;
-            
+
         } else {
-            System.out.printf("El area del triangulo es de %s u cuadradas",base*altura/2.0);
+            System.out.printf("El area del triangulo es de %s u cuadradas", base * altura / 2.0);
             return base * altura / 2.0;
         }
     }
@@ -73,10 +73,10 @@ public class Areas {
 
     }
 
-    private static double validarMedidas(Scanner scIn,String msg) {
+    private static double validarMedidas(Scanner scIn, String msg) {
         boolean entradaIncorrecta = true;
         double medidaIntroducida = 0;
-        System.out.println("Introduce un "+msg);
+        System.out.println("Introduce un " + msg);
         while (entradaIncorrecta) {
             try {
                 medidaIntroducida = scIn.nextDouble();
@@ -105,8 +105,12 @@ public class Areas {
         Scanner scIn = new Scanner(System.in);
         displayMenu();
         int eleccion = seleccion(scIn);
-        if (eleccion==1) {calcularAreaCirculo(scIn);}
-        else {calcularAreapoligono(eleccion, scIn);}
+        if (eleccion == 1) {
+            calcularAreaCirculo(scIn);
+        } else {
+            calcularAreapoligono(eleccion, scIn);
+        }
+        scIn.close();
         System.out.println("");
 
     }
