@@ -14,8 +14,8 @@ public class AppImprimirPrimoDanielGonzalez {
     public static void main(String[] args) {
         PrimoDanielGonzalez obj = new PrimoDanielGonzalez();
         int contPrimos = 0;
-        int numComp = 2;
-        while (contPrimos < 101) {
+        int numComp = 1;
+        while (contPrimos < 10) {
             if (obj.esPrimo(numComp)) {
                 System.out.println(numComp);
                 contPrimos++;
