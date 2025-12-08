@@ -1,0 +1,209 @@
+
+ul#mazo > li {
+    display: inline-block;
+}
+
+
+
+
+ul#mazo>li>div {
+     height: 56px;
+     width: 38px;
+     background-image: url(./Assets/Cartas.webp);
+     background-repeat: no-repeat;
+     /*Variables*/
+     --pos-rel-v: -28px;
+     --pos-rel-h: 19px;
+     --recorte-carta-h: -42px;
+     background-position-x: calc(((var(--valor-carta) - 1) * var(--recorte-carta-h)) - var(--ajuste-recorte-h));
+
+}
+
+ul#mazo>li>div[palo="treboles"] {
+     background-position-y: -10px;
+}
+
+ul#mazo>li>div[palo="picas"] {
+     background-position-y: -70px;
+}
+
+ul#mazo>li>div[palo="corazones"] {
+     background-position-y: -130px;
+}
+
+ul#mazo>li>div[palo="diamantes"] {
+     background-position-y: -190px;
+}
+
+
+ul#mazo>li>div[valor_carta="1"] {
+     --valor-carta: 14;
+     --ajuste-recorte-h: 6px;
+}
+
+ul#mazo>li>div[valor_carta="2"] {
+     --valor-carta: 2;
+     --ajuste-recorte-h: 10px;
+}
+
+ul#mazo>li>div[valor_carta="3"] {
+     --valor-carta: 3;
+     --ajuste-recorte-h: 10px;
+}
+
+ul#mazo>li>div[valor_carta="4"] {
+     --valor-carta: 4;
+     --ajuste-recorte-h: 9px;
+}
+
+ul#mazo>li>div[valor_carta="5"] {
+     --valor-carta: 5;
+     --ajuste-recorte-h: 9px;
+}
+
+ul#mazo>li>div[valor_carta="6"] {
+     --valor-carta: 6;
+     --ajuste-recorte-h: 9px;
+}
+
+ul#mazo>li>div[valor_carta="7"] {
+     --valor-carta: 7;
+     --ajuste-recorte-h: 8px;
+}
+
+ul#mazo>li>div[valor_carta="8"] {
+     --valor-carta: 8;
+     --ajuste-recorte-h: 8px;
+}
+
+ul#mazo>li>div[valor_carta="9"] {
+     --valor-carta: 9;
+     --ajuste-recorte-h: 7px;
+}
+
+ul#mazo>li>div[valor_carta="10"] {
+     --valor-carta: 10;
+     --ajuste-recorte-h: 7px;
+}
+
+ul#mazo>li>div[valor_carta="11"] {
+     --valor-carta: 11;
+     --ajuste-recorte-h: 7px;
+}
+
+ul#mazo>li>div[valor_carta="12"] {
+     --valor-carta: 12;
+     --ajuste-recorte-h: 7px;
+}
+
+ul#mazo>li>div[valor_carta="13"] {
+     --valor-carta: 13;
+     --ajuste-recorte-h: 7px;
+}
+
+
+
+/*
+
+
+
+div#mazo>div {
+    height: 56px;
+    width: 38px;
+    background-image: url(./Assets/Cartas.webp);
+    background-repeat: no-repeat;
+    --pos-rel-v: -28px;
+    --pos-rel-h: 19px;
+    --recorte-carta-h: -42px;
+     background-position-x: calc(((var(--valor-carta) - 1) * var(--recorte-carta-h)) - var(--ajuste-recorte-h));
+
+}
+
+
+
+
+
+div#mazo>div[palo="treboles"] {
+     background-position-y:   -10px;
+}
+div#mazo>div[palo="picas"] {
+     background-position-y:   -70px;
+}
+div#mazo>div[palo="corazones"] {
+     background-position-y:   -130px;
+}
+div#mazo>div[palo="diamantes"] {
+     background-position-y:   -190px;
+}
+
+
+/*51,9*/
+/*90,65*/
+/*
+div#mazo>div[valor_carta="carta1"] {
+    --id-carta:1;
+    --valor-carta:3;
+    left: calc(var(--pos-rel-h)*var(--id-carta));
+    
+    
+    Agradecimiento a chtgpt por explicar correctamente la sintaxis de calc y como usar variables
+    background-position-x: calc(((var(--valor-carta) - 1) * var(--recorte-carta-h)) - 9px);
+
+   
+
+}
+
+
+
+div#mazo>div[valor_carta="1"] {
+    --valor-carta:14;
+    --ajuste-recorte-h:6px;
+}
+div#mazo>div[valor_carta="2"] {
+    --valor-carta:2;
+    --ajuste-recorte-h:10px;
+}
+div#mazo>div[valor_carta="3"] {
+    --valor-carta:3;
+    --ajuste-recorte-h:10px;
+}
+div#mazo>div[valor_carta="4"] {
+    --valor-carta:4;
+    --ajuste-recorte-h:9px;
+}
+div#mazo>div[valor_carta="5"] {
+    --valor-carta:5;
+    --ajuste-recorte-h:9px;
+}
+div#mazo>div[valor_carta="6"] {
+    --valor-carta:6;
+    --ajuste-recorte-h:9px;
+}
+div#mazo>div[valor_carta="7"] {
+    --valor-carta:7;
+    --ajuste-recorte-h:8px;
+}
+div#mazo>div[valor_carta="8"] {
+    --valor-carta:8;
+    --ajuste-recorte-h:8px;
+}
+div#mazo>div[valor_carta="9"] {
+    --valor-carta:9;
+    --ajuste-recorte-h:7px;
+}
+div#mazo>div[valor_carta="10"] {
+    --valor-carta:10;
+    --ajuste-recorte-h:7px;
+}
+div#mazo>div[valor_carta="11"] {
+    --valor-carta:11;
+    --ajuste-recorte-h:7px;
+}
+div#mazo>div[valor_carta="12"] {
+    --valor-carta:12;
+    --ajuste-recorte-h:7px;
+}
+div#mazo>div[valor_carta="13"] {
+    --valor-carta:13;
+    --ajuste-recorte-h:7px;
+}
