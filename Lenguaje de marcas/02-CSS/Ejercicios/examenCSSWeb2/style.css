@@ -1,14 +1,16 @@
-ul.menu>li>a {
-
-    text-decoration: none;
-    color: black;
-    margin: 0px;
-
-
+nav {
+    background-color: #808080;
+}
+nav>ul.menu>li {
+    list-style: none;
+    display: inline-block;
+    position: sticky;
 }
 
-ul.menu {
-    list-style: none;
-    margin: 0px;
-    padding-right: 0px;
+section#imagen {
+    float: right;
+
+}
+section>article {
+    width: 200px;
 }
