@@ -1,0 +1,38 @@
+body{
+    background-color: red;
+}
+.azul{
+    background-color: blue;
+    height: 250px;
+    width: 300px;
+}
+.amarillo{
+    background-color: yellow;
+    height: 70px;
+    width: 300px;
+}
+.verde{
+    position: fixed;
+    top:60%;
+    left: 5%;
+    background-color: green;
+    height: 130px;
+    width: 80%;
+    padding-right:10% ;
+}
+#bloque1{
+    position: fixed;
+    top: 10%;
+    left: 5%;
+}
+#bloque2{
+    position:fixed;
+    top:10%;
+    left:40%;
+}
+#bloque3{
+    position:fixed;
+    top:10%;
+    left:75%;
+}
+

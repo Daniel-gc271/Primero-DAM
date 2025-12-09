@@ -1,0 +1,14 @@
+#plaza{
+    width: 100%;
+
+}
+#escudo{
+    position: fixed;
+    top: 60%;
+    left: 70%;
+}
+h1{
+    position: fixed;
+    top: 65%;
+    left: 75%;
+}

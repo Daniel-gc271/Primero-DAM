@@ -1,0 +1,27 @@
+.imagen{
+position: absolute;
+}
+#imagen1{
+z-index:5 ;
+left: 10px;
+}
+#imagen2{
+z-index:4 ;
+left: 40px;
+top: 45px;
+}
+#imagen3{
+z-index:3 ;
+left: 70px;
+top: 75px;
+}
+#imagen4{
+z-index:2 ;
+left: 100px;
+top: 105px;
+}
+#imagen5{
+z-index:1 ;
+left: 130px;
+top: 135px;
+}

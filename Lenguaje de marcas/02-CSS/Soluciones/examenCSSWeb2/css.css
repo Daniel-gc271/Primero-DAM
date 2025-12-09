@@ -1,0 +1,28 @@
+p:first-of-type,p:last-of-type {
+    color: green;
+    font-variant-caps: all-petite-caps;
+    /*text-transform: uppercase;*/
+}
+
+/*p:nth-child(odd) {*/
+p:nth-child(2n-1) {
+    background-color: grey;
+}
+
+p {
+    background-image: url(https://gregoriofer.com/logo.jpg);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 60px 60px;
+}
+
+img:hover {
+    opacity: 0%;
+    
+}
+
+/*
+img:hover {
+      visibility: hidden;
+}
+*/

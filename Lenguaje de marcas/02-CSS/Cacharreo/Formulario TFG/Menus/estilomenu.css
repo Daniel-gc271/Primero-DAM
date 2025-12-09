@@ -1,0 +1,18 @@
+input,
+label,textarea,h2 { 
+    width: 200px;
+    line-height: 30px;
+    display: block;
+    background-color: rgb(128, 158, 255);
+    color: rgb(0, 26, 113);
+    text-align: center;
+    border: 1px solid black;
+    font-weight: bold;
+}
+
+
+
+ fieldset {
+    background-color: rgb(29, 82, 255);
+    width: fit-content;
+} 

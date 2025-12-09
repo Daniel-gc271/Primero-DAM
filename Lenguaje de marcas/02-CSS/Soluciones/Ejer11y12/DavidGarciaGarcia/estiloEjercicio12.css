@@ -1,0 +1,11 @@
+/* adaptarlo a lo que se pide */
+
+div {
+    width: 600px;
+    height:600px;
+    border:20px double black;
+    background-color: lightblue;
+    position: fixed;
+    text-align: center;
+    left: 400px;
+}

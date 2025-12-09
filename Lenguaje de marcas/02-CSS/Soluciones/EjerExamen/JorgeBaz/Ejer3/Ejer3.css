@@ -1,0 +1,11 @@
+#si p:nth-child(2n+1){
+    background-color: peru;
+}
+#si p:nth-child(2n+2){
+    background-color: green;
+}
+#si p:hover{
+    background-color: gray;
+    color: orange;
+    font-size: 20px;
+}

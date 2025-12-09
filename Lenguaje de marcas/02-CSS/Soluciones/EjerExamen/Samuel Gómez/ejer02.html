@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form action="url_del_servidor.php" method="post">
+        <label for="nombre">Nombre:</label>
+        <input type="text" id="nombre" name="nombre" required>
+        <br><br>
+        <label for="correo">Correo electrónico: </label>
+        <input type="email" id="correo" name="correo" required>
+        <br><br>
+        <fieldset>
+            <leyend>Tipo de membresia:</leyend>
+            <br>
+                <input type="radio" id="basica" name="membresia" required>
+                <label for="basica">Básica</label>
+                <br>
+                <input type="radio" id="premium" name="membresia" required>
+                <label for="basica">Premium</label>
+                <br>
+                <input type="radio" id="vip" name="membresia" required>
+                <label for="basica">VIP</label>
+                <br>
+        </fieldset>
+        <br><br>
+        <label for="generosFavoritos">Géneros favoritos:</label>
+        <select id="generosFavoritos" name="generosFavoritos" multiple size="5" required>
+            <option>Acción </option>
+            <option>Aventura</option>
+            <option>Comedia</option>
+            <option>Drama</option>
+            <option>Terror</option>
+            <option>Ciencia Ficción</option>
+        </select>
+        <br><br>
+        <label for="frecuenciaVisitas">Frecuencia de visitas:</label>
+        <select id="frecuenciaVisitas" name="frecuenciaVisitas" required>
+            <option>Semanal</option>
+            <option>Quincenal</option>
+            <option>Mensual</option>
+        </select>
+        <br><br>
+        <input type="submit" value="Enviar">
+    </form>
+</body>
+</html>

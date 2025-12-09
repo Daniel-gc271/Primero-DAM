@@ -1,0 +1,53 @@
+
+#bloque{
+    display: inline-block;
+    position: absolute;
+    top:0%;
+    left:25%;
+    color:fuchsia;
+}
+.gris{
+    background-color: gray;
+    border: 2px dotted black;
+    width: 700px;
+    height: 400px;
+    text-align: center;
+}
+.blanco{
+    border: 2px dotted black;
+    width: 700px;
+    height: 400px;
+    text-align: center;
+}
+#principio{
+    width: 100px;
+    height: 100px;
+    position: fixed;
+    top: 20%;
+    left: 10%;
+    border: 2px solid black ;
+    color: red;
+    text-align: center;
+
+}
+#principio:hover{
+    background-color: black;
+    border: 2px solid white ;
+}
+#final{
+    width: 100px;
+    height: 100px;
+    position: fixed;
+    top: 20%;
+    left: 85%;
+    border: 2px solid black ;
+    color: red;
+    text-align: center;
+}
+#final:hover{
+    background-color: black;
+    border: 2px solid white ;
+}
+a:visited{
+    color: red;
+}

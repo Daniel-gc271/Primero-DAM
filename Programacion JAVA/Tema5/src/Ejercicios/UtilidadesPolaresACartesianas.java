@@ -19,14 +19,7 @@ public class UtilidadesPolaresACartesianas {
     }
     public double calcularCoordenadaY(double radio, double angulo) {
     return Math.sin(angulo)*radio;
-    public double validarPositivo() {
-        Scanner scIn = new Scanner(System.in);
-        try
-            
-        
-        
-        
-    }
+   
     }
     
     

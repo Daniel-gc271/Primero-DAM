@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form action="url.phhp" method="post">
+        <label for="nombre">Nombre:</label>
+        <input type="text" id="nombre" name="nombre"><br><br>
+        <label for="email">Correo Electrónico:</label>
+        <input type="email" id="email" name="email"><br><br>
+        <fieldset>
+            <legend>Tipo de Membresía:</legend>
+            <input type="radio" name="membresia" value="basica"> Básica<br>
+            <input type="radio" name="membresia" value="premium"> Premium<br>
+            <input type="radio" name="membresia" value="vip"> VIP<br>
+        </fieldset><br><br>
+        <label for="géneros_favoritos">Géneros Favoritos:</label>
+        <select id="géneros_favoritos" name="géneros_favoritos" multiple>
+            <option value="accion">Acción</option>
+            <option value="comedia">Comedia</option>
+            <option value="drama">Drama</option>
+            <option value="fantasia">Fantasía</option>
+            <option value="terror">Terror</option>
+        </select><br><br>
+        <label for="frecuencia_visitas">Frecuencia de Visitas:</label>
+        <select id="frecuencia_visitas" name="frecuencia_visitas">
+            <option value="diaria">Semanal</option>
+            <option value="semanal">Quincenal</option>
+            <option value="mensual">Mensual</option>
+        </select><br><br>
+        <input type="submit" value="Enviar">
+    </form>
+</body>
+</html>

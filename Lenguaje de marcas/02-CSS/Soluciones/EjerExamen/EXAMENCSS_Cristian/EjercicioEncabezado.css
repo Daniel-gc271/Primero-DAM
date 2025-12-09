@@ -1,0 +1,39 @@
+img {
+    position: absolute;
+    left: 3%;
+    top: 2%;
+    width: 20%;
+    height: auto;
+}
+
+#encabezado {
+    background-color: grey;
+    text-align: center;
+    padding-left: 5%;
+    width: auto;
+}
+
+#título {
+    color: white;
+    font-size: 150%;
+    text-decoration: none;
+    position: relative;
+}
+
+div>a {
+    color: white;
+    background-color: gray;
+    display: inline-block;
+    margin: 0 auto;
+}
+
+div>a:hover {
+    color: brown;
+    text-decoration: underline;
+}
+
+p {
+    text-align: left;
+    font-weight: bold;
+    display: inline-block;
+}

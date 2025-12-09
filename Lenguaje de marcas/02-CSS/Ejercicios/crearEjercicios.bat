@@ -4,7 +4,7 @@
 set /p num=Introduce el número del ejercicio: 
 
 :: Crear la carpeta principal
-set folder=ejercicio%num%
+set folder=Ejercicio%num%
 mkdir %folder%
 
 :: Crear la subcarpeta assets
@@ -20,7 +20,8 @@ echo ^<html lang="en"^>
 echo ^<head^>
 echo     ^<meta charset="UTF-8"^>
 echo     ^<meta name="viewport" content="width=device-width, initial-scale=1.0"^>
-echo     ^./style.css
+
+echo     ^<link rel="stylesheet" href="./style.css"^>
 echo     ^<title^>ejercicio%num%^</title^>
 echo ^</head^>
 echo ^<body^>

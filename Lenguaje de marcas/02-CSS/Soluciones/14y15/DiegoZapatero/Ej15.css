@@ -1,0 +1,11 @@
+div{
+    border: 2px solid gray;
+    width: 20%;
+    background-color: whitesmoke;
+    height: 20px;
+}
+div:hover{
+    background-image: url(Ej15/foto.png);
+    background-repeat: no-repeat;
+    text-align: center;
+}

@@ -1,0 +1,55 @@
+.filas{
+    border-style:dashed;
+    text-align: center;
+    margin-left: 15%;
+    margin-right: 15%;
+}
+.gris{
+    background-color: grey;
+    border-style:dashed;
+    height: 500px;
+}
+.blanco{
+    border-style:dashed;
+    height:500px;
+}
+
+span{
+    border-style: solid;
+}
+.cuadrado{
+    width: 100px;
+    height: 100px;
+    display: fixed;
+    position:fixed;
+    margin-left: 5%;
+    border-style: solid;
+    text-align: center;
+    
+
+}
+.cuadrado2{
+    width: 100px;
+    height: 100px;
+    display:fixed;
+    position:fixed;
+    display: inline-block;
+    margin-left: 87%;
+    border-style: solid;
+    text-align: center;
+
+}
+:hover .cuadrado{
+    background-color: black;
+}
+:hover .cuadrado2{
+    background-color: black;
+}
+.num{
+    font-size: 40px;
+    color: violet;
+    font-weight: bold;
+}
+a{
+    color: red;
+}

@@ -1,0 +1,25 @@
+.menu {
+  padding: 0px;
+
+}
+.menu li{
+display: block;
+position: relative;
+border: 1px solid black;
+width: 150px; 
+height: 25px;
+padding-left: 35px;
+
+}
+.menu  li:hover{
+  background-color: grey;
+  opacity: 0.5;
+  list-style:url(Captura\ de\ pantalla\ 2025-11-29\ 182758.png);
+}
+
+.menu li a{
+  display: block;
+  text-decoration: none;
+  color: black;
+  
+}

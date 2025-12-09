@@ -1,0 +1,18 @@
+body {
+    font-family: sans-serif;
+    padding: 40px;
+}
+
+
+#cartas img {
+    width: 120px;
+    border: 2px solid #333;
+    position: absolute;
+}
+
+/* Desplazamientos para que queden solapadas */
+#carta1 { top: 0;   left: 0; }
+#carta2 { top: 20px; left: 20px; }
+#carta3 { top: 40px; left: 40px; }
+#carta4 { top: 60px; left: 60px; }
+#carta5 { top: 80px; left: 80px; }

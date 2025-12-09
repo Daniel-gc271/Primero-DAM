@@ -1,0 +1,49 @@
+body {
+  margin: 0px;
+  font-family: Arial, Helvetica, sans-serif;
+  line-height: 1.4;
+  padding: 10px;
+}
+
+.img-flotante {
+  float: left;
+  margin: 10px;
+  width: 150px;
+  height: auto;
+}
+
+#parrafo1,#parrafo2 {
+  display: inline;
+}
+
+#parrafo1 {
+  margin: 50px;
+  border: 1px solid blue;
+  padding: 8px;
+}
+
+#parrafo2,.marcado, .marcado {
+  margin: 10px;
+  border: 1px dotted red;
+  padding: 6px;
+}
+
+
+#parrafo-flotante {
+  width: 200px;
+  height: 200px;
+  float: right;
+  border: 1px solid black;
+  margin: 10px;
+  padding: 10px;
+  box-sizing: border-box;
+  overflow: auto;
+}
+
+.evita-flujo {
+  clear: right;
+  padding: 6px;
+  margin: 10px 10px 40px 10px;
+}
+
+

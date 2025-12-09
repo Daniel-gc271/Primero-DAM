@@ -1,0 +1,24 @@
+img{
+    float: left;
+    height: 130px;
+}
+div{
+    margin-top: 0%;
+    margin-left: 0%;
+    text-align: center;
+    color: white;
+    height: 130px;
+    width: 100%;
+    display: block;
+    background-color: gray;
+    
+
+}
+div a{
+    color: white;
+    text-decoration: none;
+}
+a:hover{
+    color: red;
+    text-decoration: none;
+}

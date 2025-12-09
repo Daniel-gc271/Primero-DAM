@@ -1,0 +1,12 @@
+p:hover {
+    font-size: +110%;
+    color: burlywood !important;
+}
+
+p:nth-of-type(2n) {
+    color: gray;
+}
+
+p:nth-of-type(2n+1) {
+    color: black; 
+}

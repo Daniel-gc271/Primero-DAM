@@ -1,0 +1,52 @@
+#izq{
+    width: 75px;
+    height: 75px;
+    border: double 4px black;
+    float: left;
+    margin-left: 400px;
+    text-align: center;
+    margin-top: 50px;
+    position: fixed;
+    
+}
+
+a{
+    color: red;
+
+}
+a:hover{
+ background-color: black;
+}
+#der a{
+    color: red;
+}
+#der{
+    width: 75px;
+    height: 75px;
+    border: solid 4px black;
+    margin-left: 850px;
+    text-align: center;
+    margin-top: 50px;
+    position: fixed;
+    
+}
+#primero{
+text-align: center;
+color: #ff0077;
+size: 500px;
+width: 300px;
+height: 300px;
+border: 5px dashed black;
+font-size: 50px;
+margin: 0 auto;
+}
+#segundo{
+    text-align: center;
+    color: rgb(255, 0, 119);
+    background-color: grey;
+    border: 5px dashed black;
+    width: 300px;
+    height: 300px;
+    font-size: 50px ;
+    margin: 0 auto;
+}

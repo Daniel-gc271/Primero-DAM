@@ -1,0 +1,12 @@
+table{
+    width: 150px;
+    height: 200px;
+    text-align: center;
+    margin-left: 45%;
+}
+td:hover{
+    background-color: lightgrey;
+    background-image: url("flecha-ej15.png");
+    background-repeat: no-repeat;
+    padding-left: 25px;
+}

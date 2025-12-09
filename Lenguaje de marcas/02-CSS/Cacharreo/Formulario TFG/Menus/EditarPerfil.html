@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./estilomenu.css">
+    <title>Editar perfil</title>
+</head>
+
+<body>
+    <fieldset>
+        <h2>Editar perfil</h2>
+
+        <table>
+            <form action="">
+                <tr>
+                    <td> <label for="Username">Nombre de usuario</label></td>
+                    <td> <input type="text" name="Username" placeholder="N0mbre_de-Usuari@"></td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <input type="submit" name="Submit" value="Cambiar nombre de usuario">
+                    </td>
+                </tr>
+            </form>
+
+
+            <form action="">
+                <tr>
+                    <td> <label for="PfP">Foto de perfil</label></td>
+                    <td> <input type="file" name="PfP"></td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <input type="submit" name="Submit" value="Cambiar foto de perfil">
+                    </td>
+                </tr>
+            </form>
+
+
+            <form action="">
+                <tr>
+                    <td>
+                        <label for="ContraseñaAnt">Contraseña antigua</label>
+                        <label for="ContraseñaNueva">Contraseña nueva</label>
+                        <label for="ContraseñaNuevaConf">Confirmar contraseña</label>
+                    </td>
+                    <td>
+                        <input type="password" name="ContraseñaAnt" required>
+                        <input type="password" name="ContraseñaNueva" required>
+                        <input type="password" name="ContraseñaNuevaConf" required>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <input type="submit" name="Submit" value="Cambiar contraseña">
+                    </td>
+                </tr>
+            </form>
+
+
+
+        </table>
+
+    </fieldset>
+</body>
+
+</html>

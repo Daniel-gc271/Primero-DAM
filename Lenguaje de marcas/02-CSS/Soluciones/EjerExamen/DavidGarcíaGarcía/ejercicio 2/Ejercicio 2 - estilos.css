@@ -1,0 +1,22 @@
+* {
+    font-family:'Times New Roman', Times, 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif, serif;
+    font-size: 12pt;
+}
+
+label, select{
+    margin-bottom: 40px;
+}
+        
+#nombre{
+    margin-bottom: 20px;
+}
+
+#generoFavorito, #textoVisitas, #visitas {
+    padding-bottom: 0px;
+    margin-bottom: 15px;
+}
+
+fieldset {
+    margin-top: 20px;
+    margin-bottom: auto;
+}

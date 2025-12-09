@@ -1,0 +1,19 @@
+.divin{
+text-align: center;
+background-color: black;
+color: white;
+width: 100%;
+height: 7%;
+}
+li{
+list-style: none;
+display: inline-block;
+}
+img{
+width: 7%;
+height: 7%;
+float: left;
+}
+a{
+color: white;
+}
