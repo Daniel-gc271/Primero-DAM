@@ -1,0 +1,11 @@
+p:nth-child(2n){
+    color: chartreuse;
+}
+p:nth-child(2n+1){
+    color: grey;
+}
+
+p:hover{
+    color: blue;
+    font-size: 20px;
+}

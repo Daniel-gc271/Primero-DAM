@@ -1,0 +1,15 @@
+p:nth-child(even) {
+    color: red;
+}
+
+p:nth-child(odd) {
+    color: yellow;
+}
+p:nth-child(even):hover {
+    color: blue;
+    font-size: 30px;
+}
+p:nth-child(odd):hover {
+    color: green;
+    font-size: 30px;
+}

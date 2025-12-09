@@ -1,0 +1,20 @@
+body {
+    background-image: url("PlazaMayor.jpg");
+    background-repeat: no-repeat;
+    background-size: auto;
+    z-index: 1;
+}
+.Valladolid { /*Logo*/
+    position:absolute; /* Esto permite superponer los divs */
+    /* top: 100px;
+    margin-left: 50px; */
+    left: 300px;
+    z-index: 2;
+}
+.Valladolid:nth-of-type(3) { /*Texto "VALLADOLID"*/
+    font-size: 40px;
+    color: white;
+    left: 270px;
+    top: 250px;
+    z-index: 3;
+ }

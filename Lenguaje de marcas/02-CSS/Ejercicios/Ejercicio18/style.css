@@ -1,0 +1,38 @@
+div#cabeza>h1 {
+    background-color: #808080;
+    text-align: center;
+    width: 100%;
+    margin: 0%;
+    padding: 0%;
+    height: 100px;
+}
+
+ul.selectorTexto {
+    list-style: none;
+    background-color: #808080;
+    margin: 0px;
+    width: 20%;
+    padding: 0px;
+}
+
+ ul.selectorTexto>li>a {
+    padding: 25%;
+    padding-left: 5%;
+    text-align: left;
+    text-decoration: none;
+    color: black;
+    display: block;
+    border: black dotted 5px;
+} 
+div#texto {
+    width:200px;
+    border-left: black dotted 4px;
+    overflow-y: scroll;
+    max-height: 200px;
+}
+/* div#cabecera {
+    position: fixed;
+    top: 0;
+    left: 0;
+  
+} */

@@ -1,0 +1,68 @@
+body {
+    font-family: Arial, sans-serif;
+    padding: 40px;
+}
+
+/* Contenedor del menú */
+.menu {
+    list-style: none;
+    padding: 0;
+    width: 160px;
+    border: 1px solid #999;
+}
+
+/* Cada elemento del menú */
+.menu li {
+    border-bottom: 1px solid #999;
+    padding: 8px 10px 8px 28px;
+    background: #e6e6e6;
+    position: relative;
+    cursor: pointer;
+}
+
+/* Último sin borde inferior */
+.menu li:last-child {
+    border-bottom: none;
+}
+
+/* FLECHA AZUL QUE APARECE AL PASAR EL RATÓN */
+.menu li::before {
+    content: "";
+    position: absolute;
+    left: 6px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 16px;
+    height: 16px;
+    background-image: url("https://www.bing.com/images/search?view=detailV2&ccid=1PDfkyFS&id=22EE9AEF6B4CB24741AC12E403CD995F1C5D3F3A&thid=OIP.1PDfkyFSUx_Ww4c4I0zHjQHaHa&mediaurl=https%3a%2f%2fimg.freepik.com%2ffotos-premium%2frepresentacion-ilustracion-3d-flecha-azul-aislada_594417-4657.jpg&cdnurl=https%3a%2f%2fth.bing.com%2fth%2fid%2fR.d4f0df932152531fd6c38738234cc78d%3frik%3dOj9dHF%252bZzQPkEg%26pid%3dImgRaw%26r%3d0&exph=626&expw=626&q=flecha+azul&FORM=IRPRST&ck=06E14D796C4D69F65DC08631637B0025&selectedIndex=22&itb=0");
+    background-size: contain;
+    background-repeat: no-repeat;
+    opacity: 0;
+    transition: opacity 0.1s;
+}
+
+.menu li:hover::before {
+    opacity: 1;
+}
+
+/* TOOLTIP BLANCO CON BORDE NEGRO (como en tu imagen) */
+.menu li::after {
+    content: "Enlace genérico";
+    position: absolute;
+    left: 100%;
+    top: 50%;
+    transform: translateY(-50%);
+    background: #ffffff;
+    border: 1px solid #000;
+    padding: 3px 6px;
+    font-size: 13px;
+    white-space: nowrap;
+    margin-left: 8px;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.15s;
+}
+
+.menu li:hover::after {
+    opacity: 1;
+}

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form action="" method="post">
+        <label for="nombre">Nombre:</label>
+        <input type="text" id="nombre" name="nombre" required>
+        <br><br>
+        <label for="correo">Correo Electrónico:</label>
+        <input type="email" id="correo" name="correo" required>
+        <br>
+        <fieldset>
+            <legend>Tipo de membresía</legend>
+            <input type="radio" id="basica" name="membresia" value="basica">
+            <label for="basica">Básica</label>
+            <br>
+            <input type="radio" name="membresia" id="premium" value="premium">
+            <label for="premium">Premium</label>
+            <br>
+            <input type="radio" name="membresia" id="vip" value="vip">
+            <label for="vip">VIP</label>
+        </fieldset>
+        <br>
+        <label for="generos">Géneros Favoritos:</label>
+        <select name="generos" id="generos" multiple required>
+            <option value="accion">Acción</option>
+            <option value="comedia">Comedia</option>
+            <option value="drama">Drama</option>
+            <option value="ciencia-ficcion">Ciencia Ficción</option>
+        </select>
+        <br><br>
+        <label for="visitas">Frecuencia de Visitas: </label>
+        <select name="visitas" id="visitas" required>
+            <option value="semanal">Semanal</option>
+            <option value="quincenal">Quincenal</option>
+            <option value="mensual">Mensual</option>
+        </select>
+        <br><br>
+        <input type="submit" name="enviar" id="enviar" value="Enviar">
+    </form>
+</body>
+</html>

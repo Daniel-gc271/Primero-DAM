@@ -1,0 +1,37 @@
+#menu {
+    width: auto;
+    height: auto;
+    margin: 0;
+    padding: 0;
+}
+
+a {
+    width: auto;
+    display:inline-flex;
+    text-decoration: none;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    border: solid 1px #a9a9a9;
+    background-color: #dadada;
+}
+
+a:hover {
+    color: saddlebrown;
+}
+
+a#final {
+    border-bottom: solid 2px #707070;
+}
+
+span {
+    color: transparent;
+    padding-right: 50px;
+}
+
+span:hover {
+    color: black;
+}
+
+span#noTrant {
+    color: black;
+}

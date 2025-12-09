@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Menú con tooltip</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+
+       
+        .menu {
+            list-style: none;
+            margin: 20px;
+            padding: 0;
+            width: 180px;
+            border: 1px solid #ccc;
+        }
+
+        .menu li a {
+            display: block;
+            padding: 8px 10px;
+            text-decoration: none;
+            color: #000;
+            background-color: #f4f4f4;
+            border-bottom: 1px solid #ccc;
+            position: relative;          
+        }
+
+        .menu li:last-child a {
+            border-bottom: none;
+        }
+
+        
+        .menu li a:hover {
+            background-color: #dfe9f5;   
+            padding-left: 28px;          
+        }
+
+        
+        .menu li a:hover::before {
+            content: "";
+            position: absolute;
+            left: 6px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 16px;
+            height: 16px;
+            background-image: url("image.jpg"); 
+            background-size: contain;
+            background-repeat: no-repeat;
+        }
+    </style>
+</head>
+<body>
+
+<ul class="menu">
+    <li><a href="#" title="Enlace genérico">Elemento 1</a></li>
+    <li><a href="#" title="Enlace genérico">Elemento 2</a></li>
+    <li><a href="#" title="Enlace genérico">Elemento 3</a></li>
+    <li><a href="#" title="Enlace genérico">Elemento 4</a></li>
+    <li><a href="#" title="Enlace genérico">Elemento 5</a></li>
+    <li><a href="#" title="Enlace genérico">Elemento 6</a></li>
+</ul>
+
+</body>
+</html>

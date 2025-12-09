@@ -1,0 +1,49 @@
+#principal div{
+    border: 6px dashed black;
+    height: 400px;
+    width: 400px;
+    text-align: center;
+    font-size: 45px;
+    color: hotpink;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: bold;
+    margin-left: calc(50% - 200px);
+    /*margin: 0 auto;*/
+}
+#principal div:nth-child(2n+1){
+    background-color: gray;
+}
+#principal div:first-of-type{
+    border-top: none;
+}
+#principal div:last-of-type{
+    border-bottom: none;
+    color: black;
+}
+.boton{
+    border: 3px solid black;
+    height: 150px;
+    width: 150px;
+    text-align: center;
+    font-size: 20px;
+    font-weight: bold;
+    font-family: Arial, Helvetica, sans-serif;
+    
+}
+.boton:hover{
+    background-color: black;
+}
+a{
+    color: red;
+}
+
+#botonfinal{
+    position: sticky !important;
+    top: 80px;
+    left: 10%;
+}
+#botoninicio{
+    position: sticky !important;
+    top: 80px;
+    left: 80%;
+}

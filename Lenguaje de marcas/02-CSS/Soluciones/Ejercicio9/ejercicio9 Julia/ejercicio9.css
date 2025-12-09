@@ -1,0 +1,31 @@
+body{
+    background-color: red;
+    
+}
+.cuadrado{
+    background-color: blue;
+    height: 300px;
+    width: 300px;
+    margin-top: 50px;
+    margin-left: 80px ;
+    display: inline-block;
+
+}
+.rectangulo{
+    background-color: yellow;
+    height: 80px;
+    width: 300px;  
+    margin-left:80px ;
+    display: inline-block;
+
+
+}
+.rectangulo2{
+
+    background-color: green;
+    height: 100px;
+    width: 1070px;
+    margin-top: 50px;
+    margin-left:80px ;
+    display: inline-block;
+}

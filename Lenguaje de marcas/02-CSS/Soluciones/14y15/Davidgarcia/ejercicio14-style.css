@@ -1,0 +1,41 @@
+#cartas {
+    position: relative;
+    width: 200px;
+    height: 250px;
+}
+
+#cartas img {
+    position: absolute;
+}
+
+/* Cada carta en su capa */
+#carta1 {
+    top: 0px;
+    left: 0px;
+    z-index: 5;
+}
+
+#carta2 {
+    top: 25px;
+    left: 25px;
+    z-index: 4;
+}
+
+#carta3 {
+    top: 55px;
+    left: 55px;
+    z-index: 3;
+}
+
+#carta4 {
+    top: 90px;
+    left: 80px;
+    z-index: 2;
+}
+
+#carta5 {
+    top: 120px;
+    left: 110px;
+    z-index: 1;
+}
+

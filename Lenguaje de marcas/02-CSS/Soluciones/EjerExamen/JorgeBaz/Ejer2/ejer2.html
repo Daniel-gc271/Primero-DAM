@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <form action="www.ejer2.com" method="post">
+        <Label for="Nombre">Nombre:</Label>
+        <input type="text" id="Nombre" name="Nombre" required>
+        <br><br>
+        <label for="Correo">Correo Electrónico:</label>
+        <input type="email" id="Correo" name="Correo" required>
+        <br><br>
+        <fieldset>
+            <legend>Tipo de Membresía:</legend>
+            <label for="Membresía"></label>
+            <input type="radio" id="Basica" name="Membresía" value="Basica" required>
+            <label for="Basica">Basica</label>
+            <br>
+            <input type="radio" id="Premium" name="Membresía" value="Premium" required>
+            <label for="Premium">Premium</label>
+            <br>
+            <input type="radio" id="VIP" name="Membresía" value="VIP" required>
+            <label for="VIP">VIP</label>
+        </fieldset>
+        <br><br>
+        <label for="Generos">Generos Favoritos:</label>
+        <select name="Generos" id="Generos" multiple required>
+            <option value="Acción">Acción</option>
+            <option value="Comedia">Comedia</option>
+            <option value="CienciaF">Ciencia Ficcion</option>
+
+        </select>
+        <br><br>
+        <label for="Frecuencia">Frecuencia de Visitas:</label>
+        <select name="Frecuencia" id="Frecuencia" required>
+            <option>Selecionar</option>
+            <option value="Semanal">Semanal</option>
+            <option value="Quincenal">Quincenal</option>
+            <option value="Mensual">Mensual</option>
+        </select>
+        <br><br>
+        <input type="submit" value="Enviar">
+    </form>
+</body>
+
+</html>

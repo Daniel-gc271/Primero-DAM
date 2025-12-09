@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="Ejercicio 2 - estilos.css">
+    <title>Ejercicio 2</title>
+</head>
+<body>
+    <form action="thanks.html" method="post">
+        <label for="nombre">Nombre: </label>
+        <input type="text" id="nombre" name="nombre" required>
+        <br>
+        
+        <label for="correo">Correo Electrónico: </label>
+        <input type="email" name="correo" id="correo" required>
+        <br>
+
+        <fieldset>
+            <legend>Tipo de Membresía:</legend>
+            
+            <input type="radio" name="" id="" required>
+            <label for="">Básica</label><br>
+            <input type="radio" name="" id="" required>
+            <label for="">Premium</label><br>
+            <input type="radio" name="" id="" required>
+            <label for="">VIP</label><br>
+        </fieldset><br>
+
+        <label for="generoFavorito" id="generoFavorito">Géneros Favoritos: </label>
+        <select name="generoFavorito" id="generoFavorito" multiple required>
+            <option value="accion">Acción</option>
+            <option value="comedia">Comedia</option>
+            <option value="drama">Drama</option>
+            <option value="cienciaFiccion">Ciencia Ficción</option>
+        </select><br>
+
+        <label for="visitas" id="textoVisitas">Frecuencia de visitas: </label>
+        <select name="visitas" id="visitas" required>
+            <option value="semanal">Semanal</option>
+            <option value="quincenal">Quincenal</option>
+            <option value="mensual">Mensual</option>
+        </select><br>
+
+        <input type="submit" value="Enviar">
+    </form>
+</body>
+</html>

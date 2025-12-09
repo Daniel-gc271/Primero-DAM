@@ -20,6 +20,7 @@ public class MotorBBDD {
      */
     
     public static void main(String[] args) {
+        
          String entrada = "create table CLIENTES adsa create table USUARIOS adsa create table PERSONAL adsa";
          String cadenaBuscada = "create table ";
         int startIndexSearched=0;
