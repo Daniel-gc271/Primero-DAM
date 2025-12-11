@@ -19,6 +19,26 @@ public class MotorBBDD {
      * "alpha|delta"
      */
     public static void main(String[] args) {
+<<<<<<< HEAD
+=======
+        
+         String entrada = "create table CLIENTES adsa create table USUARIOS adsa create table PERSONAL adsa";
+         String cadenaBuscada = "create table ";
+        int startIndexSearched=0;
+        int endIndexSearched=0;
+        int contTablas=1;
+        while (entrada.indexOf("create table ",startIndexSearched)!=-1) {
+        //Buscar creacion de la tabla
+        cadenaBuscada = "create table ";  
+        startIndexSearched = entrada.indexOf(cadenaBuscada,startIndexSearched) + cadenaBuscada.length();
+        endIndexSearched=entrada.indexOf(" ",startIndexSearched);
+        String nombreTabla = entrada.substring(startIndexSearched,endIndexSearched);
+        startIndexSearched=endIndexSearched;
+        System.out.println(startIndexSearched);
+        System.out.printf("Tabla #%d \t %s\n",contTablas,nombreTabla);
+        contTablas++;
+
+>>>>>>> origin/main
 
         String entrada = "create table CLIENTES  \n" +
 "( \n" +
