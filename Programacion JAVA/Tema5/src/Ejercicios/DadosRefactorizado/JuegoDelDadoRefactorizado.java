@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Main.java to edit this template
  */
-package juegodeldado2;
+package Ejercicios.DadosRefactorizado;
 
 /**
  *
@@ -26,7 +26,7 @@ import java.util.Scanner;
 public class JuegoDelDadoRefactorizado {
 
     //Metodo que se llama para explicar las reglas (Por legilibilidad del codigo y la salud mental del programador)
-    public static void main(String[] args) {
+    /*
         long tJugado = System.currentTimeMillis();
         Random numAleatorio = new Random();
         Scanner scIn = new Scanner(System.in);
@@ -42,22 +42,16 @@ public class JuegoDelDadoRefactorizado {
         int tiradaMaquina;
         int punto = 0;
         boolean esTiradaSalida = true;
-        //Inicio del programa que explica (o no) como jugar
-        System.out.println("Bienvenido al casino de ciudad Malvalona");
-        System.out.println("Aqui es típico jugar a un juego llamado el juego de los dados");
-        System.out.println("Sabes jugar? (S o N)");
-
-        if (validarEntrada(scIn)) {
-        } else {
-            explainRules();
-        }
-        //Tirada inicial: sale quien obtenga la puntuacion más alta
-        tuTurno = tiradaInicial(numAleatorio);
-        //tuTurno = true;Debug quitar para que funcione
-        //System.out.println((tuTurno ? "Te toca a ti" : "Le toca a la máquina"));
-        //quitar tb porque el metodo que se encarga de manejar la tirada inicial
-        //ya indica de quien es el turno
-
+        
+        
+     */
+    //Tirada inicial: sale quien obtenga la puntuacion más alta
+    //tuTurno = tiradaInicial(numAleatorio);
+    //tuTurno = true;Debug quitar para que funcione
+    //System.out.println((tuTurno ? "Te toca a ti" : "Le toca a la máquina"));
+    //quitar tb porque el metodo que se encarga de manejar la tirada inicial
+    //ya indica de quien es el turno
+    /*
         do {
             esTiradaSalida = true;
 
@@ -174,10 +168,81 @@ public class JuegoDelDadoRefactorizado {
             }
 
         } while ((boteJugador >= 15 && boteMaquina >= 15) && seguirJugando);
+     */
+    public static void main(String[] args) {
+
+        Random numAleatorio = new Random();
+        Scanner scIn = new Scanner(System.in);
+        Banca banca = new Banca();
+        Player jugador = new Player("Daniel");
+        Player maquina = new Player("CPU");
+
+        //Inicio del programa que explica (o no) como jugar
+        System.out.println("Bienvenido al casino de ciudad Malvalona");
+        System.out.println("Aqui es típico jugar a un juego llamado el juego de los dados");
+        System.out.println("Sabes jugar? (S o N)\n>>");
+
+        if (validarEntrada(scIn)) {
+        } else {
+            explainRules();
+        }
+        banca.setTurno(tiradaInicial(numAleatorio, jugador, maquina));
+
+        Boolean quiereSeguirJugando;
+        System.out.println(jugador.getName() + ", te apetece jugar? (S o N)\n>>");
+        quiereSeguirJugando = validarEntrada(scIn);
+        do { //Bucle del juego
+            banca.setTiradaSalida(true);
+            int tirada = 0;
+            if (banca.getTiradaSalida()) {
+                switch (1) {
+                    case 7, 11 -> {
+
+                        if (banca.getTurno()) {
+                            jugador.victoria(maquina);
+                            banca.showImediateVictoryMsg(jugador, maquina, tirada);
+                        } else {
+                            maquina.victoria(jugador);
+                            banca.showImediateVictoryMsg(maquina, jugador, tirada);
+                        }
+                    }
+                    case 2, 3, 12 -> {
+                        if (banca.getTurno()) {
+                            jugador.derrota(maquina, banca);
+                            banca.showImediateLostMsg(jugador, maquina, tirada);
+                        } else {
+                            maquina.derrota(jugador, banca);
+                            banca.showImediateLostMsg(maquina, jugador, tirada);
+                        }
+
+                    }
+                    default -> {
+                        banca.setTiradaSalida(false);
+                        if (banca.getTurno()) {
+                            jugador.setPunto(tirada);
+                        } else {
+                            maquina.setPunto(tirada);
+                        }
+                    }
+                }
+            } else {
+                
+                if (tirada == 7) {                    
+                    banca.victoria(banca.getTurno() ? jugador:maquina);
+                
+                }      
+            
+            
+            }
+
+            System.out.println(jugador.getName() + ", quieres seguir jugando? (S o N)\n>>");
+            quiereSeguirJugando = validarEntrada(scIn);
+
+        } while (sePuedeSeguirJugando(jugador, maquina) && quiereSeguirJugando);
 
     }
-
     //Metodo que muestra las estadisticas finales de la partida
+
     private static void menuFinPartida(Player humano, Player maquina, long timePlayed, int turnosTotales) {
         String mensaje
                 = "***************************"
@@ -186,16 +251,16 @@ public class JuegoDelDadoRefactorizado {
                 + '\n';
         mensaje
                 += mensaje.formatted("Victorias Jugador: %d"
-                + "\tVictorias Maquina%d\n"
-                + " Bote final del jugador: %d"
-                + "\t Bote final de la maquina: %d\n"
-                + "Turnos totales: %d\nTiempo jugado: %dns\tTiempo jugado: %ds",
-                humano.getVictorias(),
-                maquina.getVictorias(),
-                humano.getBote(),
-                maquina.getBote(),
-                turnosTotales,
-                timePlayed, timePlayed / 1000);
+                        + "\tVictorias Maquina%d\n"
+                        + " Bote final del jugador: %d"
+                        + "\t Bote final de la maquina: %d\n"
+                        + "Turnos totales: %d\nTiempo jugado: %dns\tTiempo jugado: %ds",
+                        humano.getVictorias(),
+                        maquina.getVictorias(),
+                        humano.getBote(),
+                        maquina.getBote(),
+                        turnosTotales,
+                        timePlayed, timePlayed / 1000);
         System.out.println(mensaje);
     }
 
@@ -222,9 +287,11 @@ public class JuegoDelDadoRefactorizado {
         do {
             if (!(entrada.equalsIgnoreCase("S") || entrada.equalsIgnoreCase("N")) && !entrada.isBlank()) {
                 System.err.printf("Has introducido %s,debes introducir (S o N)%n", entrada);
+                System.out.print(">>");
                 entrada = scIn.nextLine();
             } else if (entrada.isBlank()) {
                 System.err.println("No has introducido nada,debes introducir S o N");
+                System.out.print(">>");
                 entrada = scIn.nextLine();
             }
 
@@ -232,8 +299,8 @@ public class JuegoDelDadoRefactorizado {
         return entrada.equalsIgnoreCase("S");
     }
 
-    private static boolean tiradaInicial(Random numAleatorio) {
-        System.out.println("Tirada inicial");
+    private static boolean tiradaInicial(Random numAleatorio, Player jugador, Player maquina) {
+        System.out.println("Tirada inicial:");
         int tiradaJugador = numAleatorio.nextInt(2, 13);
         int tiradaMaquina = numAleatorio.nextInt(2, 13);
         do {
@@ -242,20 +309,19 @@ public class JuegoDelDadoRefactorizado {
             tiradaJugador = numAleatorio.nextInt(2, 13);
         } while (tiradaJugador == tiradaMaquina);
         if (tiradaJugador > tiradaMaquina) {
-            System.out.printf("Enhorabuena, sales tú (%d > %d)%n ", tiradaJugador, tiradaMaquina);
+            System.out.printf("Enhorabuena, sale %s (tu) (%d > %d)\n", jugador.getName(), tiradaJugador, tiradaMaquina);
             return true;
         } else {
-            System.out.printf("Que pena, sale la máquina (%d > %d)%n ", tiradaMaquina, tiradaJugador);
+            System.out.printf("Que pena, sale %s (la máquina) (%d > %d)\n", maquina.getName(), tiradaMaquina, tiradaJugador);
             return false;
         }
     }
     //Devuelve true si se cumple que:
     //El bote del jugador es mayor o igual a su propia apuesta (la apuesta es lo que se pierde cuando pierdes)
     //El bote de la maquina es mayor o igual a su propia apuesta (la apuesta es lo que se pierde cuando pierdes)
-    
+
     private static boolean sePuedeSeguirJugando(Player jugador, Player maquina) {
-        return (maquina.getBote()>=maquina.getApuesta() && jugador.getBote()>=jugador.getApuesta());
-    
-    
+        return (maquina.getBote() >= maquina.getApuesta() && jugador.getBote() >= jugador.getApuesta());
+
     }
 }
