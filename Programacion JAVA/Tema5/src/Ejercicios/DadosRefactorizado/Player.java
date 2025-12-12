@@ -15,7 +15,8 @@ public class Player {
     private int tirada;
     private int contVictorias;
     private int apuesta;
-    private boolean miTurno;
+    private int punto;
+
     private String nombre;
 
     //Constructor
@@ -25,7 +26,7 @@ public class Player {
         this.bote = 100;
         this.nombre = "CPU";
     }
-    
+
     public Player(String nombre) {
         this.contVictorias = 0;
         this.apuesta = 15;
@@ -39,7 +40,7 @@ public class Player {
         this.apuesta = apuesta;
         this.nombre = "CPU";
     }
-    
+
     public Player(String nombre, int boteInicial, int apuesta) {
         this.contVictorias = 0;
         this.bote = boteInicial;
@@ -48,6 +49,17 @@ public class Player {
     }
 
     //Metodos
+    //Devuelve el punto actual del jugador
+    
+    public int getPunto() {
+        return this.punto;
+    }
+    //Fija el punto actual del jugador
+    
+    public void setPunto(int punto) {
+        this.punto=punto;
+    }
+
     //Devuelve la cuenta de las victorias del objeto
     public int getVictorias() {
         return this.contVictorias;
@@ -62,8 +74,9 @@ public class Player {
     public int getBote() {
         return this.bote;
     }
-    //Devuelve la apuesta del objeto
 
+    //Devuelve la apuesta del objeto
+    //La apuesta es el dinero que va a perder
     public int getApuesta() {
         return this.apuesta;
     }
@@ -84,20 +97,22 @@ public class Player {
     public void decBote() {
         this.bote -= this.apuesta;
     }
-    //Devuelve si le toca al objeto 
-    //(true: Si es su turno)
-    //(false: No es su turno)
-    public boolean getTurno() {
-        return miTurno;
+
+    //Cuando un jugador gana, recibe el dinero que le corresponde
+    //Se decrementa del jugador perdedor
+    public void victoria(Player rival) {
+        this.bote += rival.getApuesta();
+        rival.decBote();
+        this.incVivtorias();
     }
-    //Muestra las estadisticas actuales de la partida
-    public void showCurrentStats(Player humano,Player maquina) {
-        int boteJ = humano.getBote();
-        int boteM = maquina.getBote();
-        int victoriasJ = humano.getVictorias();
-        int victoriasM = maquina.getVictorias();
-        String nombre = humano.getName();
-        System.out.printf("Bote de %s: ",nombre );
+
+    //Cuando el jugador es derrotado, pierde el dinero de la apuesta
+    //Se lo da al jugador rival
+    public void derrota(Player rival, Banca banca) {
+        this.decBote();
+        rival.incBote(this.apuesta);
+        rival.incVivtorias();
+        banca.cambiarTurno();
     }
 
 }
