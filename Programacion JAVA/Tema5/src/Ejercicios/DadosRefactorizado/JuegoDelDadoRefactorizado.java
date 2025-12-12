@@ -176,7 +176,7 @@ public class JuegoDelDadoRefactorizado {
         Banca banca = new Banca();
         Player jugador = new Player("Daniel");
         Player maquina = new Player("CPU");
-
+        
         //Inicio del programa que explica (o no) como jugar
         System.out.println("Bienvenido al casino de ciudad Malvalona");
         System.out.println("Aqui es típico jugar a un juego llamado el juego de los dados");
@@ -198,43 +198,28 @@ public class JuegoDelDadoRefactorizado {
                 switch (1) {
                     case 7, 11 -> {
 
-                        if (banca.getTurno()) {
-                            jugador.victoria(maquina);
-                            banca.showImediateVictoryMsg(jugador, maquina, tirada);
-                        } else {
-                            maquina.victoria(jugador);
-                            banca.showImediateVictoryMsg(maquina, jugador, tirada);
-                        }
+                        
                     }
                     case 2, 3, 12 -> {
-                        if (banca.getTurno()) {
-                            jugador.derrota(maquina, banca);
-                            banca.showImediateLostMsg(jugador, maquina, tirada);
-                        } else {
-                            maquina.derrota(jugador, banca);
-                            banca.showImediateLostMsg(maquina, jugador, tirada);
-                        }
+                        
 
                     }
                     default -> {
                         banca.setTiradaSalida(false);
-                        if (banca.getTurno()) {
-                            jugador.setPunto(tirada);
-                        } else {
-                            maquina.setPunto(tirada);
-                        }
+                        
                     }
                 }
             } else {
                 
                 if (tirada == 7) {                    
-                    banca.victoria(banca.getTurno() ? jugador:maquina);
                 
                 }      
             
             
             }
 
+            
+            
             System.out.println(jugador.getName() + ", quieres seguir jugando? (S o N)\n>>");
             quiereSeguirJugando = validarEntrada(scIn);
 
