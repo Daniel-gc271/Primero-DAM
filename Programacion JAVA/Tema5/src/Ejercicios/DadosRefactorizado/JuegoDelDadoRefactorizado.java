@@ -180,7 +180,7 @@ public class JuegoDelDadoRefactorizado {
         //Inicio del programa que explica (o no) como jugar
         System.out.println("Bienvenido al casino de ciudad Malvalona");
         System.out.println("Aqui es típico jugar a un juego llamado el juego de los dados");
-        System.out.println("Sabes jugar? (S o N)\n>>");
+        System.out.print("Sabes jugar? (S o N)\n>>");
 
         if (validarEntrada(scIn)) {
         } else {
@@ -189,45 +189,75 @@ public class JuegoDelDadoRefactorizado {
         banca.setTurno(tiradaInicial(numAleatorio, jugador, maquina));
 
         Boolean quiereSeguirJugando;
-        System.out.println(jugador.getName() + ", te apetece jugar? (S o N)\n>>");
+        System.out.print(jugador.getName() + ", te apetece jugar? (S o N)\n>>");
         quiereSeguirJugando = validarEntrada(scIn);
         do { //Bucle del juego
+            banca.incTurnosJugados();
             banca.setTiradaSalida(true);
-            int tirada = 0;
+            int tirada = numAleatorio.nextInt(2, 13);
             if (banca.getTiradaSalida()) {
-                switch (1) {
+                System.out.printf("Tirada inicial: %d\n",tirada);
+                switch (tirada) {
                     case 7, 11 -> {
-
+                        System.out.println("Inmmediate victory:");
+                        if(banca.getTurno()) {
+                            jugador.victoria(maquina);
+                            banca.showImediateVictoryMsg(jugador, maquina, tirada);
+                        } else {
+                            maquina.victoria(jugador);
+                            banca.showImediateVictoryMsg(maquina, jugador, tirada);
+                        }
                         
                     }
                     case 2, 3, 12 -> {
-                        
+                        System.out.println("Inmmediate lost:");
+                        if(banca.getTurno()) {
+                            jugador.derrota(maquina,banca);
+                            banca.showImediateLostMsg(jugador, maquina, tirada);
+                        } else {
+                            
+                            maquina.derrota(jugador,banca);
+                            banca.showImediateLostMsg(maquina, jugador, tirada);
+
+                        }
 
                     }
                     default -> {
                         banca.setTiradaSalida(false);
-                        
                     }
                 }
             } else {
-                
-                if (tirada == 7) {                    
-                
-                }      
-            
-            
+                System.out.printf("Tirada para el punto: %d\n",tirada);
+                switch (tirada) {
+                    case 7-> {
+                        System.out.println("Regular lost:");
+                        banca.cambiarTurno();
+                        if(banca.getTurno()) {
+                            //La banca recibe el dinero y el jugador lo pierde
+                        } else {
+                            //La banca recibe el dinero y la maquina lo pierde
+                        }
+                    }
+                    default -> {
+                        if(banca.getTurno()) {
+                            //El jugador recibe el dinero y la maquina lo pierde
+                        } else {
+                            //La maquina recibe el dinero y el jugador lo pierde
+                        }
+                        
+
+                    }
             }
 
             
             
             System.out.println(jugador.getName() + ", quieres seguir jugando? (S o N)\n>>");
             quiereSeguirJugando = validarEntrada(scIn);
+        }
+    } while (sePuedeSeguirJugando(jugador, maquina) &&  quiereSeguirJugando); }
 
-        } while (sePuedeSeguirJugando(jugador, maquina) && quiereSeguirJugando);
-
-    }
+            
     //Metodo que muestra las estadisticas finales de la partida
-
     private static void menuFinPartida(Player humano, Player maquina, long timePlayed, int turnosTotales) {
         String mensaje
                 = "***************************"
