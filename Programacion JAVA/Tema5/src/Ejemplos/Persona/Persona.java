@@ -59,6 +59,9 @@ public class Persona {
             this.dni = dni;
         } else {
             System.err.println("Error. DNI no valido porque la letra no se corresponde.");
+            String msgErr = new String();
+            msgErr += "\""+dni+"\" No es un dni válido";
+            throw new IllegalArgumentException(msgErr);
         }
 
     }
@@ -80,6 +83,7 @@ public class Persona {
     }
 
     public int getEdad() {
+        calcularEdad();
         return this.edad;
     }
 

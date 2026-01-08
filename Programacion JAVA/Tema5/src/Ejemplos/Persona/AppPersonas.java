@@ -22,13 +22,9 @@ public class AppPersonas {
         maria.setDni("71232863T");
         maria.setSexo('M');
         maria.setTrabaja(true);        
-        maria.setFechaNac(LocalDate.of(2000,Month.JANUARY,1));
-        System.out.println(maria.getEdad());
-        
-
-
-//        
-        
+        maria.setFechaNac(LocalDate.of(2022,Month.JANUARY,1));
+        System.out.println("Edad: "+maria.getEdad()+" años");
+ 
 
     }
 

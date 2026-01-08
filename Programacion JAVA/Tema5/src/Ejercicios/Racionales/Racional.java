@@ -146,8 +146,8 @@ public class Racional {
          */
         return this.denominador * r.getNumerador() == this.numerador * r.getDenominador();
     }
-    /*
     //Debug para mostrar y asegurar el funcionamiento
+    
     public static void main(String[] args) {
         Racional r1 = new Racional(1, 3);
         Racional r2 = new Racional(1, 5);
@@ -200,6 +200,6 @@ public class Racional {
         Boolean comprobacion = r1.equals(r2);
         System.out.println(comprobacion);
     }
-     */
+     
 
 }
