@@ -9,6 +9,7 @@ Persona::Persona (string nombre, int edad, string dni) {
 }
 
 void Persona::mostrarInfo() {
+   
     std::cout << "Nombre: " << nombre << ", Edad: " << edad << ", DNI: " << dni<<'\n';
 }
 

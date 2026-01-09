@@ -27,10 +27,10 @@ public class AppCalculadora {
                 showOpSelMenu();
                 System.out.print(">>");
                 seleccion = scIn.nextInt();
-                if (seleccion > 7 || seleccion < 0) {
+                if (seleccion > 6 || seleccion < 0) {
                     showOpSelMenu();
                 }
-            } while (seleccion > 7 || seleccion < 0);
+            } while (seleccion > 6 || seleccion < 0);
 
             return seleccion;
         } catch (InputMismatchException e) {
