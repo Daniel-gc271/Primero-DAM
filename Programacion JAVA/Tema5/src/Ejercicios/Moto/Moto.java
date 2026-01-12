@@ -72,8 +72,8 @@ public class Moto {
         }
     }
 
-    private void setCombustibleActual(double combustibleActual) {
-        this.combustibleActual = combustibleActual;
+    private void setCombustibleActual(double combustibleRepostado) {
+        this.combustibleActual = combustibleRepostado;
     }
 
     public void repostar(double combustibleRepostado) {
