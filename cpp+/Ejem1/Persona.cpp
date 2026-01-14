@@ -1,15 +1,25 @@
-
 #include "Persona.h"
 #include <iostream>
-using string = std::string;
-Persona::Persona (string nombre, int edad, string dni) {
-    this->nombre = nombre;
-    this->edad = edad;
-    this->dni = dni;
+
+// Lista de inicialización: más eficiente e idiomática
+Persona::Persona(const std::string& nombre, int edad, const std::string& dni)
+    : nombre(nombre), edad(edad), dni(dni) {}
+
+void Persona::mostrarInfo() const {
+    std::cout << "Nombre: " << nombre
+              << "\t Edad: " << edad
+              << "\t DNI: " << dni
+              << '\n';
 }
 
-void Persona::mostrarInfo() {
-   
-    std::cout << "Nombre: " << nombre << ", Edad: " << edad << ", DNI: " << dni<<'\n';
+std::string Persona::getName() const {
+    return nombre;
 }
 
+std::string Persona::getDni() const {
+    return dni;
+}
+
+int Persona::getAge() const {
+    return edad;
+}
