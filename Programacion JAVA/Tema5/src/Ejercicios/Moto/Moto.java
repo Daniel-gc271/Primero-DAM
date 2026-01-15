@@ -19,9 +19,10 @@ public class Moto {
     private boolean arrancado;
     private int velocidadActual;
     private final int velocidadMaxima;
-    private final int aceleracion=10;
+    private final int aceleracion = 10;
     private final double autonomiaMaxima;
     private final double consumoXAceleron = 0.5;
+    private final double consumoXArrancar = 1.5;
     private final int ocupantesMaximos;
 
     public Moto(String matrícula, int velocidadMaxima, double autonomiaMaxima, int ocupantesMaximos) {
@@ -48,20 +49,19 @@ public class Moto {
         this.arrancado = arrancado;
     }
 
-    public void arrancar() //throws Exception 
-    {
-        if (this.combustibleActual <= 1.5) {
-            System.out.println("No hay combustible");
-        } else {
-            setCombustibleActual(this.combustibleActual - 1.5);
+    public void arrancar() throws Exception {
+
+        if (this.combustibleActual <= this.consumoXArrancar) {
+            //System.out.println("No hay combustible");
+            throw new Exception("The motorcycle doesn't have gas");
         }
-        if (!this.arrancado) {
-            System.out.println("Arrancando la moto");
-            System.out.println("Brrrm Brrrrrm");
-        } else {
-            System.out.println("La moto ya esta arrancada");
-            //throw new Exception("The motorcycle is already on");
+        if (this.arrancado) {
+            //System.out.println("La moto ya esta arrancada");
+            throw new Exception("The motorcycle is already on");
         }
+        System.out.println("Arrancando la moto");
+        System.out.println("Brrrm Brrrrrm");
+        setCombustibleActual(this.combustibleActual - consumoXArrancar);
     }
 
     public void parar() //throws Exception 
@@ -108,7 +108,7 @@ public class Moto {
         if (this.combustibleActual < consumoXAceleron) {
             throw new Exception("Necesitas mas combustible para acelerar");
         }
-        if (this.velocidadActual+this.aceleracion>this.velocidadMaxima) {
+        if (this.velocidadActual + this.aceleracion > this.velocidadMaxima) {
             throw new Exception("No puedes acelerar por encima de la velocidad máxima");
         }
         int nuevaVelocidad = this.velocidadActual + aceleracion;
@@ -121,6 +121,7 @@ public class Moto {
         }
 
     }
+
     public void decelerar() {
         int nuevaVelocidad = this.velocidadActual - 5;
         if (nuevaVelocidad >= 0) {

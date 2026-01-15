@@ -13,10 +13,11 @@ public class GuiAppCalculadora extends javax.swing.JFrame {
     /**
      * Creates new form GuiAppCalculadora
      */
-    public GuiAppCalculadora() {
+    public  GuiAppCalculadora() {
         initComponents();
         this.setLocationRelativeTo(null);
         this.setResizable(false);
+        this.setTitle("Calculadora buena");
             reset();
     }
 

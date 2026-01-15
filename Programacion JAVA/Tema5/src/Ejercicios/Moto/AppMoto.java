@@ -10,6 +10,7 @@ package Ejercicios.Moto;
  */
 public class AppMoto {
     public static void main(String[] args) {
+        MotoCorregida moto= new MotoCorregida("8229ddk","Kawasaki",2,"ninja h2sx",147,320,17);
         
     }
 }
