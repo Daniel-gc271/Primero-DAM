@@ -6,6 +6,8 @@ package Ejemplos.Persona;
 
 import java.time.LocalDate;
 import java.time.Month;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -15,15 +17,17 @@ public class AppPersonas {
 
     public static void main(String[] args) {
 
-        Persona maria=null; 
-        System.out.println(">>Construyendo persona");
-        maria=new Persona("71232863T","Maria","Perez");
-        System.out.println(">>Modificando con setDni");
-        maria.setDni("71232863T");
-        maria.setSexo('M');
-        maria.setTrabaja(true);        
-        maria.setFechaNac(LocalDate.of(2022,Month.JANUARY,1));
-        System.out.println("Edad: "+maria.getEdad()+" años");
+      
+            Persona maria=null;
+            System.out.println(">>Construyendo persona");
+            maria= new Persona("71232863T","Maria","Perez");
+            System.out.println(">>Modificando con setDni");
+            maria.setDni("71232863T");
+            maria.setSexo('M');
+            maria.setTrabaja(true);
+            maria.setFechaNac(LocalDate.of(2022,Month.JANUARY,1));
+            System.out.println("Edad: "+maria.getEdad()+" años");
+        
  
 
     }

@@ -34,7 +34,7 @@ public class Persona {
     }
 
     //constructor con parametros
-    public Persona(String dni, String nombre, String apellidos) {
+    public Persona(String dni, String nombre, String apellidos) throws Exception  {
         setDni(dni);
         setNombre(nombre);
         setApellidos(apellidos);
@@ -50,7 +50,7 @@ public class Persona {
         return this.dni;
     }
 
-    public void setDni(String dni) {
+    public void setDni(String dni) throws Exception {
         //validación del dni
         //b) con el dni bien construido, comprobar si su letra es la correcta
         char letraValida = getletraDni(dni);
@@ -61,7 +61,8 @@ public class Persona {
             System.err.println("Error. DNI no valido porque la letra no se corresponde.");
             String msgErr = new String();
             msgErr += "\""+dni+"\" No es un dni válido";
-            throw new IllegalArgumentException(msgErr);
+            //throw new IllegalArgumentException(msgErr);
+            throw new PersonaException(msgErr);
         }
 
     }
@@ -122,7 +123,7 @@ public class Persona {
         this.edad = (int) diasDiferencia / 365;
     }
 
-    public char getletraDni(String dniCompleto) { // 12345678Z
+    public char getletraDni(String dniCompleto) throws PersonaException { // 12345678Z
         //a) ver si está bien construido [0-9]{8}[A-Z]
         if (testDNIStruct(dniCompleto.toUpperCase())) {
             String lista = "TRWAGMYFPDXBNJZSQVHLCKE";
@@ -134,7 +135,8 @@ public class Persona {
             System.err.println("Error. DNI no valido porque el patron no se corresponde.");
             String msgErr = new String();
             msgErr += "\""+dniCompleto+"\" No es un dni válido";
-            throw new IllegalArgumentException(msgErr);
+            //throw new IllegalArgumentException(msgErr);
+            throw new PersonaException(msgErr);
         }
 
     }
