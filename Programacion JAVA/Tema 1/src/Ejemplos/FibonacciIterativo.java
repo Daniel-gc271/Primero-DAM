@@ -9,13 +9,19 @@ package Ejemplos;
  * @author goncalda
  */
 public class FibonacciIterativo {
+
     public static void main(String[] args) {
         int serie = 100; // Cantidad de números de la serie a generar
         int num1 = 0, num2 = 1;
 
         System.out.println("Serie de Fibonacci (Iterativa):");
         System.out.println(num1); // Muestra el primer número (0)
-
+        /**
+         * Imprime por consola la serie de fibonnaci
+         *@param serie: Numero de iteraciones de la serie fibonacci
+         *
+         *
+         */
         for (int i = 1; i < serie; i++) {
             System.out.println(num2); // Muestra el siguiente número
             int suma = num1 + num2; // Calcula el próximo número de la serie

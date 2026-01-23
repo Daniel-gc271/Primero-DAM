@@ -1,16 +1,22 @@
+
+
+body {
+    margin: 0%;
+    padding: 0%;
+}
 nav {
+    
     background-color: #808080;
 }
+.menu{
+    margin: 0%;
+    padding: 0%;
+    
+}
 nav>ul.menu>li {
+    padding-bottom: 2%;
+    width: none;
     list-style: none;
     display: inline-block;
-    position: sticky;
-}
-
-section#imagen {
-    float: right;
-
-}
-section>article {
-    width: 200px;
+    
 }
