@@ -11,7 +11,7 @@ package Ejercicios.Ascensor;
 public class AscensorException extends Exception {
 
     public AscensorException() {
-        
+        super();
     }
     public  AscensorException(String errMsg) {
         super(errMsg);
