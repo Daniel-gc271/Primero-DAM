@@ -11,7 +11,8 @@ package tema6.Empleado;
  */
 public class AppEmpleado {
     public static void main(String[] args) {
-        Empleado e1= new Empleado();
+        ProgramadorJunior e1= new ProgramadorJunior(200, 20, 50);
+        System.out.println(e1.salarioMensual());
        
     }
 }
