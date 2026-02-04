@@ -4,7 +4,7 @@
  */
 package Ejercicios.FigurasGeometricas;
 
-import Puntos.Punto2;
+import ActividadFiguras.Punto2;
 
 /**
  *
