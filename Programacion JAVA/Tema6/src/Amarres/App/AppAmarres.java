@@ -7,6 +7,7 @@ package Amarres.App;
 import Amarres.Model.Barco;
 import Amarres.Model.Deportivo;
 import Amarres.Model.Yate;
+import java.util.Scanner;
 
 /**
  *
@@ -18,11 +19,8 @@ public class AppAmarres {
      *
      */
     public static void main(String[] args) {
-        String input = "";
-        System.out.println("Introduce algo, 0 para salir");
-        do {
-            System.out.print(input);
-        } while (input != "0");
+        Barco y = new Yate(10, 12, "2665CNP", "2024", 29);
+        System.out.println(y);
     }
 
 }

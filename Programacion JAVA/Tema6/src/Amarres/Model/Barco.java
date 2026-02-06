@@ -22,5 +22,14 @@ public abstract class Barco {
     public double calcularModulo() {
         return this.ESLORA*this.CONSTINFLACION*10;
     }
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("MATRICULA=").append(MATRICULA);
+        sb.append(", ANIOFAB=").append(ANIOFAB);
+        sb.append(", ESLORA=").append(ESLORA);
+        return sb.toString();
+    }
     
 }

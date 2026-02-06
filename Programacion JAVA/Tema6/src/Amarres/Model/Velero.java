@@ -20,6 +20,13 @@ public class Velero extends Barco {
     public double calcularModulo() {
         return super.calcularModulo()+ this.MASTILES; 
     }
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append(", MASTILES=").append(MASTILES);
+        return super.toString() + sb.toString();
+    }
     
     
     

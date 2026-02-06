@@ -20,6 +20,11 @@ public abstract class BAM extends Barco {
     public double calcularModulo() {
         return super.calcularModulo() + this.POTENCIA; 
     }
-    
-    
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append(", POTENCIA=").append(POTENCIA);
+        return super.toString()+ sb.toString();
+    }
 }

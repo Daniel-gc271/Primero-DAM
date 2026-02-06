@@ -19,6 +19,13 @@ public class Yate extends BAM{
     public double calcularModulo() {
         return super.calcularModulo()+this.CAMAROTES; 
     }
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append(", CAMAROTES=").append(CAMAROTES);
+        return super.toString() + sb.toString();
+    }
     
     
     
