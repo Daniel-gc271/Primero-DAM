@@ -14,7 +14,7 @@ public final class Paypal implements MetodoPago
     private String correoElectronico;
 
     public Paypal(String correoElectronico) {
-        if (correoElectronico.matches("^[\\w.-]+@[\\w.-]+\\.[a-zA-Z]{2,}$")){throw new IllegalArgumentException(correoElectronico+" No es un email válido");}
+        if (correoElectronico.matches("^[\\w.-]+@[\\w.-]+\\.[a-zA-Z]+$")){throw new IllegalArgumentException(correoElectronico+" No es un email válido");}
         this.correoElectronico = correoElectronico;
     }
 
