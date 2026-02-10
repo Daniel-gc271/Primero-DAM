@@ -1,17 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-	<groupId>Daniel</groupId>
-	<artifactId>Ejem</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
-	<name>A</name>
-	<description>a</description>
 
+	<groupId>gcdani271.yt</groupId>
+	<artifactId>prueba_lwjgl_v_0_0_1</artifactId>
+	<version>1.0-SNAPSHOT</version>
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<maven.compiler.release>17</maven.compiler.release>
+		<maven.compiler.source>21</maven.compiler.source>
+		<maven.compiler.target>21</maven.compiler.target>
+		<maven.compiler.release>21</maven.compiler.release>
 		<lwjgl.version>3.3.6</lwjgl.version>
 	</properties>
 
@@ -71,6 +72,19 @@
 				<dependency>
 					<groupId>org.lwjgl</groupId>
 					<artifactId>lwjgl-opengl</artifactId>
+					<classifier>natives-windows</classifier>
+				</dependency>
+
+				<!-- STB Truetype -->
+				<dependency>
+					<groupId>org.lwjgl</groupId>
+					<artifactId>lwjgl-stb</artifactId>
+					<version>${lwjgl.version}</version>
+				</dependency>
+				<dependency>
+					<groupId>org.lwjgl</groupId>
+					<artifactId>lwjgl-stb</artifactId>
+					<version>${lwjgl.version}</version>
 					<classifier>natives-windows</classifier>
 				</dependency>
 			</dependencies>
@@ -143,7 +157,7 @@
 					</descriptorRefs>
 					<archive>
 						<manifest>
-							<mainClass>Main</mainClass>
+							<mainClass>gcdani271.yt.Main</mainClass>
 						</manifest>
 					</archive>
 				</configuration>
@@ -176,10 +190,11 @@
 				<artifactId>exec-maven-plugin</artifactId>
 				<version>3.1.0</version>
 				<configuration>
-					<mainClass>Main</mainClass>
+					<mainClass>gcdani271.yt.Main</mainClass>
 				</configuration>
 			</plugin>
 		</plugins>
 	</build>
+
 
 </project>
