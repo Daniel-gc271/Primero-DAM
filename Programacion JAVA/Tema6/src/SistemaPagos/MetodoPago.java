@@ -11,5 +11,4 @@ package SistemaPagos;
 public interface MetodoPago {
  void pagar(double cantidad);
  String obtenerComprobante();
- boolean validarMetodo();
 }

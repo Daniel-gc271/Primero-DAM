@@ -6,19 +6,30 @@ package SistemaPagos;
 
 import java.util.regex.Pattern;
 
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author goncalda
  */
 public class Tarjeta implements MetodoPago
 {
-    private String numTarjeta;
+    private JustPago justificante;
+    private long numTarjeta;
 
-    public Tarjeta(int numTarjeta) {
-        String StrNumTarjeta = String.valueOf(numTarjeta) ;
-        if (StrNumTarjeta.matches("^[1-9][0-9]{15}$")) {
-        throw new IllegalArgumentException(String.format("%s no es un numero de tarjeta válido",numTarjeta));
-        }
+    public Tarjeta(String StrNumTarjeta) {
+        this.numTarjeta = Long.parseLong(StrNumTarjeta);
+    }
+     @Override
+    public void pagar(double cantidad) {
+        String msg = String.format("¿Cobrar: %.2f€ a la tarjeta %d?",cantidad,this.numTarjeta);
+      if(JOptionPane.showConfirmDialog(null, msg,"Cobro Tarjeta",JOptionPane.YES_NO_OPTION) ==0 /*Yes*/ ) {
+        this.justificante = new JustPago(cantidad);
+      } 
+    }
+     @Override
+    public String obtenerComprobante() {
+       return this.justificante.toString() + String.format("Metodo: Tarjeta\nNumero: %d",this.numTarjeta);
     }
     
 }

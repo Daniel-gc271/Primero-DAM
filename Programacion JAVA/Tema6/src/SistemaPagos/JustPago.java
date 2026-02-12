@@ -29,10 +29,11 @@ public class JustPago {
     public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append("Comprobante de pago:\n");
-        sb.append("Fecha:").append(momento.format(formatoFecha));
-        sb.append("\t");
-        sb.append("Hora:").append(momento.format(formatoHora));
+        sb.append("Fecha: ").append(momento.format(formatoFecha));
+        sb.append("\n");
+        sb.append("Hora: ").append(momento.format(formatoHora));
         sb.append("\nImporte: ").append(this.importe);
+        sb.append('\n');
         return sb.toString();
     }
     
