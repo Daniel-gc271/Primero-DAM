@@ -31,12 +31,12 @@ public void update(Camera cam, long window, double dt) {
     float speed = (float)(dt * 5.0); // 5 unidades por segundo
 
     // Movimiento tipo Minecraft
-    if (GLFW.glfwGetKey(window, GLFW.GLFW_KEY_W) == GLFW.GLFW_PRESS)
+    if (GLFW.glfwGetKey(window, GLFW.GLFW_KEY_S) == GLFW.GLFW_PRESS)
         cam.move((float)Math.sin(Math.toRadians(cam.getYaw())) * speed, 
                  0, 
                  (float)-Math.cos(Math.toRadians(cam.getYaw())) * speed);
 
-    if (GLFW.glfwGetKey(window, GLFW.GLFW_KEY_S) == GLFW.GLFW_PRESS)
+    if (GLFW.glfwGetKey(window, GLFW.GLFW_KEY_W) == GLFW.GLFW_PRESS)
         cam.move((float)-Math.sin(Math.toRadians(cam.getYaw())) * speed,
                  0,
                  (float)Math.cos(Math.toRadians(cam.getYaw())) * speed);
@@ -68,7 +68,7 @@ public void update(Camera cam, long window, double dt) {
     lastMouseY = my[0];
 
     float sensitivity = 0.1f;
-    cam.rotate(-dy * sensitivity, dx * sensitivity);
+    cam.rotate(dy * sensitivity, -dx * sensitivity);
 }
 
 }
