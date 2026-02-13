@@ -12,7 +12,6 @@ public class Main {
     private StbFont stbFont;
     private HudRenderer hud;
     private World world;
-
     public static void main(String[] args) {
         new Main().run();
     }
@@ -35,7 +34,7 @@ public class Main {
         GLFW.glfwWindowHint(GLFW.GLFW_VISIBLE, GLFW.GLFW_TRUE);
         GLFW.glfwWindowHint(GLFW.GLFW_RESIZABLE, GLFW.GLFW_TRUE);
 
-        window = GLFW.glfwCreateWindow(800, 600, "Cubo 3D - Controles estilo Minecraft", 0, 0);
+        window = GLFW.glfwCreateWindow(640, 360, "Cubo 3D - Controles estilo Minecraft", 0, 0);
         if (window == 0) {
             throw new RuntimeException("Error al crear la ventana GLFW");
         }
@@ -67,6 +66,7 @@ public class Main {
         stbFont = new StbFont("/fonts/Monospace.ttf", 20, 512);
         hud = new HudRenderer(stbFont);
         world = new World(4); // 4×4 chunks => 64 chunks => 16×16×16 bloques c/u
+        
         // Capturar el cursor para mirar con el ratón (tipo Minecraft)
         GLFW.glfwSetInputMode(window, GLFW.GLFW_CURSOR, GLFW.GLFW_CURSOR_DISABLED);
     }

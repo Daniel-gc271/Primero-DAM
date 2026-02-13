@@ -25,7 +25,7 @@ public class HudRenderer {
         glMatrixMode(GL_PROJECTION);
         glPushMatrix();
         glLoadIdentity();
-        glOrtho(0, width, height, 0, -1, 1);
+        glOrtho(0, width, height, 1, 1, 3);
 
         glMatrixMode(GL_MODELVIEW);
         glPushMatrix();
