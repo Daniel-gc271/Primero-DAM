@@ -4,17 +4,29 @@
  */
 package SistemaPagos;
 
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author goncalda
  */
-public final class Bizum implements MetodoPago 
-{
+public final class Bizum implements MetodoPago {
     private int numTel;
-     public Bizum(int numTel) {
-        String StrNumTarjeta = String.valueOf(numTel) ;
-        if (StrNumTarjeta.matches("^[1-9][0-9]{15}$")) {
-        throw new IllegalArgumentException(String.format("%s no es un numero de tarjeta válido",numTel));
-        }
+    private JustPago justificante;
+    public Bizum(String StrNumTel) {
+        this.numTel = Integer.parseInt(StrNumTel);
     }
+
+     @Override
+    public void pagar(double cantidad) {
+        String msg = String.format("¿Cobrar: %.2f€ al telefono: %d?",cantidad,this.numTel);
+      if(JOptionPane.showConfirmDialog(null, msg,"Cobro Bizum",JOptionPane.YES_NO_OPTION) ==0 /*Yes*/ ) {
+        this.justificante = new JustPago(cantidad);
+      } 
+    }
+     @Override
+    public String obtenerComprobante() {
+       return this.justificante.toString() + String.format("Metodo: Bizum\nTelefono: %d",this.numTel);
+    }
+
 }

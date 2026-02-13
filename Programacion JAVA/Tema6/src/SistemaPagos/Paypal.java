@@ -5,6 +5,8 @@
  */
 package SistemaPagos;
 
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author goncalda
@@ -12,25 +14,25 @@ package SistemaPagos;
 public final class Paypal implements MetodoPago
 {
     private String correoElectronico;
-
+    private JustPago justificante;
     public Paypal(String correoElectronico) {
-        if (correoElectronico.matches("^[\\w.-]+@[\\w.-]+\\.[a-zA-Z]+$")){throw new IllegalArgumentException(correoElectronico+" No es un email válido");}
         this.correoElectronico = correoElectronico;
     }
 
     @Override
     public void pagar(double cantidad) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        String msg = String.format("¿Cobrar: %.2f€ a la cuenta: %s?",cantidad,this.correoElectronico);
+      if(JOptionPane.showConfirmDialog(null, msg,"Cobro Paypal",JOptionPane.YES_NO_OPTION) ==0 /*Yes*/ ) {
+        this.justificante = new JustPago(cantidad);
+      } 
+    
     }
 
     @Override
     public String obtenerComprobante() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+       return this.justificante.toString() + String.format("Metodo: Paypal\nCuenta: %s",this.correoElectronico);
     }
 
-    @Override
-    public boolean validarMetodo() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
+    
     
 }
