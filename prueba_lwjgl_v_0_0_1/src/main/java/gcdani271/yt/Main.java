@@ -34,7 +34,7 @@ public class Main {
         GLFW.glfwWindowHint(GLFW.GLFW_VISIBLE, GLFW.GLFW_TRUE);
         GLFW.glfwWindowHint(GLFW.GLFW_RESIZABLE, GLFW.GLFW_TRUE);
 
-        window = GLFW.glfwCreateWindow(640, 360, "Cubo 3D - Controles estilo Minecraft", 0, 0);
+        window = GLFW.glfwCreateWindow(640, 360, "jijijija", 0, 0);
         if (window == 0) {
             throw new RuntimeException("Error al crear la ventana GLFW");
         }
@@ -99,6 +99,7 @@ public class Main {
         hud.drawText(10, 45, line2);
 
         hud.end2D();
+       
     }
 
     private void loop() {

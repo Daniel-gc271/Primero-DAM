@@ -56,10 +56,10 @@ public class InputHandler {
         }
         // Movimiento vertical (subir con Espacio, bajar con Shift)
         if (GLFW.glfwGetKey(window, GLFW.GLFW_KEY_SPACE) == GLFW.GLFW_PRESS) {
-            cam.move(0, speed, 0);  // Subir
+            cam.move(0, -speed, 0);  // Subir
         }
         if (GLFW.glfwGetKey(window, GLFW.GLFW_KEY_LEFT_SHIFT) == GLFW.GLFW_PRESS) {
-            cam.move(0, -speed, 0);  // Bajar
+            cam.move(0, speed, 0);  // Bajar
         }
         // Rotación con ratón
         double[] mx = new double[1];
