@@ -19,7 +19,23 @@ declare
     v_saludo varchar2(100);
     v_fecha date default sysdate;
     v_total number:=10*20;
+    v_edad number;
+    v_edad_exception exception;
 begin
+if v_edad is null then
+    raise v_edad_exception;
+    elsif v_edad < 18 then
+        dbms_output.put_line('Eres menor de edad');
+    else
+        dbms_output.put_line('Eres mayor de edad');
+end if;
+exception
+  when v_edad_exception then
+    dbms_output.put_line('Error: La edad no puede ser nula');
+  when zero_divide then
+    dbms_output.put_line('Error: División por cero no permitida');
+  when others then
+    dbms_output.put_line('Error inesperado: ' || sqlerrm);
 --Asignar el saludo
   v_saludo:='hola ' || v_name||' Bienvenida a DAM'
 --Imprimir en consola el print o sout d toda la vida
