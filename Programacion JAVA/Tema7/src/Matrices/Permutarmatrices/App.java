@@ -36,9 +36,9 @@ public class App {
         if (filas==null) {return;}
     
         
-       Integer columnas =(Integer) JOptionPane.showInputDialog(null, "Introduce numero de filas", "Dimension madtriz", -1, null, valores, valores[0]);//valores son los valores de un array de objeto y valores[0]es para que aparezca en la ventana un valor por defecto.
+       Integer columnas =(Integer) JOptionPane.showInputDialog(null, "Introduce numero de columnas", "Dimension madtriz", -1, null, valores, valores[0]);//valores son los valores de un array de objeto y valores[0]es para que aparezca en la ventana un valor por defecto.
         // JOptionPane.showInputDialog(null, "Introduce numero de columnas", "Dimension madtriz", -1, null, valores2, valores2[0]);
-        System.out.println(filas);
+        System.out.println(columnas);
         if (columnas==null) {return;}
         GUIMatriz gui=new GUIMatriz (new Integer[filas][columnas]);
     }

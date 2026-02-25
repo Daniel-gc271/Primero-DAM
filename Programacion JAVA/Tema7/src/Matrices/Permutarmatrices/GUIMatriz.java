@@ -4,19 +4,82 @@
  */
 package Matrices.Permutarmatrices;
 
+import java.awt.Dimension;
+import java.awt.ScrollPane;
+import java.util.Random;
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author bazgomjo
  */
 public class GUIMatriz extends javax.swing.JFrame {
-    private Integer[][]matriz;
-    private int numFilas,numColumnas;
+
+    private Integer[][] matriz;
+    private int numFilas, numColumnas;
+    private DefaultTableModel modTabla;
+    private JTable tabla;
+    private DefaultComboBoxModel modSelectorVector;
     
+
     /**
      * Creates new form GUIMatriz
      */
-    public GUIMatriz() {
+    public GUIMatriz(Integer[][] matriz) {
+        this.matriz = matriz;
+        this.numFilas = matriz.length;
+        this.numColumnas = matriz[0].length;
+        llenaMatriz(matriz);
+        modTabla = new DefaultTableModel(matriz, new Object[numColumnas]) {
+            @Override
+            public boolean isCellEditable(int row, int column){
+            return false;
+            } 
+         
+        };
+        tabla = new JTable();
+         
+        tabla.setModel(modTabla);
+        tabla.getTableHeader().setVisible(false);//quitar el encabezado de la tabla
+        imprimirMatriz();
+
         initComponents();
+        setFrame();
+    }
+
+    private void setFrame() {
+        String tit = String.format("Matriz de: %d x %d", numFilas, numColumnas);
+        this.setTitle(tit);
+        JScrollPane scroll = new JScrollPane(tabla);
+        this.PanelCentral.add(scroll);
+        this.setPreferredSize(new Dimension(96*numColumnas+15,54*numFilas));
+        this.pack();
+        this.setLocationRelativeTo(null);
+        this.setVisible(true);
+    }
+
+    private void llenaMatriz(Integer[][] matrizParA) {
+        Random rd = new Random();
+
+        for (int i = 0; i < matrizParA.length; i++) {
+            for (int j = 0; j < matrizParA[0].length; j++) {
+                matrizParA[i][j] = rd.nextInt(0, 100);
+            }
+
+        }
+    }
+
+    private void imprimirMatriz() {
+        for (int i = 0; i < this.numFilas; i++) {
+            for (int j = 0; j < numColumnas; j++) {
+                System.out.print(this.matriz[i][j] + " ");
+            }
+            System.out.println("");
+        }
+        //System.out.println(this.tabla.getColumnCount());
     }
 
     /**
@@ -28,27 +91,64 @@ public class GUIMatriz extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        BotoneraDerecha = new javax.swing.JPanel();
+        ModoFilas = new javax.swing.JRadioButton();
+        ModoColumnas = new javax.swing.JRadioButton();
+        jComboBox2 = new javax.swing.JComboBox<>();
+        jComboBox1 = new javax.swing.JComboBox<>();
+        filler1 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 32767));
+        PanelCentral = new javax.swing.JPanel();
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 407, Short.MAX_VALUE)
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 302, Short.MAX_VALUE)
-        );
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setMinimumSize(new java.awt.Dimension(200, 200));
+
+        BotoneraDerecha.setLayout(new javax.swing.BoxLayout(BotoneraDerecha, javax.swing.BoxLayout.Y_AXIS));
+
+        ModoFilas.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        ModoFilas.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        ModoFilas.setLabel("Filas");
+        ModoFilas.setPreferredSize(new java.awt.Dimension(50, 21));
+        BotoneraDerecha.add(ModoFilas);
+
+        ModoColumnas.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        ModoColumnas.setLabel("Columnas");
+        ModoColumnas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ModoColumnasActionPerformed(evt);
+            }
+        });
+        BotoneraDerecha.add(ModoColumnas);
+
+        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        BotoneraDerecha.add(jComboBox2);
+
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        BotoneraDerecha.add(jComboBox1);
+        BotoneraDerecha.add(filler1);
+
+        getContentPane().add(BotoneraDerecha, java.awt.BorderLayout.LINE_END);
+
+        PanelCentral.setLayout(new java.awt.BorderLayout());
+        getContentPane().add(PanelCentral, java.awt.BorderLayout.CENTER);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void ModoColumnasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ModoColumnasActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_ModoColumnasActionPerformed
+
     /**
      * @param args the command line arguments
      */
-    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JPanel BotoneraDerecha;
+    private javax.swing.JRadioButton ModoColumnas;
+    private javax.swing.JRadioButton ModoFilas;
+    private javax.swing.JPanel PanelCentral;
+    private javax.swing.Box.Filler filler1;
+    private javax.swing.JComboBox<String> jComboBox1;
+    private javax.swing.JComboBox<String> jComboBox2;
     // End of variables declaration//GEN-END:variables
 }
