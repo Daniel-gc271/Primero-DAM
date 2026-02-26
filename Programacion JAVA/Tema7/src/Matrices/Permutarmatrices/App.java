@@ -13,7 +13,7 @@ import javax.swing.JOptionPane;
 public class App {
     
     //constantes
-    public static final int dimensionMax=10;//dimension maxima de la matriz
+    public static final int dimensionMax=40;//dimension maxima de la matriz
     public static final int dimensionMin=2;//dimension minima de la matriz
     
     
@@ -25,6 +25,7 @@ public class App {
         }
         return array;
     }
+    
     
     public static void main(String[] args) {
         

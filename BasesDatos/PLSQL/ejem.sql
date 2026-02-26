@@ -43,3 +43,70 @@ exception
   dbms_output.put_line(v_fecha)
   dbms_output.put_line(v_total)
 end;
+
+
+declare
+    v_nombre hr.employees.first_name%type; --Asigna el tipo de dato de la columna first_name de la tabla employees a la variable v_nombre
+    v_salario hr.employees.salary%type;
+    begin
+    select first_name, salary into v_nombre, v_salario from hr.employees where employee_id = 100;
+    dbms_output.put_line('El nombre del empleado es: ' || v_nombre '\nEl salario del empleado es: ' || v_salario);
+
+    end;
+
+    declare
+      v_empleado hr.employees%ROWTYPE; --Declara una variable de tipo fila completa de la tabla employees
+    begin
+      select * 
+      into v_empleado 
+      from hr.employees 
+      where employee_id = 100;
+      dbms_output.put_line('Nombre: ' || v_empleado.first_name);
+      dbms_output.put_line('Salario: ' || v_empleado.salary);
+      dbms_output.put_line('Departamento: ' || v_empleado.department_id);
+    end;
+    declare
+      v_empId hr.employees.employee_id%type := 100; --Declara una variable para el ID del empleado
+      v_empleado hr.employees%ROWTYPE; --Declara una variable de tipo fila completa de la tabla employees
+    begin
+      select * 
+      into v_empleado 
+      from hr.employees 
+      where employee_id = v_empId; --Utiliza la variable v_empId en la cláusula WHERE
+      dbms_output.put_line('Nombre: ' || v_empleado.first_name);
+      dbms_output.put_line('Salario: ' || v_empleado.salary);
+      dbms_output.put_line('Departamento: ' || v_empleado.department_id);
+    end;
+  
+  declare
+    v_empId
+  hr.employees.employee_id%type;
+    v_nombre hr.employees.first_name%type;
+    v_apellido1 hr.employees.last_name%type;
+    v_apellido2 hr.employees.last_name%type;
+    v_depId hr.employees.department_id%type;
+    v_salario hr.employees.salary%type;
+    v_count number;
+    ex_no_employees exception;
+    begin
+    select count(*) into v_count from hr.employees where department_id = 50;
+    
+    if v_count = 0 then
+      raise ex_no_employees;
+    end if;
+    
+    for emp in (select employee_id, first_name, last_name, department_id, salary 
+          from hr.employees where department_id = 50) loop
+      dbms_output.put_line('ID: ' || emp.employee_id || ', Nombre: ' || emp.first_name || 
+                ', Apellido: ' || emp.last_name || ', Depto: ' || emp.department_id || 
+                ', Salario: ' || emp.salary);
+    end loop;
+    
+    exception
+    when ex_no_employees then
+      dbms_output.put_line('Error: No hay empleados en este departamento');
+    when no_data_found then
+      dbms_output.put_line('Error: No se encontraron datos');
+    when others then
+      dbms_output.put_line('Error inesperado: ' || sqlerrm);
+    end;
