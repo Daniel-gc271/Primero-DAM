@@ -43,7 +43,7 @@ public class Ejem1ArrayList extends javax.swing.JFrame {
         nombre = new javax.swing.JTextField();
         ListardNombres = new javax.swing.JButton();
         Estadisticas = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        Ordenar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -72,10 +72,10 @@ public class Ejem1ArrayList extends javax.swing.JFrame {
             }
         });
 
-        jButton2.setText("jButton2");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        Ordenar.setText("Ordenar");
+        Ordenar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                OrdenarActionPerformed(evt);
             }
         });
 
@@ -86,24 +86,21 @@ public class Ejem1ArrayList extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(172, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(6, 6, 6)
-                        .addComponent(jButton2))
+                    .addComponent(Ordenar)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                         .addGroup(layout.createSequentialGroup()
                             .addComponent(Name, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(nombre, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(ListardNombres)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(Estadisticas))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(Cancel)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jButton1)))))
-                .addGap(66, 66, 66))
+                        .addGroup(layout.createSequentialGroup()
+                            .addComponent(Cancel)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(jButton1)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(ListardNombres)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(Estadisticas)))
+                .addGap(64, 64, 64))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -121,7 +118,7 @@ public class Ejem1ArrayList extends javax.swing.JFrame {
                     .addComponent(ListardNombres)
                     .addComponent(Estadisticas))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton2)
+                .addComponent(Ordenar)
                 .addContainerGap(169, Short.MAX_VALUE))
         );
 
@@ -150,9 +147,9 @@ public class Ejem1ArrayList extends javax.swing.JFrame {
            
     }//GEN-LAST:event_EstadisticasActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void OrdenarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_OrdenarActionPerformed
         Collections.sort(listaNombres);       // TODO add your handling code here:
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_OrdenarActionPerformed
     private  int contNombComp() {
     int cont=0;
         for (String listaNombre : listaNombres) {
@@ -207,8 +204,8 @@ public class Ejem1ArrayList extends javax.swing.JFrame {
     private javax.swing.JButton Estadisticas;
     private javax.swing.JButton ListardNombres;
     private javax.swing.JLabel Name;
+    private javax.swing.JButton Ordenar;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JTextField nombre;
     // End of variables declaration//GEN-END:variables
 }

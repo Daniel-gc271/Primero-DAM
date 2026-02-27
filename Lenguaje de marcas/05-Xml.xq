@@ -1,4 +1,4 @@
-(:Productos con stock entre 3 y 6:)
+(: Productos con stock entre 3 y 6:)
 (://produc[stocka_actual>3 and stock_actual<6]:)
 (:Apellido de los empleados del departamento 20:)
 (://EMPLEADOS/EMP_ROW[ DEPT_NO=20]/APELLIDO:)
@@ -30,4 +30,41 @@ min(//SALARIO) :)
 (: count(distinct-values(//OFICIO)) :)
 (: mostrar el codigo de articulo de aquellos productos cuyo pvp supera la media de los pvp de todos los articulos :)
 (: //facturastotal/articulo[//pvp>avg(/pvp)]/@codigo :)
-distinct-values(//articulo[pvp>avg(//pvp)]/@codigo)
+(: distinct-values(//articulo[pvp>avg(//pvp)]/@codigo) :)
+(: //EMP_ROW[SALARIO>avg(//SALARIO)]/APELLIDO :)
+(: //EMPLEADOS/EMP_ROW[SALARIO=max(//EMP_ROW/SALARIO)]/EMP_NO :)
+(: count(/EMPLEADOS/EMP_ROW) :)
+(: count(//EMP_ROW[SALARIO>avg(//SALARIO)]/APELLIDO ) :) 
+(: distinct-values(//OFICIO) :)
+(: sum(//SALARIO) :)
+(: sum(distinct-values(//SALARIO)) :)
+(: sum(//EMPLEADOS/EMP_ROW[DEPT_NO=30 or DEPT_NO=20]/SALARIO) :)
+
+(: //productos/produc[stock_actual<5] :)
+
+(: //productos/produc[number(stock_actual)<=number(stock_minimo)] :)
+
+(: Actividad :)
+(: //productos/produc/concat("Denominacion: ",denominacion,"|", "Precio: ",precio) :)
+(: //productos/produc[starts-with(denominacion,"P")] :)
+(: //productos/produc[precio>60 and cod_zona=20] :)
+(: count(//productos/produc[starts-with(denominacion,"M") and cod_zona=10]) :)
+(: avg(//productos/produc[starts-with(denominacion,"M")]/precio ) :)
+(: //productos/produc[number(stock_minimo)>number(stock_actual)] :)
+
+(: //productos/produc[number(stock_minimo)>number(stock_actual)and cod_zona=40]/(denominacion ,precio) :)
+(: //productos/produc[precio=max(//productos/produc/precio)] :)
+
+(: //productos/produc[number(precio)=min(//productos/produc/precio) and number(//productos/produc/cod_zona = 20)] :)
+(: //productos/produc[(precio=max(//productos/produc[cod_zona=10]/precio)) ] :)
+
+(: correccion :)
+
+(: //productos/produc[number(precio)=min(//productos/produc[cod_zona=20]/precio)] :)
+(: empleado que mas y que menos cobra deol departamento 20 :)
+(: dep 20  :)
+(: /EMPLEADOS/EMP_ROW[DEPT_NO=20]/SALARIO :)
+//EMP_ROW[SALARIO=max(//EMP_ROW[DEPT_NO=20]/SALARIO)]
+
+
+(: //EMP_ROW[(SALARIO=max(//EMP_ROW[DEPT_NO=20]/SALARIO) or (SALARIO=min(//EMP_ROW[DEPT_NO=20]/SALARIO)) and DEPT_NO=20)] :)
