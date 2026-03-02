@@ -96,7 +96,8 @@ declare
     end if;
     
     for emp in (select employee_id, first_name, last_name, department_id, salary 
-          from hr.employees where department_id = 50) loop
+          from hr.employees where department_id = 50) 
+          loop
       dbms_output.put_line('ID: ' || emp.employee_id || ', Nombre: ' || emp.first_name || 
                 ', Apellido: ' || emp.last_name || ', Depto: ' || emp.department_id || 
                 ', Salario: ' || emp.salary);
@@ -110,3 +111,79 @@ declare
     when others then
       dbms_output.put_line('Error inesperado: ' || sqlerrm);
     end;
+
+--La funcion se puede llamar en una select, en un bloque anonimo, en un procedimiento almacenado, retorna valor etc
+--el procedimiento almacenado se puede llamar desde una aplicacion externa, desde sql developer, retorno void etc
+--la funcion devuelve un valor, el procedimiento almacenado no devuelve un valor, pero puede devolver un resultado a traves de parametros de salida
+--Funcion para obtener el nombre de un empleado dado su ID
+CREATE  FUNCTION get_employee_name (p_empId IN hr.employees.employee_id%type)
+RETURN hr.employees.first_name%type
+Create or replace procedure get_employee_info (p_empId IN hr.employees.employee_id%type, 
+                                p_name OUT hr.employees.first_name%type, 
+                                p_salary OUT hr.employees.salary%type)
+
+CREATE  function saludarF (p_nombre IN varchar2) As begin
+    return 'Hola ' || p_nombre || ', bienvenido a PL/SQL!';
+end;
+create procedure saludarP (p_nombre IN varchar2) As begin
+    dbms_output.put_line('Hola ' || p_nombre || ', bienvenido a PL/SQL!');
+end;
+
+begin
+    dbms_output.put_line(saludarF('Ruth'));
+    saludarP('Ruth');
+end;
+exec  saludarP('Ruth');
+--Llamar a la función en una consulta SQL
+select cuadrado(4) as resultado from dual;
+create or replace function cuadrado (p_num IN number) return number as
+begin
+    return p_num * p_num;
+end;
+declare
+    v_num number := 5;
+    v_result number;
+begin
+    v_result := cuadrado(v_num);
+    dbms_output.put_line('El cuadrado de ' || v_num || ' es ' || v_result);
+end;
+
+
+
+
+
+CREATE OR REPLACE FUNCTION calcular_bonus (
+    p_salario NUMBER
+) RETURN NUMBER
+IS
+BEGIN
+    RETURN p_salario * 0.10;
+END;
+
+CREATE OR REPLACE PROCEDURE mostrar_info_empleado (
+    p_id_empleado EMPLEADOS.id_empleado%TYPE
+)
+IS
+    v_nombre   EMPLEADOS.nombre%TYPE;
+    v_salario  EMPLEADOS.salario%TYPE;
+    v_bonus    NUMBER;
+BEGIN
+    SELECT nombre, salario
+    INTO v_nombre, v_salario
+    FROM EMPLEADOS
+    WHERE id_empleado = p_id_empleado;
+
+    v_bonus := calcular_bonus(v_salario);
+
+    DBMS_OUTPUT.PUT_LINE('Nombre: ' || v_nombre || ' (ID: ' || p_id_empleado || ')');
+    DBMS_OUTPUT.PUT_LINE('Salario: ' || v_salario || ' €');
+    DBMS_OUTPUT.PUT_LINE('Bonus: ' || v_bonus || ' €');
+
+EXCEPTION
+    WHEN NO_DATA_FOUND THEN
+        DBMS_OUTPUT.PUT_LINE('No existe un empleado con ese ID.');
+END;
+
+BEGIN
+    mostrar_info_empleado(1);
+END;

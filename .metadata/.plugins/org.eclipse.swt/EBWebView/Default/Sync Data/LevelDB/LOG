@@ -1,2 +1,3 @@
-2025/12/15-11:48:32.631 1b08 Creating DB D:\Primero-DAM\.metadata\.plugins\org.eclipse.swt\EBWebView\Default\Sync Data\LevelDB since it was missing.
-2025/12/15-11:48:32.973 1b08 Reusing MANIFEST D:\Primero-DAM\.metadata\.plugins\org.eclipse.swt\EBWebView\Default\Sync Data\LevelDB/MANIFEST-000001
+2026/03/02-10:14:29.240 820 Reusing MANIFEST D:\Primero-DAM\.metadata\.plugins\org.eclipse.swt\EBWebView\Default\Sync Data\LevelDB/MANIFEST-000001
+2026/03/02-10:14:29.242 820 Recovering log #3
+2026/03/02-10:14:29.242 820 Reusing old log D:\Primero-DAM\.metadata\.plugins\org.eclipse.swt\EBWebView\Default\Sync Data\LevelDB/000003.log 

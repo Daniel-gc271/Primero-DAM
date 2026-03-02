@@ -1,0 +1,70 @@
+import static org.junit.jupiter.api.Assertions.*;
+
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
+
+class Test3 {
+	Calculadora calc;
+	@BeforeAll
+	void configurarEntornoInicial() {
+		System.out.println("Test3.configurarEntornoInicial()");
+	}
+	@AfterAll
+	void liberacionRecursosFinal() {
+		System.out.println("Test3.enclosing_method()");
+	}
+	@BeforeEach
+	void configurarEntorno() {
+		calc = new Calculadora();
+		System.out.println("configurarEntorno()");
+	}
+
+	@AfterEach
+	void liberarEntorno() {
+		calc = null;
+		System.gc();
+		System.out.println("liberarEntorno()");
+	}
+
+	@DisplayName("Prueba de suma")
+	@Test
+	void testSumar() {
+
+		int resultado = calc.sumar(5, 3);
+		assertEquals(8, resultado);
+		for (int i = 0; i < 100; i++) {
+			int a = (int) (Math.random() * 100);
+			int b = (int) (Math.random() * 100);
+			resultado = calc.sumar(a, b);
+			assertEquals(a + b, resultado);
+		}
+
+	}
+
+	@DisplayName("Prueba de resta")
+	@Test
+	void testRestar() {
+		// Calculadora calc = new Calculadora();
+		int resultado = calc.restar(5, 3);
+		assertEquals(2, resultado);
+		assertTrue(2 == resultado);
+		assertNotEquals(2, calc.restar(8, 2));
+		assertTrue(calc.restar(10, 5) > 0);
+		assertFalse(calc.restar(5, 10) > 0);
+		assertAll(() -> assertEquals(2, calc.restar(5, 3)), () -> assertEquals(6, calc.restar(8, 2)),
+				() -> assertEquals(5, calc.restar(10, 5)));
+
+	}
+
+	@DisplayName("Prueba de division")
+	@Test
+	void testDivision() {
+		assertThrows(IllegalArgumentException.class, () -> calc.dividir(5, 0));
+		assertEquals(2.5, calc.dividir(5, 2));
+	}
+
+}

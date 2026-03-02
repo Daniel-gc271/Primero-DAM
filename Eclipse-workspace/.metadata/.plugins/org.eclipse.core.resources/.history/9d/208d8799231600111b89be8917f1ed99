@@ -1,0 +1,29 @@
+import static org.junit.jupiter.api.Assertions.*;
+
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+
+class Test3 {
+	Calculadora calc;
+	@BeforeEach
+	void configurarEntorno() {
+		calc = new Calculadora();
+		System.out.println("configurarEntorno()");
+	}
+	@AfterEach
+	void liberarEntorno() {
+		calc=null;
+		System.gc();
+		System.out.println("liberarEntorno()");
+		
+		
+		
+	}
+	@Test
+	void test() {
+
+
+	}
+
+}
