@@ -64,7 +64,54 @@ min(//SALARIO) :)
 (: empleado que mas y que menos cobra deol departamento 20 :)
 (: dep 20  :)
 (: /EMPLEADOS/EMP_ROW[DEPT_NO=20]/SALARIO :)
-//EMP_ROW[SALARIO=max(//EMP_ROW[DEPT_NO=20]/SALARIO)]
+(: //EMP_ROW[SALARIO=max(//EMP_ROW[DEPT_NO=20]/SALARIO)] :)
 
 
 (: //EMP_ROW[(SALARIO=max(//EMP_ROW[DEPT_NO=20]/SALARIO) or (SALARIO=min(//EMP_ROW[DEPT_NO=20]/SALARIO)) and DEPT_NO=20)] :)
+
+(: Joins :)
+(: //EMPLEADOS/EMP_ROW/concat(APELLIDO,' ',DEPT_NO) :)
+
+
+(: Actividad 2 :)
+
+(: A :)
+(: //sucursales/sucursal/cuenta[@tipo="AHORRO"] :)
+
+(: b :)
+(: concat(//sucursales/sucursal/@codigo," ",count(//sucursales/sucursal/cuenta[@tipo="AHORRO"])) :)
+(: correccion: :)
+(: //sucursales/sucursal/concat(@codigo," : ",count(cuenta[@tipo="AHORRO"])) :)
+
+(: c :)
+(: //sucursales/sucursal[@codigo="SUC3"]/cuenta[@tipo="PENSIONES"] :)
+(: correccion :)
+(: //sucursales/sucursal[@codigo="SUC3"]/cuenta[@tipo="PENSIONES"] :)
+
+(: d :)
+(: correccion :)
+(: //sucursales/sucursal/concat(@codigo, " - ", director, " - ",sum(cuenta/saldohaber)) :)
+(: e :)
+(: correccion :)
+(: //sucursales/sucursal[count(cuenta)>3] :)
+(: f :)
+(: correccion :)
+(: //sucursales/sucursal[count(cuenta/[@tipo="AHORRO"])>3] :)
+(: g :)
+(: correcion :)
+(: //sucursal[count(cuenta)>3]/concat(director," - ",poblacion) :)
+(: h :)
+(: count(//sucursales/sucursal[poblacion = "Madrid"]) :)
+
+(: i :)
+
+
+concat(/sucursales/sucursal/@codigo,
+       " - ",
+       sum(/sucursales/sucursal/cuenta[@tipo="PENSIONES"]/saldohaber))
+
+
+
+
+
+
