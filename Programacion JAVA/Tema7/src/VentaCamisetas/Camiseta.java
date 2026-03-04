@@ -47,7 +47,7 @@ public class Camiseta {
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append("Cmiseta:");
+        sb.append("Camiseta:");
         sb.append("\n\tTalla: ").append(talla);
         sb.append("\n\tColor:");
         sb.append("\n\tR: ").append(colores.getRed());

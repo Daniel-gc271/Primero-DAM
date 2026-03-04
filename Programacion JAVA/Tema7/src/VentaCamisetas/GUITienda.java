@@ -8,7 +8,9 @@ import java.awt.Color;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JColorChooser;
 import VentaCamisetas.Tallas;
+import java.util.ArrayList;
 import javax.swing.SpinnerNumberModel;
+import ventacamisetas.Ordenar;
 
 /**
  *
@@ -19,7 +21,7 @@ public class GUITienda extends javax.swing.JFrame {
     private Color colCamiseta = Color.BLACK;
     private DefaultComboBoxModel<Tallas> modeloTallas;
     private SpinnerNumberModel modeloUnidadesCompradas;
-
+    private ArrayList<Camiseta> listaCamisetas;
     /**
      * Creates new form GUITienda
      */
@@ -31,11 +33,13 @@ public class GUITienda extends javax.swing.JFrame {
     private void setFrame() {
         this.setTitle("Sara");
         this.setLocationRelativeTo(null);
+        listaCamisetas= new ArrayList<>();
         modeloTallas = new DefaultComboBoxModel<>(Tallas.values());
         this.SelectorTalla.setModel(modeloTallas);
         modeloUnidadesCompradas = new SpinnerNumberModel(1, 1, 99, 1);
         this.SelectorUDS.setModel(modeloUnidadesCompradas);
         this.MuestraColor.setBackground(colCamiseta);
+        
     }
 
     /**
@@ -57,6 +61,10 @@ public class GUITienda extends javax.swing.JFrame {
         Carrito = new javax.swing.JPanel();
         Finalizar = new javax.swing.JButton();
         jTextArea1 = new javax.swing.JTextArea();
+        Cancelar = new javax.swing.JButton();
+        jMenuBar1 = new javax.swing.JMenuBar();
+        jMenuOrdenar = new javax.swing.JMenu();
+        jMenuItemAcendente = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -132,12 +140,21 @@ public class GUITienda extends javax.swing.JFrame {
             }
         });
 
+        Cancelar.setText("Cancelar");
+        Cancelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                CancelarActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout CarritoLayout = new javax.swing.GroupLayout(Carrito);
         Carrito.setLayout(CarritoLayout);
         CarritoLayout.setHorizontalGroup(
             CarritoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(CarritoLayout.createSequentialGroup()
-                .addComponent(Finalizar)
+                .addGroup(CarritoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(Cancelar)
+                    .addComponent(Finalizar))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jTextArea1, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(77, 77, 77))
@@ -145,12 +162,29 @@ public class GUITienda extends javax.swing.JFrame {
         CarritoLayout.setVerticalGroup(
             CarritoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(CarritoLayout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(31, 31, 31)
+                .addComponent(Cancelar)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(CarritoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(Finalizar)
                     .addComponent(jTextArea1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
+
+        jMenuOrdenar.setText("Ordenar");
+
+        jMenuItemAcendente.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_C, java.awt.event.InputEvent.ALT_DOWN_MASK));
+        jMenuItemAcendente.setText("Camisetas");
+        jMenuItemAcendente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemAcendenteActionPerformed(evt);
+            }
+        });
+        jMenuOrdenar.add(jMenuItemAcendente);
+
+        jMenuBar1.add(jMenuOrdenar);
+
+        setJMenuBar(jMenuBar1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -205,10 +239,23 @@ public class GUITienda extends javax.swing.JFrame {
         Camiseta camiseta = new Camiseta((Tallas) this.SelectorTalla.getSelectedItem());
         camiseta.setColores(colCamiseta);
         camiseta.setPvr(Double.parseDouble(this.jTextArea1.getText().replace(',','.')));
-        System.out.println("Insert Into");
-        System.out.println(camiseta);
+//        System.out.println("Insert Into");
+//        System.out.println(camiseta);
+        listaCamisetas.add(camiseta);
+        System.out.println(listaCamisetas);
         
     }//GEN-LAST:event_FinalizarActionPerformed
+
+    private void CancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CancelarActionPerformed
+        this.dispose();        // TODO add your handling code here:
+    }//GEN-LAST:event_CancelarActionPerformed
+
+    private void jMenuItemAcendenteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemAcendenteActionPerformed
+            // TODO add your handling code here:
+        Ordenar guiOrdenar = new Ordenar(this,true);
+        guiOrdenar.setVisible(true);
+            
+    }//GEN-LAST:event_jMenuItemAcendenteActionPerformed
 
     /**
      * @param args the command line arguments
@@ -245,7 +292,12 @@ public class GUITienda extends javax.swing.JFrame {
         });
     }
 
+    public ArrayList<Camiseta> getListaCamisetas() {
+        return listaCamisetas;
+    }
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton Cancelar;
     private javax.swing.JPanel Carrito;
     private javax.swing.JPanel ConfiguradorCamiseta;
     private javax.swing.JButton Finalizar;
@@ -255,6 +307,9 @@ public class GUITienda extends javax.swing.JFrame {
     private javax.swing.JComboBox<Tallas> SelectorTalla;
     private javax.swing.JSpinner SelectorUDS;
     private javax.swing.JLabel Unidades;
+    private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenuItem jMenuItemAcendente;
+    private javax.swing.JMenu jMenuOrdenar;
     private javax.swing.JTextArea jTextArea1;
     // End of variables declaration//GEN-END:variables
 }
