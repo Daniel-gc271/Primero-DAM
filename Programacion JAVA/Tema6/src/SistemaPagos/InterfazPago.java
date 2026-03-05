@@ -216,8 +216,8 @@ public class InterfazPago extends javax.swing.JFrame {
                                 "Solicitud datos de pago", JOptionPane.INFORMATION_MESSAGE);
 
                         try {
-                            if (correo.isBlank())
-                                throw new Exception();
+                            if (correo.isBlank()) {
+                                throw new Exception(); }
                             correoCorrecto = correo.matches("^[A-Za-z0-9]+@[A-Za-z0-9]+\\.[a-z]+$");
 
                         } catch (Exception e) {

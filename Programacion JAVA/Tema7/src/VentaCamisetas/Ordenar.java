@@ -8,12 +8,15 @@ import VentaCamisetas.GUITienda;
 import java.util.Collections;
 import java.util.Comparator;
 import VentaCamisetas.Camiseta;
+import javax.swing.ButtonGroup;
 /**
  *
  * @author goncalda
  */
 public class Ordenar extends javax.swing.JDialog {
     private  GUITienda guiPadre;
+    private ButtonGroup grupoFiltrosOrdenacion;
+    private Comparator<Camiseta> compCamisetas;
     /**
      * Creates new form Ordenar
      */
@@ -22,8 +25,14 @@ public class Ordenar extends javax.swing.JDialog {
        this.guiPadre=(GUITienda) parent;
         this.setTitle("Ordenar");
         initComponents();
+        setFrame();
+        compCamisetas = Comparator.comparing((Camiseta c) -> 0);
     }
-
+    private void setFrame(){
+        grupoFiltrosOrdenacion.add(this.Talla); 
+        grupoFiltrosOrdenacion.add(this.Color);
+        grupoFiltrosOrdenacion.add(this.Precio);
+    };
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -34,19 +43,24 @@ public class Ordenar extends javax.swing.JDialog {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        jCheckBox1 = new javax.swing.JCheckBox();
-        jCheckBox2 = new javax.swing.JCheckBox();
-        jCheckBox3 = new javax.swing.JCheckBox();
+        Precio = new javax.swing.JCheckBox();
+        Color = new javax.swing.JCheckBox();
+        Talla = new javax.swing.JCheckBox();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
-        jCheckBox1.setText("jCheckBox1");
+        Precio.setText("jCheckBox1");
 
-        jCheckBox2.setText("jCheckBox2");
+        Color.setText("jCheckBox2");
 
-        jCheckBox3.setText("jCheckBox3");
+        Talla.setText("jCheckBox3");
+        Talla.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                TallaActionPerformed(evt);
+            }
+        });
 
         jButton1.setText("Aceptar");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -70,9 +84,9 @@ public class Ordenar extends javax.swing.JDialog {
                 .addContainerGap(9, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jButton2)
-                    .addComponent(jCheckBox1)
-                    .addComponent(jCheckBox3)
-                    .addComponent(jCheckBox2)
+                    .addComponent(Precio)
+                    .addComponent(Talla)
+                    .addComponent(Color)
                     .addComponent(jButton1))
                 .addContainerGap())
         );
@@ -80,11 +94,11 @@ public class Ordenar extends javax.swing.JDialog {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jCheckBox1)
+                .addComponent(Precio)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jCheckBox2)
+                .addComponent(Color)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jCheckBox3)
+                .addComponent(Talla)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -118,32 +132,36 @@ public class Ordenar extends javax.swing.JDialog {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-//        if (this.jCheckBox1) {
-//            System.out.println("");
-//        }
-//        if (this.jCheckBox1) {
-//            
-//        }
-//        if (this.jCheckBox1) {
-//            t
-//        }
+        if (this.Precio.isSelected()) {
+            ordenarPrecio();
+        }
+        if (this.Color.isSelected()) {
+            ordenarColor();
+        }
+        if (this.Talla.isSelected()) {
+            ordenarTalla();
+        }
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void TallaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TallaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_TallaActionPerformed
     
     public  void ordenarPrecio() {
-        Collections.sort(this.guiPadre.getListaCamisetas(), Comparator.comparing(Camiseta::getPvr));
+        Collections.sort(this.guiPadre.getListaCamisetas(), compCamisetas.thenComparing(Camiseta::getPvr));
         System.out.println("Ordenar.ordenarPrecio()");
         System.out.println(this.guiPadre.getListaCamisetas());
         this.dispose();
     }
     public  void ordenarTalla() {
-        Collections.sort(this.guiPadre.getListaCamisetas(), Comparator.comparing((Camiseta c) -> c.getTalla().name() ));
+        Collections.sort(this.guiPadre.getListaCamisetas(), compCamisetas.thenComparing((Camiseta c) -> c.getTalla().name() ));
         System.out.println("Ordenar.ordenarTalla()");
         System.out.println(this.guiPadre.getListaCamisetas());
         this.dispose();
     }
     public  void ordenarColor() {
-        Collections.sort(this.guiPadre.getListaCamisetas(), Comparator.comparingInt((Camiseta c) -> c.getColores().getRGB()));
+        Collections.sort(this.guiPadre.getListaCamisetas(), compCamisetas.thenComparing((Camiseta c) -> c.getColores().getRGB()));
         System.out.println("Ordenar.ordenarColor()");
         System.out.println(this.guiPadre.getListaCamisetas());
         this.dispose();
@@ -154,11 +172,11 @@ public class Ordenar extends javax.swing.JDialog {
   
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JCheckBox Color;
+    private javax.swing.JCheckBox Precio;
+    private javax.swing.JCheckBox Talla;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
-    private javax.swing.JCheckBox jCheckBox1;
-    private javax.swing.JCheckBox jCheckBox2;
-    private javax.swing.JCheckBox jCheckBox3;
     private javax.swing.JPanel jPanel1;
     // End of variables declaration//GEN-END:variables
 }
