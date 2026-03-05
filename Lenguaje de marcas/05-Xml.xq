@@ -100,18 +100,20 @@ min(//SALARIO) :)
 (: g :)
 (: correcion :)
 (: //sucursal[count(cuenta)>3]/concat(director," - ",poblacion) :)
+
+
 (: h :)
 (: count(//sucursales/sucursal[poblacion = "Madrid"]) :)
 
 (: i :)
 
 
-(: concat(/sucursales/sucursal/@codigo," - ",sum(/sucursales/sucursal/cuenta[@tipo="PENSIONES"]/saldohaber)) :)
+//sucursales/sucursal/concat(/@codigo," - ",sum(/cuenta[@tipo="PENSIONES"]/saldohaber))
+(: j  :)
+//sucursales/sucursal/cuenta[saldohaber>10000]/concat(/nombre," ",/numero," ",/saldohaber)
 
-
-/sucursales/sucursal[count(cuenta[@tipo="AHORRO"]) > 3]/
-    <resultado codigo="{@codigo}">
-      { sum(cuenta[@tipo="AHORRO"]/saldodebe) }
+(:k:)
+//sucursales/sucursal[count(/cuenta/@tipo="AHORRO")>3]/concat(/@codigo, " ", sum(/cuenta/saldodebe)
 
 
 
