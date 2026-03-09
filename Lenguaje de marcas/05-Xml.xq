@@ -117,5 +117,76 @@ min(//SALARIO) :)
 
 
 
+(:Actividad 3:)
+
+(:A:)
+for $z in distinct-values(//produc/cod_zona)
+return <resultado>
+    <zona>{$z}</zona>
+    <cantidad>{count(//produc[cod_zona=$z])}</cantidad>
+</resultado>
+(:B:)
+for $p in //produc
+return typeswitch($p/cod_zona)
+    case "10" return <zona10>{$p/denominacion}</zona10>
+    case "20" return <zona20>{$p/denominacion}</zona20>
+    case "30" return <zona30>{$p/denominacion}</zona30>
+    case "40" return <zona40>{$p/denominacion}</zona40>
+    default return <zona-desconocida>{$p/denominacion}</zona-desconocida>
+(:C:)
+for $z in distinct-values(//produc/cod_zona)
+let $maxPrecio := max(//produc[cod_zona=$z]/precio)
+return <producto-mas-car>
+    <zona>{$z}</zona>
+    <denominacion>{//produc[cod_zona=$z and precio=$maxPrecio]/denominacion}</denominacion>
+    <precio>{$maxPrecio}</precio>
+</producto-mas-car>
+
+(:D:)
+for $p in //produc
+return typeswitch(true())
+    case contains($p/denominacion, "Placa Base") return <placa>{$p/denominacion}</placa>
+    case contains($p/denominacion, "Memoria") return <memoria>{$p/denominacion}</memoria>
+    case contains($p/denominacion, "Micro") return <micro>{$p/denominacion}</micro>
+    default return <otros>{$p/denominacion}</otros>
+(:E:)
+for $s in //sucursal
+return <sucursal>
+    <codigo>{$s/codigo}</codigo>
+    <ahorros>{count($s/cuentas/cuenta[tipo="AHORRO"])</ahorros>
+    <pensiones>{count($s/cuentas/cuenta[tipo="PENSIONES"])</pensiones>
+</sucursal>
+(:F:)
+for $s in //sucursal
+return <sucursal>
+    <codigo>{$s/codigo}</codigo>
+    <director>{$s/director}</director>
+    <poblacion>{$s/poblacion}</poblacion>
+    <total-debe>{sum($s/cuentas/cuenta/debe)}</total-debe>
+    <total-haber>{sum($s/cuentas/cuenta/haber)}</total-haber>
+</sucursal>
+(:G:)
+for $s in //sucursal
+where count($s/cuentas/cuenta) > 3
+return <sucursal>
+    <director>{$s/director}</director>
+    <codigo>{$s/codigo}</codigo>
+    <poblacion>{$s/poblacion}</poblacion>
+</sucursal>
+(:H:)
+for $s in //sucursal
+let $maxDebe := max($s/cuentas/cuenta/debe)
+return <sucursal>
+    <codigo>{$s/codigo}</codigo>
+    <cuenta-mas-debe>
+        <tipo>{$s/cuentas/cuenta[debe=$maxDebe]/tipo}</tipo>
+        <debe>{$s/cuentas/cuenta[debe=$maxDebe]/debe}</debe>
+        <haber>{$s/cuentas/cuenta[debe=$maxDebe]/haber}</haber>
+    </cuenta-mas-debe>
+</sucursal>
+(:I:)
+for $c in //cuenta[tipo="PENSIONES"]
+where $c/aportacion = max(//cuenta[tipo="PENSIONES"]/aportacion)
+return $c
 
 
