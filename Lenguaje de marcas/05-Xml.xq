@@ -127,7 +127,7 @@ return <resultado>
 </resultado>
 (:B:)
 for $p in //produc
-return concat("<zona",$p/cod_zona,">,$p/denominacion,<zona",$p,"/>")
+return concat('<zona',$p/cod_zona,'>',$p/denominacion,'<zona',$p,'/>'+)
 
 (:C:)
 for $z in distinct-values(//produc/cod_zona)
@@ -138,7 +138,7 @@ return <producto-mas-car>
     <precio>{$maxPrecio}</precio>
 </producto-mas-car>
 
-(:D:)
+-(:D:)
 for $p in //produc
 return typeswitch(true())
     case contains($p/denominacion, "Placa Base") return <placa>{$p/denominacion}</placa>
@@ -146,22 +146,23 @@ return typeswitch(true())
     case contains($p/denominacion, "Micro") return <micro>{$p/denominacion}</micro>
     default return <otros>{$p/denominacion}</otros>
 (:E:)
-for $s in //sucursal
-return <sucursal>
-    <codigo>{$s/codigo}</codigo>
-    <ahorros>{count($s/cuentas/cuenta[tipo="AHORRO"])</ahorros>
-    <pensiones>{count($s/cuentas/cuenta[tipo="PENSIONES"])</pensiones>
+for $s in //sucursales/sucursal
+return
+<sucursal>
+    <codigo>{$s/@codigo}</codigo>
+    <ahorros>{count($s/cuenta[@tipo="AHORRO"])}</ahorros>
+    <pensiones>{count($s/cuenta[@tipo="PENSIONES"])}</pensiones>
 </sucursal>
 (:F:)
-for $s in //sucursal
+for $s in //sucursales/sucursal
 return <sucursal>
-    <codigo>{$s/codigo}</codigo>
-    <director>{$s/director}</director>
-    <poblacion>{$s/poblacion}</poblacion>
-    <total-debe>{sum($s/cuentas/cuenta/debe)}</total-debe>
-    <total-haber>{sum($s/cuentas/cuenta/haber)}</total-haber>
+    <codigo>{$s/@codigo}</codigo>
+    {$s/director}
+    {$s/poblacion}
+    <total-debe>{sum($s/cuenta/debe)}</total-debe>
+    <total-haber>{sum($s/cuenta/haber)}</total-haber>
 </sucursal>
-(:G:)
+-(:G:)
 for $s in //sucursal
 where count($s/cuentas/cuenta) > 3
 return <sucursal>
@@ -169,7 +170,7 @@ return <sucursal>
     <codigo>{$s/codigo}</codigo>
     <poblacion>{$s/poblacion}</poblacion>
 </sucursal>
-(:H:)
+-(:H:)
 for $s in //sucursal
 let $maxDebe := max($s/cuentas/cuenta/debe)
 return <sucursal>
@@ -181,8 +182,8 @@ return <sucursal>
     </cuenta-mas-debe>
 </sucursal>
 (:I:)
-for $c in //cuenta[tipo="PENSIONES"]
-where $c/aportacion = max(//cuenta[tipo="PENSIONES"]/aportacion)
+for $c in //sucursales/sucursal/cuenta[@tipo="PENSIONES"]
+where $c/aportacion = max(//sucursales/sucursal/cuenta[@tipo="PENSIONES"]/aportacion)
 return $c
 
 
