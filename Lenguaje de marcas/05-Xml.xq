@@ -127,12 +127,8 @@ return <resultado>
 </resultado>
 (:B:)
 for $p in //produc
-return typeswitch($p/cod_zona)
-    case "10" return <zona10>{$p/denominacion}</zona10>
-    case "20" return <zona20>{$p/denominacion}</zona20>
-    case "30" return <zona30>{$p/denominacion}</zona30>
-    case "40" return <zona40>{$p/denominacion}</zona40>
-    default return <zona-desconocida>{$p/denominacion}</zona-desconocida>
+return concat("<zona",$p/cod_zona,">,$p/denominacion,<zona",$p,"/>")
+
 (:C:)
 for $z in distinct-values(//produc/cod_zona)
 let $maxPrecio := max(//produc[cod_zona=$z]/precio)
