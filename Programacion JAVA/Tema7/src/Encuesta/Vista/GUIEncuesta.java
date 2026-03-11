@@ -50,6 +50,9 @@ public class GUIEncuesta extends javax.swing.JFrame {
         No = new javax.swing.JRadioButton();
         Cancelar = new javax.swing.JButton();
         Aceptar = new javax.swing.JButton();
+        jPanel1 = new javax.swing.JPanel();
+        jButton1 = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         Estadisticas = new javax.swing.JMenu();
         ViewStats = new javax.swing.JMenuItem();
@@ -59,7 +62,7 @@ public class GUIEncuesta extends javax.swing.JFrame {
         Pregunta.setText("Debe dimitir pedro sánchez?");
         Pregunta.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
-        MainView.setLayout(new java.awt.GridLayout());
+        MainView.setLayout(new java.awt.GridLayout(1, 0));
 
         GrupoEncuesta.add(Si);
         Si.setText("Si");
@@ -90,6 +93,14 @@ public class GUIEncuesta extends javax.swing.JFrame {
         });
         MainView.add(Aceptar);
 
+        jPanel1.setLayout(new java.awt.GridLayout());
+
+        jButton1.setText("Iniciar sesion");
+        jPanel1.add(jButton1);
+
+        jButton2.setText("Nuevo usuario");
+        jPanel1.add(jButton2);
+
         Estadisticas.setText("Estadisticas");
 
         ViewStats.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_Q, java.awt.event.InputEvent.ALT_DOWN_MASK));
@@ -111,12 +122,12 @@ public class GUIEncuesta extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(MainView, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(Pregunta, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap())
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(Pregunta, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(MainView, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -125,6 +136,8 @@ public class GUIEncuesta extends javax.swing.JFrame {
                 .addComponent(Pregunta, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(MainView, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -236,6 +249,9 @@ public class GUIEncuesta extends javax.swing.JFrame {
     private javax.swing.JRadioButton No;
     private javax.swing.JRadioButton Si;
     private javax.swing.JMenuItem ViewStats;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JPanel jPanel1;
     // End of variables declaration//GEN-END:variables
 }
