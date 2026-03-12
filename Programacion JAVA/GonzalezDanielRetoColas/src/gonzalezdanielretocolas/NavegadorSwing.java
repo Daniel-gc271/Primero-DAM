@@ -122,8 +122,9 @@ public class NavegadorSwing extends javax.swing.JFrame {
 
     private void ButtonATRASActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButtonATRASActionPerformed
         // TODO add your handling code here:
-        int elementoAnterior = modeloListaHistorial.getSize() -1;
-        this.ListHISTORIAL.setSelectedIndex(0);
+        
+        String urlWebAnterior = this.ListHISTORIAL.
+        visitarPagina(urlWebAnterior);
     }//GEN-LAST:event_ButtonATRASActionPerformed
     private void visitarPagina() {
     String url = this.TextFieldURL.getText(), titulo;
