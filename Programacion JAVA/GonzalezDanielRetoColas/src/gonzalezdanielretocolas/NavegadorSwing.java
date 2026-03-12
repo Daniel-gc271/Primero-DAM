@@ -17,7 +17,6 @@ import javax.swing.JOptionPane;
  * @author goncalda
  */
 public class NavegadorSwing extends javax.swing.JFrame {
-
     private LinkedList<WebPage> historial;
     private DefaultListModel<WebPage> modeloListaHistorial;
 
@@ -38,6 +37,8 @@ public class NavegadorSwing extends javax.swing.JFrame {
         this.setTitle("Navegador Swing 1ºDAM");
         this.TextFieldTITULO.setFocusable(false);
         this.TextFieldTITULO.setEditable(false);
+        //Hacer que el componente tome el foco por defecto al abrir la ventana
+        this.TextFieldURL.requestFocus();
     }
 
     /**
@@ -72,6 +73,11 @@ public class NavegadorSwing extends javax.swing.JFrame {
                 ButtonATRASActionPerformed(evt);
             }
         });
+        ButtonATRAS.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                ButtonATRASKeyPressed(evt);
+            }
+        });
         Navegacion.add(ButtonATRAS);
 
         ButtonVISITAR.setText("Visitar");
@@ -86,6 +92,11 @@ public class NavegadorSwing extends javax.swing.JFrame {
         Navegacion.add(LabelURL);
 
         TextFieldURL.setColumns(25);
+        TextFieldURL.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                TextFieldURLKeyTyped(evt);
+            }
+        });
         Navegacion.add(TextFieldURL);
 
         LabelTITULO.setText("Título: ");
@@ -122,10 +133,22 @@ public class NavegadorSwing extends javax.swing.JFrame {
 
     private void ButtonATRASActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButtonATRASActionPerformed
         // TODO add your handling code here:
+        this.ListHISTORIAL.setSelectedIndex(1);
+        String urlWebAnterior = this.ListHISTORIAL.getSelectedValue().getUrl();
         
-        String urlWebAnterior = this.ListHISTORIAL.
         visitarPagina(urlWebAnterior);
     }//GEN-LAST:event_ButtonATRASActionPerformed
+    
+    private void TextFieldURLKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TextFieldURLKeyTyped
+        // TODO add your handling code here:
+        if (evt.getKeyChar()=='\n') {ButtonVISITAR.doClick();}
+        
+    }//GEN-LAST:event_TextFieldURLKeyTyped
+
+    private void ButtonATRASKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_ButtonATRASKeyPressed
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_ButtonATRASKeyPressed
     private void visitarPagina() {
     String url = this.TextFieldURL.getText(), titulo;
         if (url.isBlank() || url == null) {
@@ -143,7 +166,7 @@ public class NavegadorSwing extends javax.swing.JFrame {
                         + "Donde el dominio tiene entre una y tres letras";
                 JOptionPane.showMessageDialog(this,msgErrorFormato , "Error", JOptionPane.ERROR_MESSAGE);
             } else {
-                titulo = m.group(1);
+                titulo = m.group(1).toUpperCase().charAt(0)+m.group(1).substring(1).toLowerCase();
                 this.TextFieldTITULO.setText(titulo);
                 WebPage paginaBuscada = new WebPage(url, titulo, LocalDateTime.now());
                 modeloListaHistorial.add(0,paginaBuscada);
@@ -172,11 +195,12 @@ public class NavegadorSwing extends javax.swing.JFrame {
                         + "Donde el dominio tiene entre una y tres letras";
                 JOptionPane.showMessageDialog(this,msgErrorFormato , "Error", JOptionPane.ERROR_MESSAGE);
             } else {
-                titulo = m.group(1);
+                titulo = m.group(1).toUpperCase().charAt(0)+m.group(1).substring(1).toLowerCase();
                 this.TextFieldTITULO.setText(titulo);
                 WebPage paginaBuscada = new WebPage(url, titulo, LocalDateTime.now());
                 modeloListaHistorial.add(0,paginaBuscada);
                 this.LabelINFO.setText("Página actual: "+url);
+                this.ListHISTORIAL.setSelectedIndex(0);
             }
         }
     }
