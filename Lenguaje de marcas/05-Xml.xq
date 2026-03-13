@@ -132,19 +132,19 @@ return concat('<zona',$p/cod_zona,'>',$p/denominacion,'<zona',$p,'/>'+)
 (:C:)
 for $z in distinct-values(//produc/cod_zona)
 let $maxPrecio := max(//produc[cod_zona=$z]/precio)
-return <producto-mas-car>
+return <producto-mas-caro>
     <zona>{$z}</zona>
     <denominacion>{//produc[cod_zona=$z and precio=$maxPrecio]/denominacion}</denominacion>
     <precio>{$maxPrecio}</precio>
-</producto-mas-car>
+</producto-mas-caro>
 
--(:D:)
+(:D:)
 for $p in //produc
-return typeswitch(true())
-    case contains($p/denominacion, "Placa Base") return <placa>{$p/denominacion}</placa>
-    case contains($p/denominacion, "Memoria") return <memoria>{$p/denominacion}</memoria>
-    case contains($p/denominacion, "Micro") return <micro>{$p/denominacion}</micro>
-    default return <otros>{$p/denominacion}</otros>
+return
+    if (contains($p/denominacion, "Placa Base")) then <placa>{data($p/denominacion)}</placa>
+    else if (contains($p/denominacion, "Memoria")) then <memoria>{data($p/denominacion)}</memoria>
+    else if (contains($p/denominacion, "Micro")) then <micro>{data($p/denominacion)}</micro>
+    else () 
 (:E:)
 for $s in //sucursales/sucursal
 return
@@ -185,5 +185,8 @@ return <sucursal>
 for $c in //sucursales/sucursal/cuenta[@tipo="PENSIONES"]
 where $c/aportacion = max(//sucursales/sucursal/cuenta[@tipo="PENSIONES"]/aportacion)
 return $c
+(:If:)
+return if (:condicion:) then (:codijo/instruccion:)
+else () (:En cualquier caso:)
 
 
