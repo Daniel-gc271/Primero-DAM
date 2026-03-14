@@ -163,22 +163,22 @@ return <sucursal>
     <total-haber>{sum($s/cuenta/haber)}</total-haber>
 </sucursal>
 -(:G:)
-for $s in //sucursal
-where count($s/cuentas/cuenta) > 3
+for $s in //sucursales/sucursal
+where count($s/cuenta) > 3
 return <sucursal>
     <director>{$s/director}</director>
     <codigo>{$s/codigo}</codigo>
     <poblacion>{$s/poblacion}</poblacion>
 </sucursal>
 -(:H:)
-for $s in //sucursal
-let $maxDebe := max($s/cuentas/cuenta/debe)
+for $s in //sucursales/sucursal
+let $maxDebe := max($s/cuenta/debe)
 return <sucursal>
     <codigo>{$s/codigo}</codigo>
     <cuenta-mas-debe>
-        <tipo>{$s/cuentas/cuenta[debe=$maxDebe]/tipo}</tipo>
-        <debe>{$s/cuentas/cuenta[debe=$maxDebe]/debe}</debe>
-        <haber>{$s/cuentas/cuenta[debe=$maxDebe]/haber}</haber>
+        <tipo>{$s/cuenta[debe=$maxDebe]/tipo}</tipo>
+        <debe>{$s/cuenta[debe=$maxDebe]/debe}</debe>
+        <haber>{$s/cuenta[debe=$maxDebe]/haber}</haber>
     </cuenta-mas-debe>
 </sucursal>
 (:I:)
