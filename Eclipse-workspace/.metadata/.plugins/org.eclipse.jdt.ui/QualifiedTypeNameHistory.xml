@@ -1,11 +1,14 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <qualifiedTypeNameHistroy>
     <fullyQualifiedTypeName name="org.junit.jupiter.api.BeforeEach"/>
-    <fullyQualifiedTypeName name="org.junit.jupiter.api.AfterEach"/>
-    <fullyQualifiedTypeName name="java.lang.System"/>
-    <fullyQualifiedTypeName name="org.junit.jupiter.api.BeforeAll"/>
     <fullyQualifiedTypeName name="org.junit.jupiter.api.AfterAll"/>
     <fullyQualifiedTypeName name="Calculadora"/>
     <fullyQualifiedTypeName name="org.junit.jupiter.params.provider.CsvSource"/>
     <fullyQualifiedTypeName name="org.junit.jupiter.params.provider.CsvFileSource"/>
+    <fullyQualifiedTypeName name="org.junit.jupiter.api.BeforeAll"/>
+    <fullyQualifiedTypeName name="Cuadrado"/>
+    <fullyQualifiedTypeName name="org.junit.jupiter.api.AfterEach"/>
+    <fullyQualifiedTypeName name="java.util.Random"/>
+    <fullyQualifiedTypeName name="java.lang.System"/>
+    <fullyQualifiedTypeName name="CaminABLE"/>
 </qualifiedTypeNameHistroy>

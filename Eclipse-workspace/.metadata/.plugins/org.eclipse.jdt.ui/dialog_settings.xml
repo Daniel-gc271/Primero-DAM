@@ -17,4 +17,21 @@
 	</section>
 	<section name="org.eclipse.ltk.ui.refactoring.settings">
 	</section>
+	<section name="NewClassCreationWizard.dialogBounds">
+		<item key="DIALOG_X_ORIGIN" value="457"/>
+		<item key="DIALOG_Y_ORIGIN" value="9"/>
+		<item key="DIALOG_WIDTH" value="542"/>
+		<item key="DIALOG_HEIGHT" value="638"/>
+		<item key="DIALOG_FONT_NAME" value="1|Segoe UI|9.0|0|WINDOWS|1|-12|0|0|0|400|0|0|0|1|0|0|0|0|Segoe UI"/>
+	</section>
+	<section name="NewInterfaceCreationWizard.dialogBounds">
+		<item key="DIALOG_X_ORIGIN" value="439"/>
+		<item key="DIALOG_Y_ORIGIN" value="72"/>
+		<item key="DIALOG_WIDTH" value="579"/>
+		<item key="DIALOG_HEIGHT" value="543"/>
+		<item key="DIALOG_FONT_NAME" value="1|Segoe UI|9.0|0|WINDOWS|1|-12|0|0|0|400|0|0|0|1|0|0|0|0|Segoe UI"/>
+	</section>
+	<section name="OptionalMessageDialog.hide.">
+		<item key="org.eclipse.jdt.ui.typecomment.deprecated" value="true"/>
+	</section>
 </section>
