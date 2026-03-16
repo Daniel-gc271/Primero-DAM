@@ -11,4 +11,8 @@
     <fullyQualifiedTypeName name="java.util.Random"/>
     <fullyQualifiedTypeName name="java.lang.System"/>
     <fullyQualifiedTypeName name="CaminABLE"/>
+    <fullyQualifiedTypeName name="Persona"/>
+    <fullyQualifiedTypeName name="jdk.internal.classfile.impl.BufferedCodeBuilder.Model"/>
+    <fullyQualifiedTypeName name="java.awt.event.ActionListener"/>
+    <fullyQualifiedTypeName name="Vista.VistaInterfazGrafico"/>
 </qualifiedTypeNameHistroy>
