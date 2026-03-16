@@ -117,5 +117,76 @@ min(//SALARIO) :)
 
 
 
+(:Actividad 3:)
+
+(:A:)
+for $z in distinct-values(//produc/cod_zona)
+return <resultado>
+    <zona>{$z}</zona>
+    <cantidad>{count(//produc[cod_zona=$z])}</cantidad>
+</resultado>
+(:B:)
+for $p in //produc
+return concat('<zona',$p/cod_zona,'>',$p/denominacion,'<zona',$p,'/>'+)
+
+(:C:)
+for $z in distinct-values(//produc/cod_zona)
+let $maxPrecio := max(//produc[cod_zona=$z]/precio)
+return <producto-mas-caro>
+    <zona>{$z}</zona>
+    <denominacion>{//produc[cod_zona=$z and precio=$maxPrecio]/denominacion}</denominacion>
+    <precio>{$maxPrecio}</precio>
+</producto-mas-caro>
+
+(:D:)
+for $p in //produc
+return
+    if (contains($p/denominacion, "Placa Base")) then <placa>{data($p/denominacion)}</placa>
+    else if (contains($p/denominacion, "Memoria")) then <memoria>{data($p/denominacion)}</memoria>
+    else if (contains($p/denominacion, "Micro")) then <micro>{data($p/denominacion)}</micro>
+    else () 
+(:E:)
+for $s in //sucursales/sucursal
+return
+<sucursal>
+    <codigo>{$s/@codigo}</codigo>
+    <ahorros>{count($s/cuenta[@tipo="AHORRO"])}</ahorros>
+    <pensiones>{count($s/cuenta[@tipo="PENSIONES"])}</pensiones>
+</sucursal>
+(:F:)
+for $s in //sucursales/sucursal
+return <sucursal>
+    <codigo>{$s/@codigo}</codigo>
+    {$s/director}
+    {$s/poblacion}
+    <total-debe>{sum($s/cuenta/debe)}</total-debe>
+    <total-haber>{sum($s/cuenta/haber)}</total-haber>
+</sucursal>
+-(:G:)
+for $s in //sucursales/sucursal
+where count($s/cuenta) > 3
+return <sucursal>
+    <director>{$s/director}</director>
+    <codigo>{$s/codigo}</codigo>
+    <poblacion>{$s/poblacion}</poblacion>
+</sucursal>
+-(:H:)
+for $s in //sucursales/sucursal
+let $maxDebe := max($s/cuenta/debe)
+return <sucursal>
+    <codigo>{$s/codigo}</codigo>
+    <cuenta-mas-debe>
+        <tipo>{$s/cuenta[debe=$maxDebe]/tipo}</tipo>
+        <debe>{$s/cuenta[debe=$maxDebe]/debe}</debe>
+        <haber>{$s/cuenta[debe=$maxDebe]/haber}</haber>
+    </cuenta-mas-debe>
+</sucursal>
+(:I:)
+for $c in //sucursales/sucursal/cuenta[@tipo="PENSIONES"]
+where $c/aportacion = max(//sucursales/sucursal/cuenta[@tipo="PENSIONES"]/aportacion)
+return $c
+(:If:)
+return if (:condicion:) then (:codijo/instruccion:)
+else () (:En cualquier caso:)
 
 

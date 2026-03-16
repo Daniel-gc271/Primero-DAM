@@ -51,8 +51,14 @@ public class GUIEncuesta extends javax.swing.JFrame {
         Si = new javax.swing.JRadioButton();
         Cancelar = new javax.swing.JButton();
         Aceptar = new javax.swing.JButton();
+<<<<<<< HEAD
         Login = new javax.swing.JButton();
         No = new javax.swing.JRadioButton();
+=======
+        jPanel1 = new javax.swing.JPanel();
+        jButton1 = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
+>>>>>>> origin/main
         jMenuBar1 = new javax.swing.JMenuBar();
         Estadisticas = new javax.swing.JMenu();
         ViewStats = new javax.swing.JMenuItem();
@@ -73,12 +79,16 @@ public class GUIEncuesta extends javax.swing.JFrame {
         Pregunta.setText("Debe dimitir pedro sánchez?");
         Pregunta.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
+<<<<<<< HEAD
         Logout.setText("Logout");
         Logout.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 LogoutActionPerformed(evt);
             }
         });
+=======
+        MainView.setLayout(new java.awt.GridLayout(1, 0));
+>>>>>>> origin/main
 
         GrupoEncuesta.add(Si);
         Si.setText("Si");
@@ -147,6 +157,14 @@ public class GUIEncuesta extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
+        jPanel1.setLayout(new java.awt.GridLayout());
+
+        jButton1.setText("Iniciar sesion");
+        jPanel1.add(jButton1);
+
+        jButton2.setText("Nuevo usuario");
+        jPanel1.add(jButton2);
+
         Estadisticas.setText("Estadisticas");
 
         ViewStats.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_Q, java.awt.event.InputEvent.ALT_DOWN_MASK));
@@ -166,16 +184,34 @@ public class GUIEncuesta extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+<<<<<<< HEAD
             .addComponent(Pregunta, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+=======
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(Pregunta, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(MainView, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+>>>>>>> origin/main
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(Pregunta, javax.swing.GroupLayout.DEFAULT_SIZE, 230, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+<<<<<<< HEAD
                 .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
+=======
+                .addComponent(MainView, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+>>>>>>> origin/main
         );
 
         pack();
@@ -296,7 +332,12 @@ public class GUIEncuesta extends javax.swing.JFrame {
     private javax.swing.JRadioButton No;
     private javax.swing.JRadioButton Si;
     private javax.swing.JMenuItem ViewStats;
+<<<<<<< HEAD
     private javax.swing.JFrame jFrame1;
+=======
+    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
+>>>>>>> origin/main
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JPanel jPanel1;
     // End of variables declaration//GEN-END:variables
