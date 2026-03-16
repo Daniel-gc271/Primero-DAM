@@ -15,4 +15,7 @@
     <fullyQualifiedTypeName name="jdk.internal.classfile.impl.BufferedCodeBuilder.Model"/>
     <fullyQualifiedTypeName name="java.awt.event.ActionListener"/>
     <fullyQualifiedTypeName name="Vista.VistaInterfazGrafico"/>
+    <fullyQualifiedTypeName name="Model.Persona"/>
+    <fullyQualifiedTypeName name="modelo.Persona"/>
+    <fullyQualifiedTypeName name="Controlador.Controlador"/>
 </qualifiedTypeNameHistroy>
