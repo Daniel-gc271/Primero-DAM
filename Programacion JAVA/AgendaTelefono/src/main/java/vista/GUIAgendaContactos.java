@@ -4,19 +4,34 @@
  */
 package vista;
 
+import java.util.ArrayList;
+import javax.swing.DefaultListModel;
+import modelo.Contacto;
+
 /**
  *
  * @author goncalda
  */
 public class GUIAgendaContactos extends javax.swing.JFrame {
-
+    private ArrayList<Contacto> listaContactos;
+    private DefaultListModel<Contacto> modListaContacto;
+    private AgregarContacto guiAddContact;
     /**
      * Creates new form GUIAgendaContactos
      */
-    public GUIAgendaContactos() {
+    public GUIAgendaContactos(AgregarContacto gui) {
         initComponents();
+            setFrame();
+            this.guiAddContact = gui;
     }
-
+    private void setFrame() {
+        this.setLocationRelativeTo(null);
+        this.setTitle("Agenda de contactos");
+        listaContactos = new ArrayList<>();
+        modListaContacto = new DefaultListModel<>();
+        this.jList1.setModel(modListaContacto);
+        /* Set the Nimbus look and feel */
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -26,6 +41,8 @@ public class GUIAgendaContactos extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jList1 = new javax.swing.JList<>();
         jMenuBar1 = new javax.swing.JMenuBar();
         OptContacto = new javax.swing.JMenu();
         Añadir = new javax.swing.JMenuItem();
@@ -37,10 +54,21 @@ public class GUIAgendaContactos extends javax.swing.JFrame {
         Vaciar = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setMinimumSize(new java.awt.Dimension(400, 300));
+
+        jList1.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        jScrollPane1.setViewportView(jList1);
+
+        getContentPane().add(jScrollPane1, java.awt.BorderLayout.CENTER);
 
         OptContacto.setText("Contacto");
 
         Añadir.setText("Añadir");
+        Añadir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                AñadirActionPerformed(evt);
+            }
+        });
         OptContacto.add(Añadir);
 
         Buscar.setText("Buscar");
@@ -69,40 +97,16 @@ public class GUIAgendaContactos extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void AñadirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AñadirActionPerformed
+        // TODO add your handling code here:
+    
+        guiAddContact.setVisible(true);
+    }//GEN-LAST:event_AñadirActionPerformed
+
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(GUIAgendaContactos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(GUIAgendaContactos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(GUIAgendaContactos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(GUIAgendaContactos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new GUIAgendaContactos().setVisible(true);
-            }
-        });
-    }
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuItem Añadir;
@@ -113,6 +117,8 @@ public class GUIAgendaContactos extends javax.swing.JFrame {
     private javax.swing.JMenu OptAgenda;
     private javax.swing.JMenu OptContacto;
     private javax.swing.JMenuItem Vaciar;
+    private javax.swing.JList<Contacto> jList1;
     private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JScrollPane jScrollPane1;
     // End of variables declaration//GEN-END:variables
 }
