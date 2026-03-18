@@ -4,26 +4,32 @@
  */
 package vista;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import javax.swing.DefaultListModel;
+import modelo.Contacto;
 
 /**
  *
  * @author goncalda
  */
-public class GuiEditarContacto extends javax.swing.JFrame {
-
+public class GuiAddContacto extends javax.swing.JFrame {
+    private HashMap<String,Contacto> listaContactos;
     /**
      * Creates new form AgregarContacto
      */
-    public GuiEditarContacto() {
+    public GuiAddContacto(HashMap<String,Contacto> listaContactos) {
+        this.listaContactos=listaContactos;
         initComponents();
         setFrame();
     }
+
     private void setFrame() {
         this.setLocationRelativeTo(null);
         this.LstNumTel.setModel(new DefaultListModel<>());
         this.setTitle("");
     }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -150,9 +156,7 @@ public class GuiEditarContacto extends javax.swing.JFrame {
                 .addGap(0, 0, 0)
                 .addGroup(DescLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(ScrollDesc)
-                    .addGroup(DescLayout.createSequentialGroup()
-                        .addComponent(LblDesc, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addComponent(LblDesc, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(0, 0, 0))
         );
         DescLayout.setVerticalGroup(
@@ -272,12 +276,12 @@ public class GuiEditarContacto extends javax.swing.JFrame {
 
     private void ContactCancelKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_ContactCancelKeyPressed
         // TODO add your handling code here:
-        
+
     }//GEN-LAST:event_ContactCancelKeyPressed
 
     private void formKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_formKeyPressed
         // TODO add your handling code here:
-     
+
     }//GEN-LAST:event_formKeyPressed
 
     private void TxtNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TxtNameActionPerformed
@@ -286,14 +290,22 @@ public class GuiEditarContacto extends javax.swing.JFrame {
 
     private void ContactAceptActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ContactAceptActionPerformed
         // TODO add your handling code here:
+       //recuperar la lista de contactos, 
+       String nombre;
+       ArrayList<String> numsTel = new ArrayList<>();
+       nombre= this.TxtName.getText();
+        for (Object object : this.LstNumTel.g) {
+            
+        }
+
     }//GEN-LAST:event_ContactAceptActionPerformed
 
     private void ContactClearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ContactClearActionPerformed
         // TODO add your handling code here:
-        
+
     }//GEN-LAST:event_ContactClearActionPerformed
     private void clearFields() {
-        
+
     }
     /**
      * @param args the command line arguments

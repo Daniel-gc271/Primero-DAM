@@ -9,6 +9,7 @@ import java.util.Collections;
 import java.util.Comparator;
 
 import java.util.HashMap;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -16,16 +17,24 @@ import java.util.HashMap;
  */
 public class Contacto {
 
-    private Comparator<Contacto> compContacto;
-    private LocalDateTime fechaAñadido, fechacumpleaños;
+    private final Comparator<Contacto> compContacto;
+    private final LocalDateTime fechaAñadido;
+    private LocalDateTime fechacumpleaños;
     private String nombre, apellido1, apellido2, correo, descripcion;
-    private int numTelf;
-    private HashMap<String, String> socials = new HashMap<>();
+    ArrayList<String> lstNumTelf;
+//    private HashMap<String, String> socials = new HashMap<>();
 
-    public Contacto(String nombre, int numTelf) {
+    public Contacto(String nombre, String numTelf) {
         this.fechaAñadido = LocalDateTime.now();
+        if (nombre == null || nombre.isBlank()||nombre.length()==0) {
+            System.out.println("Pene1");
+            JOptionPane.showMessageDialog(null, "El nombre no puede estar vacio", "ERROR", 1);}
+        if (numTelf == null ||numTelf.isBlank()||numTelf.length()==0) {
+                        System.out.println("Pene2");
+
+            JOptionPane.showMessageDialog(null, "El teléfono no puede estar vacio", "ERROR", 1);}
         this.nombre = nombre;
-        this.numTelf = numTelf;
+        this.lstNumTelf.add(numTelf);
         compContacto = Comparator.comparing((Contacto c) -> 0);
     }
 
@@ -37,6 +46,7 @@ public class Contacto {
                         thenComparing(Contacto::getApellido2)
         );
     }
+
     public void ordenarNombreDesc(ArrayList<Contacto> listaContactos) {
         Collections.sort(listaContactos,
                 compContacto.
@@ -46,12 +56,14 @@ public class Contacto {
         );
         listaContactos.reversed();
     }
-    public void ordenarFechaAsc (ArrayList<Contacto> listaContactos) {
+
+    public void ordenarFechaAsc(ArrayList<Contacto> listaContactos) {
         Collections.sort(listaContactos,
                 compContacto.
                         thenComparing(Contacto::getFechaAñadido));
     }
-    public void ordenarFechaDesc (ArrayList<Contacto> listaContactos) {
+
+    public void ordenarFechaDesc(ArrayList<Contacto> listaContactos) {
         Collections.sort(listaContactos,
                 compContacto.
                         thenComparing(Contacto::getFechaAñadido));
@@ -73,4 +85,20 @@ public class Contacto {
     public LocalDateTime getFechaAñadido() {
         return fechaAñadido;
     }
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append(nombre).append(" ");
+        sb.append(apellido1).append(" ");
+        sb.append(apellido2).append(" ");
+      
+        sb.append("Cumplea\u00f1os: ").append(fechacumpleaños);
+        return sb.toString();
+    }
+
+    public String contactoShort() {
+        return nombre + apellido1;
+    }
+
 }

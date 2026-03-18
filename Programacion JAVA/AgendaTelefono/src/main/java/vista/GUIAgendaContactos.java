@@ -5,6 +5,7 @@
 package vista;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import javax.swing.DefaultListModel;
 import modelo.Contacto;
 
@@ -14,11 +15,13 @@ import modelo.Contacto;
  */
 public class GUIAgendaContactos extends javax.swing.JFrame {
     private DefaultListModel<Contacto> modListaContacto;
+    private HashMap<String,Contacto> listaContactos;
     private GuiContacto guiAddContact;
     /**
      * Creates new form GUIAgendaContactos
      */
-    public GUIAgendaContactos(GuiContacto gui) {
+    public GUIAgendaContactos(GuiContacto gui,HashMap<String,Contacto> listaContactos) {
+        this.listaContactos=listaContactos;
         initComponents();
             setFrame();
             this.guiAddContact = gui;
@@ -42,6 +45,7 @@ public class GUIAgendaContactos extends javax.swing.JFrame {
 
         jScrollPane1 = new javax.swing.JScrollPane();
         jList1 = new javax.swing.JList<>();
+        jLabel1 = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         OptContacto = new javax.swing.JMenu();
         Añadir = new javax.swing.JMenuItem();
@@ -59,6 +63,9 @@ public class GUIAgendaContactos extends javax.swing.JFrame {
         jScrollPane1.setViewportView(jList1);
 
         getContentPane().add(jScrollPane1, java.awt.BorderLayout.CENTER);
+
+        jLabel1.setText("jLabel1");
+        getContentPane().add(jLabel1, java.awt.BorderLayout.PAGE_END);
 
         OptContacto.setText("Contacto");
 
@@ -116,6 +123,7 @@ public class GUIAgendaContactos extends javax.swing.JFrame {
     private javax.swing.JMenu OptAgenda;
     private javax.swing.JMenu OptContacto;
     private javax.swing.JMenuItem Vaciar;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JList<Contacto> jList1;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JScrollPane jScrollPane1;
