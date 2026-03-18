@@ -13,13 +13,12 @@ import modelo.Contacto;
  * @author goncalda
  */
 public class GUIAgendaContactos extends javax.swing.JFrame {
-    private ArrayList<Contacto> listaContactos;
     private DefaultListModel<Contacto> modListaContacto;
-    private AgregarContacto guiAddContact;
+    private GuiContacto guiAddContact;
     /**
      * Creates new form GUIAgendaContactos
      */
-    public GUIAgendaContactos(AgregarContacto gui) {
+    public GUIAgendaContactos(GuiContacto gui) {
         initComponents();
             setFrame();
             this.guiAddContact = gui;
@@ -27,7 +26,7 @@ public class GUIAgendaContactos extends javax.swing.JFrame {
     private void setFrame() {
         this.setLocationRelativeTo(null);
         this.setTitle("Agenda de contactos");
-        listaContactos = new ArrayList<>();
+        
         modListaContacto = new DefaultListModel<>();
         this.jList1.setModel(modListaContacto);
         /* Set the Nimbus look and feel */
@@ -99,7 +98,7 @@ public class GUIAgendaContactos extends javax.swing.JFrame {
 
     private void AñadirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AñadirActionPerformed
         // TODO add your handling code here:
-    
+        guiAddContact.setTitle("Nuevo contacto");
         guiAddContact.setVisible(true);
     }//GEN-LAST:event_AñadirActionPerformed
 
