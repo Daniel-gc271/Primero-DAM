@@ -7,8 +7,11 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.HashMap;
 
 import java.util.HashSet;
+import java.util.Objects;
+import java.util.Set;
 import javax.swing.JOptionPane;
 
 /**
@@ -26,10 +29,9 @@ public class Contacto {
 
     public Contacto(String nombre, HashSet<String> numTelf) {
         this.fechaAñadido = LocalDateTime.now();
-        System.out.println("Fecha de contactoAsociada");
-        System.out.println("nombre.length()= "+nombre.length());
-        
-        if (numTelf.isEmpty()) {JOptionPane.showMessageDialog(null, "El telefono no puede estar vacio", "ERROR", 1);}
+        if (numTelf.isEmpty()) {
+            JOptionPane.showMessageDialog(null, "El telefono no puede estar vacio", "ERROR", 1);
+        }
         this.lstNumTelf = numTelf;
         this.nombre = nombre;
 
@@ -39,7 +41,7 @@ public class Contacto {
     public void ordenarNombreAsc(ArrayList<Contacto> listaContactos) {
         Collections.sort(listaContactos,
                 compContacto.
-                        thenComparing(Contacto::getName).
+                        thenComparing(Contacto::getNombre).
                         thenComparing(Contacto::getApellido1).
                         thenComparing(Contacto::getApellido2)
         );
@@ -48,7 +50,7 @@ public class Contacto {
     public void ordenarNombreDesc(ArrayList<Contacto> listaContactos) {
         Collections.sort(listaContactos,
                 compContacto.
-                        thenComparing(Contacto::getName).
+                        thenComparing(Contacto::getNombre).
                         thenComparing(Contacto::getApellido1).
                         thenComparing(Contacto::getApellido2)
         );
@@ -68,10 +70,6 @@ public class Contacto {
         listaContactos.reversed();
     }
 
-    public String getName() {
-        return this.nombre;
-    }
-
     public String getApellido1() {
         return apellido1;
     }
@@ -87,28 +85,33 @@ public class Contacto {
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append("Nombre: ").append(nombre).append('\n');
-        if (apellido1 != null||apellido1.isEmpty()||apellido1.isBlank()) {
+        sb.append("\nNombre: ").append(nombre).append('\n');
+        if (apellido1 != null || !apellido1.isEmpty() || !apellido1.isBlank()) {
             sb.append("Primer apellido: ").append(apellido1).append('\n');
         }
-        if (apellido2 != null ||apellido2.isEmpty()||apellido2.isBlank()) {
+        if (apellido2 != null || !apellido2.isEmpty() || !apellido2.isBlank()) {
             sb.append("Segundo apellido: ").append(apellido2).append('\n');
         }
         if (fechacumpleaños != null) {
             sb.append("Cumplea\u00f1os: ").append(fechacumpleaños);
         }
-        
-            sb.append("Numeros de contacto:\n");
-            for (String string : lstNumTelf) {
-                sb.append(string).append(" ");
+
+        sb.append("Numeros de contacto:\n");
+        for (String string : lstNumTelf) {
+            sb.append(string).append(" ");
+        }
+
+        if (correo != null) {
+            if (!correo.isBlank()) {
+                sb.append('\n').append("Email: ").append(correo).append('\n');
             }
-        
-        if (correo != null||correo.isEmpty()||correo.isBlank()) {
-            sb.append('\n').append("Email: ").append(correo).append('\n');
         }
-        if (descripcion != null ||descripcion.isEmpty()||descripcion.isBlank()) {
-            sb.append("Descripcion: ").append(descripcion).append('\n');
+        if (descripcion != null) {
+            if (!descripcion.isBlank()) {
+                sb.append("Descripcion: ").append(descripcion);
+            }
         }
+        sb.append('\n');
         return sb.toString();
     }
 
@@ -142,10 +145,13 @@ public class Contacto {
 
     public void setCorreo(String correo) throws Exception {
         String regexEmail = "^\\w+@\\w+.\\w+$";
-        
-        if (correo.matches(regexEmail)) {this.correo = correo; }
-        else {throw new Exception();}
-        
+
+        if (correo.matches(regexEmail)) {
+            this.correo = correo.toLowerCase();
+        } else {
+            throw new Exception();
+        }
+
     }
 
     public String getDescripcion() {
@@ -160,4 +166,97 @@ public class Contacto {
         return nombre + apellido1;
     }
 
+    @Override
+    public int hashCode() {
+        int hash = 3;
+        hash = 59 * hash + Objects.hashCode(this.fechaAñadido);
+        hash = 59 * hash + Objects.hashCode(this.fechacumpleaños);
+        hash = 59 * hash + Objects.hashCode(this.nombre);
+        hash = 59 * hash + Objects.hashCode(this.apellido1);
+        hash = 59 * hash + Objects.hashCode(this.apellido2);
+        hash = 59 * hash + Objects.hashCode(this.correo);
+        hash = 59 * hash + Objects.hashCode(this.descripcion);
+        hash = 59 * hash + Objects.hashCode(this.lstNumTelf);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Contacto other = (Contacto) obj;
+        if (!Objects.equals(this.nombre, other.nombre)) {
+            return false;
+        }
+        if (!Objects.equals(this.apellido1, other.apellido1)) {
+            return false;
+        }
+        if (!Objects.equals(this.apellido2, other.apellido2)) {
+            return false;
+        }
+        if (!Objects.equals(this.correo, other.correo)) {
+            return false;
+        }
+        if (!Objects.equals(this.descripcion, other.descripcion)) {
+            return false;
+        }
+        if (!Objects.equals(this.fechaAñadido, other.fechaAñadido)) {
+            return false;
+        }
+        if (!Objects.equals(this.fechacumpleaños, other.fechacumpleaños)) {
+            return false;
+        }
+        return Objects.equals(this.lstNumTelf, other.lstNumTelf);
+    }
+
+    /**
+     *
+     * @param listContactos la lista de la que buscar
+     * @param nombre 
+     * @return
+     */
+    public ArrayList<Contacto> buscarContacto(HashMap<?, Contacto> listContactos, String nombre) {
+        ArrayList<Contacto> coincidencias = new ArrayList<>();
+        for (Contacto contacto : listContactos.values()) {
+            if (contacto.getNombre().toUpperCase().contains(nombre.toUpperCase())) {
+                coincidencias.add(contacto);
+            }
+        }
+        return coincidencias;
+    }
+    public ArrayList<Contacto> buscarMailContacto(HashMap<?, Contacto> listContactos, String mail) {
+        ArrayList<Contacto> coincidencias = new ArrayList<>();
+        for (Contacto contacto : listContactos.values()) {
+            if (contacto.getCorreo().toUpperCase().contains(mail.toUpperCase())) {
+                coincidencias.add(contacto);
+            }
+        }
+        return coincidencias;
+    }
+    
+    public ArrayList<Contacto> buscarContacto(HashMap<?, Contacto> listContactos, String nombre, String apellido1) {
+        ArrayList<Contacto> coincidencias = new ArrayList<>();
+        for (Contacto contacto : listContactos.values()) {
+            if (contacto.getNombre().toUpperCase().contains(nombre.toUpperCase())||contacto.getApellido1().toUpperCase().contains(apellido1.toUpperCase())) {
+                coincidencias.add(contacto);
+            }
+        }
+        return coincidencias;
+    }
+    public ArrayList<Contacto> buscarContacto(HashMap<?, Contacto> listContactos, String nombre, String apellido1, String apellido2) {
+        ArrayList<Contacto> coincidencias = new ArrayList<>();
+        for (Contacto contacto : listContactos.values()) {
+            if (contacto.getNombre().toUpperCase().contains(nombre.toUpperCase())||contacto.getApellido1().toUpperCase().contains(apellido1.toUpperCase())||contacto.getApellido2().toUpperCase().contains(apellido2.toUpperCase())) {
+                coincidencias.add(contacto);
+            }
+        }
+        return coincidencias;
+    }
 }

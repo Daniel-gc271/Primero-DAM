@@ -15,12 +15,12 @@ import modelo.Contacto;
  */
 public class GUIAgendaContactos extends javax.swing.JFrame {
     private DefaultListModel<Contacto> modListaContacto;
-    private HashMap<String,Contacto> listaContactos;
+    private HashMap<Integer,Contacto> listaContactos;
     private GuiContacto guiAddContact;
     /**
      * Creates new form GUIAgendaContactos
      */
-    public GUIAgendaContactos(GuiContacto gui,HashMap<String,Contacto> listaContactos) {
+    public GUIAgendaContactos(GuiContacto gui,HashMap<Integer,Contacto> listaContactos) {
         this.listaContactos=listaContactos;
         initComponents();
             setFrame();
@@ -109,11 +109,9 @@ public class GUIAgendaContactos extends javax.swing.JFrame {
         guiAddContact.setVisible(true);
     }//GEN-LAST:event_AñadirActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
-    
-
+    public void setModListaContacto(DefaultListModel<Contacto> modListaContacto) {
+        this.modListaContacto = modListaContacto;
+    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuItem Añadir;
     private javax.swing.JMenuItem Borrar;

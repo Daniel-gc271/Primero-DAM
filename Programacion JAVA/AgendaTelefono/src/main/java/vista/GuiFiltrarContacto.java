@@ -13,22 +13,20 @@ import modelo.Contacto;
  *
  * @author goncalda
  */
-public class GuiAddContacto extends javax.swing.JFrame {
+public class GuiFiltrarContacto extends javax.swing.JFrame {
 
     private HashMap<String, Contacto> listaContactos;
 
     /**
      * Creates new form AgregarContacto
      */
-    /*public GuiAddContacto(HashMap<String, Contacto> listaContactos) {
+    public GuiFiltrarContacto(HashMap<String, Contacto> listaContactos) {
         this.listaContactos = listaContactos;
         initComponents();
         setFrame();
-    }*/
-
+    }
     private void setFrame() {
         this.setLocationRelativeTo(null);
-        this.LstNumTel.setModel(new DefaultListModel<>());
         this.setTitle("");
     }
 
@@ -49,19 +47,11 @@ public class GuiAddContacto extends javax.swing.JFrame {
         LblApp2 = new javax.swing.JLabel();
         TxtApp2 = new javax.swing.JTextField();
         LblTel = new javax.swing.JLabel();
-        jScrollPane3 = new javax.swing.JScrollPane();
-        LstNumTel = new javax.swing.JList<>();
-        Desc = new javax.swing.JPanel();
-        ScrollDesc = new javax.swing.JScrollPane();
-        ContDesc = new javax.swing.JTextArea();
-        LblDesc = new javax.swing.JLabel();
-        CampoB = new javax.swing.JPanel();
+        TxtApp3 = new javax.swing.JTextField();
         LblMail = new javax.swing.JLabel();
         TxtMail = new javax.swing.JTextField();
-        LblBirthDay = new javax.swing.JLabel();
-        TxtBirthDay = new javax.swing.JTextField();
         ConfBtn = new javax.swing.JPanel();
-        ContactAcept = new javax.swing.JButton();
+        ContactSearch = new javax.swing.JButton();
         ContactCancel = new javax.swing.JButton();
         ContactClear = new javax.swing.JButton();
 
@@ -97,32 +87,38 @@ public class GuiAddContacto extends javax.swing.JFrame {
 
         LblTel.setText("Teléfonos");
 
-        jScrollPane3.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+        TxtApp3.setMaximumSize(new java.awt.Dimension(155, 25));
+        TxtApp3.setMinimumSize(new java.awt.Dimension(155, 25));
 
-        LstNumTel.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
-        LstNumTel.setMaximumSize(new java.awt.Dimension(155, 25));
-        LstNumTel.setMinimumSize(new java.awt.Dimension(155, 25));
-        jScrollPane3.setViewportView(LstNumTel);
+        LblMail.setText("Correo");
+
+        TxtMail.setMaximumSize(new java.awt.Dimension(155, 25));
+        TxtMail.setMinimumSize(new java.awt.Dimension(155, 25));
 
         javax.swing.GroupLayout CampoALayout = new javax.swing.GroupLayout(CampoA);
         CampoA.setLayout(CampoALayout);
         CampoALayout.setHorizontalGroup(
             CampoALayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(CampoALayout.createSequentialGroup()
-                .addGap(0, 0, 0)
+                .addContainerGap()
                 .addGroup(CampoALayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(LblTel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(LblApp2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(LblApp1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(LblName, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(CampoALayout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
-                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                    .addComponent(TxtApp1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(LblMail, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(LblTel, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(LblApp2, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(LblApp1, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(LblName, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(6, 6, 6)
+                .addGroup(CampoALayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(TxtApp2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(TxtName, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(0, 0, 0))
+                    .addComponent(TxtApp1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(TxtName, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(TxtApp3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(TxtMail, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(12, 12, 12))
         );
+
+        CampoALayout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {LblApp1, LblApp2, LblMail, LblName, LblTel});
+
         CampoALayout.setVerticalGroup(
             CampoALayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(CampoALayout.createSequentialGroup()
@@ -132,94 +128,34 @@ public class GuiAddContacto extends javax.swing.JFrame {
                     .addComponent(LblName))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(CampoALayout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
-                    .addComponent(TxtApp1, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(LblApp1))
+                    .addComponent(LblApp1)
+                    .addComponent(TxtApp1, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(CampoALayout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
                     .addComponent(LblApp2)
                     .addComponent(TxtApp2, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(CampoALayout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
-                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(TxtApp3, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(LblTel))
-                .addGap(0, 0, 0))
-        );
-
-        ContDesc.setColumns(20);
-        ContDesc.setRows(5);
-        ScrollDesc.setViewportView(ContDesc);
-
-        LblDesc.setText("Descripcion");
-
-        javax.swing.GroupLayout DescLayout = new javax.swing.GroupLayout(Desc);
-        Desc.setLayout(DescLayout);
-        DescLayout.setHorizontalGroup(
-            DescLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(DescLayout.createSequentialGroup()
-                .addGap(0, 0, 0)
-                .addGroup(DescLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(ScrollDesc)
-                    .addComponent(LblDesc, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(0, 0, 0))
-        );
-        DescLayout.setVerticalGroup(
-            DescLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(DescLayout.createSequentialGroup()
-                .addGap(0, 0, 0)
-                .addComponent(LblDesc, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(ScrollDesc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, 0))
+                .addGroup(CampoALayout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
+                    .addComponent(LblMail)
+                    .addComponent(TxtMail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap())
         );
 
-        LblMail.setText("Correo");
-
-        TxtMail.setMaximumSize(new java.awt.Dimension(155, 25));
-        TxtMail.setMinimumSize(new java.awt.Dimension(155, 25));
-
-        LblBirthDay.setText("Cumpleaños");
-
-        TxtBirthDay.setMaximumSize(new java.awt.Dimension(155, 25));
-        TxtBirthDay.setMinimumSize(new java.awt.Dimension(155, 25));
-
-        javax.swing.GroupLayout CampoBLayout = new javax.swing.GroupLayout(CampoB);
-        CampoB.setLayout(CampoBLayout);
-        CampoBLayout.setHorizontalGroup(
-            CampoBLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(CampoBLayout.createSequentialGroup()
-                .addGap(0, 0, 0)
-                .addGroup(CampoBLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(LblMail, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(LblBirthDay, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(CampoBLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(TxtMail, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(TxtBirthDay, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(0, 0, 0))
-        );
-        CampoBLayout.setVerticalGroup(
-            CampoBLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(CampoBLayout.createSequentialGroup()
-                .addGap(0, 0, 0)
-                .addGroup(CampoBLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
-                    .addComponent(TxtMail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(LblMail))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(CampoBLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
-                    .addComponent(TxtBirthDay, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(LblBirthDay))
-                .addGap(0, 0, 0))
-        );
+        CampoALayout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {LblApp1, LblApp2, LblMail, LblName, LblTel});
 
         ConfBtn.setLayout(new java.awt.GridLayout(1, 0));
 
-        ContactAcept.setText("Aceptar");
-        ContactAcept.addActionListener(new java.awt.event.ActionListener() {
+        ContactSearch.setText("Buscar");
+        ContactSearch.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                ContactAceptActionPerformed(evt);
+                ContactSearchActionPerformed(evt);
             }
         });
-        ConfBtn.add(ContactAcept);
+        ConfBtn.add(ContactSearch);
 
         ContactCancel.setText("Cancelar");
         ContactCancel.addActionListener(new java.awt.event.ActionListener() {
@@ -247,24 +183,18 @@ public class GuiAddContacto extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(ConfBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(CampoA, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(CampoB, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(Desc, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(ConfBtn, javax.swing.GroupLayout.DEFAULT_SIZE, 324, Short.MAX_VALUE)
+                    .addComponent(CampoA, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(CampoA, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(Desc, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(CampoB, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(CampoA, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(ConfBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -291,13 +221,13 @@ public class GuiAddContacto extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_TxtNameActionPerformed
 
-    private void ContactAceptActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ContactAceptActionPerformed
+    private void ContactSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ContactSearchActionPerformed
         // TODO add your handling code here:
         //recuperar la lista de contactos,
 
         
 
-    }//GEN-LAST:event_ContactAceptActionPerformed
+    }//GEN-LAST:event_ContactSearchActionPerformed
 
     private void ContactClearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ContactClearActionPerformed
         // TODO add your handling code here:
@@ -305,13 +235,10 @@ public class GuiAddContacto extends javax.swing.JFrame {
 
     }//GEN-LAST:event_ContactClearActionPerformed
     private void clearFields() {
-        this.ContDesc.setText("");
-        this.LstNumTel.removeAll();
         this.TxtMail.setText("");
         this.TxtName.setText("");
         this.TxtApp1.setText("");
         this.TxtApp2.setText("");
-        System.out.println("vista.GuiAddContacto.clearFields()");
     }
     /**
      * @param args the command line arguments
@@ -350,27 +277,19 @@ public class GuiAddContacto extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel CampoA;
-    private javax.swing.JPanel CampoB;
     private javax.swing.JPanel ConfBtn;
-    private javax.swing.JTextArea ContDesc;
-    private javax.swing.JButton ContactAcept;
     private javax.swing.JButton ContactCancel;
     private javax.swing.JButton ContactClear;
-    private javax.swing.JPanel Desc;
+    private javax.swing.JButton ContactSearch;
     private javax.swing.JLabel LblApp1;
     private javax.swing.JLabel LblApp2;
-    private javax.swing.JLabel LblBirthDay;
-    private javax.swing.JLabel LblDesc;
     private javax.swing.JLabel LblMail;
     private javax.swing.JLabel LblName;
     private javax.swing.JLabel LblTel;
-    private javax.swing.JList<String> LstNumTel;
-    private javax.swing.JScrollPane ScrollDesc;
     private javax.swing.JTextField TxtApp1;
     private javax.swing.JTextField TxtApp2;
-    private javax.swing.JTextField TxtBirthDay;
+    private javax.swing.JTextField TxtApp3;
     private javax.swing.JTextField TxtMail;
     private javax.swing.JTextField TxtName;
-    private javax.swing.JScrollPane jScrollPane3;
     // End of variables declaration//GEN-END:variables
 }

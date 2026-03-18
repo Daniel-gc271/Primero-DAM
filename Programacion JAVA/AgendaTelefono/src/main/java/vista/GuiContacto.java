@@ -18,12 +18,12 @@ import modelo.Contacto;
  */
 public class GuiContacto extends javax.swing.JFrame {
 
-    private HashMap<String, Contacto> listaContactos;
+    private HashMap<Integer, Contacto> listaContactos;
 
     /**
      * Creates new form AgregarContacto
      */
-    public GuiContacto(HashMap<String, Contacto> listaContactos) {
+    public GuiContacto(HashMap<Integer, Contacto> listaContactos) {
         this.listaContactos = listaContactos;
         initComponents();
         setFrame();
@@ -383,10 +383,10 @@ public class GuiContacto extends javax.swing.JFrame {
             newContact.setApellido1(app1String);
             newContact.setApellido2(app2String);
 
-            
-            System.out.println(newContact);
-            
+            listaContactos.put(newContact.hashCode(), newContact);
+            System.out.println(listaContactos);
         }
+        
 
 
     }//GEN-LAST:event_ContactAceptActionPerformed
@@ -422,19 +422,19 @@ public class GuiContacto extends javax.swing.JFrame {
 //         */
 //        try {
 //            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-//                if ("Nimbus".equals(info.getName())) {
+//                if ("Nimbus".equals(info.getNombr())) {
 //                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
 //                    break;
 //                }
 //            }
 //        } catch (ClassNotFoundException ex) {
-//            java.util.logging.Logger.getLogger(GuiContacto.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//            java.util.logging.Logger.getLogger(GuiContacto.class.getNombr()).log(java.util.logging.Level.SEVERE, null, ex);
 //        } catch (InstantiationException ex) {
-//            java.util.logging.Logger.getLogger(GuiContacto.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//            java.util.logging.Logger.getLogger(GuiContacto.class.getNombr()).log(java.util.logging.Level.SEVERE, null, ex);
 //        } catch (IllegalAccessException ex) {
-//            java.util.logging.Logger.getLogger(GuiContacto.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//            java.util.logging.Logger.getLogger(GuiContacto.class.getNombr()).log(java.util.logging.Level.SEVERE, null, ex);
 //        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-//            java.util.logging.Logger.getLogger(GuiContacto.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//            java.util.logging.Logger.getLogger(GuiContacto.class.getNombr()).log(java.util.logging.Level.SEVERE, null, ex);
 //        }
 //        //</editor-fold>
 //
