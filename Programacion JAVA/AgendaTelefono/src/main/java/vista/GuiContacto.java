@@ -4,11 +4,12 @@
  */
 package vista;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.ResolverStyle;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.LinkedHashSet;
-import java.util.StringTokenizer;
 import javax.swing.JOptionPane;
 import modelo.Contacto;
 
@@ -305,7 +306,6 @@ public class GuiContacto extends javax.swing.JFrame {
         // TODO add your handling code here:
         //recuperar la lista de contactos
         String nombreString, app1String, app2String, cumpleAñosString, emailString, numTelfString, descString;
-        numTelfString = this.LstNumsTelf.getText();
         descString = this.ContDesc.getText();
         nombreString = this.TxtName.getText().trim();
         app1String = this.TxtApp1.getText().trim();
@@ -313,7 +313,7 @@ public class GuiContacto extends javax.swing.JFrame {
         cumpleAñosString = this.TxtBirthDay.getText().trim();
         emailString = this.TxtMail.getText().trim();
         numTelfString = this.LstNumsTelf.getText();
-
+        
         if (nombreString == null || nombreString.isBlank() || nombreString.length() == 0) {
             JOptionPane.showMessageDialog(null, "El nombre no puede estar vacio", "ERROR", 1);
             this.TxtName.requestFocus();
@@ -366,7 +366,7 @@ public class GuiContacto extends javax.swing.JFrame {
                     + "El contacto no se ha guardado",
                     "ERROR", JOptionPane.INFORMATION_MESSAGE);
             LstNumsTelf.requestFocus();
-
+            return;
         }
         Contacto newContact = new Contacto(nombreString, telefonos);
         newContact.setNombre(nombreString);
@@ -380,6 +380,18 @@ public class GuiContacto extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Formato de correo no válido", "ERROR", 1);
             return;
         } finally {
+            try {
+
+                if (!cumpleAñosString.isBlank()) {
+            DateTimeFormatter f = DateTimeFormatter.ofPattern("dd/MM/uuuu")
+                    .withResolverStyle(ResolverStyle.STRICT);
+            LocalDate fecha = LocalDate.parse(cumpleAñosString, f);
+            newContact.setFechacumpleaños(fecha); }
+        } catch (Exception ex) {
+            // aquí te “salta” si la fecha es inválida
+            JOptionPane.showMessageDialog(this, "Fecha de cumpleaños inválida: " + cumpleAñosString);
+            return;
+        }
             newContact.setDescripcion(descString);
             newContact.setApellido1(app1String);
             newContact.setApellido2(app2String);
@@ -387,7 +399,7 @@ public class GuiContacto extends javax.swing.JFrame {
         }
         if (!listaContactos.containsValue(newContact)) {
             listaContactos.put(newContact.hashCode(), newContact);
-        }
+        } else {System.out.println("Contactor repetido");}
         if (listaContactos.isEmpty()) {
             System.out.println("Lista de contactos vacia");
         } else {

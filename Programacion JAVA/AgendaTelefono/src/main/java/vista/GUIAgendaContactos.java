@@ -18,8 +18,8 @@ public class GUIAgendaContactos extends javax.swing.JFrame {
 
     private DefaultListModel<Contacto> modListaContacto;
     private HashMap<Integer, Contacto> listaContactos;
-    private GuiContacto guiAddContact;
-    private GuiFiltrarContacto guiFilterContact;
+    private final GuiContacto guiAddContact;
+    private final GuiFiltrarContacto guiFilterContact;
 
     /**
      * Creates new form GUIAgendaContactos
@@ -129,8 +129,8 @@ public class GUIAgendaContactos extends javax.swing.JFrame {
 
     private void BuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BuscarActionPerformed
         // TODO add your handling code here:
-        GuiFiltrarContacto guiFiltrarContacto = new GuiFiltrarContacto(listaContactos);
-        guiFiltrarContacto.setVisible(true);
+        this.guiFilterContact.clearFields();
+        guiFilterContact.setVisible(true);
     }//GEN-LAST:event_BuscarActionPerformed
 
     private void VaciarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_VaciarActionPerformed

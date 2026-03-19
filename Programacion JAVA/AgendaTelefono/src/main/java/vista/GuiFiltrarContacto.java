@@ -7,6 +7,7 @@ package vista;
 import java.util.ArrayList;
 import java.util.HashMap;
 import javax.swing.DefaultListModel;
+import javax.swing.JOptionPane;
 import modelo.Contacto;
 
 /**
@@ -14,8 +15,9 @@ import modelo.Contacto;
  * @author goncalda
  */
 public class GuiFiltrarContacto extends javax.swing.JFrame {
+
     /**
-     * 
+     *
      */
     private HashMap<Integer, Contacto> listaContactos;
 
@@ -27,6 +29,7 @@ public class GuiFiltrarContacto extends javax.swing.JFrame {
         initComponents();
         setFrame();
     }
+
     private void setFrame() {
         this.setLocationRelativeTo(null);
         this.setTitle("Filtrar contacto");
@@ -87,7 +90,7 @@ public class GuiFiltrarContacto extends javax.swing.JFrame {
         TxtApp2.setMaximumSize(new java.awt.Dimension(155, 25));
         TxtApp2.setMinimumSize(new java.awt.Dimension(155, 25));
 
-        LblTel.setText("eléfonos");
+        LblTel.setText("Teléfonos");
 
         TxtNumTelf.setMaximumSize(new java.awt.Dimension(155, 25));
         TxtNumTelf.setMinimumSize(new java.awt.Dimension(155, 25));
@@ -226,10 +229,27 @@ public class GuiFiltrarContacto extends javax.swing.JFrame {
     private void ContactSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ContactSearchActionPerformed
         // TODO add your handling code here:
         //recuperar la lista de contactos,
-        String nombreBuscado = this.TxtName.getText();
-        System.out.println("\""+nombreBuscado+ "\"");
+        String telBuscado = this.TxtNumTelf.getText();
 
-        
+        String nombreBuscado = this.TxtName.getText();
+        String app1Buscado = this.TxtApp1.getText();
+        String app2Buscado = this.TxtApp2.getText();
+        if (nombreBuscado.isBlank()) {
+            JOptionPane.showMessageDialog(null, "El nombre no puede estar vacio", "ERROR", 1);
+            this.TxtName.requestFocus();
+            return;
+        }
+        System.out.println("\"" + nombreBuscado + "\"");
+        System.out.println("\"" + app1Buscado + "\"");
+        System.out.println("\"" + app2Buscado + "\"");
+        ArrayList<Contacto> coincidenciasBusqueda;
+        coincidenciasBusqueda = Contacto.buscarContacto(listaContactos, nombreBuscado);
+        if (coincidenciasBusqueda.isEmpty()) {
+            System.out.println("No hay coincidencias para los parametros");
+        } else {
+            System.out.println(coincidenciasBusqueda);
+        }
+
 
     }//GEN-LAST:event_ContactSearchActionPerformed
 
@@ -238,7 +258,7 @@ public class GuiFiltrarContacto extends javax.swing.JFrame {
         clearFields();
 
     }//GEN-LAST:event_ContactClearActionPerformed
-    private void clearFields() {
+    public void clearFields() {
         this.TxtMail.setText("");
         this.TxtName.setText("");
         this.TxtApp1.setText("");

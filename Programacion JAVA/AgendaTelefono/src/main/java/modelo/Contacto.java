@@ -3,7 +3,9 @@
  */
 package modelo;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -22,7 +24,7 @@ public class Contacto {
 
     private final Comparator<Contacto> compContacto;
     private final LocalDateTime fechaAñadido;
-    private LocalDateTime fechacumpleaños;
+    private LocalDate fechacumpleaños;
     private String nombre, apellido1, apellido2, correo, descripcion;
     HashSet<String> lstNumTelf;
 //    private HashMap<String, String> socials = new HashMap<>();
@@ -86,14 +88,15 @@ public class Contacto {
     public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append("\nNombre: ").append(nombre).append('\n');
-        if (apellido1 != null || !apellido1.isEmpty() || !apellido1.isBlank()) {
+        if (apellido1 != null && !apellido1.isEmpty() && !apellido1.isBlank()) {
             sb.append("Primer apellido: ").append(apellido1).append('\n');
         }
-        if (apellido2 != null || !apellido2.isEmpty() || !apellido2.isBlank()) {
+        if (apellido2 != null && !apellido2.isEmpty() && !apellido2.isBlank()) {
             sb.append("Segundo apellido: ").append(apellido2).append('\n');
         }
         if (fechacumpleaños != null) {
-            sb.append("Cumplea\u00f1os: ").append(fechacumpleaños);
+            DateTimeFormatter f = DateTimeFormatter.ofPattern("dd/MM/uuuu");
+            sb.append("Cumplea\u00f1os: ").append(fechacumpleaños.format(f));
         }
 
         sb.append("Numeros de contacto:\n");
@@ -115,11 +118,11 @@ public class Contacto {
         return sb.toString();
     }
 
-    public LocalDateTime getFechacumpleaños() {
+    public LocalDate getFechacumpleaños() {
         return fechacumpleaños;
     }
 
-    public void setFechacumpleaños(LocalDateTime fechacumpleaños) {
+    public void setFechacumpleaños(LocalDate fechacumpleaños) {
         this.fechacumpleaños = fechacumpleaños;
     }
 
@@ -232,7 +235,7 @@ public class Contacto {
      * @param nombre
      * @return
      */
-    public ArrayList<Contacto> buscarContacto(HashMap<?, Contacto> listContactos, String nombre) {
+    public static ArrayList<Contacto> buscarContacto(HashMap<?, Contacto> listContactos, String nombre) {
         ArrayList<Contacto> coincidencias = new ArrayList<>();
         for (Contacto contacto : listContactos.values()) {
             if (contacto.getNombre().toUpperCase().contains(nombre.toUpperCase())) {
@@ -242,7 +245,7 @@ public class Contacto {
         return coincidencias;
     }
 
-    public ArrayList<Contacto> buscarMailContacto(HashMap<?, Contacto> listContactos, String mail) {
+    public static ArrayList<Contacto> buscarMailContacto(HashMap<?, Contacto> listContactos, String mail) {
         ArrayList<Contacto> coincidencias = new ArrayList<>();
         for (Contacto contacto : listContactos.values()) {
             if (contacto.getCorreo().toUpperCase().contains(mail.toUpperCase())) {
@@ -252,7 +255,7 @@ public class Contacto {
         return coincidencias;
     }
 
-    public ArrayList<Contacto> buscarContacto(HashMap<?, Contacto> listContactos, String nombre, String apellido1) {
+    public static ArrayList<Contacto> buscarContacto(HashMap<?, Contacto> listContactos, String nombre, String apellido1) {
         ArrayList<Contacto> coincidencias = new ArrayList<>();
         for (Contacto contacto : listContactos.values()) {
             if (contacto.getNombre().toUpperCase().contains(nombre.toUpperCase()) || contacto.getApellido1().toUpperCase().contains(apellido1.toUpperCase())) {
@@ -262,7 +265,7 @@ public class Contacto {
         return coincidencias;
     }
 
-    public ArrayList<Contacto> buscarContacto(HashMap<?, Contacto> listContactos, String nombre, String apellido1, String apellido2) {
+    public static ArrayList<Contacto> buscarContacto(HashMap<?, Contacto> listContactos, String nombre, String apellido1, String apellido2) {
         ArrayList<Contacto> coincidencias = new ArrayList<>();
         for (Contacto contacto : listContactos.values()) {
             if (contacto.getNombre().toUpperCase().contains(nombre.toUpperCase()) || contacto.getApellido1().toUpperCase().contains(apellido1.toUpperCase()) || contacto.getApellido2().toUpperCase().contains(apellido2.toUpperCase())) {
