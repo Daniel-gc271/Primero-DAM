@@ -319,7 +319,11 @@ public class GuiContacto extends javax.swing.JFrame {
             this.TxtName.requestFocus();
             return;
         }
-
+        if (app1String.isBlank()&&!app2String.isBlank()) {
+            JOptionPane.showMessageDialog(null, "Debes introducir el primer apellido antes", "ERROR", 1);
+            this.TxtApp1.requestFocus();
+            return;
+        }
         ArrayList<String> telefonosInválidos = new ArrayList<>();
         LinkedHashSet<String> telefonos = new LinkedHashSet<>();
         if (!numTelfString.isEmpty()) {
@@ -399,7 +403,7 @@ public class GuiContacto extends javax.swing.JFrame {
         }
         if (!listaContactos.containsValue(newContact)) {
             listaContactos.put(newContact.hashCode(), newContact);
-        } else {System.out.println("Contactor repetido");}
+        } else {System.out.println("DEBUG Contacto repetido");}
         if (listaContactos.isEmpty()) {
             System.out.println("Lista de contactos vacia");
         } else {

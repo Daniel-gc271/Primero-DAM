@@ -24,7 +24,6 @@ public class Aplicacion {
         HashMap<Integer, Contacto> listaContactos;
         listaContactos = new HashMap<>() 
         {
-            
             @Override
             /**
              * Override al metodo to string de la lista de contactos

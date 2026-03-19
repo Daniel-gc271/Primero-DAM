@@ -13,7 +13,6 @@ import java.util.HashMap;
 
 import java.util.HashSet;
 import java.util.Objects;
-import java.util.Set;
 import javax.swing.JOptionPane;
 
 /**
@@ -164,11 +163,13 @@ public class Contacto {
     public void setDescripcion(String descripcion) {
         this.descripcion = descripcion;
     }
-
-    public String contactoShort() {
+    
+    public String contactoToShortString() {
         return nombre + apellido1;
     }
-
+    public HashSet<String> getNumTel() {
+        return this.lstNumTelf;
+    }
     @Override
     public int hashCode() {
         int hash = 3;
@@ -209,13 +210,14 @@ public class Contacto {
          *
          *
          */
+        //Uso to array en la lista de telefonos porque 
         int hashThis = 3;
         hashThis = 59 * hashThis + Objects.hashCode(this.fechacumpleaños);
         hashThis = 59 * hashThis + Objects.hashCode(this.nombre);
         hashThis = 59 * hashThis + Objects.hashCode(this.apellido1);
         hashThis = 59 * hashThis + Objects.hashCode(this.apellido2);
         hashThis = 59 * hashThis + Objects.hashCode(this.correo);
-        hashThis = 59 * hashThis + Objects.hashCode(this.lstNumTelf);
+        hashThis = 59 * hashThis + Objects.hashCode(this.lstNumTelf.toArray());
 
         int hashOther = 3;
         hashOther = 59 * hashOther + Objects.hashCode(other.fechacumpleaños);
@@ -223,7 +225,7 @@ public class Contacto {
         hashOther = 59 * hashOther + Objects.hashCode(other.apellido1);
         hashOther = 59 * hashOther + Objects.hashCode(other.apellido2);
         hashOther = 59 * hashOther + Objects.hashCode(other.correo);
-        hashOther = 59 * hashOther + Objects.hashCode(other.lstNumTelf);
+        hashOther = 59 * hashOther + Objects.hashCode(other.lstNumTelf.toArray());
 
         return (hashThis == hashOther);
 
@@ -238,7 +240,7 @@ public class Contacto {
     public static ArrayList<Contacto> buscarContacto(HashMap<?, Contacto> listContactos, String nombre) {
         ArrayList<Contacto> coincidencias = new ArrayList<>();
         for (Contacto contacto : listContactos.values()) {
-            if (contacto.getNombre().toUpperCase().contains(nombre.toUpperCase())) {
+            if (contacto.getNombre().trim().toUpperCase().startsWith(nombre.trim().toUpperCase())) {
                 coincidencias.add(contacto);
             }
         }
@@ -248,8 +250,19 @@ public class Contacto {
     public static ArrayList<Contacto> buscarMailContacto(HashMap<?, Contacto> listContactos, String mail) {
         ArrayList<Contacto> coincidencias = new ArrayList<>();
         for (Contacto contacto : listContactos.values()) {
-            if (contacto.getCorreo().toUpperCase().contains(mail.toUpperCase())) {
+            if (contacto.getCorreo().trim().toUpperCase().startsWith(mail.trim().toUpperCase())) {
                 coincidencias.add(contacto);
+            }
+        }
+        return coincidencias;
+    }
+    public static ArrayList<Contacto> buscarTelfContacto(HashMap<?, Contacto> listContactos, String telf) {
+        ArrayList<Contacto> coincidencias = new ArrayList<>();
+        for (Contacto contacto : listContactos.values()) {
+            for (String numTel : contacto.getNumTel()) {
+                if (numTel.startsWith(telf)) {coincidencias.add(contacto);
+                break;
+                }
             }
         }
         return coincidencias;
@@ -258,7 +271,7 @@ public class Contacto {
     public static ArrayList<Contacto> buscarContacto(HashMap<?, Contacto> listContactos, String nombre, String apellido1) {
         ArrayList<Contacto> coincidencias = new ArrayList<>();
         for (Contacto contacto : listContactos.values()) {
-            if (contacto.getNombre().toUpperCase().contains(nombre.toUpperCase()) || contacto.getApellido1().toUpperCase().contains(apellido1.toUpperCase())) {
+            if (contacto.getNombre().trim().toUpperCase().startsWith(nombre.trim().toUpperCase()) || contacto.getApellido1().trim().toUpperCase().startsWith(apellido1.trim().toUpperCase())) {
                 coincidencias.add(contacto);
             }
         }
@@ -268,7 +281,7 @@ public class Contacto {
     public static ArrayList<Contacto> buscarContacto(HashMap<?, Contacto> listContactos, String nombre, String apellido1, String apellido2) {
         ArrayList<Contacto> coincidencias = new ArrayList<>();
         for (Contacto contacto : listContactos.values()) {
-            if (contacto.getNombre().toUpperCase().contains(nombre.toUpperCase()) || contacto.getApellido1().toUpperCase().contains(apellido1.toUpperCase()) || contacto.getApellido2().toUpperCase().contains(apellido2.toUpperCase())) {
+            if (contacto.getNombre().trim().toUpperCase().startsWith(nombre.trim().toUpperCase()) || contacto.getApellido1().trim().toUpperCase().startsWith(apellido1.trim().toUpperCase()) || contacto.getApellido2().trim().toUpperCase().startsWith(apellido2.trim().toUpperCase())) {
                 coincidencias.add(contacto);
             }
         }

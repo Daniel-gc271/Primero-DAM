@@ -4,9 +4,8 @@
  */
 package vista;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import javax.swing.DefaultListModel;
+import java.util.HashSet;
 import javax.swing.JOptionPane;
 import modelo.Contacto;
 
@@ -230,10 +229,10 @@ public class GuiFiltrarContacto extends javax.swing.JFrame {
         // TODO add your handling code here:
         //recuperar la lista de contactos,
         String telBuscado = this.TxtNumTelf.getText();
-
         String nombreBuscado = this.TxtName.getText();
         String app1Buscado = this.TxtApp1.getText();
         String app2Buscado = this.TxtApp2.getText();
+        String mailBuscado = this.TxtMail.getText();
         if (nombreBuscado.isBlank()) {
             JOptionPane.showMessageDialog(null, "El nombre no puede estar vacio", "ERROR", 1);
             this.TxtName.requestFocus();
@@ -242,8 +241,20 @@ public class GuiFiltrarContacto extends javax.swing.JFrame {
         System.out.println("\"" + nombreBuscado + "\"");
         System.out.println("\"" + app1Buscado + "\"");
         System.out.println("\"" + app2Buscado + "\"");
-        ArrayList<Contacto> coincidenciasBusqueda;
-        coincidenciasBusqueda = Contacto.buscarContacto(listaContactos, nombreBuscado);
+        HashSet<Contacto> coincidenciasBusqueda = new HashSet<>(
+                Contacto.buscarContacto(listaContactos, nombreBuscado)
+        );
+        if (!mailBuscado.isBlank()) {
+            coincidenciasBusqueda.addAll(Contacto.buscarMailContacto(listaContactos, mailBuscado));
+        }
+        if (!telBuscado.isBlank()) {
+            coincidenciasBusqueda.addAll(Contacto.buscarTelfContacto(listaContactos, telBuscado));
+        }
+        if (!app1Buscado.isBlank() && app2Buscado.isBlank()) {
+            coincidenciasBusqueda.addAll(Contacto.buscarContacto(listaContactos, mailBuscado, app1Buscado));
+        } else if (!app1Buscado.isBlank() && !app2Buscado.isBlank()) {
+            coincidenciasBusqueda.addAll(Contacto.buscarContacto(listaContactos, mailBuscado, app1Buscado, app2Buscado));
+        }
         if (coincidenciasBusqueda.isEmpty()) {
             System.out.println("No hay coincidencias para los parametros");
         } else {
