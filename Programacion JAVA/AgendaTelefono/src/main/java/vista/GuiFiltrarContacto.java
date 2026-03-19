@@ -4,9 +4,8 @@
  */
 package vista;
 
+import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.HashSet;
-import javax.swing.JOptionPane;
 import modelo.Contacto;
 
 /**
@@ -228,37 +227,17 @@ public class GuiFiltrarContacto extends javax.swing.JFrame {
     private void ContactSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ContactSearchActionPerformed
         // TODO add your handling code here:
         //recuperar la lista de contactos,
-        String telBuscado = this.TxtNumTelf.getText();
         String nombreBuscado = this.TxtName.getText();
         String app1Buscado = this.TxtApp1.getText();
         String app2Buscado = this.TxtApp2.getText();
         String mailBuscado = this.TxtMail.getText();
-        if (nombreBuscado.isBlank()) {
-            JOptionPane.showMessageDialog(null, "El nombre no puede estar vacio", "ERROR", 1);
-            this.TxtName.requestFocus();
-            return;
-        }
-        System.out.println("\"" + nombreBuscado + "\"");
-        System.out.println("\"" + app1Buscado + "\"");
-        System.out.println("\"" + app2Buscado + "\"");
-        HashSet<Contacto> coincidenciasBusqueda = new HashSet<>(
-                Contacto.buscarContacto(listaContactos, nombreBuscado)
-        );
-        if (!mailBuscado.isBlank()) {
-            coincidenciasBusqueda.addAll(Contacto.buscarMailContacto(listaContactos, mailBuscado));
-        }
-        if (!telBuscado.isBlank()) {
-            coincidenciasBusqueda.addAll(Contacto.buscarTelfContacto(listaContactos, telBuscado));
-        }
-        if (!app1Buscado.isBlank() && app2Buscado.isBlank()) {
-            coincidenciasBusqueda.addAll(Contacto.buscarContacto(listaContactos, mailBuscado, app1Buscado));
-        } else if (!app1Buscado.isBlank() && !app2Buscado.isBlank()) {
-            coincidenciasBusqueda.addAll(Contacto.buscarContacto(listaContactos, mailBuscado, app1Buscado, app2Buscado));
-        }
-        if (coincidenciasBusqueda.isEmpty()) {
-            System.out.println("No hay coincidencias para los parametros");
-        } else {
-            System.out.println(coincidenciasBusqueda);
+        String telBuscado = this.TxtNumTelf.getText();
+        ArrayList<Contacto> resultados = null;
+        resultados =new ArrayList<>();
+        resultados = Contacto.filtrarAvanzado(listaContactos, nombreBuscado, app1Buscado, app2Buscado, mailBuscado, telBuscado);
+        System.out.println("Debug resultados");
+        for (Contacto resultado : resultados) {
+            System.out.println(resultado.toString());
         }
 
 

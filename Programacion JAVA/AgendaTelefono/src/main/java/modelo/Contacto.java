@@ -25,14 +25,11 @@ public class Contacto {
     private final LocalDateTime fechaAñadido;
     private LocalDate fechacumpleaños;
     private String nombre, apellido1, apellido2, correo, descripcion;
-    HashSet<String> lstNumTelf;
+    private HashSet<String> lstNumTelf;
 //    private HashMap<String, String> socials = new HashMap<>();
 
     public Contacto(String nombre, HashSet<String> numTelf) {
         this.fechaAñadido = LocalDateTime.now();
-        if (numTelf.isEmpty()) {
-            JOptionPane.showMessageDialog(null, "El telefono no puede estar vacio", "ERROR", 1);
-        }
         this.lstNumTelf = numTelf;
         this.nombre = nombre;
 
@@ -99,9 +96,7 @@ public class Contacto {
         }
 
         sb.append("Numeros de contacto:\n");
-        for (String string : lstNumTelf) {
-            sb.append(string).append(" ");
-        }
+        sb.append(String.join(",",lstNumTelf )).append(" ");
 
         if (correo != null) {
             if (!correo.isBlank()) {
@@ -146,7 +141,7 @@ public class Contacto {
     }
 
     public void setCorreo(String correo) throws Exception {
-        String regexEmail = "^\\w+@\\w+.\\w+$";
+        String regexEmail = "^\\w+@\\w+\\.\\w+$";
 
         if (correo.matches(regexEmail)) {
             this.correo = correo.toLowerCase();
@@ -230,61 +225,57 @@ public class Contacto {
         return (hashThis == hashOther);
 
     }
+    
+    
+    public static ArrayList<Contacto> filtrarAvanzado(HashMap<?, Contacto> listaContactos, String nombreBuscado, String app1Buscado, String app2Buscado, String mailBuscado, String telfBuscado) {
+    ArrayList<Contacto> resultados = new ArrayList<>();
+    
+    // Normalizamos las búsquedas a minúsculas y sin espacios
+    String nombre = nombreBuscado.trim().toLowerCase();
+    String apellido1 = app1Buscado.trim().toLowerCase();
+    String apellido2 = app2Buscado.trim().toLowerCase();
+    String eMail = mailBuscado.trim().toLowerCase();
+    String telefono = telfBuscado.trim();
 
-    /**
-     *
-     * @param listContactos la lista de la que buscar
-     * @param nombre
-     * @return
-     */
-    public static ArrayList<Contacto> buscarContacto(HashMap<?, Contacto> listContactos, String nombre) {
-        ArrayList<Contacto> coincidencias = new ArrayList<>();
-        for (Contacto contacto : listContactos.values()) {
-            if (contacto.getNombre().trim().toUpperCase().startsWith(nombre.trim().toUpperCase())) {
-                coincidencias.add(contacto);
-            }
-        }
-        return coincidencias;
-    }
+    for (Contacto c : listaContactos.values()) {
+        boolean coincide = true;
 
-    public static ArrayList<Contacto> buscarMailContacto(HashMap<?, Contacto> listContactos, String mail) {
-        ArrayList<Contacto> coincidencias = new ArrayList<>();
-        for (Contacto contacto : listContactos.values()) {
-            if (contacto.getCorreo().trim().toUpperCase().startsWith(mail.trim().toUpperCase())) {
-                coincidencias.add(contacto);
-            }
+        // Filtro de Nombre
+        if (!nombre.isEmpty() && (c.getNombre() == null || !c.getNombre().toLowerCase().contains(nombre))) {
+            coincide = false;
         }
-        return coincidencias;
-    }
-    public static ArrayList<Contacto> buscarTelfContacto(HashMap<?, Contacto> listContactos, String telf) {
-        ArrayList<Contacto> coincidencias = new ArrayList<>();
-        for (Contacto contacto : listContactos.values()) {
-            for (String numTel : contacto.getNumTel()) {
-                if (numTel.startsWith(telf)) {coincidencias.add(contacto);
-                break;
+        // Filtro de Apellido 1
+        if (coincide && !apellido1.isEmpty() && (c.getApellido1() == null || !c.getApellido1().toLowerCase().contains(apellido1))) {
+            coincide = false;
+        }
+        // Filtro de Apellido 2
+        if (coincide && !apellido2.isEmpty() && (c.getApellido2() == null || !c.getApellido2().toLowerCase().contains(apellido2))) {
+            coincide = false;
+        }
+        // Filtro de Email
+        if (coincide && !eMail.isEmpty() && (c.getCorreo() == null || !c.getCorreo().toLowerCase().contains(eMail))) {
+            coincide = false;
+        }
+        // Filtro de Teléfono
+        if (coincide && !telefono.isEmpty()) {
+            boolean telEncontrado = false;
+            for (String t : c.getNumTel()) {
+                if (t.contains(telefono)) {
+                    telEncontrado = true;
+                    break;
                 }
             }
+            if (!telEncontrado) coincide = false;
         }
-        return coincidencias;
-    }
 
-    public static ArrayList<Contacto> buscarContacto(HashMap<?, Contacto> listContactos, String nombre, String apellido1) {
-        ArrayList<Contacto> coincidencias = new ArrayList<>();
-        for (Contacto contacto : listContactos.values()) {
-            if (contacto.getNombre().trim().toUpperCase().startsWith(nombre.trim().toUpperCase()) || contacto.getApellido1().trim().toUpperCase().startsWith(apellido1.trim().toUpperCase())) {
-                coincidencias.add(contacto);
-            }
+        // Solo si ha pasado todos los filtros activos se añade
+        if (coincide) {
+            resultados.add(c);
         }
-        return coincidencias;
     }
+    return resultados;
+}
 
-    public static ArrayList<Contacto> buscarContacto(HashMap<?, Contacto> listContactos, String nombre, String apellido1, String apellido2) {
-        ArrayList<Contacto> coincidencias = new ArrayList<>();
-        for (Contacto contacto : listContactos.values()) {
-            if (contacto.getNombre().trim().toUpperCase().startsWith(nombre.trim().toUpperCase()) || contacto.getApellido1().trim().toUpperCase().startsWith(apellido1.trim().toUpperCase()) || contacto.getApellido2().trim().toUpperCase().startsWith(apellido2.trim().toUpperCase())) {
-                coincidencias.add(contacto);
-            }
-        }
-        return coincidencias;
-    }
+
+
 }
