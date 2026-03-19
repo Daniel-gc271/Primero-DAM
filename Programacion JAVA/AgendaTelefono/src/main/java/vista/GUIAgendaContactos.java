@@ -7,6 +7,7 @@ package vista;
 import java.util.ArrayList;
 import java.util.HashMap;
 import javax.swing.DefaultListModel;
+import javax.swing.JOptionPane;
 import modelo.Contacto;
 
 /**
@@ -105,6 +106,11 @@ public class GUIAgendaContactos extends javax.swing.JFrame {
         OptAgenda.add(Listar);
 
         Vaciar.setText("Vaciar");
+        Vaciar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                VaciarActionPerformed(evt);
+            }
+        });
         OptAgenda.add(Vaciar);
 
         jMenuBar1.add(OptAgenda);
@@ -117,6 +123,7 @@ public class GUIAgendaContactos extends javax.swing.JFrame {
     private void AñadirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AñadirActionPerformed
         // TODO add your handling code here:
         guiAddContact.setTitle("Nuevo contacto");
+        guiAddContact.clearFields();
         guiAddContact.setVisible(true);
     }//GEN-LAST:event_AñadirActionPerformed
 
@@ -125,6 +132,13 @@ public class GUIAgendaContactos extends javax.swing.JFrame {
         GuiFiltrarContacto guiFiltrarContacto = new GuiFiltrarContacto(listaContactos);
         guiFiltrarContacto.setVisible(true);
     }//GEN-LAST:event_BuscarActionPerformed
+
+    private void VaciarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_VaciarActionPerformed
+        // TODO add your handling code here:
+       if ( JOptionPane.showConfirmDialog(this, "Vaciar lista de contactos", "Confirmacion", JOptionPane.YES_NO_OPTION)==1) {
+           System.out.println("No");
+       } else {this.listaContactos.clear();}
+    }//GEN-LAST:event_VaciarActionPerformed
 
     public void setModListaContacto(DefaultListModel<Contacto> modListaContacto) {
         this.modListaContacto = modListaContacto;

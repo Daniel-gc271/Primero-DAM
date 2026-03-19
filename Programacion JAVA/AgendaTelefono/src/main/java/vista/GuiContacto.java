@@ -284,7 +284,6 @@ public class GuiContacto extends javax.swing.JFrame {
 
     private void ContactCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ContactCancelActionPerformed
         // TODO add your handling code here:
-        System.out.println("vista.GuiContacto.ContactCancelActionPerformed()");
         this.dispose();
     }//GEN-LAST:event_ContactCancelActionPerformed
 
@@ -304,8 +303,7 @@ public class GuiContacto extends javax.swing.JFrame {
 
     private void ContactAceptActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ContactAceptActionPerformed
         // TODO add your handling code here:
-        //recuperar la lista de contactos, 
-        System.out.println("vista.GuiContacto.ContactAceptActionPerformed()");
+        //recuperar la lista de contactos
         String nombreString, app1String, app2String, cumpleAñosString, emailString, numTelfString, descString;
         numTelfString = this.LstNumsTelf.getText();
         descString = this.ContDesc.getText();
@@ -321,7 +319,7 @@ public class GuiContacto extends javax.swing.JFrame {
             this.TxtName.requestFocus();
             return;
         }
-        
+
         ArrayList<String> telefonosInválidos = new ArrayList<>();
         LinkedHashSet<String> telefonos = new LinkedHashSet<>();
         if (!numTelfString.isEmpty()) {
@@ -332,14 +330,16 @@ public class GuiContacto extends javax.swing.JFrame {
                 *(En este caso cada token es un numero de telefono y el delimitador son ',' [comas])
                 * Si un telefono no coincide se le hace saber al usuario el telefono erroneo
                 *
-                */
+                 */
                 String tel = tok.trim();
                 if (!tel.isEmpty()) {
                     String telNormalizado = tel.replaceAll("\\D", ""); // Normalizar para conservar solo los digitos (quitar basura)
                     if (!telNormalizado.matches("\\d{9}")) {
                         //Notifica telf erroneo
                         telefonosInválidos.add(telNormalizado);
-                    } else {telefonos.add(telNormalizado);}
+                    } else {
+                        telefonos.add(telNormalizado);
+                    }
 
                     telefonos.add(telNormalizado); // guarda la versión normalizada
                 }
@@ -350,8 +350,8 @@ public class GuiContacto extends javax.swing.JFrame {
             LstNumsTelf.requestFocus();
             return;
         }
-        if (telefonos.isEmpty() ){
-            JOptionPane.showMessageDialog(this, 
+        if (telefonos.isEmpty()) {
+            JOptionPane.showMessageDialog(this,
                     "Debe indicar algún teléfono válido"
                     + "\n"
                     + "El contacto no se ha guardado",
@@ -360,13 +360,13 @@ public class GuiContacto extends javax.swing.JFrame {
             return;
         }
         if (!telefonosInválidos.isEmpty()) {
-            JOptionPane.showMessageDialog(this, 
+            JOptionPane.showMessageDialog(this,
                     "Debe indicar algún teléfono válido"
                     + "\n"
                     + "El contacto no se ha guardado",
                     "ERROR", JOptionPane.INFORMATION_MESSAGE);
             LstNumsTelf.requestFocus();
-        
+
         }
         Contacto newContact = new Contacto(nombreString, telefonos);
         newContact.setNombre(nombreString);
@@ -374,20 +374,25 @@ public class GuiContacto extends javax.swing.JFrame {
         try {
             if (!emailString.isBlank()) {
                 newContact.setCorreo(emailString);
-            } 
-            
+            }
+
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(null, "Formato de correo no válido", "ERROR", 1);
+            return;
         } finally {
             newContact.setDescripcion(descString);
             newContact.setApellido1(app1String);
             newContact.setApellido2(app2String);
 
+        }
+        if (!listaContactos.containsValue(newContact)) {
             listaContactos.put(newContact.hashCode(), newContact);
+        }
+        if (listaContactos.isEmpty()) {
+            System.out.println("Lista de contactos vacia");
+        } else {
             System.out.println(listaContactos);
         }
-        
-
 
     }//GEN-LAST:event_ContactAceptActionPerformed
 
@@ -399,12 +404,15 @@ public class GuiContacto extends javax.swing.JFrame {
     private void LstNumsTelfKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_LstNumsTelfKeyTyped
         // TODO add your handling code here:
         char c = evt.getKeyChar();
-        if (Character.isDigit(c)||c==' '||c==',') {}
-        else {evt.consume();}
+        if (Character.isDigit(c) || c == ' ' || c == ',') {
+        } else {
+            evt.consume();
+        }
     }//GEN-LAST:event_LstNumsTelfKeyTyped
-    private void clearFields() {
+    public void clearFields() {
         this.ContDesc.setText("");
         this.LstNumsTelf.removeAll();
+        this.LstNumsTelf.setText("");
         this.TxtMail.setText("");
         this.TxtName.setText("");
         this.TxtApp1.setText("");

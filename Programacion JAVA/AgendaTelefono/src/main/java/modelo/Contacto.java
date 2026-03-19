@@ -182,44 +182,54 @@ public class Contacto {
 
     @Override
     public boolean equals(Object obj) {
-        if (this == obj) {
-            return true;
-        }
+        final Contacto other = (Contacto) obj;
         if (obj == null) {
             return false;
         }
         if (getClass() != obj.getClass()) {
             return false;
         }
-        final Contacto other = (Contacto) obj;
-        if (!Objects.equals(this.nombre, other.nombre)) {
-            return false;
+        /**
+         * En teoria si absolutamente toda la lista de telefonos coincide
+         * Los contactos se pueden mergear
+         */
+        if (this.lstNumTelf.equals(other.lstNumTelf)) {
+            return true;
         }
-        if (!Objects.equals(this.apellido1, other.apellido1)) {
-            return false;
-        }
-        if (!Objects.equals(this.apellido2, other.apellido2)) {
-            return false;
-        }
-        if (!Objects.equals(this.correo, other.correo)) {
-            return false;
-        }
-        if (!Objects.equals(this.descripcion, other.descripcion)) {
-            return false;
-        }
-        if (!Objects.equals(this.fechaAñadido, other.fechaAñadido)) {
-            return false;
-        }
-        if (!Objects.equals(this.fechacumpleaños, other.fechacumpleaños)) {
-            return false;
-        }
-        return Objects.equals(this.lstNumTelf, other.lstNumTelf);
+
+        /**
+         *
+         * Los comparo con el hash pero sin tener en cuenta la fecha añadido a
+         * la hora de hacer el hash (Comparo el resto de campos que
+         * identificarian a una persona) (Nombre apellidos, correo y numeros de
+         * )
+         *
+         *
+         */
+        int hashThis = 3;
+        hashThis = 59 * hashThis + Objects.hashCode(this.fechacumpleaños);
+        hashThis = 59 * hashThis + Objects.hashCode(this.nombre);
+        hashThis = 59 * hashThis + Objects.hashCode(this.apellido1);
+        hashThis = 59 * hashThis + Objects.hashCode(this.apellido2);
+        hashThis = 59 * hashThis + Objects.hashCode(this.correo);
+        hashThis = 59 * hashThis + Objects.hashCode(this.lstNumTelf);
+
+        int hashOther = 3;
+        hashOther = 59 * hashOther + Objects.hashCode(other.fechacumpleaños);
+        hashOther = 59 * hashOther + Objects.hashCode(other.nombre);
+        hashOther = 59 * hashOther + Objects.hashCode(other.apellido1);
+        hashOther = 59 * hashOther + Objects.hashCode(other.apellido2);
+        hashOther = 59 * hashOther + Objects.hashCode(other.correo);
+        hashOther = 59 * hashOther + Objects.hashCode(other.lstNumTelf);
+
+        return (hashThis == hashOther);
+
     }
 
     /**
      *
      * @param listContactos la lista de la que buscar
-     * @param nombre 
+     * @param nombre
      * @return
      */
     public ArrayList<Contacto> buscarContacto(HashMap<?, Contacto> listContactos, String nombre) {
@@ -231,6 +241,7 @@ public class Contacto {
         }
         return coincidencias;
     }
+
     public ArrayList<Contacto> buscarMailContacto(HashMap<?, Contacto> listContactos, String mail) {
         ArrayList<Contacto> coincidencias = new ArrayList<>();
         for (Contacto contacto : listContactos.values()) {
@@ -240,20 +251,21 @@ public class Contacto {
         }
         return coincidencias;
     }
-    
+
     public ArrayList<Contacto> buscarContacto(HashMap<?, Contacto> listContactos, String nombre, String apellido1) {
         ArrayList<Contacto> coincidencias = new ArrayList<>();
         for (Contacto contacto : listContactos.values()) {
-            if (contacto.getNombre().toUpperCase().contains(nombre.toUpperCase())||contacto.getApellido1().toUpperCase().contains(apellido1.toUpperCase())) {
+            if (contacto.getNombre().toUpperCase().contains(nombre.toUpperCase()) || contacto.getApellido1().toUpperCase().contains(apellido1.toUpperCase())) {
                 coincidencias.add(contacto);
             }
         }
         return coincidencias;
     }
+
     public ArrayList<Contacto> buscarContacto(HashMap<?, Contacto> listContactos, String nombre, String apellido1, String apellido2) {
         ArrayList<Contacto> coincidencias = new ArrayList<>();
         for (Contacto contacto : listContactos.values()) {
-            if (contacto.getNombre().toUpperCase().contains(nombre.toUpperCase())||contacto.getApellido1().toUpperCase().contains(apellido1.toUpperCase())||contacto.getApellido2().toUpperCase().contains(apellido2.toUpperCase())) {
+            if (contacto.getNombre().toUpperCase().contains(nombre.toUpperCase()) || contacto.getApellido1().toUpperCase().contains(apellido1.toUpperCase()) || contacto.getApellido2().toUpperCase().contains(apellido2.toUpperCase())) {
                 coincidencias.add(contacto);
             }
         }
