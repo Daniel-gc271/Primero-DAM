@@ -73,7 +73,7 @@
                       <Component id="TxtApp2" alignment="0" max="32767" attributes="0"/>
                       <Component id="TxtApp1" alignment="0" max="32767" attributes="0"/>
                       <Component id="TxtName" alignment="0" max="32767" attributes="0"/>
-                      <Component id="TxtApp3" alignment="0" max="32767" attributes="0"/>
+                      <Component id="TxtNumTelf" alignment="0" max="32767" attributes="0"/>
                       <Component id="TxtMail" alignment="0" max="32767" attributes="0"/>
                   </Group>
                   <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
@@ -100,7 +100,7 @@
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="2" attributes="0">
-                      <Component id="TxtApp3" alignment="2" min="-2" pref="25" max="-2" attributes="0"/>
+                      <Component id="TxtNumTelf" alignment="2" min="-2" pref="25" max="-2" attributes="0"/>
                       <Component id="LblTel" linkSize="3" alignment="2" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
@@ -164,10 +164,10 @@
         </Component>
         <Component class="javax.swing.JLabel" name="LblTel">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Tel&#xe9;fonos"/>
+            <Property name="text" type="java.lang.String" value="el&#xe9;fonos"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="TxtApp3">
+        <Component class="javax.swing.JTextField" name="TxtNumTelf">
           <Properties>
             <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
               <Dimension value="[155, 25]"/>

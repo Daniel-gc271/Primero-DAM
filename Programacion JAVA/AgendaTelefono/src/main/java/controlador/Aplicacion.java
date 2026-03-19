@@ -6,6 +6,7 @@ import java.util.HashMap;
 import modelo.Contacto;
 import vista.GuiContacto;
 import vista.GUIAgendaContactos;
+import vista.GuiFiltrarContacto;
 
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
@@ -37,8 +38,9 @@ public class Aplicacion {
                 return msg;
             }
         };
+        GuiFiltrarContacto filterContactGui = new GuiFiltrarContacto(listaContactos);
         GuiContacto viewContactGui = new GuiContacto(listaContactos) ;
-        GUIAgendaContactos mainGui = new GUIAgendaContactos(viewContactGui,listaContactos);
+        GUIAgendaContactos mainGui = new GUIAgendaContactos(viewContactGui,filterContactGui,listaContactos);
         mainGui.setVisible(true);
     }
 }

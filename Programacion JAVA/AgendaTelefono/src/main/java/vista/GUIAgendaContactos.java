@@ -14,26 +14,32 @@ import modelo.Contacto;
  * @author goncalda
  */
 public class GUIAgendaContactos extends javax.swing.JFrame {
+
     private DefaultListModel<Contacto> modListaContacto;
-    private HashMap<Integer,Contacto> listaContactos;
+    private HashMap<Integer, Contacto> listaContactos;
     private GuiContacto guiAddContact;
+    private GuiFiltrarContacto guiFilterContact;
+
     /**
      * Creates new form GUIAgendaContactos
      */
-    public GUIAgendaContactos(GuiContacto gui,HashMap<Integer,Contacto> listaContactos) {
-        this.listaContactos=listaContactos;
+    public GUIAgendaContactos(GuiContacto guiAñadirContacto, GuiFiltrarContacto guiFiltrarContacto, HashMap<Integer, Contacto> listaContactos) {
+        this.listaContactos = listaContactos;
         initComponents();
-            setFrame();
-            this.guiAddContact = gui;
+        setFrame();
+        this.guiFilterContact = guiFiltrarContacto;
+        this.guiAddContact = guiAñadirContacto;
     }
+
     private void setFrame() {
         this.setLocationRelativeTo(null);
         this.setTitle("Agenda de contactos");
-        
+
         modListaContacto = new DefaultListModel<>();
         this.jList1.setModel(modListaContacto);
         /* Set the Nimbus look and feel */
     }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -78,6 +84,11 @@ public class GUIAgendaContactos extends javax.swing.JFrame {
         OptContacto.add(Añadir);
 
         Buscar.setText("Buscar");
+        Buscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BuscarActionPerformed(evt);
+            }
+        });
         OptContacto.add(Buscar);
 
         Modificar.setText("Modificar");
@@ -108,6 +119,12 @@ public class GUIAgendaContactos extends javax.swing.JFrame {
         guiAddContact.setTitle("Nuevo contacto");
         guiAddContact.setVisible(true);
     }//GEN-LAST:event_AñadirActionPerformed
+
+    private void BuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BuscarActionPerformed
+        // TODO add your handling code here:
+        GuiFiltrarContacto guiFiltrarContacto = new GuiFiltrarContacto(listaContactos);
+        guiFiltrarContacto.setVisible(true);
+    }//GEN-LAST:event_BuscarActionPerformed
 
     public void setModListaContacto(DefaultListModel<Contacto> modListaContacto) {
         this.modListaContacto = modListaContacto;

@@ -14,20 +14,22 @@ import modelo.Contacto;
  * @author goncalda
  */
 public class GuiFiltrarContacto extends javax.swing.JFrame {
-
-    private HashMap<String, Contacto> listaContactos;
+    /**
+     * 
+     */
+    private HashMap<Integer, Contacto> listaContactos;
 
     /**
      * Creates new form AgregarContacto
      */
-    public GuiFiltrarContacto(HashMap<String, Contacto> listaContactos) {
+    public GuiFiltrarContacto(HashMap<Integer, Contacto> listaContactos) {
         this.listaContactos = listaContactos;
         initComponents();
         setFrame();
     }
     private void setFrame() {
         this.setLocationRelativeTo(null);
-        this.setTitle("");
+        this.setTitle("Filtrar contacto");
     }
 
     /**
@@ -47,7 +49,7 @@ public class GuiFiltrarContacto extends javax.swing.JFrame {
         LblApp2 = new javax.swing.JLabel();
         TxtApp2 = new javax.swing.JTextField();
         LblTel = new javax.swing.JLabel();
-        TxtApp3 = new javax.swing.JTextField();
+        TxtNumTelf = new javax.swing.JTextField();
         LblMail = new javax.swing.JLabel();
         TxtMail = new javax.swing.JTextField();
         ConfBtn = new javax.swing.JPanel();
@@ -85,10 +87,10 @@ public class GuiFiltrarContacto extends javax.swing.JFrame {
         TxtApp2.setMaximumSize(new java.awt.Dimension(155, 25));
         TxtApp2.setMinimumSize(new java.awt.Dimension(155, 25));
 
-        LblTel.setText("Teléfonos");
+        LblTel.setText("eléfonos");
 
-        TxtApp3.setMaximumSize(new java.awt.Dimension(155, 25));
-        TxtApp3.setMinimumSize(new java.awt.Dimension(155, 25));
+        TxtNumTelf.setMaximumSize(new java.awt.Dimension(155, 25));
+        TxtNumTelf.setMinimumSize(new java.awt.Dimension(155, 25));
 
         LblMail.setText("Correo");
 
@@ -112,7 +114,7 @@ public class GuiFiltrarContacto extends javax.swing.JFrame {
                     .addComponent(TxtApp2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(TxtApp1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(TxtName, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(TxtApp3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(TxtNumTelf, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(TxtMail, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(12, 12, 12))
         );
@@ -136,7 +138,7 @@ public class GuiFiltrarContacto extends javax.swing.JFrame {
                     .addComponent(TxtApp2, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(CampoALayout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
-                    .addComponent(TxtApp3, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(TxtNumTelf, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(LblTel))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(CampoALayout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
@@ -224,6 +226,8 @@ public class GuiFiltrarContacto extends javax.swing.JFrame {
     private void ContactSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ContactSearchActionPerformed
         // TODO add your handling code here:
         //recuperar la lista de contactos,
+        String nombreBuscado = this.TxtName.getText();
+        System.out.println("\""+nombreBuscado+ "\"");
 
         
 
@@ -288,8 +292,8 @@ public class GuiFiltrarContacto extends javax.swing.JFrame {
     private javax.swing.JLabel LblTel;
     private javax.swing.JTextField TxtApp1;
     private javax.swing.JTextField TxtApp2;
-    private javax.swing.JTextField TxtApp3;
     private javax.swing.JTextField TxtMail;
     private javax.swing.JTextField TxtName;
+    private javax.swing.JTextField TxtNumTelf;
     // End of variables declaration//GEN-END:variables
 }
