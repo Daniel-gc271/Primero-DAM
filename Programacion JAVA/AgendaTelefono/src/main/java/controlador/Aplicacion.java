@@ -18,28 +18,25 @@ import vista.GuiFiltrarContacto;
  */
 public class Aplicacion {
 
-
     public static void main(String args[]) {
 
         HashMap<Integer, Contacto> listaContactos;
-        listaContactos = new HashMap<>() 
-        {
+        listaContactos = new HashMap<>() {
             @Override
             /**
-             * Override al metodo to string de la lista de contactos
-             * para dar un formato apropiado (que me convenga para listar los cintactos)
+             * Override al metodo to string de la lista de contactos para dar un
+             * formato apropiado (que me convenga para listar los cintactos)
              */
             public String toString() {
-                String msg="";
-                for (Contacto contacto :this.values()) {
+                String msg = "";
+                for (Contacto contacto : this.values()) {
                     msg += contacto.toString();
                 }
                 return msg;
             }
         };
-        GuiFiltrarContacto filterContactGui = new GuiFiltrarContacto(listaContactos);
-        GuiContacto viewContactGui = new GuiContacto(listaContactos) ;
-        GUIAgendaContactos mainGui = new GUIAgendaContactos(viewContactGui,filterContactGui,listaContactos);
+        GUIAgendaContactos mainGui = new GUIAgendaContactos(listaContactos);
+
         mainGui.setVisible(true);
     }
 }
