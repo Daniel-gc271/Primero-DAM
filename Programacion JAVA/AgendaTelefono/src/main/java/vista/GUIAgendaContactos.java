@@ -25,12 +25,12 @@ public class GUIAgendaContactos extends javax.swing.JFrame {
     /**
      * Creates new form GUIAgendaContactos
      */
-    public GUIAgendaContactos(GuiContacto guiAñadirContacto, GuiFiltrarContacto guiFiltrarContacto, HashMap<Integer, Contacto> listaContactos) {
+    public GUIAgendaContactos(HashMap<Integer, Contacto> listaContactos) {
         this.listaContactos = listaContactos;
         initComponents();
         setFrame();
-        this.guiFilterContact = guiFiltrarContacto;
-        this.guiAddContact = guiAñadirContacto;
+        this.guiFilterContact =new  GuiFiltrarContacto(listaContactos);
+        this.guiAddContact =new GuiContacto(listaContactos, this);
     }
 
     private void setFrame() {
@@ -104,6 +104,11 @@ public class GUIAgendaContactos extends javax.swing.JFrame {
         OptAgenda.setText("Agenda");
 
         Listar.setText("Listar");
+        Listar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ListarActionPerformed(evt);
+            }
+        });
         OptAgenda.add(Listar);
 
         Vaciar.setText("Vaciar");
@@ -126,11 +131,7 @@ public class GUIAgendaContactos extends javax.swing.JFrame {
         guiAddContact.setTitle("Nuevo contacto");
         guiAddContact.clearFields();
         guiAddContact.setVisible(true);
-        modListaContacto= new DefaultListModel<>();
-        for (Contacto contacto : listaContactos.values()) {
-                    modListaContacto.addElement(contacto);
-        }
-        this.jList1.setModel(modListaContacto);
+
     }//GEN-LAST:event_AñadirActionPerformed
 
     private void BuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BuscarActionPerformed
@@ -141,13 +142,24 @@ public class GUIAgendaContactos extends javax.swing.JFrame {
 
     private void VaciarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_VaciarActionPerformed
         // TODO add your handling code here:
-       if ( JOptionPane.showConfirmDialog(this, "Vaciar lista de contactos", "Confirmacion", JOptionPane.YES_NO_OPTION)==1) {
-           System.out.println("No");
-       } else {this.listaContactos.clear();}
+        if (JOptionPane.showConfirmDialog(this, "Vaciar lista de contactos", "Confirmacion", JOptionPane.YES_NO_OPTION) == 1) {
+            System.out.println("No");
+        } else {
+            this.listaContactos.clear();
+            updateListaContacto(listaContactos);
+        }
     }//GEN-LAST:event_VaciarActionPerformed
 
-    public void setModListaContacto(DefaultListModel<Contacto> modListaContacto) {
-        this.modListaContacto = modListaContacto;
+    private void ListarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ListarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_ListarActionPerformed
+
+    public void updateListaContacto(HashMap<Integer, Contacto> listaContactos) {
+        this.modListaContacto = new DefaultListModel<>();
+        for (Contacto contacto : listaContactos.values()) {
+            this.modListaContacto.addElement(contacto);
+        }
+        this.jList1.setModel(modListaContacto);
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuItem Añadir;

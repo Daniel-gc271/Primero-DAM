@@ -10,6 +10,7 @@ import java.time.format.ResolverStyle;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedHashSet;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import modelo.Contacto;
 
@@ -20,12 +21,13 @@ import modelo.Contacto;
 public class GuiContacto extends javax.swing.JFrame {
 
     private HashMap<Integer, Contacto> listaContactos;
-
+    private GUIAgendaContactos guiPadre;
     /**
      * Creates new form AgregarContacto
      */
-    public GuiContacto(HashMap<Integer, Contacto> listaContactos) {
+    public GuiContacto(HashMap<Integer, Contacto> listaContactos,GUIAgendaContactos guiPadre) {
         this.listaContactos = listaContactos;
+        this.guiPadre =guiPadre;
         initComponents();
         setFrame();
     }
@@ -408,6 +410,7 @@ public class GuiContacto extends javax.swing.JFrame {
             System.out.println("Lista de contactos vacia");
         } else {
             System.out.println(listaContactos);
+            this.guiPadre.updateListaContacto(listaContactos);
         }
     }//GEN-LAST:event_ContactAceptActionPerformed
 
