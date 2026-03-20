@@ -189,4 +189,36 @@ return $c
 return if (:condicion:) then (:codijo/instruccion:)
 else () (:En cualquier caso:)
 
+(:Ejercicio 5:)
+	for $suc in //sucursal
+let $max := max($suc/cuenta/saldohaber)
+let $nombre := $suc/cuenta[saldohaber = $max]/nombre
+return concat($suc/@codigo, " - ", $max," - ", $nombre)
+
+
+
+for $suc in //sucursal
+let $maxSal := max($suc/cuenta/saldodebe)
+for $cta in $suc/cuenta[@tipo='AHORRO']
+return if($cta/saldodebe = $maxSal)
+then <saldoMax>{$suc/@codigo}<sal>{$maxSal}</sal>{$cta/nombre}</saldoMax>
+else ()
+
+
+for $productos in //produc
+let $producto:= $productos/denominacion
+for $zonas in /zonas/zona
+let $nombre_zona:=$zonas/nombre
+where $zonas/cod_zona=$productos/cod_zona
+return concat($producto,' --- ', $nombre_zona)
+
+
+for $den in /productos/produc[stock_minimo>5]
+for $zona in /zonas/zona[cod_zona=$den/cod_zona]
+let $prod:=$den/denominacion
+let $nomdir:=$zona/director
+return concat('codigo zona', $zona/cod_zona,'stock minimo >5', $prod,'nombre director',$nomdir,'nombre producto',$den/denominacion)
+
+
+
 
