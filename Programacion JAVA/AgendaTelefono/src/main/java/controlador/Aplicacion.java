@@ -1,5 +1,6 @@
 package controlador;
 
+import com.formdev.flatlaf.FlatDarkLaf;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
@@ -25,7 +26,7 @@ public class Aplicacion {
             @Override
             /**
              * Override al metodo to string de la lista de contactos para dar un
-             * formato apropiado (que me convenga para listar los cintactos)
+             * formato apropiado (que me convenga para listar los cintactos x consola)
              */
             public String toString() {
                 String msg = "";
@@ -36,7 +37,7 @@ public class Aplicacion {
             }
         };
         GUIAgendaContactos mainGui = new GUIAgendaContactos(listaContactos);
-
+        FlatDarkLaf.setup();
         mainGui.setVisible(true);
     }
 }
