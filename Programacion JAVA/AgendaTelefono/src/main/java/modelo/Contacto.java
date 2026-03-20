@@ -10,10 +10,8 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
-
 import java.util.HashSet;
 import java.util.Objects;
-import javax.swing.JOptionPane;
 
 /**
  *
@@ -44,29 +42,13 @@ public class Contacto {
                         thenComparing(Contacto::getApellido2)
         );
     }
-
-    public void ordenarNombreDesc(ArrayList<Contacto> listaContactos) {
-        Collections.sort(listaContactos,
-                compContacto.
-                        thenComparing(Contacto::getNombre).
-                        thenComparing(Contacto::getApellido1).
-                        thenComparing(Contacto::getApellido2)
-        );
-        listaContactos.reversed();
-    }
-
     public void ordenarFechaAsc(ArrayList<Contacto> listaContactos) {
         Collections.sort(listaContactos,
                 compContacto.
                         thenComparing(Contacto::getFechaAñadido));
     }
 
-    public void ordenarFechaDesc(ArrayList<Contacto> listaContactos) {
-        Collections.sort(listaContactos,
-                compContacto.
-                        thenComparing(Contacto::getFechaAñadido));
-        listaContactos.reversed();
-    }
+    
 
     public String getApellido1() {
         return apellido1;
@@ -83,32 +65,32 @@ public class Contacto {
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append("\nNombre: ").append(nombre).append('\n');
+        sb.append("\nNombre: ").append(nombre);
         if (apellido1 != null && !apellido1.isEmpty() && !apellido1.isBlank()) {
-            sb.append("Primer apellido: ").append(apellido1).append('\n');
+            sb.append(", Primer apellido: ").append(apellido1);
         }
         if (apellido2 != null && !apellido2.isEmpty() && !apellido2.isBlank()) {
-            sb.append("Segundo apellido: ").append(apellido2).append('\n');
+            sb.append(", Segundo apellido: ").append(apellido2);
         }
         if (fechacumpleaños != null) {
             DateTimeFormatter f = DateTimeFormatter.ofPattern("dd/MM/uuuu");
-            sb.append("Cumplea\u00f1os: ").append(fechacumpleaños.format(f));
+            sb.append(", Cumplea\u00f1os: ").append(fechacumpleaños.format(f));
         }
 
-        sb.append("Numeros de contacto:\n");
-        sb.append(String.join(",",lstNumTelf )).append(" ");
+        sb.append(", Numeros de contacto: ");
+        sb.append(String.join(",",lstNumTelf ));
 
         if (correo != null) {
             if (!correo.isBlank()) {
-                sb.append('\n').append("Email: ").append(correo).append('\n');
+                sb.append(", Email: ").append(correo);
             }
         }
         if (descripcion != null) {
             if (!descripcion.isBlank()) {
-                sb.append("Descripcion: ").append(descripcion);
+                sb.append(", Descripcion: ").append(descripcion);
             }
         }
-        sb.append('\n');
+        
         return sb.toString();
     }
 
@@ -141,7 +123,8 @@ public class Contacto {
     }
 
     public void setCorreo(String correo) throws Exception {
-        String regexEmail = "^\\w+@\\w+\\.\\w+$";
+        //Regex email -> ChatGpt
+        String regexEmail = "^[A-Za-z0-9_+]+(?:\\.[A-Za-z0-9_+]+)*@[A-Za-z0-9](?:[A-Za-z0-9-]*[A-Za-z0-9])?(?:\\.[A-Za-z0-9](?:[A-Za-z0-9-]*[A-Za-z0-9])?)*\\.[A-Za-z]{1,}$";
 
         if (correo.matches(regexEmail)) {
             this.correo = correo.toLowerCase();
@@ -227,7 +210,7 @@ public class Contacto {
     }
     
     
-    public static ArrayList<Contacto> filtrarAvanzado(HashMap<?, Contacto> listaContactos, String nombreBuscado, String app1Buscado, String app2Buscado, String mailBuscado, String telfBuscado) {
+    public static ArrayList<Contacto> filtrarContactos(HashMap<?, Contacto> listaContactos, String nombreBuscado, String app1Buscado, String app2Buscado, String mailBuscado, String telfBuscado) {
     ArrayList<Contacto> resultados = new ArrayList<>();
     
     // Normalizamos las búsquedas a minúsculas y sin espacios

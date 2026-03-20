@@ -21,6 +21,7 @@ public class GUIAgendaContactos extends javax.swing.JFrame {
     private HashMap<Integer, Contacto> listaContactos;
     private final GuiContacto guiAddContact;
     private final GuiFiltrarContacto guiFilterContact;
+    private final GUIListarContactos guiListarContactos;
 
     /**
      * Creates new form GUIAgendaContactos
@@ -29,8 +30,9 @@ public class GUIAgendaContactos extends javax.swing.JFrame {
         this.listaContactos = listaContactos;
         initComponents();
         setFrame();
-        this.guiFilterContact =new  GuiFiltrarContacto(listaContactos);
+        this.guiFilterContact =new  GuiFiltrarContacto(listaContactos,this);
         this.guiAddContact =new GuiContacto(listaContactos, this);
+        this.guiListarContactos =new GUIListarContactos(listaContactos, this);
     }
 
     private void setFrame() {
@@ -138,6 +140,7 @@ public class GUIAgendaContactos extends javax.swing.JFrame {
         // TODO add your handling code here:
         this.guiFilterContact.clearFields();
         guiFilterContact.setVisible(true);
+        
     }//GEN-LAST:event_BuscarActionPerformed
 
     private void VaciarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_VaciarActionPerformed
@@ -152,11 +155,20 @@ public class GUIAgendaContactos extends javax.swing.JFrame {
 
     private void ListarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ListarActionPerformed
         // TODO add your handling code here:
+        updateListaContacto(listaContactos);
+        
     }//GEN-LAST:event_ListarActionPerformed
 
     public void updateListaContacto(HashMap<Integer, Contacto> listaContactos) {
         this.modListaContacto = new DefaultListModel<>();
         for (Contacto contacto : listaContactos.values()) {
+            this.modListaContacto.addElement(contacto);
+        }
+        this.jList1.setModel(modListaContacto);
+    }
+    public void updateListaContacto(HashSet<Contacto> listaContactos) {
+        this.modListaContacto = new DefaultListModel<>();
+        for (Contacto contacto : listaContactos) {
             this.modListaContacto.addElement(contacto);
         }
         this.jList1.setModel(modListaContacto);
