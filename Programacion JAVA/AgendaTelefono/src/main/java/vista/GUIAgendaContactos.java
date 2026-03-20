@@ -30,9 +30,9 @@ public class GUIAgendaContactos extends javax.swing.JFrame {
         this.listaContactos = listaContactos;
         initComponents();
         setFrame();
-        this.guiFilterContact =new  GuiFiltrarContacto(listaContactos,this);
-        this.guiAddContact =new GuiContacto(listaContactos, this);
-        this.guiListarContactos =new GUIListarContactos(listaContactos, this);
+        this.guiFilterContact = new GuiFiltrarContacto(listaContactos, this);
+        this.guiAddContact = new GuiContacto(listaContactos, this);
+        this.guiListarContactos = new GUIListarContactos(listaContactos, this);
     }
 
     private void setFrame() {
@@ -40,7 +40,7 @@ public class GUIAgendaContactos extends javax.swing.JFrame {
         this.setTitle("Agenda de contactos");
 
         modListaContacto = new DefaultListModel<>();
-        this.jList1.setModel(modListaContacto);
+        this.JlistContactos.setModel(modListaContacto);
         /* Set the Nimbus look and feel */
     }
 
@@ -54,8 +54,8 @@ public class GUIAgendaContactos extends javax.swing.JFrame {
     private void initComponents() {
 
         jScrollPane1 = new javax.swing.JScrollPane();
-        jList1 = new javax.swing.JList<>();
-        jLabel1 = new javax.swing.JLabel();
+        JlistContactos = new javax.swing.JList<>();
+        LabelIdContacto = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         OptContacto = new javax.swing.JMenu();
         Añadir = new javax.swing.JMenuItem();
@@ -69,13 +69,16 @@ public class GUIAgendaContactos extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(400, 300));
 
-        jList1.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
-        jScrollPane1.setViewportView(jList1);
+        JlistContactos.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        JlistContactos.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
+            public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
+                JlistContactosValueChanged(evt);
+            }
+        });
+        jScrollPane1.setViewportView(JlistContactos);
 
         getContentPane().add(jScrollPane1, java.awt.BorderLayout.CENTER);
-
-        jLabel1.setText("jLabel1");
-        getContentPane().add(jLabel1, java.awt.BorderLayout.PAGE_END);
+        getContentPane().add(LabelIdContacto, java.awt.BorderLayout.PAGE_END);
 
         OptContacto.setText("Contacto");
 
@@ -140,7 +143,7 @@ public class GUIAgendaContactos extends javax.swing.JFrame {
         // TODO add your handling code here:
         this.guiFilterContact.clearFields();
         guiFilterContact.setVisible(true);
-        
+
     }//GEN-LAST:event_BuscarActionPerformed
 
     private void VaciarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_VaciarActionPerformed
@@ -159,31 +162,46 @@ public class GUIAgendaContactos extends javax.swing.JFrame {
         guiListarContactos.setVisible(true);
     }//GEN-LAST:event_ListarActionPerformed
 
+    private void JlistContactosValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_JlistContactosValueChanged
+        // TODO add your handling code here:
+        if (!evt.getValueIsAdjusting()) {
+            Contacto selectContacto = JlistContactos.getSelectedValue();
+            if (selectContacto != null) {
+                System.out.println(selectContacto);
+                this.LabelIdContacto.setText("  ID Contacto: "
+                        + selectContacto.hashCode()
+                );
+            }
+            JlistContactos.clearSelection();
+        }
+    }//GEN-LAST:event_JlistContactosValueChanged
+
     public void updateListaContacto(HashMap<Integer, Contacto> listaContactos) {
         this.modListaContacto = new DefaultListModel<>();
         for (Contacto contacto : listaContactos.values()) {
             this.modListaContacto.addElement(contacto);
         }
-        this.jList1.setModel(modListaContacto);
+        this.JlistContactos.setModel(modListaContacto);
     }
+
     public void updateListaContacto(HashSet<Contacto> listaContactos) {
         this.modListaContacto = new DefaultListModel<>();
         for (Contacto contacto : listaContactos) {
             this.modListaContacto.addElement(contacto);
         }
-        this.jList1.setModel(modListaContacto);
+        this.JlistContactos.setModel(modListaContacto);
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuItem Añadir;
     private javax.swing.JMenuItem Borrar;
     private javax.swing.JMenuItem Buscar;
+    private javax.swing.JList<Contacto> JlistContactos;
+    private javax.swing.JLabel LabelIdContacto;
     private javax.swing.JMenuItem Listar;
     private javax.swing.JMenuItem Modificar;
     private javax.swing.JMenu OptAgenda;
     private javax.swing.JMenu OptContacto;
     private javax.swing.JMenuItem Vaciar;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JList<Contacto> jList1;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JScrollPane jScrollPane1;
     // End of variables declaration//GEN-END:variables

@@ -20,7 +20,7 @@ import java.util.Objects;
 public class Contacto {
 
     private final Comparator<Contacto> compContacto;
-    private final LocalDateTime fechaAñadido;
+    private LocalDateTime fechaAñadido;
     private LocalDate fechacumpleaños;
     private String nombre, apellido1, apellido2, correo, descripcion;
     private HashSet<String> lstNumTelf;
@@ -50,17 +50,6 @@ public class Contacto {
 
     
 
-    public String getApellido1() {
-        return apellido1;
-    }
-
-    public String getApellido2() {
-        return apellido2;
-    }
-
-    public LocalDateTime getFechaAñadido() {
-        return fechaAñadido;
-    }
 
     @Override
     public String toString() {
@@ -94,60 +83,14 @@ public class Contacto {
         return sb.toString();
     }
 
-    public LocalDate getFechacumpleaños() {
-        return fechacumpleaños;
-    }
+   
 
-    public void setFechacumpleaños(LocalDate fechacumpleaños) {
-        this.fechacumpleaños = fechacumpleaños;
-    }
-
-    public String getNombre() {
-        return nombre;
-    }
-
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }
-
-    public void setApellido1(String app1) {
-        this.apellido1 = app1;
-    }
-
-    public void setApellido2(String app2) {
-        this.apellido2 = app2;
-    }
-
-    public String getCorreo() {
-        return correo;
-    }
-
-    public void setCorreo(String correo) throws Exception {
-        //Regex email -> ChatGpt
-        String regexEmail = "^[A-Za-z0-9_+]+(?:\\.[A-Za-z0-9_+]+)*@[A-Za-z0-9](?:[A-Za-z0-9-]*[A-Za-z0-9])?(?:\\.[A-Za-z0-9](?:[A-Za-z0-9-]*[A-Za-z0-9])?)*\\.[A-Za-z]{1,}$";
-
-        if (correo.matches(regexEmail)) {
-            this.correo = correo.toLowerCase();
-        } else {
-            throw new Exception();
-        }
-
-    }
-
-    public String getDescripcion() {
-        return descripcion;
-    }
-
-    public void setDescripcion(String descripcion) {
-        this.descripcion = descripcion;
-    }
     
-    public String contactoToShortString() {
-        return nombre + apellido1;
-    }
-    public HashSet<String> getNumTel() {
-        return this.lstNumTelf;
-    }
+
+    
+
+   
+    
     @Override
     public int hashCode() {
         int hash = 3;
@@ -220,30 +163,30 @@ public class Contacto {
     String eMail = mailBuscado.trim().toLowerCase();
     String telefono = telfBuscado.trim();
 
-    for (Contacto c : listaContactos.values()) {
+    for (Contacto contacto : listaContactos.values()) {
         boolean coincide = true;
 
         // Filtro de Nombre
-        if (!nombre.isEmpty() && (c.getNombre() == null || !c.getNombre().toLowerCase().contains(nombre))) {
+        if (!nombre.isEmpty() && (contacto.getNombre() == null || !contacto.getNombre().toLowerCase().contains(nombre))) {
             coincide = false;
         }
         // Filtro de Apellido 1
-        if (coincide && !apellido1.isEmpty() && (c.getApellido1() == null || !c.getApellido1().toLowerCase().contains(apellido1))) {
+        if (coincide && !apellido1.isEmpty() && (contacto.getApellido1() == null || !contacto.getApellido1().toLowerCase().contains(apellido1))) {
             coincide = false;
         }
         // Filtro de Apellido 2
-        if (coincide && !apellido2.isEmpty() && (c.getApellido2() == null || !c.getApellido2().toLowerCase().contains(apellido2))) {
+        if (coincide && !apellido2.isEmpty() && (contacto.getApellido2() == null || !contacto.getApellido2().toLowerCase().contains(apellido2))) {
             coincide = false;
         }
         // Filtro de Email
-        if (coincide && !eMail.isEmpty() && (c.getCorreo() == null || !c.getCorreo().toLowerCase().contains(eMail))) {
+        if (coincide && !eMail.isEmpty() && (contacto.getCorreo() == null || !contacto.getCorreo().toLowerCase().contains(eMail))) {
             coincide = false;
         }
         // Filtro de Teléfono
         if (coincide && !telefono.isEmpty()) {
             boolean telEncontrado = false;
-            for (String t : c.getNumTel()) {
-                if (t.contains(telefono)) {
+            for (String telefonos : contacto.getLstNumTelf()) {
+                if (telefonos.contains(telefono)) {
                     telEncontrado = true;
                     break;
                 }
@@ -253,12 +196,82 @@ public class Contacto {
 
         // Solo si ha pasado todos los filtros activos se añade
         if (coincide) {
-            resultados.add(c);
+            resultados.add(contacto);
         }
     }
     return resultados;
 }
 
+    public LocalDateTime getFechaAñadido() {
+        return fechaAñadido;
+    }
 
+    public LocalDate getFechacumpleaños() {
+        return fechacumpleaños;
+    }
 
+    public String getNombre() {
+        return nombre;
+    }
+
+    public String getApellido1() {
+        return apellido1;
+    }
+
+    public String getApellido2() {
+        return apellido2;
+    }
+
+    public String getCorreo() {
+        return correo;
+    }
+
+    public String getDescripcion() {
+        return descripcion;
+    }
+
+    public HashSet<String> getLstNumTelf() {
+        return lstNumTelf;
+    }
+
+    public void setFechaAñadido(LocalDateTime fechaAñadido) {
+        this.fechaAñadido = fechaAñadido;
+    }
+
+    public void setFechacumpleaños(LocalDate fechacumpleaños) {
+        this.fechacumpleaños = fechacumpleaños;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public void setApellido1(String apellido1) {
+        this.apellido1 = apellido1;
+    }
+
+    public void setApellido2(String apellido2) {
+        this.apellido2 = apellido2;
+    }
+
+    public void setCorreo(String correo) throws Exception {
+        //Regex email -> ChatGpt
+        String regexEmail = "^[A-Za-z0-9_+]+(?:\\.[A-Za-z0-9_+]+)*@[A-Za-z0-9](?:[A-Za-z0-9-]*[A-Za-z0-9])?(?:\\.[A-Za-z0-9](?:[A-Za-z0-9-]*[A-Za-z0-9])?)*\\.[A-Za-z]{1,}$";
+        if (correo.matches(regexEmail)) {
+            this.correo = correo.toLowerCase();
+        } else {
+            throw new Exception();
+        }
+    }
+    
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
+    }
+
+    public void setLstNumTelf(HashSet<String> lstNumTelf) {
+        this.lstNumTelf = lstNumTelf;
+    }
+    
+    
+    
 }
