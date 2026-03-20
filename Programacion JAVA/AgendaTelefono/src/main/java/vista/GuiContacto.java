@@ -409,7 +409,6 @@ public class GuiContacto extends javax.swing.JFrame {
         } else {
             System.out.println(listaContactos);
         }
-
     }//GEN-LAST:event_ContactAceptActionPerformed
 
     private void ContactClearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ContactClearActionPerformed

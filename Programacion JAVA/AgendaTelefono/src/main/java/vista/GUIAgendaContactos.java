@@ -6,6 +6,7 @@ package vista;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
 import modelo.Contacto;
@@ -125,6 +126,11 @@ public class GUIAgendaContactos extends javax.swing.JFrame {
         guiAddContact.setTitle("Nuevo contacto");
         guiAddContact.clearFields();
         guiAddContact.setVisible(true);
+        modListaContacto= new DefaultListModel<>();
+        for (Contacto contacto : listaContactos.values()) {
+                    modListaContacto.addElement(contacto);
+        }
+        this.jList1.setModel(modListaContacto);
     }//GEN-LAST:event_AñadirActionPerformed
 
     private void BuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BuscarActionPerformed
