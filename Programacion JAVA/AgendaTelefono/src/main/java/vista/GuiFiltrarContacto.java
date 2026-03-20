@@ -19,7 +19,6 @@ public class GuiFiltrarContacto extends javax.swing.JFrame {
      */
     private GUIAgendaContactos guiPadre;
     private HashMap<Integer, Contacto> listaContactos;
-    private final GUIAgendaContactos guiPadre;
 
     /**
      * Creates new form AgregarContacto

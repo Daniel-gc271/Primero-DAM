@@ -156,7 +156,7 @@ public class GUIAgendaContactos extends javax.swing.JFrame {
     private void ListarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ListarActionPerformed
         // TODO add your handling code here:
         updateListaContacto(listaContactos);
-        
+        guiListarContactos.setVisible(true);
     }//GEN-LAST:event_ListarActionPerformed
 
     public void updateListaContacto(HashMap<Integer, Contacto> listaContactos) {
