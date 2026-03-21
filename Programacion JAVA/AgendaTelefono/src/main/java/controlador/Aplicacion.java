@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import modelo.Contacto;
-import vista.GuiContacto;
+import vista.GuiAñadirContacto;
 import vista.GUIAgendaContactos;
 import vista.GuiFiltrarContacto;
 

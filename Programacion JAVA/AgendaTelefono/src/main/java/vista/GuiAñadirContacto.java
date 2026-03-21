@@ -18,14 +18,14 @@ import modelo.Contacto;
  *
  * @author goncalda
  */
-public class GuiContacto extends javax.swing.JFrame {
+public class GuiAñadirContacto extends javax.swing.JFrame {
 
     private HashMap<Integer, Contacto> listaContactos;
     private GUIAgendaContactos guiPadre;
     /**
      * Creates new form AgregarContacto
      */
-    public GuiContacto(HashMap<Integer, Contacto> listaContactos,GUIAgendaContactos guiPadre) {
+    public GuiAñadirContacto(HashMap<Integer, Contacto> listaContactos,GUIAgendaContactos guiPadre) {
         this.listaContactos = listaContactos;
         this.guiPadre =guiPadre;
         initComponents();
@@ -69,7 +69,7 @@ public class GuiContacto extends javax.swing.JFrame {
         ConfBtn = new javax.swing.JPanel();
         ContactAcept = new javax.swing.JButton();
         ContactCancel = new javax.swing.JButton();
-        ContactClear = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setAlwaysOnTop(true);
@@ -247,13 +247,13 @@ public class GuiContacto extends javax.swing.JFrame {
         });
         ConfBtn.add(ContactCancel);
 
-        ContactClear.setText("Vaciar");
-        ContactClear.addActionListener(new java.awt.event.ActionListener() {
+        jButton1.setText("Vaciar");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                ContactClearActionPerformed(evt);
+                jButton1ActionPerformed(evt);
             }
         });
-        ConfBtn.add(ContactClear);
+        ConfBtn.add(jButton1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -414,11 +414,6 @@ public class GuiContacto extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_ContactAceptActionPerformed
 
-    private void ContactClearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ContactClearActionPerformed
-        // TODO add your handling code here:
-        clearFields();
-    }//GEN-LAST:event_ContactClearActionPerformed
-
     private void LstNumsTelfKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_LstNumsTelfKeyTyped
         // TODO add your handling code here:
         char c = evt.getKeyChar();
@@ -427,6 +422,11 @@ public class GuiContacto extends javax.swing.JFrame {
             evt.consume();
         }
     }//GEN-LAST:event_LstNumsTelfKeyTyped
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        clearFields();
+    }//GEN-LAST:event_jButton1ActionPerformed
     public void clearFields() {
         this.ContDesc.setText("");
         this.LstNumsTelf.removeAll();
@@ -454,20 +454,20 @@ public class GuiContacto extends javax.swing.JFrame {
 //                }
 //            }
 //        } catch (ClassNotFoundException ex) {
-//            java.util.logging.Logger.getLogger(GuiContacto.class.getNombr()).log(java.util.logging.Level.SEVERE, null, ex);
+//            java.util.logging.Logger.getLogger(GuiAñadirContacto.class.getNombr()).log(java.util.logging.Level.SEVERE, null, ex);
 //        } catch (InstantiationException ex) {
-//            java.util.logging.Logger.getLogger(GuiContacto.class.getNombr()).log(java.util.logging.Level.SEVERE, null, ex);
+//            java.util.logging.Logger.getLogger(GuiAñadirContacto.class.getNombr()).log(java.util.logging.Level.SEVERE, null, ex);
 //        } catch (IllegalAccessException ex) {
-//            java.util.logging.Logger.getLogger(GuiContacto.class.getNombr()).log(java.util.logging.Level.SEVERE, null, ex);
+//            java.util.logging.Logger.getLogger(GuiAñadirContacto.class.getNombr()).log(java.util.logging.Level.SEVERE, null, ex);
 //        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-//            java.util.logging.Logger.getLogger(GuiContacto.class.getNombr()).log(java.util.logging.Level.SEVERE, null, ex);
+//            java.util.logging.Logger.getLogger(GuiAñadirContacto.class.getNombr()).log(java.util.logging.Level.SEVERE, null, ex);
 //        }
 //        //</editor-fold>
 //
 //        /* Create and display the form */
 //        java.awt.EventQueue.invokeLater(new Runnable() {
 //            public void run() {
-//                new GuiContacto().setVisible(true);
+//                new GuiAñadirContacto().setVisible(true);
 //            }
 //        });
 //    }
@@ -479,7 +479,6 @@ public class GuiContacto extends javax.swing.JFrame {
     private javax.swing.JTextArea ContDesc;
     private javax.swing.JButton ContactAcept;
     private javax.swing.JButton ContactCancel;
-    private javax.swing.JButton ContactClear;
     private javax.swing.JPanel Desc;
     private javax.swing.JLabel LblApp1;
     private javax.swing.JLabel LblApp2;
@@ -495,6 +494,7 @@ public class GuiContacto extends javax.swing.JFrame {
     private javax.swing.JTextField TxtBirthDay;
     private javax.swing.JTextField TxtMail;
     private javax.swing.JTextField TxtName;
+    private javax.swing.JButton jButton1;
     private javax.swing.JScrollPane jScrollPane1;
     // End of variables declaration//GEN-END:variables
 }

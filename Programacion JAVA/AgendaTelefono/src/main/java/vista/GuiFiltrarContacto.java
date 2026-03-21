@@ -237,11 +237,6 @@ public class GuiFiltrarContacto extends javax.swing.JFrame {
         HashSet<Contacto> resultados = null;
         resultados = new HashSet<>();
         resultados.addAll(Contacto.filtrarContactos(listaContactos, nombreBuscado, app1Buscado, app2Buscado, mailBuscado, telBuscado));
-        System.out.println("Debug resultados");
-        for (Contacto resultado : resultados) {
-            System.out.println(resultado.toString());
-        }
-
         this.guiPadre.updateListaContacto(resultados);
 
 

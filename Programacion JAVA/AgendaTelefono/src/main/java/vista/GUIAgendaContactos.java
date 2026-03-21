@@ -19,7 +19,7 @@ public class GUIAgendaContactos extends javax.swing.JFrame {
 
     private DefaultListModel<Contacto> modListaContacto;
     private HashMap<Integer, Contacto> listaContactos;
-    private final GuiContacto guiAddContact;
+    private final GuiAñadirContacto guiAddContact;
     private final GuiFiltrarContacto guiFilterContact;
     private final GUIListarContactos guiListarContactos;
 
@@ -31,7 +31,7 @@ public class GUIAgendaContactos extends javax.swing.JFrame {
         initComponents();
         setFrame();
         this.guiFilterContact = new GuiFiltrarContacto(listaContactos, this);
-        this.guiAddContact = new GuiContacto(listaContactos, this);
+        this.guiAddContact = new GuiAñadirContacto(listaContactos, this);
         this.guiListarContactos = new GUIListarContactos(listaContactos, this);
     }
 
@@ -99,9 +99,19 @@ public class GUIAgendaContactos extends javax.swing.JFrame {
         OptContacto.add(Buscar);
 
         Modificar.setText("Modificar");
+        Modificar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ModificarActionPerformed(evt);
+            }
+        });
         OptContacto.add(Modificar);
 
         Borrar.setText("Borrar");
+        Borrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BorrarActionPerformed(evt);
+            }
+        });
         OptContacto.add(Borrar);
 
         jMenuBar1.add(OptContacto);
@@ -142,6 +152,7 @@ public class GUIAgendaContactos extends javax.swing.JFrame {
     private void BuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BuscarActionPerformed
         // TODO add your handling code here:
         this.guiFilterContact.clearFields();
+        guiFilterContact.setTitle("Buscar contacto");
         guiFilterContact.setVisible(true);
 
     }//GEN-LAST:event_BuscarActionPerformed
@@ -172,9 +183,44 @@ public class GUIAgendaContactos extends javax.swing.JFrame {
                         + selectContacto.hashCode()
                 );
             }
-            JlistContactos.clearSelection();
         }
     }//GEN-LAST:event_JlistContactosValueChanged
+
+    private void BorrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BorrarActionPerformed
+        // TODO add your handling code here:
+        Contacto contactoParaEliminar = JlistContactos.getSelectedValue();
+        if (contactoParaEliminar == null) {
+            JOptionPane.showMessageDialog(this, "Debes seleccionar un contacto para eliminarlo", "ERROR", 0);
+            this.Buscar.doClick();
+        } else {
+            if (listaContactos.remove(contactoParaEliminar.hashCode(), contactoParaEliminar)) {
+                JOptionPane.showMessageDialog(this, "Contacto eliminado con éxito", "Informacion", 1);
+                updateListaContacto(listaContactos);
+            } else {
+                JOptionPane.showMessageDialog(this, "Error no se ha encontrado un contacto para eliminarlo", "ERROR", 0);
+            }
+        }
+
+
+    }//GEN-LAST:event_BorrarActionPerformed
+
+    private void ModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ModificarActionPerformed
+        // TODO add your handling code here:
+        Contacto contactoParaModificar = JlistContactos.getSelectedValue();
+        if (contactoParaModificar == null) {
+            JOptionPane.showMessageDialog(this, "Debes seleccionar un contacto para modificarlo", "ERROR", 0);
+            this.Buscar.doClick();
+        } else {
+            if (!listaContactos.remove(contactoParaModificar.hashCode(), contactoParaModificar)) {
+                JOptionPane.showMessageDialog(this, "Error no se ha encontrado un contacto para eliminarlo", "ERROR", 0);
+            } else {
+                JOptionPane.showMessageDialog(this, "Contacto eliminado con éxito", "Informacion", 1);
+                Contacto cModificado = contactoParaModificar.clone();
+                this.guiAddContact.setVisible(true);
+                
+            }
+        }
+    }//GEN-LAST:event_ModificarActionPerformed
 
     public void updateListaContacto(HashMap<Integer, Contacto> listaContactos) {
         this.modListaContacto = new DefaultListModel<>();

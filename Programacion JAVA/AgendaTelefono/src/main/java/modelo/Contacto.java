@@ -33,6 +33,12 @@ public class Contacto {
 
         compContacto = Comparator.comparing((Contacto c) -> 0);
     }
+    private Contacto(String nombre, HashSet<String> numTelf, LocalDateTime fechaAñadido) {
+        this.fechaAñadido = fechaAñadido;
+        this.lstNumTelf = numTelf;
+        this.nombre = nombre;
+        compContacto = Comparator.comparing((Contacto c) -> 0);
+    }
 
     public void ordenarNombreAsc(ArrayList<Contacto> listaContactos) {
         Collections.sort(listaContactos,
@@ -270,6 +276,12 @@ public class Contacto {
 
     public void setLstNumTelf(HashSet<String> lstNumTelf) {
         this.lstNumTelf = lstNumTelf;
+    }
+
+    
+    @Override
+    public Contacto clone()  {
+        return new Contacto(nombre, lstNumTelf, this.fechaAñadido);
     }
     
     
