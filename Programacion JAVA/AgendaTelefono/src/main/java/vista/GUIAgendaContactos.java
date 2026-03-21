@@ -4,7 +4,8 @@
  */
 package vista;
 
-import java.util.ArrayList;
+import com.formdev.flatlaf.FlatDarkLaf;
+import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
 import java.util.HashSet;
 import javax.swing.DefaultListModel;
@@ -27,6 +28,7 @@ public class GUIAgendaContactos extends javax.swing.JFrame {
      * Creates new form GUIAgendaContactos
      */
     public GUIAgendaContactos(HashMap<Integer, Contacto> listaContactos) {
+        FlatDarkLaf.setup();
         this.listaContactos = listaContactos;
         initComponents();
         setFrame();
@@ -38,7 +40,6 @@ public class GUIAgendaContactos extends javax.swing.JFrame {
     private void setFrame() {
         this.setLocationRelativeTo(null);
         this.setTitle("Agenda de contactos");
-
         modListaContacto = new DefaultListModel<>();
         this.JlistContactos.setModel(modListaContacto);
         /* Set the Nimbus look and feel */
@@ -160,7 +161,6 @@ public class GUIAgendaContactos extends javax.swing.JFrame {
     private void VaciarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_VaciarActionPerformed
         // TODO add your handling code here:
         if (JOptionPane.showConfirmDialog(this, "Vaciar lista de contactos", "Confirmacion", JOptionPane.YES_NO_OPTION) == 1) {
-            System.out.println("No");
         } else {
             this.listaContactos.clear();
             updateListaContacto(listaContactos);
@@ -180,7 +180,7 @@ public class GUIAgendaContactos extends javax.swing.JFrame {
             if (selectContacto != null) {
                 System.out.println(selectContacto);
                 this.LabelIdContacto.setText("  ID Contacto: "
-                        + selectContacto.hashCode()
+                        + selectContacto.hashCode() + selectContacto.getFechaAñadido().format(DateTimeFormatter.ofPattern("EEEE dd 'de' MMMM 'de' yyyy HH:mm:ss.SSSSSSSSS"))
                 );
             }
         }
@@ -206,18 +206,20 @@ public class GUIAgendaContactos extends javax.swing.JFrame {
 
     private void ModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ModificarActionPerformed
         // TODO add your handling code here:
-        Contacto contactoParaModificar = JlistContactos.getSelectedValue();
-        if (contactoParaModificar == null) {
+        Contacto cPm = JlistContactos.getSelectedValue();
+        if (cPm == null) {
             JOptionPane.showMessageDialog(this, "Debes seleccionar un contacto para modificarlo", "ERROR", 0);
             this.Buscar.doClick();
         } else {
-            if (!listaContactos.remove(contactoParaModificar.hashCode(), contactoParaModificar)) {
+            if (!listaContactos.containsValue(cPm)) {
                 JOptionPane.showMessageDialog(this, "Error no se ha encontrado un contacto para eliminarlo", "ERROR", 0);
             } else {
-                JOptionPane.showMessageDialog(this, "Contacto eliminado con éxito", "Informacion", 1);
-                Contacto cModificado = contactoParaModificar.clone();
-                this.guiAddContact.setVisible(true);
-                
+                DateTimeFormatter f = DateTimeFormatter.ofPattern("dd/MM/uuuu");
+                GuiEditarContacto guiModificarContacto = new GuiEditarContacto(listaContactos, this, cPm) {
+                };
+
+                guiModificarContacto.setVisible(true);
+
             }
         }
     }//GEN-LAST:event_ModificarActionPerformed

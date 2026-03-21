@@ -4,6 +4,7 @@
  */
 package vista;
 
+import com.formdev.flatlaf.FlatDarkLaf;
 import java.util.HashMap;
 import modelo.Contacto;
 
@@ -23,6 +24,7 @@ public class GUIListarContactos extends javax.swing.JFrame {
      * @param guiPadre
      */
     public GUIListarContactos(HashMap<Integer, Contacto> listaContactos, GUIAgendaContactos guiPadre) {
+        FlatDarkLaf.setup();
         this.guiPadre = guiPadre;
         this.listaContactos = listaContactos;
         initComponents();

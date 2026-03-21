@@ -19,25 +19,38 @@ import modelo.Contacto;
  *
  * @author goncalda
  */
-public class GuiAñadirContacto extends javax.swing.JFrame {
-
+public class GuiEditarContacto extends javax.swing.JFrame {
     private HashMap<Integer, Contacto> listaContactos;
     private GUIAgendaContactos guiPadre;
+    private Contacto contactoPreviaModificacion;
+
     /**
      * Creates new form AgregarContacto
      */
-    public GuiAñadirContacto(HashMap<Integer, Contacto> listaContactos,GUIAgendaContactos guiPadre) {
+    public GuiEditarContacto(HashMap<Integer, Contacto> listaContactos, GUIAgendaContactos guiPadre, Contacto contactoPreviaModificacion) {
         FlatDarkLaf.setup();
         this.listaContactos = listaContactos;
-        this.guiPadre =guiPadre;
+        this.guiPadre = guiPadre;
+        this.contactoPreviaModificacion = contactoPreviaModificacion;
         initComponents();
         setFrame();
     }
 
     private void setFrame() {
         this.setLocationRelativeTo(null);
-        this.setTitle("");
+        setTitle("Editar contacto");
         this.setAlwaysOnTop(false);
+
+        this.clearFields();
+        DateTimeFormatter f = DateTimeFormatter.ofPattern("dd/MM/uuuu");
+        this.setTxtName(contactoPreviaModificacion.getNombre());
+        this.setTxtApp1(contactoPreviaModificacion.getApellido1());
+        this.setTxtApp2(contactoPreviaModificacion.getApellido2());
+        this.setTxtMail(contactoPreviaModificacion.getCorreo());
+        this.setTxtBirthDay(
+                contactoPreviaModificacion.getFechacumpleaños() == null ? "" : contactoPreviaModificacion.getFechacumpleaños().format(f)
+        );
+        this.setLstNumsTelf(contactoPreviaModificacion.getLstNumTelf());
     }
 
     /**
@@ -228,7 +241,7 @@ public class GuiAñadirContacto extends javax.swing.JFrame {
 
         ConfBtn.setLayout(new java.awt.GridLayout(1, 0));
 
-        ContactAcept.setText("Aceptar");
+        ContactAcept.setText("Modificar");
         ContactAcept.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 ContactAceptActionPerformed(evt);
@@ -317,13 +330,13 @@ public class GuiAñadirContacto extends javax.swing.JFrame {
         cumpleAñosString = this.TxtBirthDay.getText().trim();
         emailString = this.TxtMail.getText().trim();
         numTelfString = this.LstNumsTelf.getText();
-        
+
         if (nombreString == null || nombreString.isBlank() || nombreString.length() == 0) {
             JOptionPane.showMessageDialog(null, "El nombre no puede estar vacio", "ERROR", 1);
             this.TxtName.requestFocus();
             return;
         }
-        if (app1String.isBlank()&&!app2String.isBlank()) {
+        if (app1String.isBlank() && !app2String.isBlank()) {
             JOptionPane.showMessageDialog(null, "Debes introducir el primer apellido antes", "ERROR", 1);
             this.TxtApp1.requestFocus();
             return;
@@ -349,7 +362,6 @@ public class GuiAñadirContacto extends javax.swing.JFrame {
                         telefonos.add(telNormalizado);  // guarda la versión normalizada
                     }
 
-                   
                 }
             }
         } else {
@@ -376,8 +388,9 @@ public class GuiAñadirContacto extends javax.swing.JFrame {
             LstNumsTelf.requestFocus();
             return;
         }
-        Contacto newContact = new Contacto(nombreString, telefonos);
+        Contacto newContact = this.contactoPreviaModificacion.clone();
         newContact.setNombre(nombreString);
+        newContact.setLstNumTelf(telefonos);
 
         try {
             if (!emailString.isBlank()) {
@@ -391,29 +404,29 @@ public class GuiAñadirContacto extends javax.swing.JFrame {
             try {
 
                 if (!cumpleAñosString.isBlank()) {
-            DateTimeFormatter f = DateTimeFormatter.ofPattern("dd/MM/uuuu")
-                    .withResolverStyle(ResolverStyle.STRICT);
-            LocalDate fecha = LocalDate.parse(cumpleAñosString, f);
-            newContact.setFechacumpleaños(fecha); }
-        } catch (Exception ex) {
-            // aquí te “salta” si la fecha es inválida
-            JOptionPane.showMessageDialog(this, "Fecha de cumpleaños inválida: " + cumpleAñosString);
-            return;
-        }
+                    DateTimeFormatter f = DateTimeFormatter.ofPattern("dd/MM/uuuu")
+                            .withResolverStyle(ResolverStyle.STRICT);
+                    LocalDate fecha = LocalDate.parse(cumpleAñosString, f);
+                    newContact.setFechacumpleaños(fecha);
+                }
+            } catch (Exception ex) {
+                // aquí te “salta” si la fecha es inválida
+                JOptionPane.showMessageDialog(this, "Fecha de cumpleaños inválida: " + cumpleAñosString);
+                return;
+            }
             newContact.setDescripcion(descString);
             newContact.setApellido1(app1String);
             newContact.setApellido2(app2String);
 
         }
-        if (!listaContactos.containsValue(newContact)) {
-            listaContactos.put(newContact.hashCode(), newContact);
-        } else {System.out.println("DEBUG Contacto repetido");}
-        if (listaContactos.isEmpty()) {
-            System.out.println("Lista de contactos vacia");
-        } else {
+        listaContactos.remove(contactoPreviaModificacion.hashCode());
+        listaContactos.put(newContact.hashCode(), newContact);
+        JOptionPane.showMessageDialog(this, "Contacto modificado con éxito", "Informacion", 1);
+        if (!listaContactos.isEmpty()) {
             System.out.println(listaContactos);
             this.guiPadre.updateListaContacto(listaContactos);
-        }
+        } 
+        this.dispose();
     }//GEN-LAST:event_ContactAceptActionPerformed
 
     private void LstNumsTelfKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_LstNumsTelfKeyTyped
@@ -439,6 +452,7 @@ public class GuiAñadirContacto extends javax.swing.JFrame {
         this.TxtApp2.setText("");
         this.TxtBirthDay.setText("");
     }
+
     /**
      * @param args the command line arguments
      */
@@ -473,7 +487,6 @@ public class GuiAñadirContacto extends javax.swing.JFrame {
 //            }
 //        });
 //    }
-    
     public void setContDesc(String descripcion) {
         this.ContDesc.setText(descripcion);
     }
@@ -498,12 +511,11 @@ public class GuiAñadirContacto extends javax.swing.JFrame {
         this.TxtMail.setText(email);
     }
 
-
     public void setTxtName(String nombre) {
         this.TxtName.setText(nombre);
-    }    
-    
-        /**
+    }
+
+    /**
      * @param args the command line arguments
      */
 //    public static void main(String args[]) {
@@ -537,7 +549,6 @@ public class GuiAñadirContacto extends javax.swing.JFrame {
 //            }
 //        });
 //    }
-    
     /**
      * @param args the command line arguments
      */
@@ -574,7 +585,7 @@ public class GuiAñadirContacto extends javax.swing.JFrame {
 //    }
     public void setContactAcept(String textoBoton1) {
         this.ContactAcept.setText(textoBoton1);
-    }    
+    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel CampoA;
     private javax.swing.JPanel CampoB;
