@@ -5,7 +5,11 @@
 package vista;
 
 import com.formdev.flatlaf.FlatDarkLaf;
-import java.util.HashMap;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.LinkedHashMap;
 import modelo.Contacto;
 
 /**
@@ -13,8 +17,8 @@ import modelo.Contacto;
  * @author goncalda
  */
 public class GUIListarContactos extends javax.swing.JFrame {
-
-    private HashMap<Integer, Contacto> listaContactos;
+    private Comparator<Contacto> compContactos;
+    private LinkedHashMap<Integer, Contacto> listaContactos;
     private final GUIAgendaContactos guiPadre;
 
     /**
@@ -23,7 +27,7 @@ public class GUIListarContactos extends javax.swing.JFrame {
      * @param listaContactos
      * @param guiPadre
      */
-    public GUIListarContactos(HashMap<Integer, Contacto> listaContactos, GUIAgendaContactos guiPadre) {
+    public GUIListarContactos(LinkedHashMap<Integer, Contacto> listaContactos, GUIAgendaContactos guiPadre) {
         FlatDarkLaf.setup();
         this.guiPadre = guiPadre;
         this.listaContactos = listaContactos;
@@ -65,14 +69,10 @@ public class GUIListarContactos extends javax.swing.JFrame {
 
         jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Ascendente", "Descendente" }));
 
-        ActivadorAlfabetico.setText("jCheckBox2");
-
         jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jLabel1.setText("Fecha");
 
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Ascendente", "Descendente" }));
-
-        ActivadorFechaAdicion.setText("jCheckBox1");
 
         javax.swing.GroupLayout ContSelectoresLayout = new javax.swing.GroupLayout(ContSelectores);
         ContSelectores.setLayout(ContSelectoresLayout);
@@ -119,6 +119,11 @@ public class GUIListarContactos extends javax.swing.JFrame {
         jPanel1.setLayout(new java.awt.GridLayout(1, 0));
 
         jButton1.setText("Filtrar");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
         jPanel1.add(jButton1);
 
         jButton2.setText("Cancelar");
@@ -134,12 +139,12 @@ public class GUIListarContactos extends javax.swing.JFrame {
         BaseLayout.setHorizontalGroup(
             BaseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(BaseLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(ContSelectores, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(BaseLayout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 357, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
+            .addGroup(BaseLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(ContSelectores, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
         BaseLayout.setVerticalGroup(
             BaseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -173,6 +178,19 @@ public class GUIListarContactos extends javax.swing.JFrame {
         // TODO add your handling code here:
         this.dispose();
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        System.out.println();
+        if (this.ActivadorFechaAdicion.isSelected()) {
+            ArrayList<Contacto> contactosOrdenados = new ArrayList<>(listaContactos.values());
+            Collections.sort(contactosOrdenados, compContactos.thenComparing(Contacto::getNombre));
+            if (this.jComboBox1.getSelectedIndex()==1) {
+                
+            }
+            
+        }
+    }//GEN-LAST:event_jButton1ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

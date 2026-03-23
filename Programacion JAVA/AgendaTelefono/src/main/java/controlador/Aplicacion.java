@@ -1,13 +1,10 @@
 package controlador;
 
 import com.formdev.flatlaf.FlatDarkLaf;
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import modelo.Contacto;
-import vista.GuiAñadirContacto;
 import vista.GUIAgendaContactos;
-import vista.GuiFiltrarContacto;
 
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
@@ -21,8 +18,8 @@ public class Aplicacion {
 
     public static void main(String args[]) {
 
-        HashMap<Integer, Contacto> listaContactos;
-        listaContactos = new HashMap<>() {
+        LinkedHashMap<Integer, Contacto> listaContactos;
+        listaContactos = new LinkedHashMap<>() {
             @Override
             /**
              * Override al metodo to string de la lista de contactos para dar un

@@ -7,10 +7,11 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.LinkedHashMap;
+import java.util.LinkedHashSet;
 import java.util.Objects;
 
 /**
@@ -18,10 +19,9 @@ import java.util.Objects;
  * @author goncalda
  */
 public class Contacto {
-
-    private final Comparator<Contacto> compContacto;
+    
     private LocalDateTime fechaAñadido;
-    private LocalDate fechacumpleaños;
+    private LocalDate fechaNacimiento;
     private String nombre, apellido1, apellido2, correo, descripcion;
     private HashSet<String> lstNumTelf;
 //    private HashMap<String, String> socials = new HashMap<>();
@@ -31,31 +31,36 @@ public class Contacto {
         this.lstNumTelf = numTelf;
         this.nombre = nombre;
 
-        compContacto = Comparator.comparing((Contacto c) -> 0);
+        
     }
+
     private Contacto(String nombre, HashSet<String> numTelf, LocalDateTime fechaAñadido) {
         this.fechaAñadido = fechaAñadido;
         this.lstNumTelf = numTelf;
         this.nombre = nombre;
-        compContacto = Comparator.comparing((Contacto c) -> 0);
     }
 
-    public void ordenarNombreAsc(ArrayList<Contacto> listaContactos) {
-        Collections.sort(listaContactos,
-                compContacto.
-                        thenComparing(Contacto::getNombre).
-                        thenComparing(Contacto::getApellido1).
-                        thenComparing(Contacto::getApellido2)
+    public static void ordenarNombreAsc(LinkedHashMap<Integer,Contacto> set) {
+        // Copiamos a lista
+        ArrayList<Contacto> contactosOrdenados = new ArrayList<>(set.values());
+
+        // Orden: nombre → apellido1 → apellido2 (case-insensitive)
+        contactosOrdenados.sort(
+                Comparator.comparing(Contacto::getNombre, String.CASE_INSENSITIVE_ORDER)
+                        .thenComparing(Contacto::getApellido1, String.CASE_INSENSITIVE_ORDER)
+                        .thenComparing(Contacto::getApellido2, String.CASE_INSENSITIVE_ORDER)
         );
+        set.clear();
+        for (Contacto contacto : contactosOrdenados) {
+         set.put(contacto.hashCode(), contacto);
+        }
+        
     }
-    public void ordenarFechaAsc(ArrayList<Contacto> listaContactos) {
-        Collections.sort(listaContactos,
-                compContacto.
-                        thenComparing(Contacto::getFechaAñadido));
-    }
+    
 
     
 
+    
 
     @Override
     public String toString() {
@@ -67,13 +72,13 @@ public class Contacto {
         if (apellido2 != null && !apellido2.isEmpty() && !apellido2.isBlank()) {
             sb.append(", Segundo apellido: ").append(apellido2);
         }
-        if (fechacumpleaños != null) {
+        if (fechaNacimiento != null) {
             DateTimeFormatter f = DateTimeFormatter.ofPattern("dd/MM/uuuu");
-            sb.append(", Cumplea\u00f1os: ").append(fechacumpleaños.format(f));
+            sb.append(", Fecha de nacimiento: ").append(fechaNacimiento.format(f));
         }
 
         sb.append(", Numeros de contacto: ");
-        sb.append(String.join(",",lstNumTelf ));
+        sb.append(String.join(",", lstNumTelf));
 
         if (correo != null) {
             if (!correo.isBlank()) {
@@ -82,26 +87,18 @@ public class Contacto {
         }
         if (descripcion != null) {
             if (!descripcion.isBlank()) {
-                sb.append(", Descripcion: ").append(descripcion);
+                sb.append(", Descripcion: \"").append(descripcion).append('"');
             }
         }
-        
+
         return sb.toString();
     }
 
-   
-
-    
-
-    
-
-   
-    
     @Override
     public int hashCode() {
         int hash = 3;
         hash = 59 * hash + Objects.hashCode(this.fechaAñadido);
-        hash = 59 * hash + Objects.hashCode(this.fechacumpleaños);
+        hash = 59 * hash + Objects.hashCode(this.fechaNacimiento);
         hash = 59 * hash + Objects.hashCode(this.nombre);
         hash = 59 * hash + Objects.hashCode(this.apellido1);
         hash = 59 * hash + Objects.hashCode(this.apellido2);
@@ -121,8 +118,8 @@ public class Contacto {
             return false;
         }
         /**
-         * En teoria si absolutamente toda la lista de telefonos coincide
-         * Los contactos se pueden mergear
+         * En teoria si absolutamente toda la lista de telefonos coincide Los
+         * contactos se pueden mergear
          */
         if (this.lstNumTelf.equals(other.lstNumTelf)) {
             return true;
@@ -139,7 +136,7 @@ public class Contacto {
          */
         //Uso to array en la lista de telefonos porque 
         int hashThis = 3;
-        hashThis = 59 * hashThis + Objects.hashCode(this.fechacumpleaños);
+        hashThis = 59 * hashThis + Objects.hashCode(this.fechaNacimiento);
         hashThis = 59 * hashThis + Objects.hashCode(this.nombre);
         hashThis = 59 * hashThis + Objects.hashCode(this.apellido1);
         hashThis = 59 * hashThis + Objects.hashCode(this.apellido2);
@@ -147,7 +144,7 @@ public class Contacto {
         hashThis = 59 * hashThis + Objects.hashCode(this.lstNumTelf.toArray());
 
         int hashOther = 3;
-        hashOther = 59 * hashOther + Objects.hashCode(other.fechacumpleaños);
+        hashOther = 59 * hashOther + Objects.hashCode(other.fechaNacimiento);
         hashOther = 59 * hashOther + Objects.hashCode(other.nombre);
         hashOther = 59 * hashOther + Objects.hashCode(other.apellido1);
         hashOther = 59 * hashOther + Objects.hashCode(other.apellido2);
@@ -157,63 +154,64 @@ public class Contacto {
         return (hashThis == hashOther);
 
     }
-    
-    
+
     public static ArrayList<Contacto> filtrarContactos(HashMap<?, Contacto> listaContactos, String nombreBuscado, String app1Buscado, String app2Buscado, String mailBuscado, String telfBuscado) {
-    ArrayList<Contacto> resultados = new ArrayList<>();
-    
-    // Normalizamos las búsquedas a minúsculas y sin espacios
-    String nombre = nombreBuscado.trim().toLowerCase();
-    String apellido1 = app1Buscado.trim().toLowerCase();
-    String apellido2 = app2Buscado.trim().toLowerCase();
-    String eMail = mailBuscado.trim().toLowerCase();
-    String telefono = telfBuscado.trim();
+        ArrayList<Contacto> resultados = new ArrayList<>();
 
-    for (Contacto contacto : listaContactos.values()) {
-        boolean coincide = true;
+        // Normalizamos las búsquedas a minúsculas y sin espacios
+        String nombre = nombreBuscado.trim().toLowerCase();
+        String apellido1 = app1Buscado.trim().toLowerCase();
+        String apellido2 = app2Buscado.trim().toLowerCase();
+        String eMail = mailBuscado.trim().toLowerCase();
+        String telefono = telfBuscado.trim();
 
-        // Filtro de Nombre
-        if (!nombre.isEmpty() && (contacto.getNombre() == null || !contacto.getNombre().toLowerCase().contains(nombre))) {
-            coincide = false;
-        }
-        // Filtro de Apellido 1
-        if (coincide && !apellido1.isEmpty() && (contacto.getApellido1() == null || !contacto.getApellido1().toLowerCase().contains(apellido1))) {
-            coincide = false;
-        }
-        // Filtro de Apellido 2
-        if (coincide && !apellido2.isEmpty() && (contacto.getApellido2() == null || !contacto.getApellido2().toLowerCase().contains(apellido2))) {
-            coincide = false;
-        }
-        // Filtro de Email
-        if (coincide && !eMail.isEmpty() && (contacto.getCorreo() == null || !contacto.getCorreo().toLowerCase().contains(eMail))) {
-            coincide = false;
-        }
-        // Filtro de Teléfono
-        if (coincide && !telefono.isEmpty()) {
-            boolean telEncontrado = false;
-            for (String telefonos : contacto.getLstNumTelf()) {
-                if (telefonos.contains(telefono)) {
-                    telEncontrado = true;
-                    break;
+        for (Contacto contacto : listaContactos.values()) {
+            boolean coincide = true;
+
+            // Filtro de Nombre
+            if (!nombre.isEmpty() && (contacto.getNombre() == null || !contacto.getNombre().toLowerCase().contains(nombre))) {
+                coincide = false;
+            }
+            // Filtro de Apellido 1
+            if (coincide && !apellido1.isEmpty() && (contacto.getApellido1() == null || !contacto.getApellido1().toLowerCase().contains(apellido1))) {
+                coincide = false;
+            }
+            // Filtro de Apellido 2
+            if (coincide && !apellido2.isEmpty() && (contacto.getApellido2() == null || !contacto.getApellido2().toLowerCase().contains(apellido2))) {
+                coincide = false;
+            }
+            // Filtro de Email
+            if (coincide && !eMail.isEmpty() && (contacto.getCorreo() == null || !contacto.getCorreo().toLowerCase().contains(eMail))) {
+                coincide = false;
+            }
+            // Filtro de Teléfono
+            if (coincide && !telefono.isEmpty()) {
+                boolean telEncontrado = false;
+                for (String telefonos : contacto.getLstNumTelf()) {
+                    if (telefonos.contains(telefono)) {
+                        telEncontrado = true;
+                        break;
+                    }
+                }
+                if (!telEncontrado) {
+                    coincide = false;
                 }
             }
-            if (!telEncontrado) coincide = false;
-        }
 
-        // Solo si ha pasado todos los filtros activos se añade
-        if (coincide) {
-            resultados.add(contacto);
+            // Solo si ha pasado todos los filtros activos se añade
+            if (coincide) {
+                resultados.add(contacto);
+            }
         }
+        return resultados;
     }
-    return resultados;
-}
 
     public LocalDateTime getFechaAñadido() {
         return fechaAñadido;
     }
 
     public LocalDate getFechacumpleaños() {
-        return fechacumpleaños;
+        return fechaNacimiento;
     }
 
     public String getNombre() {
@@ -245,7 +243,7 @@ public class Contacto {
     }
 
     public void setFechacumpleaños(LocalDate fechacumpleaños) {
-        this.fechacumpleaños = fechacumpleaños;
+        this.fechaNacimiento = fechacumpleaños;
     }
 
     public void setNombre(String nombre) {
@@ -269,7 +267,7 @@ public class Contacto {
             throw new Exception();
         }
     }
-    
+
     public void setDescripcion(String descripcion) {
         this.descripcion = descripcion;
     }
@@ -278,12 +276,9 @@ public class Contacto {
         this.lstNumTelf = lstNumTelf;
     }
 
-    
     @Override
-    public Contacto clone()  {
+    public Contacto clone() {
         return new Contacto(nombre, lstNumTelf, this.fechaAñadido);
     }
-    
-    
-    
+
 }

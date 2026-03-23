@@ -7,6 +7,7 @@ package vista;
 import com.formdev.flatlaf.FlatDarkLaf;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.LinkedHashMap;
 import modelo.Contacto;
 
 /**
@@ -19,12 +20,12 @@ public class GuiFiltrarContacto extends javax.swing.JFrame {
      *
      */
     private GUIAgendaContactos guiPadre;
-    private HashMap<Integer, Contacto> listaContactos;
+    private LinkedHashMap<Integer, Contacto> listaContactos;
 
     /**
      * Creates new form AgregarContacto
      */
-    public GuiFiltrarContacto(HashMap<Integer, Contacto> listaContactos, GUIAgendaContactos guiPadre) {
+    public GuiFiltrarContacto(LinkedHashMap<Integer, Contacto> listaContactos, GUIAgendaContactos guiPadre) {
         FlatDarkLaf.setup();
         this.listaContactos = listaContactos;
         this.guiPadre = guiPadre;

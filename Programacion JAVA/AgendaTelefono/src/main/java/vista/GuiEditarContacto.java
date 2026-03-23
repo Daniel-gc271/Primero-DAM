@@ -11,6 +11,7 @@ import java.time.format.ResolverStyle;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
 import javax.swing.JOptionPane;
 import modelo.Contacto;
@@ -20,14 +21,14 @@ import modelo.Contacto;
  * @author goncalda
  */
 public class GuiEditarContacto extends javax.swing.JFrame {
-    private HashMap<Integer, Contacto> listaContactos;
+    private LinkedHashMap<Integer, Contacto> listaContactos;
     private GUIAgendaContactos guiPadre;
     private Contacto contactoPreviaModificacion;
 
     /**
      * Creates new form AgregarContacto
      */
-    public GuiEditarContacto(HashMap<Integer, Contacto> listaContactos, GUIAgendaContactos guiPadre, Contacto contactoPreviaModificacion) {
+    public GuiEditarContacto(LinkedHashMap<Integer, Contacto> listaContactos, GUIAgendaContactos guiPadre, Contacto contactoPreviaModificacion) {
         FlatDarkLaf.setup();
         this.listaContactos = listaContactos;
         this.guiPadre = guiPadre;

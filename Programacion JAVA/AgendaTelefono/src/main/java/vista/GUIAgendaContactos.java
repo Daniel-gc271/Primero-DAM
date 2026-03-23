@@ -8,6 +8,7 @@ import com.formdev.flatlaf.FlatDarkLaf;
 import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.LinkedHashMap;
 import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
 import modelo.Contacto;
@@ -19,7 +20,7 @@ import modelo.Contacto;
 public class GUIAgendaContactos extends javax.swing.JFrame {
 
     private DefaultListModel<Contacto> modListaContacto;
-    private HashMap<Integer, Contacto> listaContactos;
+    private LinkedHashMap<Integer, Contacto> listaContactos;
     private final GuiAñadirContacto guiAddContact;
     private final GuiFiltrarContacto guiFilterContact;
     private final GUIListarContactos guiListarContactos;
@@ -27,7 +28,7 @@ public class GUIAgendaContactos extends javax.swing.JFrame {
     /**
      * Creates new form GUIAgendaContactos
      */
-    public GUIAgendaContactos(HashMap<Integer, Contacto> listaContactos) {
+    public GUIAgendaContactos(LinkedHashMap<Integer, Contacto> listaContactos) {
         FlatDarkLaf.setup();
         this.listaContactos = listaContactos;
         initComponents();
@@ -180,7 +181,7 @@ public class GUIAgendaContactos extends javax.swing.JFrame {
             if (selectContacto != null) {
                 System.out.println(selectContacto);
                 this.LabelIdContacto.setText("  ID Contacto: "
-                        + selectContacto.hashCode() + selectContacto.getFechaAñadido().format(DateTimeFormatter.ofPattern("EEEE dd 'de' MMMM 'de' yyyy HH:mm:ss.SSSSSSSSS"))
+                        + selectContacto.getNombre() + selectContacto.getLstNumTelf()
                 );
             }
         }
@@ -224,7 +225,7 @@ public class GUIAgendaContactos extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_ModificarActionPerformed
 
-    public void updateListaContacto(HashMap<Integer, Contacto> listaContactos) {
+    public void updateListaContacto(LinkedHashMap<Integer, Contacto> listaContactos) {
         this.modListaContacto = new DefaultListModel<>();
         for (Contacto contacto : listaContactos.values()) {
             this.modListaContacto.addElement(contacto);
