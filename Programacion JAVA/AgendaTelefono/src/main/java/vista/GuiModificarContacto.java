@@ -20,15 +20,15 @@ import modelo.Contacto;
  *
  * @author goncalda
  */
-public class GuiEditarContacto extends javax.swing.JFrame {
+public class GuiModificarContacto extends javax.swing.JFrame {
     private LinkedHashMap<Integer, Contacto> listaContactos;
-    private GUIAgendaContactos guiPadre;
+    private GuiPrincipalAgendaContactos guiPadre;
     private Contacto contactoPreviaModificacion;
 
     /**
      * Creates new form AgregarContacto
      */
-    public GuiEditarContacto(LinkedHashMap<Integer, Contacto> listaContactos, GUIAgendaContactos guiPadre, Contacto contactoPreviaModificacion) {
+    public GuiModificarContacto(LinkedHashMap<Integer, Contacto> listaContactos, GuiPrincipalAgendaContactos guiPadre, Contacto contactoPreviaModificacion) {
         FlatDarkLaf.setup();
         this.listaContactos = listaContactos;
         this.guiPadre = guiPadre;

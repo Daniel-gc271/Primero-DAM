@@ -19,19 +19,21 @@ import java.util.Objects;
  * @author goncalda
  */
 public class Contacto {
-    
+
     private LocalDateTime fechaAñadido;
     private LocalDate fechaNacimiento;
     private String nombre, apellido1, apellido2, correo, descripcion;
     private HashSet<String> lstNumTelf;
-//    private HashMap<String, String> socials = new HashMap<>();
+//  private HashMap<String, String> socials = new HashMap<>();
+
+    public Contacto() {
+    }
 
     public Contacto(String nombre, HashSet<String> numTelf) {
         this.fechaAñadido = LocalDateTime.now();
         this.lstNumTelf = numTelf;
         this.nombre = nombre;
 
-        
     }
 
     private Contacto(String nombre, HashSet<String> numTelf, LocalDateTime fechaAñadido) {
@@ -40,7 +42,7 @@ public class Contacto {
         this.nombre = nombre;
     }
 
-    public static void ordenarNombreAsc(LinkedHashMap<Integer,Contacto> set) {
+    public static void ordenarNombreAsc(LinkedHashMap<Integer, Contacto> set) {
         // Copiamos a lista
         ArrayList<Contacto> contactosOrdenados = new ArrayList<>(set.values());
 
@@ -52,15 +54,10 @@ public class Contacto {
         );
         set.clear();
         for (Contacto contacto : contactosOrdenados) {
-         set.put(contacto.hashCode(), contacto);
+            set.put(contacto.hashCode(), contacto);
         }
-        
+
     }
-    
-
-    
-
-    
 
     @Override
     public String toString() {
@@ -156,7 +153,8 @@ public class Contacto {
     }
 
     public static ArrayList<Contacto> filtrarContactos(HashMap<?, Contacto> listaContactos, String nombreBuscado, String app1Buscado, String app2Buscado, String mailBuscado, String telfBuscado) {
-        ArrayList<Contacto> resultados = new ArrayList<>();
+        ArrayList<Contacto> resultados = null;
+        resultados = new ArrayList<>();
 
         // Normalizamos las búsquedas a minúsculas y sin espacios
         String nombre = nombreBuscado.trim().toLowerCase();
@@ -171,30 +169,36 @@ public class Contacto {
             // Filtro de Nombre
             if (!nombre.isEmpty() && (contacto.getNombre() == null || !contacto.getNombre().toLowerCase().contains(nombre))) {
                 coincide = false;
-            }
-            // Filtro de Apellido 1
-            if (coincide && !apellido1.isEmpty() && (contacto.getApellido1() == null || !contacto.getApellido1().toLowerCase().contains(apellido1))) {
-                coincide = false;
-            }
-            // Filtro de Apellido 2
-            if (coincide && !apellido2.isEmpty() && (contacto.getApellido2() == null || !contacto.getApellido2().toLowerCase().contains(apellido2))) {
-                coincide = false;
-            }
-            // Filtro de Email
-            if (coincide && !eMail.isEmpty() && (contacto.getCorreo() == null || !contacto.getCorreo().toLowerCase().contains(eMail))) {
-                coincide = false;
-            }
-            // Filtro de Teléfono
-            if (coincide && !telefono.isEmpty()) {
-                boolean telEncontrado = false;
-                for (String telefonos : contacto.getLstNumTelf()) {
-                    if (telefonos.contains(telefono)) {
-                        telEncontrado = true;
-                        break;
-                    }
-                }
-                if (!telEncontrado) {
+                continue;
+            } else {
+                if (!nombre.isEmpty() && (contacto.getNombre() == null || !contacto.getNombre().toLowerCase().contains(nombre))) {
                     coincide = false;
+                    continue;
+                } else {// Filtro de Apellido 1
+                    if (coincide && !apellido1.isEmpty() && (contacto.getApellido1() == null || !contacto.getApellido1().toLowerCase().startsWith(apellido1))) {
+                        coincide = false;
+                    } else {// Filtro de Apellido 2
+                        if (coincide && !apellido2.isEmpty() && (contacto.getApellido2() == null || !contacto.getApellido2().toLowerCase().startsWith(apellido2))) {
+                            coincide = false;
+                        } else { // Filtro de Email
+                            if (coincide && !eMail.isEmpty() && (contacto.getCorreo() == null || !contacto.getCorreo().toLowerCase().contains(eMail))) {
+                                coincide = false;
+                            } else {// Filtro de Teléfono
+                                if (coincide && !telefono.isEmpty()) {
+                                    boolean telEncontrado = false;
+                                    for (String telefonos : contacto.getLstNumTelf()) {
+                                        if (telefonos.startsWith(telefono)) {
+                                            telEncontrado = true;
+                                            break;
+                                        }
+                                    }
+                                    if (!telEncontrado) {
+                                        coincide = false;
+                                    }
+                                }
+                            }
+                        }
+                    }
                 }
             }
 
@@ -269,7 +273,7 @@ public class Contacto {
     }
 
     public void setDescripcion(String descripcion) {
-        this.descripcion = descripcion;
+        this.descripcion = descripcion.trim();
     }
 
     public void setLstNumTelf(HashSet<String> lstNumTelf) {

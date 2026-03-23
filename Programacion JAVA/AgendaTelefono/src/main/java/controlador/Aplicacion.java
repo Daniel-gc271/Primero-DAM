@@ -4,7 +4,7 @@ import com.formdev.flatlaf.FlatDarkLaf;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import modelo.Contacto;
-import vista.GUIAgendaContactos;
+import vista.GuiPrincipalAgendaContactos;
 
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
@@ -33,7 +33,7 @@ public class Aplicacion {
                 return msg;
             }
         };
-        GUIAgendaContactos mainGui = new GUIAgendaContactos(listaContactos);
+        GuiPrincipalAgendaContactos mainGui = new GuiPrincipalAgendaContactos(listaContactos);
         FlatDarkLaf.setup();
         mainGui.setVisible(true);
     }

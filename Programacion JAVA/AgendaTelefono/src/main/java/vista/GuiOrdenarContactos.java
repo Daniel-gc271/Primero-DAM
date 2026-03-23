@@ -6,7 +6,6 @@ package vista;
 
 import com.formdev.flatlaf.FlatDarkLaf;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.LinkedHashMap;
@@ -16,10 +15,11 @@ import modelo.Contacto;
  *
  * @author goncalda
  */
-public class GUIListarContactos extends javax.swing.JFrame {
+public class GuiOrdenarContactos extends javax.swing.JFrame {
+
     private Comparator<Contacto> compContactos;
     private LinkedHashMap<Integer, Contacto> listaContactos;
-    private final GUIAgendaContactos guiPadre;
+    private final GuiPrincipalAgendaContactos guiPadre;
 
     /**
      * Creates new form GUIListarContactos
@@ -27,10 +27,11 @@ public class GUIListarContactos extends javax.swing.JFrame {
      * @param listaContactos
      * @param guiPadre
      */
-    public GUIListarContactos(LinkedHashMap<Integer, Contacto> listaContactos, GUIAgendaContactos guiPadre) {
+    public GuiOrdenarContactos(LinkedHashMap<Integer, Contacto> listaContactos, GuiPrincipalAgendaContactos guiPadre) {
         FlatDarkLaf.setup();
         this.guiPadre = guiPadre;
         this.listaContactos = listaContactos;
+        compContactos = Comparator.comparing((Contacto c) -> 0);
         initComponents();
         setFrame();
     }
@@ -52,11 +53,11 @@ public class GUIListarContactos extends javax.swing.JFrame {
 
         Base = new javax.swing.JPanel();
         ContSelectores = new javax.swing.JPanel();
-        jLabel2 = new javax.swing.JLabel();
-        jComboBox2 = new javax.swing.JComboBox<>();
+        LblAlfabeto = new javax.swing.JLabel();
+        AlfabetoTipoOrden = new javax.swing.JComboBox<>();
         ActivadorAlfabetico = new javax.swing.JCheckBox();
         jLabel1 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        FechaTipoOrdenar = new javax.swing.JComboBox<>();
         ActivadorFechaAdicion = new javax.swing.JCheckBox();
         jPanel1 = new javax.swing.JPanel();
         jButton1 = new javax.swing.JButton();
@@ -64,15 +65,15 @@ public class GUIListarContactos extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
-        jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jLabel2.setText("Alfabéticamente");
+        LblAlfabeto.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        LblAlfabeto.setText("Alfabéticamente");
 
-        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Ascendente", "Descendente" }));
+        AlfabetoTipoOrden.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Ascendente", "Descendente" }));
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jLabel1.setText("Fecha");
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Ascendente", "Descendente" }));
+        FechaTipoOrdenar.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Ascendente", "Descendente" }));
 
         javax.swing.GroupLayout ContSelectoresLayout = new javax.swing.GroupLayout(ContSelectores);
         ContSelectores.setLayout(ContSelectoresLayout);
@@ -81,12 +82,12 @@ public class GUIListarContactos extends javax.swing.JFrame {
             .addGroup(ContSelectoresLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(ContSelectoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(LblAlfabeto, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(ContSelectoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jComboBox1, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jComboBox2, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(FechaTipoOrdenar, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(AlfabetoTipoOrden, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(ContSelectoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(ActivadorFechaAdicion, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -101,15 +102,15 @@ public class GUIListarContactos extends javax.swing.JFrame {
                     .addGroup(ContSelectoresLayout.createSequentialGroup()
                         .addGap(3, 3, 3)
                         .addGroup(ContSelectoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jComboBox1)
+                            .addComponent(FechaTipoOrdenar)
                             .addComponent(ActivadorFechaAdicion, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                     .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(ContSelectoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
                     .addGroup(ContSelectoresLayout.createSequentialGroup()
                         .addGap(3, 3, 3)
-                        .addComponent(jComboBox2))
-                    .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(AlfabetoTipoOrden))
+                    .addComponent(LblAlfabeto, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(ContSelectoresLayout.createSequentialGroup()
                         .addGap(5, 5, 5)
                         .addComponent(ActivadorAlfabetico, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
@@ -118,7 +119,7 @@ public class GUIListarContactos extends javax.swing.JFrame {
 
         jPanel1.setLayout(new java.awt.GridLayout(1, 0));
 
-        jButton1.setText("Filtrar");
+        jButton1.setText("Ordenar");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
@@ -181,29 +182,55 @@ public class GUIListarContactos extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        System.out.println();
-        if (this.ActivadorFechaAdicion.isSelected()) {
-            ArrayList<Contacto> contactosOrdenados = new ArrayList<>(listaContactos.values());
-            Collections.sort(contactosOrdenados, compContactos.thenComparing(Contacto::getNombre));
-            if (this.jComboBox1.getSelectedIndex()==1) {
-                
+        ArrayList<Contacto> contactosOrdenados = new ArrayList<>(listaContactos.values());
+        if (this.ActivadorAlfabetico.isSelected()) {
+            System.out.println("Listar alfabetico");
+            System.out.println(this.AlfabetoTipoOrden.getSelectedIndex());
+
+            Collections.sort(contactosOrdenados, compContactos
+                    .thenComparing(Contacto::getNombre)
+                    .thenComparing(Contacto::getApellido1)
+                    .thenComparing(Contacto::getApellido2)
+            );
+            if (this.AlfabetoTipoOrden.getSelectedIndex() == 1) {
+                Collections.reverse(contactosOrdenados);
+                System.out.println("Reversed");
             }
-            
+            System.out.println("Alfabetico");
+            guiPadre.updateListaContacto(contactosOrdenados);
+
         }
+
+        if (this.ActivadorFechaAdicion.isSelected()) {
+            System.out.println("Listar fecha");
+            System.out.println(this.FechaTipoOrdenar.getSelectedIndex());
+
+            Collections.sort(contactosOrdenados, compContactos
+                    .thenComparing(Contacto::getFechaAñadido)
+            );
+            if (this.FechaTipoOrdenar.getSelectedIndex() == 1) {
+                Collections.reverse(contactosOrdenados);
+                System.out.println("Reversed");
+            }
+            System.out.println("Por fechas");
+            guiPadre.updateListaContacto(contactosOrdenados);
+
+        }
+
     }//GEN-LAST:event_jButton1ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JCheckBox ActivadorAlfabetico;
     private javax.swing.JCheckBox ActivadorFechaAdicion;
+    private javax.swing.JComboBox<String> AlfabetoTipoOrden;
     private javax.swing.JPanel Base;
     private javax.swing.JPanel ContSelectores;
+    private javax.swing.JComboBox<String> FechaTipoOrdenar;
+    private javax.swing.JLabel LblAlfabeto;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
-    private javax.swing.JComboBox<String> jComboBox1;
-    private javax.swing.JComboBox<String> jComboBox2;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     // End of variables declaration//GEN-END:variables
 }

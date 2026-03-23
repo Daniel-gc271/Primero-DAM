@@ -8,24 +8,26 @@ import com.formdev.flatlaf.FlatDarkLaf;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedHashMap;
+import javax.swing.JOptionPane;
 import modelo.Contacto;
 
 /**
  *
  * @author goncalda
  */
-public class GuiFiltrarContacto extends javax.swing.JFrame {
+public class GuiBuscarContacto extends javax.swing.JFrame {
 
     /**
      *
      */
-    private GUIAgendaContactos guiPadre;
+    HashSet<Contacto> resultados = new HashSet<>();
+    private GuiPrincipalAgendaContactos guiPadre;
     private LinkedHashMap<Integer, Contacto> listaContactos;
 
     /**
      * Creates new form AgregarContacto
      */
-    public GuiFiltrarContacto(LinkedHashMap<Integer, Contacto> listaContactos, GUIAgendaContactos guiPadre) {
+    public GuiBuscarContacto(LinkedHashMap<Integer, Contacto> listaContactos, GuiPrincipalAgendaContactos guiPadre) {
         FlatDarkLaf.setup();
         this.listaContactos = listaContactos;
         this.guiPadre = guiPadre;
@@ -178,7 +180,7 @@ public class GuiFiltrarContacto extends javax.swing.JFrame {
         });
         ConfBtn.add(ContactCancel);
 
-        ContactClear.setText("Vaciar");
+        ContactClear.setText("Limpiar");
         ContactClear.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 ContactClearActionPerformed(evt);
@@ -212,6 +214,7 @@ public class GuiFiltrarContacto extends javax.swing.JFrame {
 
     private void ContactCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ContactCancelActionPerformed
         // TODO add your handling code here:
+        if (resultados.isEmpty()) {guiPadre.updateListaContacto(listaContactos);}
         this.dispose();
     }//GEN-LAST:event_ContactCancelActionPerformed
 
@@ -232,15 +235,18 @@ public class GuiFiltrarContacto extends javax.swing.JFrame {
     private void ContactSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ContactSearchActionPerformed
         // TODO add your handling code here:
         //recuperar la lista de contactos,
+        this.resultados = new HashSet<>();
         String nombreBuscado = this.TxtName.getText();
         String app1Buscado = this.TxtApp1.getText();
         String app2Buscado = this.TxtApp2.getText();
         String mailBuscado = this.TxtMail.getText();
         String telBuscado = this.TxtNumTelf.getText();
-        HashSet<Contacto> resultados = null;
-        resultados = new HashSet<>();
-        resultados.addAll(Contacto.filtrarContactos(listaContactos, nombreBuscado, app1Buscado, app2Buscado, mailBuscado, telBuscado));
+        
+        this.resultados.addAll(Contacto.filtrarContactos(listaContactos, nombreBuscado, app1Buscado, app2Buscado, mailBuscado, telBuscado));
+        if (!resultados.isEmpty()) {
         this.guiPadre.updateListaContacto(resultados);
+        JOptionPane.showMessageDialog(this, "Se han encontrado resultados: " + resultados.size() + " que coinciden", "Informacion", 1);
+        } else {JOptionPane.showMessageDialog(this, "Error no coincide ningun contacto", "ERROR", 0);}
 
 
     }//GEN-LAST:event_ContactSearchActionPerformed
