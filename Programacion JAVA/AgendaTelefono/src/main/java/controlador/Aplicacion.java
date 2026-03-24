@@ -1,7 +1,6 @@
 package controlador;
 
 import com.formdev.flatlaf.FlatDarkLaf;
-import java.util.HashMap;
 import java.util.LinkedHashMap;
 import modelo.Contacto;
 import vista.GuiPrincipalAgendaContactos;

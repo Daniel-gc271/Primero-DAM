@@ -9,7 +9,6 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.ResolverStyle;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
@@ -52,6 +51,7 @@ public class GuiModificarContacto extends javax.swing.JFrame {
                 contactoPreviaModificacion.getFechacumpleaños() == null ? "" : contactoPreviaModificacion.getFechacumpleaños().format(f)
         );
         this.setLstNumsTelf(contactoPreviaModificacion.getLstNumTelf());
+        this.setContDesc(contactoPreviaModificacion.getDescripcion());
     }
 
     /**

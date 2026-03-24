@@ -108,7 +108,7 @@ min(//SALARIO) :)
 (: i :)
 
 
-//sucursales/sucursal/concat(/@codigo," - ",sum(/cuenta[@tipo="PENSIONES"]/saldohaber))
+(: //sucursales/sucursal/concat(/@codigo," - ",sum(/cuenta[@tipo="PENSIONES"]/saldohaber))
 (: j  :)
 //sucursales/sucursal/cuenta[saldohaber>10000]/concat(/nombre," ",/numero," ",/saldohaber)
 
@@ -187,37 +187,107 @@ where $c/aportacion = max(//sucursales/sucursal/cuenta[@tipo="PENSIONES"]/aporta
 return $c
 (:If:)
 return if (:condicion:) then (:codijo/instruccion:)
-else () (:En cualquier caso:)
+else () En cualquier caso :)
 
 (:Ejercicio 5:)
-	for $suc in //sucursal
+	(: for $suc in //sucursal
 let $max := max($suc/cuenta/saldohaber)
 let $nombre := $suc/cuenta[saldohaber = $max]/nombre
-return concat($suc/@codigo, " - ", $max," - ", $nombre)
+return concat($suc/@codigo, " - ", $max," - ", $nombre) :)
 
 
 
-for $suc in //sucursal
+(: for $suc in //sucursal
 let $maxSal := max($suc/cuenta/saldodebe)
 for $cta in $suc/cuenta[@tipo='AHORRO']
 return if($cta/saldodebe = $maxSal)
 then <saldoMax>{$suc/@codigo}<sal>{$maxSal}</sal>{$cta/nombre}</saldoMax>
-else ()
+else () :)
 
 
-for $productos in //produc
+(: for $productos in //produc
 let $producto:= $productos/denominacion
 for $zonas in /zonas/zona
 let $nombre_zona:=$zonas/nombre
 where $zonas/cod_zona=$productos/cod_zona
-return concat($producto,' --- ', $nombre_zona)
+return concat($producto,' --- ', $nombre_zona) :)
 
 
-for $den in /productos/produc[stock_minimo>5]
+(: for $den in /productos/produc[stock_minimo>5]
 for $zona in /zonas/zona[cod_zona=$den/cod_zona]
 let $prod:=$den/denominacion
 let $nomdir:=$zona/director
-return concat('codigo zona', $zona/cod_zona,'stock minimo >5', $prod,'nombre director',$nomdir,'nombre producto',$den/denominacion)
+return concat('codigo zona', $zona/cod_zona,'stock minimo >5', $prod,'nombre director',$nomdir,'nombre producto',$den/denominacion) :)
+
+
+(:Modificaciones e inserciones:)
+(:inserciones:)
+
+(:update insert ELEMENTO into EXPRESION :) (:insertamos a una etiqueta xml/estruuctura dentro al final:)
+(: update insert ELEMENTO following EXPRESION :) (:insertamos a una etiqueta xml/estructura despues de:)
+(: update insert ELEMENTO preceding EXPRESION :) (:insertamos a una etiqueta xml/estructura antes de:)
+
+(:
+update insert 
+<zona><cod_zona>50</cod_zona> 
+<nombre>Madrid-OESTE </nombre> 
+<director>Alicia Ramos Martin</director> </zona> into /zonas
+
+:)
+(: 
+update insert 
+<zona><cod_zona>35</cod_zona> 
+<nombre>Valladolid-Valladolid </nombre> 
+<director>Sergi Tenés Canos</director> </zona> preceding /zonas/zona[cod_zona=40] 
+:)
+
+(:
+update insert 
+<zona><cod_zona>45</cod_zona> 
+<nombre>Valladolid-Valladolid </nombre> 
+<director>Juanmi Latassa</director> </zona> following /zonas/zona[cod_zona=40] :)
+
+(:
+update insert 
+<cuenta tipo="PENSIONES"><nombre>Alberto Morales 
+</nombre><numero>30302900</numero> 
+<aportacion>5000</aportacion></cuenta> 
+into /sucursales/sucursal[@codigo="SUC1"]
+
+:)
+
+
+(: update replace NODO with VALOR NUEVO :)
+(:Cambia el nodo completo:)
+(: update replace 
+/zonas/zona[cod_zona=40]/director 
+with <directora>Pilar Martin Ramos</directora> :)
+
+(: update value NODO with 'VALOR NUEVO' :)
+(: actualiza un valor  :)
+
+
+
+(: update delete NODO :)
+(: Borra un valor:)
+(: update delete //zona[cod_zona=50] :)
+
+(:update rename /EMPLEADOS/EMP_ROW as 'fila_emple' :)
+(: Renombra el nodo :)
+
+
+(: COn for incremento del salario un 10% de los empleados del departamento 20 :)
+(: for $empDpt in /EMPLEADOS/EMP_ROW[DEPT_NO=20]
+return update value $empDpt/SALARIO with  ROUND(($empDpt/SALARIO) * 1.10) :)
+
+
+(: Reemplazar los valores en oficio por empleado/a :)
+
+(: for $empOfic in /EMPLEADOS/EMP_ROW[OFICIO="EMPLEADO"]
+return update value $empOfic/OFICIO with "Empleado/Empleada" :)
+
+(: update value /EMPLEADOS/EMP_ROW[OFICIO="EMPLEADO"]/OFICIO with "Empleado/Empleada" :)
+(: Ejercicio 6 xml :)
 
 
 

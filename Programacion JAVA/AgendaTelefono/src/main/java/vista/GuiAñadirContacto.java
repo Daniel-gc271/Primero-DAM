@@ -393,7 +393,7 @@ public class GuiAñadirContacto extends javax.swing.JFrame {
                 }
             } catch (Exception ex) {
                 // aquí te “salta” si la fecha es inválida
-                JOptionPane.showMessageDialog(this, "Fecha de cumpleaños inválida: " + cumpleAñosString);
+                JOptionPane.showMessageDialog(this, "Fecha de cumpleaños inválida: " + cumpleAñosString,"ERROR",0);
                 return;
             }
             newContact.setDescripcion(descString);
@@ -405,6 +405,9 @@ public class GuiAñadirContacto extends javax.swing.JFrame {
             listaContactos.put(newContact.hashCode(), newContact);
         } else {
             System.out.println("DEBUG Contacto repetido");
+            JOptionPane.showMessageDialog(this, "El contacto ya existe, no será añadido","ERROR",0);
+                return;
+            
         }
         if (listaContactos.isEmpty()) {
             System.out.println("Lista de contactos vacia");

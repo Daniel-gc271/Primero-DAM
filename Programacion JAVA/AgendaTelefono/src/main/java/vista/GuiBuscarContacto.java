@@ -5,7 +5,6 @@
 package vista;
 
 import com.formdev.flatlaf.FlatDarkLaf;
-import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedHashMap;
 import javax.swing.JOptionPane;
