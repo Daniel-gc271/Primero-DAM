@@ -11,7 +11,6 @@ import java.util.Comparator;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedHashMap;
-import java.util.LinkedHashSet;
 import java.util.Objects;
 
 /**
@@ -26,25 +25,37 @@ public class Contacto {
     private HashSet<String> lstNumTelf;
 //  private HashMap<String, String> socials = new HashMap<>();
 
-    public Contacto() {
-    }
-
+   
+    /**
+     * Crea un contacto con el instante de creacion ya introducido
+     * @param nombre nombre del contacto (requisito mínimo)
+     * @param numTelf lista de numeros de telefono (requisito mínimo)
+     */
     public Contacto(String nombre, HashSet<String> numTelf) {
         this.fechaAñadido = LocalDateTime.now();
         this.lstNumTelf = numTelf;
         this.nombre = nombre;
 
     }
-
+    /**
+     * Crea un contactocon una fecha de una fuente externa
+     * privado para usarse en el clone a la hora de editar un contacto
+     * y que persista la fecha de creacion
+     * @param nombre
+     * @param numTelf
+     * @param fechaAñadido 
+     */
     private Contacto(String nombre, HashSet<String> numTelf, LocalDateTime fechaAñadido) {
         this.fechaAñadido = fechaAñadido;
         this.lstNumTelf = numTelf;
         this.nombre = nombre;
     }
-
-    public static void ordenarNombreAsc(LinkedHashMap<Integer, Contacto> set) {
-        // Copiamos a lista
-        ArrayList<Contacto> contactosOrdenados = new ArrayList<>(set.values());
+    /**
+     *  Ordena los contactos segun nombre y apellidos de manera ascendente 
+     * @param listaCOntactosOrdenados referencia de lista de contactos a ordenar
+     */
+    public static void ordenarNombreAsc(LinkedHashMap<Integer, Contacto> listaCOntactosOrdenados) {
+        ArrayList<Contacto> contactosOrdenados = new ArrayList<>(listaCOntactosOrdenados.values());
 
         // Orden: nombre → apellido1 → apellido2 (case-insensitive)
         contactosOrdenados.sort(
@@ -52,9 +63,9 @@ public class Contacto {
                         .thenComparing(Contacto::getApellido1, String.CASE_INSENSITIVE_ORDER)
                         .thenComparing(Contacto::getApellido2, String.CASE_INSENSITIVE_ORDER)
         );
-        set.clear();
+        listaCOntactosOrdenados.clear();
         for (Contacto contacto : contactosOrdenados) {
-            set.put(contacto.hashCode(), contacto);
+            listaCOntactosOrdenados.put(contacto.hashCode(), contacto);
         }
 
     }
@@ -75,7 +86,7 @@ public class Contacto {
         }
 
         sb.append(", Numeros de contacto: ");
-        sb.append(String.join(",", lstNumTelf));
+        sb.append(String.join(", ", lstNumTelf));
 
         if (correo != null) {
             if (!correo.isBlank()) {
@@ -151,7 +162,16 @@ public class Contacto {
         return (hashThis == hashOther);
 
     }
-
+    /**
+     * Filtra los contactos segun los parametros ingresados
+     * @param listaContactos Referencia a la lista de contactos en la que buscar
+     * @param nombreBuscado
+     * @param app1Buscado
+     * @param app2Buscado
+     * @param mailBuscado
+     * @param telfBuscado
+     * @return devuelve la lista de los contactos encontrados
+     */
     public static ArrayList<Contacto> filtrarContactos(HashMap<?, Contacto> listaContactos, String nombreBuscado, String app1Buscado, String app2Buscado, String mailBuscado, String telfBuscado) {
         ArrayList<Contacto> resultados = null;
         resultados = new ArrayList<>();
@@ -281,6 +301,9 @@ public class Contacto {
     }
 
     @Override
+    /**
+     * Clona un contacto pasando la fecha de creacion del contacto de origen
+     */
     public Contacto clone() {
         return new Contacto(nombre, lstNumTelf, this.fechaAñadido);
     }

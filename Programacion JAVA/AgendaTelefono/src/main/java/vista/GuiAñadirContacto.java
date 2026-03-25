@@ -25,9 +25,7 @@ public class GuiAñadirContacto extends javax.swing.JFrame {
     private LinkedHashMap<Integer, Contacto> listaContactos;
     private GuiPrincipalAgendaContactos guiPadre;
 
-    /**
-     * Creates new form AgregarContacto
-     */
+    
     public GuiAñadirContacto(LinkedHashMap<Integer, Contacto> listaContactos, GuiPrincipalAgendaContactos guiPadre) {
         FlatDarkLaf.setup();
         this.listaContactos = listaContactos;
@@ -332,7 +330,7 @@ public class GuiAñadirContacto extends javax.swing.JFrame {
         }
         ArrayList<String> telefonosInválidos = new ArrayList<>();
         LinkedHashSet<String> telefonos = new LinkedHashSet<>();
-        
+
         if (!numTelfString.isEmpty()) {
             for (StringTokenizer stringTokenizer = new StringTokenizer(numTelfString, ","); stringTokenizer.hasMoreTokens();) {
                 String numeroTelefonico = stringTokenizer.nextToken().trim();
@@ -372,28 +370,26 @@ public class GuiAñadirContacto extends javax.swing.JFrame {
             return;
         }
         Contacto newContact = new Contacto(nombreString, telefonos);
-        newContact.setNombre(nombreString);
-
         try {
             if (!emailString.isBlank()) {
                 newContact.setCorreo(emailString);
             }
 
         } catch (Exception ex) {
-            JOptionPane.showMessageDialog(null, "Formato de correo no válido", "ERROR", 1);
+            
+            JOptionPane.showMessageDialog(null, "Formato de correo no válido", "ERROR", 0);
             return;
         } finally {
             try {
 
                 if (!cumpleAñosString.isBlank()) {
-                    DateTimeFormatter f = DateTimeFormatter.ofPattern("dd/MM/uuuu")
-                            .withResolverStyle(ResolverStyle.STRICT);
+                    DateTimeFormatter f = DateTimeFormatter.ofPattern("dd/MM/uuuu").withResolverStyle(ResolverStyle.STRICT);
                     LocalDate fecha = LocalDate.parse(cumpleAñosString, f);
                     newContact.setFechacumpleaños(fecha);
                 }
             } catch (Exception ex) {
-                // aquí te “salta” si la fecha es inválida
-                JOptionPane.showMessageDialog(this, "Fecha de cumpleaños inválida: " + cumpleAñosString,"ERROR",0);
+                
+                JOptionPane.showMessageDialog(this, "Fecha de cumpleaños inválida: " + cumpleAñosString, "ERROR", 0);
                 return;
             }
             newContact.setDescripcion(descString);
@@ -404,17 +400,13 @@ public class GuiAñadirContacto extends javax.swing.JFrame {
         if (!listaContactos.containsValue(newContact)) {
             listaContactos.put(newContact.hashCode(), newContact);
         } else {
-            System.out.println("DEBUG Contacto repetido");
-            JOptionPane.showMessageDialog(this, "El contacto ya existe, no será añadido","ERROR",0);
-                return;
-            
+            JOptionPane.showMessageDialog(this, "El contacto ya existe, no será añadido", "ERROR", 0);
+            return;
+
         }
-        if (listaContactos.isEmpty()) {
-            System.out.println("Lista de contactos vacia");
-        } else {
-            System.out.println(listaContactos);
+        if (!listaContactos.isEmpty()) {
             this.guiPadre.updateListaContacto(listaContactos);
-        }
+        } 
     }//GEN-LAST:event_ContactAceptActionPerformed
 
     private void LstNumsTelfKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_LstNumsTelfKeyTyped
@@ -430,6 +422,9 @@ public class GuiAñadirContacto extends javax.swing.JFrame {
         // TODO add your handling code here:
         clearFields();
     }//GEN-LAST:event_jButton1ActionPerformed
+    /**
+     * Limpia los campos de la ventana
+     */
     public void clearFields() {
         this.ContDesc.setText("");
         this.LstNumsTelf.removeAll();
@@ -441,47 +436,13 @@ public class GuiAñadirContacto extends javax.swing.JFrame {
         this.TxtBirthDay.setText("");
     }
 
-    /**
-     * @param args the command line arguments
-     */
-//    public static void main(String args[]) {
-//        /* Set the Nimbus look and feel */
-//        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-//        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-//         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-//         */
-//        try {
-//            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-//                if ("Nimbus".equals(info.getNombr())) {
-//                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-//                    break;
-//                }
-//            }
-//        } catch (ClassNotFoundException ex) {
-//            java.util.logging.Logger.getLogger(GuiAñadirContacto.class.getNombr()).log(java.util.logging.Level.SEVERE, null, ex);
-//        } catch (InstantiationException ex) {
-//            java.util.logging.Logger.getLogger(GuiAñadirContacto.class.getNombr()).log(java.util.logging.Level.SEVERE, null, ex);
-//        } catch (IllegalAccessException ex) {
-//            java.util.logging.Logger.getLogger(GuiAñadirContacto.class.getNombr()).log(java.util.logging.Level.SEVERE, null, ex);
-//        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-//            java.util.logging.Logger.getLogger(GuiAñadirContacto.class.getNombr()).log(java.util.logging.Level.SEVERE, null, ex);
-//        }
-//        //</editor-fold>
-//
-//        /* Create and display the form */
-//        java.awt.EventQueue.invokeLater(new Runnable() {
-//            public void run() {
-//                new GuiAñadirContacto().setVisible(true);
-//            }
-//        });
-//    }
-
+   
     public void setContDesc(String descripcion) {
         this.ContDesc.setText(descripcion);
     }
 
     public void setLstNumsTelf(HashSet<String> lstNumsTelf) {
-        this.LstNumsTelf.setText(String.join(",", lstNumsTelf));
+        this.LstNumsTelf.setText(String.join(", ", lstNumsTelf));
     }
 
     public void setTxtApp1(String apellido1) {
@@ -504,77 +465,7 @@ public class GuiAñadirContacto extends javax.swing.JFrame {
         this.TxtName.setText(nombre);
     }
 
-    /**
-     * @param args the command line arguments
-     */
-//    public static void main(String args[]) {
-//        /* Set the Nimbus look and feel */
-//        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-//        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-//         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html
-//         */
-//        try {
-//            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-//                if ("Nimbus".equals(info.getNombr())) {
-//                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-//                    break;
-//                }
-//            }
-//        } catch (ClassNotFoundException ex) {
-//            java.util.logging.Logger.getLogger(GuiAñadirContacto.class.getNombr()).log(java.util.logging.Level.SEVERE, null, ex);
-//        } catch (InstantiationException ex) {
-//            java.util.logging.Logger.getLogger(GuiAñadirContacto.class.getNombr()).log(java.util.logging.Level.SEVERE, null, ex);
-//        } catch (IllegalAccessException ex) {
-//            java.util.logging.Logger.getLogger(GuiAñadirContacto.class.getNombr()).log(java.util.logging.Level.SEVERE, null, ex);
-//        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-//            java.util.logging.Logger.getLogger(GuiAñadirContacto.class.getNombr()).log(java.util.logging.Level.SEVERE, null, ex);
-//        }
-//        //</editor-fold>
-//
-//        /* Create and display the form */
-//        java.awt.EventQueue.invokeLater(new Runnable() {
-//            public void run() {
-//                new GuiAñadirContacto().setVisible(true);
-//            }
-//        });
-//    }
-    /**
-     * @param args the command line arguments
-     */
-//    public static void main(String args[]) {
-//        /* Set the Nimbus look and feel */
-//        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-//        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-//         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html
-//         */
-//        try {
-//            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-//                if ("Nimbus".equals(info.getNombr())) {
-//                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-//                    break;
-//                }
-//            }
-//        } catch (ClassNotFoundException ex) {
-//            java.util.logging.Logger.getLogger(GuiAñadirContacto.class.getNombr()).log(java.util.logging.Level.SEVERE, null, ex);
-//        } catch (InstantiationException ex) {
-//            java.util.logging.Logger.getLogger(GuiAñadirContacto.class.getNombr()).log(java.util.logging.Level.SEVERE, null, ex);
-//        } catch (IllegalAccessException ex) {
-//            java.util.logging.Logger.getLogger(GuiAñadirContacto.class.getNombr()).log(java.util.logging.Level.SEVERE, null, ex);
-//        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-//            java.util.logging.Logger.getLogger(GuiAñadirContacto.class.getNombr()).log(java.util.logging.Level.SEVERE, null, ex);
-//        }
-//        //</editor-fold>
-//
-//        /* Create and display the form */
-//        java.awt.EventQueue.invokeLater(new Runnable() {
-//            public void run() {
-//                new GuiAñadirContacto().setVisible(true);
-//            }
-//        });
-//    }
-    public void setContactAcept(String textoBoton1) {
-        this.ContactAcept.setText(textoBoton1);
-    }
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel CampoA;
     private javax.swing.JPanel CampoB;
