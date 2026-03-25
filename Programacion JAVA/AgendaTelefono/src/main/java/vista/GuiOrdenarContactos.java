@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.LinkedHashMap;
+import javax.swing.JOptionPane;
 import modelo.Contacto;
 
 /**
@@ -182,10 +183,13 @@ public class GuiOrdenarContactos extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
+        if (listaContactos.values().size()==0) {
+                JOptionPane.showMessageDialog(this, "Error no se ha encontrado ningun contacto para listar", "ERROR", 0);
+                return;
+        }
         ArrayList<Contacto> contactosOrdenados = new ArrayList<>(listaContactos.values());
         if (this.ActivadorAlfabetico.isSelected()) {
-            System.out.println("Listar alfabetico");
-            System.out.println(this.AlfabetoTipoOrden.getSelectedIndex());
+            
 
             Collections.sort(contactosOrdenados, compContactos
                     .thenComparing(Contacto::getNombre)
@@ -196,15 +200,11 @@ public class GuiOrdenarContactos extends javax.swing.JFrame {
                 Collections.reverse(contactosOrdenados);
                 System.out.println("Reversed");
             }
-            System.out.println("Alfabetico");
-            guiPadre.updateListaContacto(contactosOrdenados);
-
+            
         }
 
         if (this.ActivadorFechaAdicion.isSelected()) {
-            System.out.println("Listar fecha");
-            System.out.println(this.FechaTipoOrdenar.getSelectedIndex());
-
+            
             Collections.sort(contactosOrdenados, compContactos
                     .thenComparing(Contacto::getFechaAñadido)
             );
@@ -212,8 +212,7 @@ public class GuiOrdenarContactos extends javax.swing.JFrame {
                 Collections.reverse(contactosOrdenados);
                 System.out.println("Reversed");
             }
-            System.out.println("Por fechas");
-            guiPadre.updateListaContacto(contactosOrdenados);
+            
 
         }
 
