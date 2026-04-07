@@ -187,3 +187,36 @@ END;
 BEGIN
     mostrar_info_empleado(1);
 END;
+
+
+
+create table datos (emp_no NUMBER(4) PRIMARY KEY);
+insert into DATOS values (7566);
+select * EMPLE;
+
+
+declare
+    v_empno emple.EMP_NO%TYPE;
+    v_salarioActual emple.SALARIO%TYPE;
+    v_job emple.OFICIO%TYPE;
+    v_empls NUMBER;
+    v_incre number := 0;
+begin
+  select EMP_NO into v_empno from datos;
+
+  select SALARIO,OFICIO into v_salarioActual,v_job from datos where EMP_NO = v_empno;
+  select count(*) v_empls;
+  from EMPLE where DIR=v_empno;
+  if v_empls = 0 then 
+    v_incre := 50;
+  else if v_empls = 1 then 
+    v_incre := 80;
+   else if v_empls = 2 or v_empls = 3 then 
+    v_incre := 100;
+  else  v_incre := 110;
+  end if;
+
+  if v_job = "PRESIDENTE" then v_incre := v_incre + 30;
+  
+
+ end;
