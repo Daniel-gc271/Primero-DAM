@@ -1,4 +1,4 @@
-(: Productos con stock entre 3 y 6:)
+Productos con stock entre 3 y 6
 (://produc[stocka_actual>3 and stock_actual<6]:)
 (:Apellido de los empleados del departamento 20:)
 (://EMPLEADOS/EMP_ROW[ DEPT_NO=20]/APELLIDO:)
@@ -291,11 +291,23 @@ return update value $empOfic/OFICIO with "Empleado/Empleada" :)
 
 
   (: 1. Añadir empleado al dept posición 2 :)
-  let $dept2 := //dept_row[position()=2]
+
+(: 
+  update insert
+<EMP_ROW>
+<SALARIO>2340</SALARIO>
+<OFICIO>TECNICO</OFICIO>
+<APELLIDO>PEDRO FRAILE</APELLIDO></EMP_ROW>
+following  //EMP_ROW[1]
+
+ :)
+
+(: 
+  let $dept2 := //dept_row[2]
   return
-  insert node {
+  update insert node {
     <EMP_ROW>
-      <EMP_NO>{fn:max(//emp_no) + 1}</EMP_NO>
+      <EMP_NO>{max(//emp_no) + 1}</EMP_NO>
       <APELLIDO>Fraile</APELLIDO>
       <OFICIO>Técnico</OFICIO>
       <DIR/>
@@ -306,7 +318,7 @@ return update value $empOfic/OFICIO with "Empleado/Empleada" :)
   } into $dept2/emp_row,
 
   (: 2. Sustituir empleado 7902 :)
-  replace node //emp_row[emp_no='7902'] with
+  update replace node //emp_row[emp_no='7902'] with
     <EMP_ROW>
       <EMP_NO>8043</EMP_NO>
       <APELLIDO>González</APELLIDO>
@@ -331,10 +343,10 @@ return update value $empOfic/OFICIO with "Empleado/Empleada" :)
   return replace value of node $salario with xs:decimal($salario) + 100,
 
   (: 5. Renombrar nodos :)
-  rename nodes $doc//DEP_ROW as "filadepar",
+   update rename $doc//DEP_ROW as "filadepar",
 
   (: 6. Borrar empleados de Valladolid :)
-  delete nodes //filadepar[loc='Valladolid']/emp_row,
+  delete node //filadepar[loc='Valladolid']/emp_row,
 
   (: 7. Añadir media salarial :)
   for $dept in //filadepar
@@ -344,4 +356,23 @@ return update value $empOfic/OFICIO with "Empleado/Empleada" :)
     into $dept
 
 
+ :)
 
+(: 7 :)
+(: A :)
+
+for $dep in /departamentos/DEP_ROW[DNOMBRE="INVESTIGACION"]/DEPT_NO
+	for $media in avg(/EMPLEADOS/EMP_ROW[DEPT_NO=$dep]/SALARIO)
+	for $sal in /EMPLEADOS/EMP_ROW[DEPT_NO=$dep]/SALARIO
+	let $nuevoSal:=data($sal) + data($media)*0.10
+	return update value $sal with $nuevoSal
+
+let dptInv := distinct-values(//departamentos[DNOMBRE = "INVESTIGACION"])
+for $empDpt in /EMPLEADOS/EMP_ROW[DEPT_NO=dptInv]
+return update value $empDpt/SALARIO with  ROUND(($empDpt/SALARIO) + 0.1 * avg($empDpt/SALARIO)) :)
+
+
+
+update rename /EMPLEADOS/EMP_ROW/OFICIO as 'puesto'
+
+for 
