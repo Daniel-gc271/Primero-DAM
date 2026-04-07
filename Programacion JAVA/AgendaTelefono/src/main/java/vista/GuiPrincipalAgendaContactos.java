@@ -57,6 +57,7 @@ public class GuiPrincipalAgendaContactos extends javax.swing.JFrame {
 
         jScrollPane1 = new javax.swing.JScrollPane();
         JlistContactos = new javax.swing.JList<>();
+        LblNumContactos = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         OptContacto = new javax.swing.JMenu();
         Añadir = new javax.swing.JMenuItem();
@@ -79,10 +80,11 @@ public class GuiPrincipalAgendaContactos extends javax.swing.JFrame {
         jScrollPane1.setViewportView(JlistContactos);
 
         getContentPane().add(jScrollPane1, java.awt.BorderLayout.CENTER);
+        getContentPane().add(LblNumContactos, java.awt.BorderLayout.PAGE_END);
 
         OptContacto.setText("Contacto");
 
-        Añadir.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_A, java.awt.event.InputEvent.CTRL_DOWN_MASK));
+        Añadir.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_Q, java.awt.event.InputEvent.CTRL_DOWN_MASK));
         Añadir.setText("Añadir");
         Añadir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -179,7 +181,7 @@ public class GuiPrincipalAgendaContactos extends javax.swing.JFrame {
     }//GEN-LAST:event_ListarActionPerformed
 
     private void JlistContactosValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_JlistContactosValueChanged
-        
+
     }//GEN-LAST:event_JlistContactosValueChanged
 
     private void BorrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BorrarActionPerformed
@@ -226,6 +228,7 @@ public class GuiPrincipalAgendaContactos extends javax.swing.JFrame {
             this.modListaContacto.addElement(contacto);
         }
         this.JlistContactos.setModel(modListaContacto);
+        this.LblNumContactos.setText(String.valueOf(listaContactos.size()));
     }
 
     public void updateListaContacto(HashSet<Contacto> listaContactos) {
@@ -235,12 +238,15 @@ public class GuiPrincipalAgendaContactos extends javax.swing.JFrame {
             this.modListaContacto.addElement(contacto);
         }
         this.JlistContactos.setModel(modListaContacto);
+        this.LblNumContactos.setText(String.valueOf(listaContactos.size()));
+
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuItem Añadir;
     private javax.swing.JMenuItem Borrar;
     private javax.swing.JMenuItem Buscar;
     private javax.swing.JList<Contacto> JlistContactos;
+    private javax.swing.JLabel LblNumContactos;
     private javax.swing.JMenuItem Listar;
     private javax.swing.JMenuItem Modificar;
     private javax.swing.JMenu OptAgenda;
@@ -256,5 +262,7 @@ public class GuiPrincipalAgendaContactos extends javax.swing.JFrame {
             this.modListaContacto.addElement(contacto);
         }
         this.JlistContactos.setModel(modListaContacto);
+        this.LblNumContactos.setText(String.valueOf(listaContactos.size()));
+
     }
 }

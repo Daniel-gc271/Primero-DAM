@@ -406,6 +406,7 @@ public class GuiAñadirContacto extends javax.swing.JFrame {
         }
         if (!listaContactos.isEmpty()) {
             this.guiPadre.updateListaContacto(listaContactos);
+            JOptionPane.showMessageDialog(this, "Contacto agregado correctamente", "Informacion", 1);
         } 
     }//GEN-LAST:event_ContactAceptActionPerformed
 

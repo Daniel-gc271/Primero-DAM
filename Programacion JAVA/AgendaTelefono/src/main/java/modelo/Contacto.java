@@ -112,7 +112,6 @@ public class Contacto {
         hash = 59 * hash + Objects.hashCode(this.apellido2);
         hash = 59 * hash + Objects.hashCode(this.correo);
         hash = 59 * hash + Objects.hashCode(this.descripcion);
-        hash = 59 * hash + Objects.hashCode(this.lstNumTelf);
         return hash;
     }
 
@@ -129,9 +128,7 @@ public class Contacto {
          * En teoria si absolutamente toda la lista de telefonos coincide Los
          * contactos se pueden mergear
          */
-        if (this.lstNumTelf.equals(other.lstNumTelf)) {
-            return true;
-        }
+        
 
         /**
          *
@@ -149,7 +146,6 @@ public class Contacto {
         hashThis = 59 * hashThis + Objects.hashCode(this.apellido1);
         hashThis = 59 * hashThis + Objects.hashCode(this.apellido2);
         hashThis = 59 * hashThis + Objects.hashCode(this.correo);
-        hashThis = 59 * hashThis + Objects.hashCode(this.lstNumTelf.toArray());
 
         int hashOther = 3;
         hashOther = 59 * hashOther + Objects.hashCode(other.fechaNacimiento);
@@ -157,7 +153,6 @@ public class Contacto {
         hashOther = 59 * hashOther + Objects.hashCode(other.apellido1);
         hashOther = 59 * hashOther + Objects.hashCode(other.apellido2);
         hashOther = 59 * hashOther + Objects.hashCode(other.correo);
-        hashOther = 59 * hashOther + Objects.hashCode(other.lstNumTelf.toArray());
 
         return (hashThis == hashOther);
 

@@ -290,5 +290,58 @@ return update value $empOfic/OFICIO with "Empleado/Empleada" :)
 (: Ejercicio 6 xml :)
 
 
+  (: 1. Añadir empleado al dept posición 2 :)
+  let $dept2 := //dept_row[position()=2]
+  return
+  insert node {
+    <EMP_ROW>
+      <EMP_NO>{fn:max(//emp_no) + 1}</EMP_NO>
+      <APELLIDO>Fraile</APELLIDO>
+      <OFICIO>Técnico</OFICIO>
+      <DIR/>
+      <FECHA_ALT>{current-dateTime()}</FECHA_ALT>
+      <SALARIO>2340</SALARIO>
+      <DEPT_NO>{$dept2/dept_no}</DEPT_NO>
+    </EMP_ROW>
+  } into $dept2/emp_row,
+
+  (: 2. Sustituir empleado 7902 :)
+  replace node //emp_row[emp_no='7902'] with
+    <EMP_ROW>
+      <EMP_NO>8043</EMP_NO>
+      <APELLIDO>González</APELLIDO>
+      <OFICIO>Programador</OFICIO>
+      <DIR>7566</DIR>
+      <FECHA_ALT>2013-05-23</FECHA_ALT>
+      <SALARIO>2800</SALARIO>
+      <DEPT_NO>60</DEPT_NO>
+    </EMP_ROW>,
+
+  (: 3. Añadir departamento 60 :)
+  insert node 
+    <DEP_ROW>
+      <DEPT_NO>60</DEPT_NO>
+      <DNOMBRE>Informática</DNOMBRE>
+      <LOC>Valladolid</LOC>
+    </DEP_ROW>
+  into //departamentos,
+
+  (: 4. Actualizar salarios dept 20 :)
+  for $salario in //dept_row[dept_no='20']/emp_row/salario
+  return replace value of node $salario with xs:decimal($salario) + 100,
+
+  (: 5. Renombrar nodos :)
+  rename nodes $doc//DEP_ROW as "filadepar",
+
+  (: 6. Borrar empleados de Valladolid :)
+  delete nodes //filadepar[loc='Valladolid']/emp_row,
+
+  (: 7. Añadir media salarial :)
+  for $dept in //filadepar
+  return
+    insert node 
+      <media_salario>{avg($dept/emp_row/salario)}</media_salario>
+    into $dept
+
 
 
