@@ -393,6 +393,7 @@ else()
 
 Ejercicoi 7
 
+A
 
 for $dep in distinct-values(/departamentos/DEP_ROW/DEPT_NO)
 let $media:=avg(/EMPLEADOS/EMP_ROW[DEPT_NO=$dep]/SALARIO)
@@ -402,8 +403,28 @@ for $dep in /departamentos/DEP_ROW
 let $numdep:=data($dep/DEPT_NO), $sal:=avg(/EMPLEADOS/EMP_ROW[DEPT_NO=$numdep]/SALARIO)
 return update insert <media> {$sal} </media> into $dep
 
+B
+
+update rename //empleados/EMP_ROW/OFICIO as 'puesto'
+
+C
+
+for $dep in //departamentos/EMP_ROW/DEPT_NO
+return update insert <NUMEMPLE> {count(//empleados/EMP_ROW[DEP_NO=dep])}
 
 
+D
 
+idea recorrer todos los departamentos, bucle externo
+luego buscar el numero de empleado con el sueldo mas alto entre todos los empleados en cierto departamento
+posteriormente eliminar empleadomcon ese codigo
+for $dep in //departamentos/filadep/DEPT_NO
+let $empEliminar := //empleados/EMP_ROW[DEPT_NO=$dep and SALARIO = max(//empleados/EMP_ROW[DEPT_NO=$dep)/SALARIO]/EMP_NO
+update delete //empleados/EMP_ROW[EMP_NO=$empEliminar]
+
+E
+
+update value
+//EMP_ROW/OFICIO[./='VENDEDOR'] with 'COMERCIAL'
 
 
