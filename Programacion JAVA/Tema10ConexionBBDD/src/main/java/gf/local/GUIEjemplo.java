@@ -7,6 +7,7 @@ package gf.local;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -37,7 +38,10 @@ public class GUIEjemplo extends javax.swing.JFrame {
             /**
              * Mandar una select
              */
-            con.createS
+            String select = "select * from tabla1";
+            Statement st = con.createStatement();
+            st.executeQuery(select);
+            
             //Cerrar recursos
         } catch (SQLException ex) {
             System.err.println("Error al conectar: "+ex.getLocalizedMessage());
