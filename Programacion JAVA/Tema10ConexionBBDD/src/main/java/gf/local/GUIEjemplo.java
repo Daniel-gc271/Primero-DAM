@@ -50,7 +50,7 @@ public class GUIEjemplo extends javax.swing.JFrame {
             String select = "select * from tabla1";
             Statement st = con.createStatement();
             st.executeQuery(select);
-
+            
             //Cerrar recursos
         } catch (SQLException ex) {
             System.err.println("Error al conectar: " + ex.getLocalizedMessage());
