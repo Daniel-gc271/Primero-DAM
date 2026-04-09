@@ -288,7 +288,143 @@ return update value $empOfic/OFICIO with "Empleado/Empleada" :)
 
 (: update value /EMPLEADOS/EMP_ROW[OFICIO="EMPLEADO"]/OFICIO with "Empleado/Empleada" :)
 (: Ejercicio 6 xml :)
+ejercicio 1.
 
 
+update insert
+<EMP_ROW>
+<SALARIO>2340</SALARIO>
+<OFICIO>TECNICO</OFICIO>
+<APELLIDO>PEDRO FRAILE</APELLIDO></EMP_ROW>
+following //EMP_ROW[1]
+
+
+o
+
+for $depart in //DEP_ROW[2]/DEPT_NO
+return
+update insert
+<EMP_ROW>
+<SALARIO>2340</SALARIO>
+<OFICIO>TECNICO</OFICIO>
+<APELLIDO>PEDRO FRAILE</APELLIDO>
+<DEPT_NO>{data($depart)}</DEPT_NO></EMP_ROW>
+into /EMPLEADOS
+
+
+
+
+Ejercicio 2.
+
+
+update replace /EMPLEADOS/EMP_ROW[EMP_NO=7902] with
+<EMP_ROW> 
+<EMP_NO>8043</EMP_NO> 
+<APELLIDO>González</APELLIDO> 
+<OFICIO>Programador</OFICIO> 
+<DIR>7566</DIR> 
+<FECHA_ALT>2013-05-23</FECHA_ALT> 
+<SALARIO>2800</SALARIO> 
+<DEPT_NO>60</DEPT_NO> 
+</EMP_ROW>
+
+
+Ejercicio 3
+
+update insert 
+<DEP_ROW><DEPT_NO>60</DEPT_NO><DNOMBRE>INFORMATICA</DNOMBRE><LOC>VALLADOLID</LOC></DEP_ROW>
+into /departamentos
+
+update insert 
+<DEP_ROW><DEPT_NO>60</DEPT_NO><DNOMBRE>INFORMATICA</DNOMBRE><LOC>VALLADOLID</LOC></DEP_ROW>
+following /departamentos/DEP_ROW[DEPT_NO=40]
+
+
+
+Ejercicio 4.
+
+
+for $em in /EMPLEADOS/EMP_ROW[DEPT_NO =20]
+let $sal:= number($em/SALARIO + 100)
+return update replace $em/SALARIO
+with <SALARIO>{$sal}</SALARIO>
+
+
+for $empl in /EMPLEADOS/EMP_ROW[DEPT_NO=20]
+let $salario:=$empl/SALARIO
+return update replace $salario with <SALARIO>{data($salario)+100}</SALARIO>
+
+
+
+for $emp in /EMPLEADOS/EMP_ROW[DEPT_NO=20]
+let $nuevosal:=$emp/SALARIO 
+return update value $emp/SALARIO with data($nuevosal)+100
+
+
+
+Ejercicio 5.
+
+
+update rename /departamentos/DEP_ROW as 'filadepar'
+
+
+
+Ejercicio 6. 
+
+
+update delete 
+//EMP_ROW[DEPT_NO=//DEP_ROW[LOC='VALLADOLID']/DEPT_NO]
+
+
+opción
+
+for $emple in //departamentos/filadep[LOC='VALLADOLID']
+let $dep:=$emple/DEPT_NO
+return update delete /EMPLEADOS/fila_emple[DEPT_NO=$dep]
+
+opción 2
+
+for $dep in (/EMPLEADOS/EMP_ROW/DEPT_NO)
+for $depd in (/departamentos/DEP_ROW[LOC='VALLADOLID']/DEPT_NO)
+return if($dep=$depd) then update delete /EMPLEADOS/EMP_ROW[DEPT_NO=$depd]
+else()
+
+
+
+Ejercicoi 7
+
+A
+
+for $dep in distinct-values(/departamentos/DEP_ROW/DEPT_NO)
+let $media:=avg(/EMPLEADOS/EMP_ROW[DEPT_NO=$dep]/SALARIO)
+return update insert <media>{$media}</media> into /departamentos/DEP_ROW[DEPT_NO=$dep]
+
+for $dep in /departamentos/DEP_ROW
+let $numdep:=data($dep/DEPT_NO), $sal:=avg(/EMPLEADOS/EMP_ROW[DEPT_NO=$numdep]/SALARIO)
+return update insert <media> {$sal} </media> into $dep
+
+B
+
+update rename //empleados/EMP_ROW/OFICIO as 'puesto'
+
+C
+
+for $dep in //departamentos/EMP_ROW/DEPT_NO
+return update insert <NUMEMPLE> {count(//empleados/EMP_ROW[DEP_NO=dep])}
+
+
+D
+
+idea recorrer todos los departamentos, bucle externo
+luego buscar el numero de empleado con el sueldo mas alto entre todos los empleados en cierto departamento
+posteriormente eliminar empleadomcon ese codigo
+for $dep in //departamentos/filadep/DEPT_NO
+let $empEliminar := //empleados/EMP_ROW[DEPT_NO=$dep and SALARIO = max(//empleados/EMP_ROW[DEPT_NO=$dep)/SALARIO]/EMP_NO
+update delete //empleados/EMP_ROW[EMP_NO=$empEliminar]
+
+E
+
+update value
+//EMP_ROW/OFICIO[./='VENDEDOR'] with 'COMERCIAL'
 
 
