@@ -74,6 +74,11 @@ public class GuiOrdenarContactos extends javax.swing.JFrame {
         jLabel1.setText("Fecha");
 
         FechaTipoOrdenar.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Ascendente", "Descendente" }));
+        FechaTipoOrdenar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                FechaTipoOrdenarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout ContSelectoresLayout = new javax.swing.GroupLayout(ContSelectores);
         ContSelectores.setLayout(ContSelectoresLayout);
@@ -218,6 +223,10 @@ public class GuiOrdenarContactos extends javax.swing.JFrame {
         }
 
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void FechaTipoOrdenarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_FechaTipoOrdenarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_FechaTipoOrdenarActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

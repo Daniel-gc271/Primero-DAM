@@ -2,15 +2,13 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package gf.local;
+package gf.local.Ejemplo;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
@@ -50,7 +48,7 @@ public class GUIEjemplo extends javax.swing.JFrame {
             String select = "select * from tabla1";
             Statement st = con.createStatement();
             st.executeQuery(select);
-            
+
             //Cerrar recursos
         } catch (SQLException ex) {
             System.err.println("Error al conectar: " + ex.getLocalizedMessage());
@@ -110,12 +108,27 @@ public class GUIEjemplo extends javax.swing.JFrame {
         MenBD.add(Select);
 
         Insert.setText("Insert");
+        Insert.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                InsertActionPerformed(evt);
+            }
+        });
         MenBD.add(Insert);
 
         Update.setText("Update");
+        Update.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                UpdateActionPerformed(evt);
+            }
+        });
         MenBD.add(Update);
 
         Delete.setText("Delete");
+        Delete.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                DeleteActionPerformed(evt);
+            }
+        });
         MenBD.add(Delete);
 
         jMenuBar1.add(MenBD);
@@ -190,6 +203,100 @@ public class GUIEjemplo extends javax.swing.JFrame {
             }
         }
     }//GEN-LAST:event_SelectActionPerformed
+
+    private void InsertActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_InsertActionPerformed
+        // TODO add your handling code here:
+        try {
+            //Abrir conexion
+            this.con = DriverManager.getConnection(url, "root", "");
+
+            //Mandar consultas + procesar resultado
+            /**
+             * Mandar una select
+             */
+            String select = "insert into tabla1 (Columna1_tabla1,Columna2_tabla1) "
+                    + "values( 'nUEVASperas' ,22.99)";
+            Statement st = con.createStatement();
+            st.executeUpdate(select);
+
+            //Cerrar recursos
+        } catch (SQLException ex) {
+            System.err.println("Error al conectar: " + ex.getLocalizedMessage());
+            JOptionPane.showMessageDialog(this, "ERROR: " + ex.getLocalizedMessage(), "no se ha podido conectar a: " + url, 0);
+        } finally {
+            try {
+                this.con.close();
+            } catch (SQLException ex) {
+                System.out.println(ex.getMessage());
+            }
+        }
+
+    }//GEN-LAST:event_InsertActionPerformed
+
+    private void UpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UpdateActionPerformed
+        // TODO add your handling code here:
+
+        try {
+            //Abrir conexion
+            this.con = DriverManager.getConnection(url, "root", "");
+
+            //Mandar consultas + procesar resultado
+            /**
+             * Mandar una select
+             */
+            String select = "UPDATE tabla1\n"
+                    + "SET Columna1_tabla1 = 'Otra cosa',\n"
+                    + "    Columna2_tabla1 = 213.99\n"
+                    + "WHERE id_tabla1 = 1;";
+            System.out.println(select);
+            Statement st = con.createStatement();
+            System.out.println(st.executeUpdate(select));
+
+            //Cerrar recursos
+        } catch (SQLException ex) {
+            System.err.println("Error al conectar: " + ex.getLocalizedMessage());
+            JOptionPane.showMessageDialog(this, "ERROR: " + ex.getLocalizedMessage(), "no se ha podido conectar a: " + url, 0);
+        } finally {
+            try {
+                this.con.close();
+            } catch (SQLException ex) {
+                System.out.println(ex.getMessage());
+            }
+        }
+
+
+    }//GEN-LAST:event_UpdateActionPerformed
+
+    private void DeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DeleteActionPerformed
+        // TODO add your handling code here:
+        try {
+            //Abrir conexion
+            this.con = DriverManager.getConnection(url, "root", "");
+
+            //Mandar consultas + procesar resultado
+            /**
+             * Mandar una select
+             */
+            String select = "delete from tabla1 where id_tabla1=4";
+            Statement st = con.createStatement();
+            if (JOptionPane.showConfirmDialog(this, "Sure") != JOptionPane.YES_OPTION) {
+                return;
+            }
+            st.executeUpdate(select);
+
+            //Cerrar recursos
+        } catch (SQLException ex) {
+            System.err.println("Error al conectar: " + ex.getLocalizedMessage());
+            JOptionPane.showMessageDialog(this, "ERROR: " + ex.getLocalizedMessage(), "no se ha podido conectar a: " + url, 0);
+        } finally {
+            try {
+                this.con.close();
+            } catch (SQLException ex) {
+                System.out.println(ex.getMessage());
+            }
+        }
+
+    }//GEN-LAST:event_DeleteActionPerformed
 
     /**
      * @param args the command line arguments
