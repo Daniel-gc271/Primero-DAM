@@ -6,9 +6,12 @@ package gf.local;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
 /**
@@ -26,22 +29,32 @@ public class GUIEjemplo extends javax.swing.JFrame {
     public GUIEjemplo() {
         initComponents();
         conTest();
+        setFrame();
+    }
+
+    private void setFrame() {
+        this.setTitle("Ejemplo JDBC - BD:ejemplo");
+        this.setExtendedState(JFrame.MAXIMIZED_BOTH);
+
     }
 
     private void conTest() {
         try {
             //Abrir conexion
             this.con = DriverManager.getConnection(url, "root", "");
-            
+
             //Mandar consultas + procesar resultado
             /**
              * Mandar una select
              */
-            con.createS
+            String select = "select * from tabla1";
+            Statement st = con.createStatement();
+            st.executeQuery(select);
+
             //Cerrar recursos
         } catch (SQLException ex) {
-            System.err.println("Error al conectar: "+ex.getLocalizedMessage());
-            JOptionPane.showMessageDialog(this, "ERROR: "+ ex.getLocalizedMessage(), "no se ha podido conectar a: "+url, 0);
+            System.err.println("Error al conectar: " + ex.getLocalizedMessage());
+            JOptionPane.showMessageDialog(this, "ERROR: " + ex.getLocalizedMessage(), "no se ha podido conectar a: " + url, 0);
         } finally {
             try {
                 this.con.close();
@@ -62,19 +75,64 @@ public class GUIEjemplo extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTextArea1 = new javax.swing.JTextArea();
+        jMenuBar1 = new javax.swing.JMenuBar();
+        MenBD = new javax.swing.JMenu();
+        Select = new javax.swing.JMenuItem();
+        Insert = new javax.swing.JMenuItem();
+        Update = new javax.swing.JMenuItem();
+        Delete = new javax.swing.JMenuItem();
+        MenAplicacion = new javax.swing.JMenu();
+        Quit = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
-        );
+        jPanel1.setLayout(new java.awt.BorderLayout());
+
+        jTextArea1.setEditable(false);
+        jTextArea1.setColumns(20);
+        jTextArea1.setRows(5);
+        jTextArea1.setFocusTraversalPolicyProvider(true);
+        jTextArea1.setFocusable(false);
+        jScrollPane1.setViewportView(jTextArea1);
+
+        jPanel1.add(jScrollPane1, java.awt.BorderLayout.CENTER);
+
+        MenBD.setText("BD");
+
+        Select.setText("Select");
+        Select.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                SelectActionPerformed(evt);
+            }
+        });
+        MenBD.add(Select);
+
+        Insert.setText("Insert");
+        MenBD.add(Insert);
+
+        Update.setText("Update");
+        MenBD.add(Update);
+
+        Delete.setText("Delete");
+        MenBD.add(Delete);
+
+        jMenuBar1.add(MenBD);
+
+        MenAplicacion.setText("Aplicacion");
+
+        Quit.setText("Quit");
+        Quit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                QuitActionPerformed(evt);
+            }
+        });
+        MenAplicacion.add(Quit);
+
+        jMenuBar1.add(MenAplicacion);
+
+        setJMenuBar(jMenuBar1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -89,6 +147,49 @@ public class GUIEjemplo extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void QuitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_QuitActionPerformed
+        // TODO add your handling code here:
+        this.dispose();
+    }//GEN-LAST:event_QuitActionPerformed
+
+    private void SelectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SelectActionPerformed
+
+        // TODO add your handling code here:
+        try {
+            //Abrir conexion
+            this.con = DriverManager.getConnection(url, "root", "");
+
+            //Mandar consultas + procesar resultado
+            String select = "select * from tabla1";
+            Statement consulta = con.createStatement();
+            ResultSet resultados = consulta.executeQuery(select);
+            StringBuilder stb = new StringBuilder();
+            while (resultados.next()) {
+                //resultados.next();
+                stb.append(resultados.getInt(1));
+                stb.append('\t');
+
+                stb.append(resultados.getString(2));
+                stb.append('\t');
+
+                stb.append(resultados.getDouble(3));
+                stb.append('\n');
+            }
+            this.jTextArea1.setText(stb.toString());
+            System.out.println(stb);
+            //Cerrar recursos
+        } catch (SQLException ex) {
+            System.err.println("Error al conectar: " + ex.getLocalizedMessage());
+            JOptionPane.showMessageDialog(this, "ERROR: " + ex.getLocalizedMessage(), "no se ha podido conectar a: " + url, 0);
+        } finally {
+            try {
+                this.con.close();
+            } catch (SQLException ex) {
+                System.out.println(ex.getMessage());
+            }
+        }
+    }//GEN-LAST:event_SelectActionPerformed
 
     /**
      * @param args the command line arguments
@@ -126,6 +227,16 @@ public class GUIEjemplo extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JMenuItem Delete;
+    private javax.swing.JMenuItem Insert;
+    private javax.swing.JMenu MenAplicacion;
+    private javax.swing.JMenu MenBD;
+    private javax.swing.JMenuItem Quit;
+    private javax.swing.JMenuItem Select;
+    private javax.swing.JMenuItem Update;
+    private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTextArea jTextArea1;
     // End of variables declaration//GEN-END:variables
 }
