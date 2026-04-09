@@ -187,3 +187,17 @@ END;
 BEGIN
     mostrar_info_empleado(1);
 END;
+
+
+select * from hr.DEPARTMENTS;
+
+create or replace PROCEDURE eliminarDepartamento (numDpt NUMBER)
+--cursor que obtiene todos los ids de los empleados a eliminar
+is cursor c_empDep is select EMPLOYEE_ID  from HR.EMPLOYEES where DEPARTMENT_ID = numDpt;
+BEGIN
+    insert into HR.DEPARTMENTS (DEPARTMENT_ID, DEPARTMENT_NAME,LOCATION_ID) VALUES (1,"Provisional",1)
+    EXCEPTION 
+         /*si el departamento ya existe no hacer nada*/
+        when DUP_VAL_ON_INDEX then 
+        --Excepcion buscada de IA no fiable 
+        DBMS_OUTPUT.PUT_LINE("Y existe un departamento provisional")
