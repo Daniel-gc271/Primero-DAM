@@ -2,7 +2,7 @@
 setlocal enabledelayedexpansion
 
 :: --- CONFIGURA AQUÍ EL NOMBRE DE LA CARPETA A CREAR ---
-set "NOMBRE_CARPETA=Porno gay"
+set "NOMBRE_CARPETA=Prueba
 
 :: Directorio actual del script
 set "DIR_ACTUAL=%~dp0"
@@ -12,9 +12,26 @@ echo Directorio actual: %DIR_ACTUAL%
 echo.
 
 :: Crear la carpeta si no existe
-if not exist "%DIR_ACTUAL%%NOMBRE_CARPETA%" (
-    mkdir "%DIR_ACTUAL%%NOMBRE_CARPETA%"
-)
+
+
+
+if not exist "%DIR_ACTUAL%%NOMBRE_CARPETA%" mkdir "%DIR_ACTUAL%%NOMBRE_CARPETA%"
+
+set "URL=https://picsum.photos/800/600"
+set "DEST=%DIR_ACTUAL%%NOMBRE_CARPETA%\imagen_random.jpg"
+
+
+powershell -Command "Write-Host 'DESCARGANDO'; (New-Object Net.WebClient).DownloadFile('%URL%', '%DEST%')"
+echo ERRORLEVEL = %ERRORLEVEL%
+pause
+
+echo Imagen guardada en: %DEST%
+pause
+
+
+
+
+
 
 set "TIENE_SUBCARPETAS=0"
 
