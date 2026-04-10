@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  */
 
-package gf.local;
+package gf.local.Ejemplo;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
