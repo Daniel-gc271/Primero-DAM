@@ -428,3 +428,4 @@ update value
 //EMP_ROW/OFICIO[./='VENDEDOR'] with 'COMERCIAL'
 
 
+https://app.blackbox.ai/share/3d34d4aa-9fc4-4965-a4f1-0fdbab541cf2
