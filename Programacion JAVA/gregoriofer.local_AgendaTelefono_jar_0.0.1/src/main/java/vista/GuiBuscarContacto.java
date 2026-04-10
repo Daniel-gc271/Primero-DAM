@@ -1,0 +1,277 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
+ */
+package vista;
+
+import com.formdev.flatlaf.FlatDarkLaf;
+import java.util.HashSet;
+import java.util.LinkedHashMap;
+import javax.swing.JOptionPane;
+import modelo.Contacto;
+
+/**
+ *
+ * @author goncalda
+ */
+public class GuiBuscarContacto extends javax.swing.JFrame {
+
+    /**
+     *
+     */
+    HashSet<Contacto> resultados = new HashSet<>();
+    private GuiPrincipalAgendaContactos guiPadre;
+    private LinkedHashMap<Integer, Contacto> listaContactos;
+
+    
+    public GuiBuscarContacto(LinkedHashMap<Integer, Contacto> listaContactos, GuiPrincipalAgendaContactos guiPadre) {
+        FlatDarkLaf.setup();
+        this.listaContactos = listaContactos;
+        this.guiPadre = guiPadre;
+        initComponents();
+        setFrame();
+    }
+
+    private void setFrame() {
+        this.setLocationRelativeTo(null);
+        this.setTitle("Filtrar contacto");
+    }
+
+    
+    @SuppressWarnings("unchecked")
+    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
+    private void initComponents() {
+
+        CampoA = new javax.swing.JPanel();
+        LblName = new javax.swing.JLabel();
+        TxtName = new javax.swing.JTextField();
+        LblApp1 = new javax.swing.JLabel();
+        TxtApp1 = new javax.swing.JTextField();
+        LblApp2 = new javax.swing.JLabel();
+        TxtApp2 = new javax.swing.JTextField();
+        LblTel = new javax.swing.JLabel();
+        TxtNumTelf = new javax.swing.JTextField();
+        LblMail = new javax.swing.JLabel();
+        TxtMail = new javax.swing.JTextField();
+        ConfBtn = new javax.swing.JPanel();
+        ContactSearch = new javax.swing.JButton();
+        ContactCancel = new javax.swing.JButton();
+        ContactClear = new javax.swing.JButton();
+
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setAlwaysOnTop(true);
+        setMinimumSize(new java.awt.Dimension(275, 355));
+        setResizable(false);
+        addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                formKeyPressed(evt);
+            }
+        });
+
+        LblName.setText("Nombre");
+
+        TxtName.setMaximumSize(new java.awt.Dimension(155, 25));
+        TxtName.setMinimumSize(new java.awt.Dimension(155, 25));
+        TxtName.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                TxtNameActionPerformed(evt);
+            }
+        });
+
+        LblApp1.setText("Primer apellido");
+
+        TxtApp1.setMaximumSize(new java.awt.Dimension(155, 25));
+        TxtApp1.setMinimumSize(new java.awt.Dimension(155, 25));
+
+        LblApp2.setText("Segundo apellido");
+
+        TxtApp2.setMaximumSize(new java.awt.Dimension(155, 25));
+        TxtApp2.setMinimumSize(new java.awt.Dimension(155, 25));
+
+        LblTel.setText("Teléfonos");
+
+        TxtNumTelf.setMaximumSize(new java.awt.Dimension(155, 25));
+        TxtNumTelf.setMinimumSize(new java.awt.Dimension(155, 25));
+
+        LblMail.setText("Correo");
+
+        TxtMail.setMaximumSize(new java.awt.Dimension(155, 25));
+        TxtMail.setMinimumSize(new java.awt.Dimension(155, 25));
+
+        javax.swing.GroupLayout CampoALayout = new javax.swing.GroupLayout(CampoA);
+        CampoA.setLayout(CampoALayout);
+        CampoALayout.setHorizontalGroup(
+            CampoALayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(CampoALayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(CampoALayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(LblMail, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(LblTel, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(LblApp2, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(LblApp1, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(LblName, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(6, 6, 6)
+                .addGroup(CampoALayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(TxtApp2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(TxtApp1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(TxtName, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(TxtNumTelf, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(TxtMail, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(12, 12, 12))
+        );
+
+        CampoALayout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {LblApp1, LblApp2, LblMail, LblName, LblTel});
+
+        CampoALayout.setVerticalGroup(
+            CampoALayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(CampoALayout.createSequentialGroup()
+                .addGap(0, 0, 0)
+                .addGroup(CampoALayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(TxtName, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(LblName))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(CampoALayout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
+                    .addComponent(LblApp1)
+                    .addComponent(TxtApp1, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(CampoALayout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
+                    .addComponent(LblApp2)
+                    .addComponent(TxtApp2, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(CampoALayout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
+                    .addComponent(TxtNumTelf, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(LblTel))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(CampoALayout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
+                    .addComponent(LblMail)
+                    .addComponent(TxtMail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap())
+        );
+
+        CampoALayout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {LblApp1, LblApp2, LblMail, LblName, LblTel});
+
+        ConfBtn.setLayout(new java.awt.GridLayout(1, 0));
+
+        ContactSearch.setText("Buscar");
+        ContactSearch.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ContactSearchActionPerformed(evt);
+            }
+        });
+        ConfBtn.add(ContactSearch);
+
+        ContactCancel.setText("Cancelar");
+        ContactCancel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ContactCancelActionPerformed(evt);
+            }
+        });
+        ContactCancel.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                ContactCancelKeyPressed(evt);
+            }
+        });
+        ConfBtn.add(ContactCancel);
+
+        ContactClear.setText("Limpiar");
+        ContactClear.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ContactClearActionPerformed(evt);
+            }
+        });
+        ConfBtn.add(ContactClear);
+
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(ConfBtn, javax.swing.GroupLayout.DEFAULT_SIZE, 324, Short.MAX_VALUE)
+                    .addComponent(CampoA, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(CampoA, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(ConfBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
+
+        pack();
+    }// </editor-fold>//GEN-END:initComponents
+
+    private void ContactCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ContactCancelActionPerformed
+        // TODO add your handling code here:
+        if (resultados.isEmpty()) {guiPadre.updateListaContacto(listaContactos);}
+        this.dispose();
+    }//GEN-LAST:event_ContactCancelActionPerformed
+
+    private void ContactCancelKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_ContactCancelKeyPressed
+        // TODO add your handling code here:
+
+    }//GEN-LAST:event_ContactCancelKeyPressed
+
+    private void formKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_formKeyPressed
+        // TODO add your handling code here:
+
+    }//GEN-LAST:event_formKeyPressed
+
+    private void TxtNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TxtNameActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_TxtNameActionPerformed
+
+    private void ContactSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ContactSearchActionPerformed
+        // TODO add your handling code here:
+        //recuperar la lista de contactos,
+        this.resultados = new HashSet<>();
+        String nombreBuscado = this.TxtName.getText();
+        String app1Buscado = this.TxtApp1.getText();
+        String app2Buscado = this.TxtApp2.getText();
+        String mailBuscado = this.TxtMail.getText();
+        String telBuscado = this.TxtNumTelf.getText();
+        
+        this.resultados.addAll(Contacto.filtrarContactos(listaContactos, nombreBuscado, app1Buscado, app2Buscado, mailBuscado, telBuscado));
+        if (!resultados.isEmpty()) {
+        this.guiPadre.updateListaContacto(resultados);
+        JOptionPane.showMessageDialog(this, "Se han encontrado resultados: " + resultados.size() + " que coinciden", "Informacion", 1);
+        } else {JOptionPane.showMessageDialog(this, "Error no coincide ningun contacto", "ERROR", 0);}
+
+
+    }//GEN-LAST:event_ContactSearchActionPerformed
+
+    private void ContactClearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ContactClearActionPerformed
+        // TODO add your handling code here:
+        clearFields();
+
+    }//GEN-LAST:event_ContactClearActionPerformed
+    public void clearFields() {
+        this.TxtMail.setText("");
+        this.TxtName.setText("");
+        this.TxtApp1.setText("");
+        this.TxtApp2.setText("");
+    }
+
+
+    // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JPanel CampoA;
+    private javax.swing.JPanel ConfBtn;
+    private javax.swing.JButton ContactCancel;
+    private javax.swing.JButton ContactClear;
+    private javax.swing.JButton ContactSearch;
+    private javax.swing.JLabel LblApp1;
+    private javax.swing.JLabel LblApp2;
+    private javax.swing.JLabel LblMail;
+    private javax.swing.JLabel LblName;
+    private javax.swing.JLabel LblTel;
+    private javax.swing.JTextField TxtApp1;
+    private javax.swing.JTextField TxtApp2;
+    private javax.swing.JTextField TxtMail;
+    private javax.swing.JTextField TxtName;
+    private javax.swing.JTextField TxtNumTelf;
+    // End of variables declaration//GEN-END:variables
+}

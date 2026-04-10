@@ -1,0 +1,510 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
+ */
+package vista;
+
+import com.formdev.flatlaf.FlatDarkLaf;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.ResolverStyle;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.LinkedHashMap;
+import java.util.LinkedHashSet;
+import javax.swing.JOptionPane;
+import modelo.Contacto;
+
+/**
+ *
+ * @author goncalda
+ */
+public class GuiModificarContacto extends javax.swing.JFrame {
+    private LinkedHashMap<Integer, Contacto> listaContactos;
+    private GuiPrincipalAgendaContactos guiPadre;
+    private Contacto contactoPreviaModificacion;
+
+    /**
+     * Creates new form AgregarContacto
+     */
+    public GuiModificarContacto(LinkedHashMap<Integer, Contacto> listaContactos, GuiPrincipalAgendaContactos guiPadre, Contacto contactoPreviaModificacion) {
+        FlatDarkLaf.setup();
+        this.listaContactos = listaContactos;
+        this.guiPadre = guiPadre;
+        this.contactoPreviaModificacion = contactoPreviaModificacion;
+        initComponents();
+        setFrame();
+    }
+
+    private void setFrame() {
+        this.setLocationRelativeTo(null);
+        setTitle("Editar contacto");
+        this.setAlwaysOnTop(false);
+
+        this.clearFields();
+        DateTimeFormatter f = DateTimeFormatter.ofPattern("dd/MM/uuuu");
+        this.setTxtName(contactoPreviaModificacion.getNombre());
+        this.setTxtApp1(contactoPreviaModificacion.getApellido1());
+        this.setTxtApp2(contactoPreviaModificacion.getApellido2());
+        this.setTxtMail(contactoPreviaModificacion.getCorreo());
+        this.setTxtBirthDay(
+                contactoPreviaModificacion.getFechacumpleaños() == null ? "" : contactoPreviaModificacion.getFechacumpleaños().format(f)
+        );
+        this.setLstNumsTelf(contactoPreviaModificacion.getLstNumTelf());
+        this.setContDesc(contactoPreviaModificacion.getDescripcion());
+    }
+
+    
+    @SuppressWarnings("unchecked")
+    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
+    private void initComponents() {
+
+        CampoA = new javax.swing.JPanel();
+        LblName = new javax.swing.JLabel();
+        TxtName = new javax.swing.JTextField();
+        LblApp1 = new javax.swing.JLabel();
+        TxtApp1 = new javax.swing.JTextField();
+        LblApp2 = new javax.swing.JLabel();
+        TxtApp2 = new javax.swing.JTextField();
+        LblTel = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        LstNumsTelf = new javax.swing.JTextArea();
+        Desc = new javax.swing.JPanel();
+        ScrollDesc = new javax.swing.JScrollPane();
+        ContDesc = new javax.swing.JTextArea();
+        LblDesc = new javax.swing.JLabel();
+        CampoB = new javax.swing.JPanel();
+        LblMail = new javax.swing.JLabel();
+        TxtMail = new javax.swing.JTextField();
+        LblBirthDay = new javax.swing.JLabel();
+        TxtBirthDay = new javax.swing.JTextField();
+        ConfBtn = new javax.swing.JPanel();
+        ContactAcept = new javax.swing.JButton();
+        ContactCancel = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
+
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setAlwaysOnTop(true);
+        setMinimumSize(new java.awt.Dimension(275, 355));
+        setResizable(false);
+        addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                formKeyPressed(evt);
+            }
+        });
+
+        LblName.setText("Nombre");
+
+        TxtName.setMaximumSize(new java.awt.Dimension(155, 25));
+        TxtName.setMinimumSize(new java.awt.Dimension(155, 25));
+        TxtName.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                TxtNameActionPerformed(evt);
+            }
+        });
+
+        LblApp1.setText("Primer apellido");
+
+        TxtApp1.setMaximumSize(new java.awt.Dimension(155, 25));
+        TxtApp1.setMinimumSize(new java.awt.Dimension(155, 25));
+
+        LblApp2.setText("Segundo apellido");
+
+        TxtApp2.setMaximumSize(new java.awt.Dimension(155, 25));
+        TxtApp2.setMinimumSize(new java.awt.Dimension(155, 25));
+
+        LblTel.setText("Teléfono");
+
+        LstNumsTelf.setColumns(20);
+        LstNumsTelf.setRows(5);
+        LstNumsTelf.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                LstNumsTelfKeyTyped(evt);
+            }
+        });
+        jScrollPane1.setViewportView(LstNumsTelf);
+
+        javax.swing.GroupLayout CampoALayout = new javax.swing.GroupLayout(CampoA);
+        CampoA.setLayout(CampoALayout);
+        CampoALayout.setHorizontalGroup(
+            CampoALayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(CampoALayout.createSequentialGroup()
+                .addGap(0, 0, 0)
+                .addGroup(CampoALayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(LblTel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(LblApp2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(LblApp1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(LblName, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(CampoALayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(CampoALayout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
+                        .addComponent(TxtApp1, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(TxtApp2, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(TxtName, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)))
+        );
+
+        CampoALayout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {TxtApp1, TxtApp2, TxtName, jScrollPane1});
+
+        CampoALayout.setVerticalGroup(
+            CampoALayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(CampoALayout.createSequentialGroup()
+                .addGap(0, 0, 0)
+                .addGroup(CampoALayout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
+                    .addComponent(TxtName, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(LblName))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(CampoALayout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
+                    .addComponent(TxtApp1, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(LblApp1))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(CampoALayout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
+                    .addComponent(LblApp2)
+                    .addComponent(TxtApp2, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(CampoALayout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(LblTel))
+                .addGap(0, 0, Short.MAX_VALUE))
+        );
+
+        CampoALayout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {TxtApp1, TxtApp2, TxtName, jScrollPane1});
+
+        ContDesc.setColumns(20);
+        ContDesc.setRows(5);
+        ScrollDesc.setViewportView(ContDesc);
+
+        LblDesc.setText("Descripcion");
+
+        javax.swing.GroupLayout DescLayout = new javax.swing.GroupLayout(Desc);
+        Desc.setLayout(DescLayout);
+        DescLayout.setHorizontalGroup(
+            DescLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(DescLayout.createSequentialGroup()
+                .addGap(0, 0, 0)
+                .addGroup(DescLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(ScrollDesc)
+                    .addComponent(LblDesc, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(0, 0, 0))
+        );
+        DescLayout.setVerticalGroup(
+            DescLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(DescLayout.createSequentialGroup()
+                .addGap(0, 0, 0)
+                .addComponent(LblDesc, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(ScrollDesc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, 0))
+        );
+
+        LblMail.setText("Correo");
+
+        TxtMail.setMaximumSize(new java.awt.Dimension(155, 25));
+        TxtMail.setMinimumSize(new java.awt.Dimension(155, 25));
+
+        LblBirthDay.setText("Cumpleaños");
+
+        TxtBirthDay.setMaximumSize(new java.awt.Dimension(155, 25));
+        TxtBirthDay.setMinimumSize(new java.awt.Dimension(155, 25));
+
+        javax.swing.GroupLayout CampoBLayout = new javax.swing.GroupLayout(CampoB);
+        CampoB.setLayout(CampoBLayout);
+        CampoBLayout.setHorizontalGroup(
+            CampoBLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(CampoBLayout.createSequentialGroup()
+                .addGap(0, 0, 0)
+                .addGroup(CampoBLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(LblMail, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(LblBirthDay, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(CampoBLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(TxtMail, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(TxtBirthDay, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(0, 0, 0))
+        );
+        CampoBLayout.setVerticalGroup(
+            CampoBLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(CampoBLayout.createSequentialGroup()
+                .addGap(0, 0, 0)
+                .addGroup(CampoBLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
+                    .addComponent(TxtMail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(LblMail))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(CampoBLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
+                    .addComponent(TxtBirthDay, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(LblBirthDay))
+                .addGap(0, 0, 0))
+        );
+
+        ConfBtn.setLayout(new java.awt.GridLayout(1, 0));
+
+        ContactAcept.setText("Modificar");
+        ContactAcept.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ContactAceptActionPerformed(evt);
+            }
+        });
+        ConfBtn.add(ContactAcept);
+
+        ContactCancel.setText("Cancelar");
+        ContactCancel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ContactCancelActionPerformed(evt);
+            }
+        });
+        ContactCancel.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                ContactCancelKeyPressed(evt);
+            }
+        });
+        ConfBtn.add(ContactCancel);
+
+        jButton1.setText("Vaciar");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+        ConfBtn.add(jButton1);
+
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(ConfBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(CampoA, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(CampoB, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(Desc, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(CampoA, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(Desc, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(CampoB, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(ConfBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
+
+        pack();
+    }// </editor-fold>//GEN-END:initComponents
+
+    private void ContactCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ContactCancelActionPerformed
+        // TODO add your handling code here:
+        this.dispose();
+    }//GEN-LAST:event_ContactCancelActionPerformed
+
+    private void ContactCancelKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_ContactCancelKeyPressed
+        // TODO add your handling code here:
+
+    }//GEN-LAST:event_ContactCancelKeyPressed
+
+    private void formKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_formKeyPressed
+        // TODO add your handling code here:
+
+    }//GEN-LAST:event_formKeyPressed
+
+    private void TxtNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TxtNameActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_TxtNameActionPerformed
+
+    private void ContactAceptActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ContactAceptActionPerformed
+        // TODO add your handling code here:
+        //recuperar la lista de contactos
+        String nombreString, app1String, app2String, cumpleAñosString, emailString, numTelfString, descString;
+        descString = this.ContDesc.getText();
+        nombreString = this.TxtName.getText().trim();
+        app1String = this.TxtApp1.getText().trim();
+        app2String = this.TxtApp2.getText().trim();
+        cumpleAñosString = this.TxtBirthDay.getText().trim();
+        emailString = this.TxtMail.getText().trim();
+        numTelfString = this.LstNumsTelf.getText();
+
+        if (nombreString == null || nombreString.isBlank() || nombreString.length() == 0) {
+            JOptionPane.showMessageDialog(null, "El nombre no puede estar vacio", "ERROR", 1);
+            this.TxtName.requestFocus();
+            return;
+        }
+        if (app1String.isBlank() && !app2String.isBlank()) {
+            JOptionPane.showMessageDialog(null, "Debes introducir el primer apellido antes", "ERROR", 1);
+            this.TxtApp1.requestFocus();
+            return;
+        }
+        ArrayList<String> telefonosInválidos = new ArrayList<>();
+        LinkedHashSet<String> telefonos = new LinkedHashSet<>();
+        if (!numTelfString.isEmpty()) {
+            //Comprobar que el string de numeros de telefono tenga algo
+            for (String tok : numTelfString.split(",")) {
+                /*
+                *Separar los tokens de los numeros de telefono
+                *(En este caso cada token es un numero de telefono y el delimitador son ',' [comas])
+                * Si un telefono no coincide se le hace saber al usuario el telefono erroneo
+                *
+                 */
+                String tel = tok.trim();
+                if (!tel.isEmpty()) {
+                    String telNormalizado = tel.replaceAll("\\D", ""); // Normalizar para conservar solo los digitos
+                    if (!telNormalizado.matches("\\d{9}")) {
+                        //Notifica telf erroneo
+                        telefonosInválidos.add(telNormalizado);
+                    } else {
+                        telefonos.add(telNormalizado);  // guarda la versión normalizada
+                    }
+
+                }
+            }
+        } else {
+            JOptionPane.showMessageDialog(this, "Debe indicar al menos un teléfono",
+                    "ERROR", JOptionPane.ERROR_MESSAGE);
+            LstNumsTelf.requestFocus();
+            return;
+        }
+        if (telefonos.isEmpty()) {
+            JOptionPane.showMessageDialog(this,
+                    "Debe indicar algún teléfono válido"
+                    + "\n"
+                    + "El contacto no se ha guardado",
+                    "ERROR", JOptionPane.INFORMATION_MESSAGE);
+            LstNumsTelf.requestFocus();
+            return;
+        }
+        if (!telefonosInválidos.isEmpty()) {
+            JOptionPane.showMessageDialog(this,
+                    "Debe indicar algún teléfono válido"
+                    + "\n"
+                    + "El contacto no se ha guardado",
+                    "ERROR", JOptionPane.INFORMATION_MESSAGE);
+            LstNumsTelf.requestFocus();
+            return;
+        }
+        Contacto newContact = this.contactoPreviaModificacion.clone();
+        newContact.setNombre(nombreString);
+        newContact.setLstNumTelf(telefonos);
+
+        try {
+            if (!emailString.isBlank()) {
+                newContact.setCorreo(emailString);
+            }
+
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null, "Formato de correo no válido", "ERROR", 1);
+            return;
+        } finally {
+            try {
+
+                if (!cumpleAñosString.isBlank()) {
+                    DateTimeFormatter f = DateTimeFormatter.ofPattern("dd/MM/uuuu")
+                            .withResolverStyle(ResolverStyle.STRICT);
+                    LocalDate fecha = LocalDate.parse(cumpleAñosString, f);
+                    newContact.setFechacumpleaños(fecha);
+                }
+            } catch (Exception ex) {
+                // aquí te “salta” si la fecha es inválida
+                JOptionPane.showMessageDialog(this, "Fecha de cumpleaños inválida: " + cumpleAñosString);
+                return;
+            }
+            newContact.setDescripcion(descString);
+            newContact.setApellido1(app1String);
+            newContact.setApellido2(app2String);
+
+        }
+        listaContactos.remove(contactoPreviaModificacion.hashCode());
+        listaContactos.put(newContact.hashCode(), newContact);
+        JOptionPane.showMessageDialog(this, "Contacto modificado con éxito", "Informacion", 1);
+        if (!listaContactos.isEmpty()) {
+            System.out.println(listaContactos);
+            this.guiPadre.updateListaContacto(listaContactos);
+        } 
+        this.dispose();
+    }//GEN-LAST:event_ContactAceptActionPerformed
+
+    private void LstNumsTelfKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_LstNumsTelfKeyTyped
+        // TODO add your handling code here:
+        char c = evt.getKeyChar();
+        if (Character.isDigit(c) || c == ' ' || c == ',') {
+        } else {
+            evt.consume();
+        }
+    }//GEN-LAST:event_LstNumsTelfKeyTyped
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        clearFields();
+    }//GEN-LAST:event_jButton1ActionPerformed
+    public void clearFields() {
+        this.ContDesc.setText("");
+        this.LstNumsTelf.removeAll();
+        this.LstNumsTelf.setText("");
+        this.TxtMail.setText("");
+        this.TxtName.setText("");
+        this.TxtApp1.setText("");
+        this.TxtApp2.setText("");
+        this.TxtBirthDay.setText("");
+    }
+
+    
+    public void setContDesc(String descripcion) {
+        this.ContDesc.setText(descripcion);
+    }
+
+    public void setLstNumsTelf(HashSet<String> lstNumsTelf) {
+        this.LstNumsTelf.setText(String.join(", ", lstNumsTelf));
+    }
+
+    public void setTxtApp1(String apellido1) {
+        this.TxtApp1.setText(apellido1);
+    }
+
+    public void setTxtApp2(String apellido2) {
+        this.TxtApp2.setText(apellido2);
+    }
+
+    public void setTxtBirthDay(String fechaCumple) {
+        this.TxtBirthDay.setText(fechaCumple);
+    }
+
+    public void setTxtMail(String email) {
+        this.TxtMail.setText(email);
+    }
+
+    public void setTxtName(String nombre) {
+        this.TxtName.setText(nombre);
+    }
+
+    public void setContactAcept(String textoBoton1) {
+        this.ContactAcept.setText(textoBoton1);
+    }
+    // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JPanel CampoA;
+    private javax.swing.JPanel CampoB;
+    private javax.swing.JPanel ConfBtn;
+    private javax.swing.JTextArea ContDesc;
+    private javax.swing.JButton ContactAcept;
+    private javax.swing.JButton ContactCancel;
+    private javax.swing.JPanel Desc;
+    private javax.swing.JLabel LblApp1;
+    private javax.swing.JLabel LblApp2;
+    private javax.swing.JLabel LblBirthDay;
+    private javax.swing.JLabel LblDesc;
+    private javax.swing.JLabel LblMail;
+    private javax.swing.JLabel LblName;
+    private javax.swing.JLabel LblTel;
+    private javax.swing.JTextArea LstNumsTelf;
+    private javax.swing.JScrollPane ScrollDesc;
+    private javax.swing.JTextField TxtApp1;
+    private javax.swing.JTextField TxtApp2;
+    private javax.swing.JTextField TxtBirthDay;
+    private javax.swing.JTextField TxtMail;
+    private javax.swing.JTextField TxtName;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JScrollPane jScrollPane1;
+    // End of variables declaration//GEN-END:variables
+}

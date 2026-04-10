@@ -2,16 +2,17 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package gf.local.Actividades.Almacen;
+package gf.local.Actividades.AlmacenCopia;
 
-import gf.local.Actividades.AlmacenCopia.*;
 import java.awt.Dimension;
 import java.awt.event.ItemEvent;
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.DefaultListModel;
 
@@ -110,6 +111,11 @@ public class GUIAlmacen extends javax.swing.JFrame {
         jPanel2.setLayout(new javax.swing.BoxLayout(jPanel2, javax.swing.BoxLayout.LINE_AXIS));
 
         jList1.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        jList1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jList1MouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(jList1);
 
         jPanel2.add(jScrollPane1);
@@ -121,21 +127,37 @@ public class GUIAlmacen extends javax.swing.JFrame {
 
     private void jComboBox1ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jComboBox1ItemStateChanged
         // TODO add your handling code here:
-
         System.out.println(this.jComboBox1.getSelectedIndex());
         if (evt.getStateChange() == ItemEvent.SELECTED
                 && this.jComboBox1.getSelectedIndex() != 0)
         {
-            int seleccion = this.jComboBox1.getSelectedIndex();
+            this.modListaProductos.clear();
+            TipoProducto pBuscado= (TipoProducto) this.jComboBox1.getSelectedItem();
+            ArrayList<Producto> productos = buscarProductoTipo(pBuscado);
+            this.modListaProductos.addAll(productos);
+            
+        }
+           
+           
+
+
+    }//GEN-LAST:event_jComboBox1ItemStateChanged
+    
+    
+    
+    private ArrayList<Producto> buscarProductoTipo(TipoProducto tipo) {
+        ArrayList<Producto> lst=new ArrayList<>();
             this.modListaProductos.clear();
             try {
                 this.con = DriverManager.getConnection(url, user, password);
-                String sql = "select * from productos where idProducto = " + seleccion;
-                Statement st = con.createStatement();
-                ResultSet rs = st.executeQuery(sql);
+                String sql = "select * from productos where idProducto = ?";
+                PreparedStatement ps = con.prepareStatement(sql);
+                ps.setInt(1, tipo.getIdTipo());
+                
+                ResultSet rs = ps.executeQuery(sql);
                 while (rs.next()) {
                     Producto producto = new Producto(rs.getInt(1), rs.getString(2),rs.getDouble(3),rs.getInt(4),rs.getInt(5));
-                    this.modListaProductos.addElement(producto);
+                    lst.add(producto);
                 }
             } catch (SQLException e) {
                 System.out.println("Fallo al conectar");
@@ -148,15 +170,28 @@ public class GUIAlmacen extends javax.swing.JFrame {
                 }
             }
 
-        }
-
-
-    }//GEN-LAST:event_jComboBox1ItemStateChanged
-
+        
+    
+        return lst;
+    }
     private void jComboBox1PropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_jComboBox1PropertyChange
         // TODO add your handling code here:
 
     }//GEN-LAST:event_jComboBox1PropertyChange
+
+    private void jList1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jList1MouseClicked
+        // TODO add your handling code here:
+        if (evt.getClickCount()==2&&this.jList1.getSelectedValue()!=null) {
+        Producto prodSeleccionado =this.jList1.getSelectedValue();
+        int unidadesStock = prodSeleccionado.getCantidad();
+        StringBuilder msg= new StringBuilder();
+        msg.append("Stock en el almacen: ");
+        msg.append(unidadesStock);
+        
+        
+        
+        }
+    }//GEN-LAST:event_jList1MouseClicked
 
     /**
      * @param args the command line arguments
@@ -183,7 +218,6 @@ public class GUIAlmacen extends javax.swing.JFrame {
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(GUIAlmacen.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
-        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */

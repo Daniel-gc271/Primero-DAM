@@ -157,10 +157,6 @@ public class Contacto {
         return (hashThis == hashOther);
 
     }
-    
-    
-    
-    // <editor-fold defaultstate="collapsed" desc="Metodo filtrarContacto">
     /**
      * Filtra los contactos segun los parametros ingresados
      * @param listaContactos Referencia a la lista de contactos en la que buscar
@@ -228,10 +224,7 @@ public class Contacto {
         }
         return resultados;
     }
-    // </editor-fold>
-    // <editor-fold defaultstate="collapsed" desc="Metodo añadirContacto">
-    
-    // </editor-fold>
+
     public LocalDateTime getFechaAñadido() {
         return fechaAñadido;
     }
