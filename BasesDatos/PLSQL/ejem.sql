@@ -251,6 +251,28 @@ EXCEPTION
   When no_data_found then 
   DBMS_OUTPUT.PUT_LINE('No hay empleados en la tabla');
   When others then 
-  DBMS_OUTPUT.PUT_LINE('Error inesperado');
-    
+  DBMS_OUTPUT.PUT_LINE('Error inesperado');  
 END;
+
+
+/**
+* 
+*
+*/
+
+
+declare
+  v_cadena varchar2(100) := 'fernandez gurierrez';
+  v_apellido varchar2(100) := '';
+  v_char char(1);
+begin
+  for i in 1..length(v_cadena) loop
+        v_char:=susbtr(v_cadena,i,1);
+        if (regexp_like(v_char, '^[A-Za-z+$]')) -- \s
+        then  v_apellido = v_apellido || v_char;
+        else exit;
+        end if;
+
+  end loop;
+  dbms_output.put_line('Apellido: '|| v_apellido);
+end;
