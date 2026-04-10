@@ -220,3 +220,37 @@ begin
   
 
  end;
+
+select * from hr.DEPARTMENTS;
+
+create or replace PROCEDURE eliminarDepartamento (numDpt NUMBER)
+--cursor que obtiene todos los ids de los empleados a eliminar
+is cursor c_empDep is select EMPLOYEE_ID  from HR.EMPLOYEES where DEPARTMENT_ID = numDpt;
+BEGIN
+    insert into HR.DEPARTMENTS (DEPARTMENT_ID, DEPARTMENT_NAME,LOCATION_ID) VALUES (1,"Provisional",1)
+    EXCEPTION 
+         /*si el departamento ya existe no hacer nada*/
+        when DUP_VAL_ON_INDEX then 
+        --Excepcion buscada de IA no fiable 
+        DBMS_OUTPUT.PUT_LINE("Y existe un departamento provisional")
+
+END;
+
+
+DECLARE
+  v_tot number:=0;
+  v_sal_alto number := 0;
+BEGIN
+  SELECT SUM(salario + comision), SUM(case when salario>2000 hten 1 else 0 end)
+    into v_tot, v_sal_alto
+    from EMPLE;
+DBMS_OUTPUT.PUT_LINE('Total ganancias'|| v_tot) ;   
+DBMS_OUTPUT.PUT_LINE('Empleados con salario mayor a dos mil euros'|| v_sal_alto);    
+EXCEPTION
+
+  When no_data_found then 
+  DBMS_OUTPUT.PUT_LINE('No hay empleados en la tabla');
+  When others then 
+  DBMS_OUTPUT.PUT_LINE('Error inesperado');
+    
+END;

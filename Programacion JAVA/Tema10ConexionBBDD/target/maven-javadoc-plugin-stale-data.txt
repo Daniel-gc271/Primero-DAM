@@ -1,0 +1,51 @@
+-J-Duser.language=
+-J-Duser.country=
+@options
+@packages
+-classpath
+'C:/Users/goncalda/.m2/repository/com/mysql/mysql-connector-j/9.6.0/mysql-connector-j-9.6.0.jar;C:/Users/goncalda/.m2/repository/com/google/protobuf/protobuf-java/4.31.1/protobuf-java-4.31.1.jar'
+-encoding
+'UTF-8'
+-protected
+--release
+21
+-sourcepath
+'C:/Users/goncalda/Documents/NetBeansProjects/Tema10ConexionBBDD/src/main/java'
+-author
+-bottom
+'Copyright &#169; 2026. All rights reserved.'
+-charset
+'UTF-8'
+-d
+'C:/Users/goncalda/Documents/NetBeansProjects/Tema10ConexionBBDD/target/reports/apidocs'
+-docencoding
+'UTF-8'
+-doctitle
+'Tema10ConexionBBDD 1.0-SNAPSHOT API'
+-use
+-version
+-windowtitle
+'Tema10ConexionBBDD 1.0-SNAPSHOT API'
+com.mycompany.tema10conexionbbdd
+C:\Users\goncalda\.m2\repository\com\mysql\mysql-connector-j\9.6.0\mysql-connector-j-9.6.0.jar = 1775647098396
+C:\Users\goncalda\.m2\repository\com\google\protobuf\protobuf-java\4.31.1\protobuf-java-4.31.1.jar = 1775647098460
+C:\Users\goncalda\Documents\NetBeansProjects\Tema10ConexionBBDD\src\main\java = 1775646819285
+C:\Users\goncalda\Documents\NetBeansProjects\Tema10ConexionBBDD\target\reports\apidocs\allclasses-index.html = 1775647132768
+C:\Users\goncalda\Documents\NetBeansProjects\Tema10ConexionBBDD\target\reports\apidocs\allpackages-index.html = 1775647132772
+C:\Users\goncalda\Documents\NetBeansProjects\Tema10ConexionBBDD\target\reports\apidocs\copy.svg = 1775647132813
+C:\Users\goncalda\Documents\NetBeansProjects\Tema10ConexionBBDD\target\reports\apidocs\element-list = 1775647132714
+C:\Users\goncalda\Documents\NetBeansProjects\Tema10ConexionBBDD\target\reports\apidocs\help-doc.html = 1775647132803
+C:\Users\goncalda\Documents\NetBeansProjects\Tema10ConexionBBDD\target\reports\apidocs\index-all.html = 1775647132789
+C:\Users\goncalda\Documents\NetBeansProjects\Tema10ConexionBBDD\target\reports\apidocs\index.html = 1775647132796
+C:\Users\goncalda\Documents\NetBeansProjects\Tema10ConexionBBDD\target\reports\apidocs\link.svg = 1775647132816
+C:\Users\goncalda\Documents\NetBeansProjects\Tema10ConexionBBDD\target\reports\apidocs\member-search-index.js = 1775647132778
+C:\Users\goncalda\Documents\NetBeansProjects\Tema10ConexionBBDD\target\reports\apidocs\module-search-index.js = 1775647132773
+C:\Users\goncalda\Documents\NetBeansProjects\Tema10ConexionBBDD\target\reports\apidocs\overview-tree.html = 1775647132749
+C:\Users\goncalda\Documents\NetBeansProjects\Tema10ConexionBBDD\target\reports\apidocs\package-search-index.js = 1775647132775
+C:\Users\goncalda\Documents\NetBeansProjects\Tema10ConexionBBDD\target\reports\apidocs\script.js = 1775647132811
+C:\Users\goncalda\Documents\NetBeansProjects\Tema10ConexionBBDD\target\reports\apidocs\search-page.js = 1775647132824
+C:\Users\goncalda\Documents\NetBeansProjects\Tema10ConexionBBDD\target\reports\apidocs\search.html = 1775647132793
+C:\Users\goncalda\Documents\NetBeansProjects\Tema10ConexionBBDD\target\reports\apidocs\search.js = 1775647132821
+C:\Users\goncalda\Documents\NetBeansProjects\Tema10ConexionBBDD\target\reports\apidocs\stylesheet.css = 1775647132809
+C:\Users\goncalda\Documents\NetBeansProjects\Tema10ConexionBBDD\target\reports\apidocs\tag-search-index.js = 1775647132779
+C:\Users\goncalda\Documents\NetBeansProjects\Tema10ConexionBBDD\target\reports\apidocs\type-search-index.js = 1775647132776
