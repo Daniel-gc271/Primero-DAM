@@ -6,12 +6,16 @@ package modelo;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.time.format.ResolverStyle;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedHashMap;
+import java.util.LinkedHashSet;
+import java.util.Map;
 import java.util.Objects;
+import java.util.StringTokenizer;
 
 /**
  *
@@ -25,33 +29,32 @@ public class Contacto {
     private HashSet<String> lstNumTelf;
 //  private HashMap<String, String> socials = new HashMap<>();
 
-   
     /**
      * Crea un contacto con el instante de creacion ya introducido
-     * @param nombre nombre del contacto (requisito mínimo)
-     * @param numTelf lista de numeros de telefono (requisito mínimo)
+     *
      */
-    public Contacto(String nombre, HashSet<String> numTelf) {
-        this.fechaAñadido = LocalDateTime.now();
-        this.lstNumTelf = numTelf;
-        this.nombre = nombre;
+    public Contacto() {
 
     }
+
     /**
-     * Crea un contactocon una fecha de una fuente externa
-     * privado para usarse en el clone a la hora de editar un contacto
-     * y que persista la fecha de creacion
+     * Crea un contactocon una fecha de una fuente externa privado para usarse
+     * en el clone a la hora de editar un contacto y que persista la fecha de
+     * creacion
+     *
      * @param nombre
      * @param numTelf
-     * @param fechaAñadido 
+     * @param fechaAñadido
      */
     private Contacto(String nombre, HashSet<String> numTelf, LocalDateTime fechaAñadido) {
         this.fechaAñadido = fechaAñadido;
         this.lstNumTelf = numTelf;
         this.nombre = nombre;
     }
+
     /**
-     *  Ordena los contactos segun nombre y apellidos de manera ascendente 
+     * Ordena los contactos segun nombre y apellidos de manera ascendente
+     *
      * @param listaCOntactosOrdenados referencia de lista de contactos a ordenar
      */
     public static void ordenarNombreAsc(LinkedHashMap<Integer, Contacto> listaCOntactosOrdenados) {
@@ -128,7 +131,6 @@ public class Contacto {
          * En teoria si absolutamente toda la lista de telefonos coincide Los
          * contactos se pueden mergear
          */
-        
 
         /**
          *
@@ -157,12 +159,11 @@ public class Contacto {
         return (hashThis == hashOther);
 
     }
-    
-    
-    
+
     // <editor-fold defaultstate="collapsed" desc="Metodo filtrarContacto">
     /**
      * Filtra los contactos segun los parametros ingresados
+     *
      * @param listaContactos Referencia a la lista de contactos en la que buscar
      * @param nombreBuscado
      * @param app1Buscado
@@ -230,7 +231,98 @@ public class Contacto {
     }
     // </editor-fold>
     // <editor-fold defaultstate="collapsed" desc="Metodo añadirContacto">
-    
+
+    public Contacto crearContacto(
+            String nombreString,
+            String app1String,
+            String app2String,
+            String cumpleAñosString,
+            String emailString,
+            String numTelfString,
+            String descString,
+            Map<Integer, Contacto> listaContactos
+    ) throws DatosInvalidosException {
+        Contacto contactoAñadir = new Contacto();
+        // --- Validación de nombre ---
+        if (nombreString == null || nombreString.isBlank()) {
+        } else contactoAñadir.setNombre(nombre);
+        // --- Validación apellidos ---
+        if (app1String.isBlank() && !app2String.isBlank()) {
+            throw new DatosInvalidosException("Debes introducir antes el primer apellido");
+        } else {contactoAñadir.setApellido1(apellido1); contactoAñadir.setApellido2(apellido2);}
+
+        
+
+        // --- Procesar teléfonos ---
+        ArrayList<String> telefonosInvalidos = new ArrayList<>();
+        LinkedHashSet<String> telefonos = new LinkedHashSet<>();
+
+        if (numTelfString.isEmpty()) {
+            throw new DatosInvalidosException("Debe indicar al menos un teléfono");
+        }
+
+        StringTokenizer st = new StringTokenizer(numTelfString, ",");
+        while (st.hasMoreTokens()) {
+            String numero = st.nextToken().trim();
+
+            if (!numero.isEmpty()) {
+                String normalizado = numero.replaceAll("\\D", "");
+
+                if (!normalizado.matches("\\d{9}")) {
+                    telefonosInvalidos.add(normalizado);
+                } else {
+                    telefonos.add(normalizado);
+                }
+            }
+        }
+
+        if (telefonos.isEmpty()) {
+            throw new DatosInvalidosException("No se ha indicado ningún teléfono válido");
+        }
+
+        if (!telefonosInvalidos.isEmpty()) {
+            throw new DatosInvalidosException("Hay teléfonos inválidos en la lista");
+        }
+
+     
+        if (!emailString.isBlank()) {
+            try {
+                contactoAñadir.setCorreo(emailString);
+            } catch (Exception e) {
+                throw new DatosInvalidosException("Formato de correo no válido");
+            }
+        }
+
+        // --- Validación fecha ---
+        if (!cumpleAñosString.isBlank()) {
+            try {
+                DateTimeFormatter f = DateTimeFormatter.ofPattern("dd/MM/uuuu")
+                        .withResolverStyle(ResolverStyle.STRICT);
+
+                LocalDate fecha = LocalDate.parse(cumpleAñosString, f);
+                contactoAñadir.setFechacumpleaños(fecha);
+
+            } catch (Exception e) {
+                throw new DatosInvalidosException("Fecha de cumpleaños inválida: " + cumpleAñosString);
+            }
+        }
+
+        // --- Datos restantes ---
+        contactoAñadir.setDescripcion(descString);
+        contactoAñadir.setApellido1(app1String);
+        contactoAñadir.setApellido2(app2String);
+
+        // --- Validar duplicado ---
+        if (listaContactos.containsValue(contactoAñadir)) {
+            throw new DatosInvalidosException("El contacto ya existe, no será añadido");
+        }
+
+        // --- Guardar ---
+        listaContactos.put(contactoAñadir.hashCode(), contactoAñadir);
+
+        return contactoAñadir;
+    }
+
     // </editor-fold>
     public LocalDateTime getFechaAñadido() {
         return fechaAñadido;
@@ -272,8 +364,11 @@ public class Contacto {
         this.fechaNacimiento = fechacumpleaños;
     }
 
-    public void setNombre(String nombre) {
+    public void setNombre(String nombre) throws DatosInvalidosException  {
         this.nombre = nombre;
+        if (nombre == null || nombre.isBlank()) {
+            throw new DatosInvalidosException("El nombre no puede estar vacío");
+        }
     }
 
     public void setApellido1(String apellido1) {
@@ -308,6 +403,13 @@ public class Contacto {
      */
     public Contacto clone() {
         return new Contacto(nombre, lstNumTelf, this.fechaAñadido);
+    }
+
+    private static class DatosInvalidosException extends Exception {
+
+        public DatosInvalidosException(String msg) {
+            super(msg);
+        }
     }
 
 }
