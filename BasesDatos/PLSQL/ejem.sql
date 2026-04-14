@@ -324,3 +324,25 @@ is
       end loop;
       DBMS_OUTPUT.PUT_LINE('La cadena modificada es: '|| v_result);
    end; 
+
+
+
+create or replace PROCEDURE medlista is
+v_suma  number :=0 ;
+ v_media number  :=0;
+  v_num number;
+
+begin 
+    for i in 1..5 loop
+        v_num := trunc(DBMS_RANDOM.VALUE(1,100));
+        v_suma := v_suma + v_num;
+        dbms_output.put_line("Numero: "|| v_num);
+    end loop;
+        v_media := v_suma/5;
+     --  dbms_output.put_line('Numero: '|| v_media);
+       dbms_output.put_line('Hola');
+    end;
+
+begin
+    medlista;
+end;
