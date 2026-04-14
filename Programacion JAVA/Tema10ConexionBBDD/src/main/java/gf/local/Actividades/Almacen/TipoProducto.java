@@ -4,6 +4,8 @@
  */
 package gf.local.Actividades.Almacen;
 
+import gf.local.Actividades.AlmacenCopia.*;
+
 /**
  *
  * @author goncalda

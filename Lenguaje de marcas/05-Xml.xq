@@ -1,4 +1,4 @@
-(: Productos con stock entre 3 y 6:)
+Productos con stock entre 3 y 6
 (://produc[stocka_actual>3 and stock_actual<6]:)
 (:Apellido de los empleados del departamento 20:)
 (://EMPLEADOS/EMP_ROW[ DEPT_NO=20]/APELLIDO:)
@@ -298,6 +298,13 @@ update insert
 <APELLIDO>PEDRO FRAILE</APELLIDO></EMP_ROW>
 following //EMP_ROW[1]
 
+(: 
+  update insert
+<EMP_ROW>
+<SALARIO>2340</SALARIO>
+<OFICIO>TECNICO</OFICIO>
+<APELLIDO>PEDRO FRAILE</APELLIDO></EMP_ROW>
+following  //EMP_ROW[1]
 
 o
 
@@ -428,3 +435,4 @@ update value
 //EMP_ROW/OFICIO[./='VENDEDOR'] with 'COMERCIAL'
 
 
+https://app.blackbox.ai/share/3d34d4aa-9fc4-4965-a4f1-0fdbab541cf2

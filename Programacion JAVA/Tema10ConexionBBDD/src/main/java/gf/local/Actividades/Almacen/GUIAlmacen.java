@@ -4,14 +4,14 @@
  */
 package gf.local.Actividades.Almacen;
 
+import gf.local.Actividades.AlmacenCopia.*;
 import java.awt.Dimension;
+import java.awt.event.ItemEvent;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.DefaultListModel;
 
@@ -33,21 +33,21 @@ public class GUIAlmacen extends javax.swing.JFrame {
         initComponents();
         setFrame();
     }
-    
+
     private void setFrame() {
-        this.setPreferredSize(new Dimension(300, 500));
+        this.setPreferredSize(new Dimension(500, 500));
         this.setTitle("Manager de almacenes");
         pack();
         this.setLocationRelativeTo(null);
         //Cargar el combobox con los tipo de productos a partir de la select
-        TipoProducto tipoDefault = new TipoProducto(-1,"Selecciona un producto");
+        TipoProducto tipoDefault = new TipoProducto(-1, "Selecciona un producto");
         this.modComboTipoProd = new DefaultComboBoxModel<>();
         this.modComboTipoProd.addElement(tipoDefault);
         this.jComboBox1.setModel(modComboTipoProd);
-        
+
         this.modListaProductos = new DefaultListModel<>();
         this.jList1.setModel(modListaProductos);
-        
+
         try {
             this.con = DriverManager.getConnection(url, user, password);
             String sql = "select * from tiposproducto";
@@ -66,7 +66,7 @@ public class GUIAlmacen extends javax.swing.JFrame {
                 System.out.println("No cerada conexion");
             }
         }
-        
+
     }
 
     /**
@@ -121,13 +121,41 @@ public class GUIAlmacen extends javax.swing.JFrame {
 
     private void jComboBox1ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jComboBox1ItemStateChanged
         // TODO add your handling code here:
-        
-        
+
+        System.out.println(this.jComboBox1.getSelectedIndex());
+        if (evt.getStateChange() == ItemEvent.SELECTED
+                && this.jComboBox1.getSelectedIndex() != 0)
+        {
+            int seleccion = this.jComboBox1.getSelectedIndex();
+            this.modListaProductos.clear();
+            try {
+                this.con = DriverManager.getConnection(url, user, password);
+                String sql = "select * from productos where idProducto = " + seleccion;
+                Statement st = con.createStatement();
+                ResultSet rs = st.executeQuery(sql);
+                while (rs.next()) {
+                    Producto producto = new Producto(rs.getInt(1), rs.getString(2),rs.getDouble(3),rs.getInt(4),rs.getInt(5));
+                    this.modListaProductos.addElement(producto);
+                }
+            } catch (SQLException e) {
+                System.out.println("Fallo al conectar");
+                System.out.println(e.getLocalizedMessage());
+            } finally {
+                try {
+                    this.con.close();
+                } catch (SQLException ex) {
+                    System.out.println("No cerada conexion");
+                }
+            }
+
+        }
+
+
     }//GEN-LAST:event_jComboBox1ItemStateChanged
 
     private void jComboBox1PropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_jComboBox1PropertyChange
         // TODO add your handling code here:
-        
+
     }//GEN-LAST:event_jComboBox1PropertyChange
 
     /**
@@ -155,6 +183,7 @@ public class GUIAlmacen extends javax.swing.JFrame {
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(GUIAlmacen.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */

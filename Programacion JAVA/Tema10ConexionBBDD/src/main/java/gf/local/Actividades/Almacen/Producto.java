@@ -4,6 +4,8 @@
  */
 package gf.local.Actividades.Almacen;
 
+import gf.local.Actividades.AlmacenCopia.*;
+
 /**
  *
  * @author goncalda
@@ -14,7 +16,7 @@ public class Producto {
     private double precio;
     private String descripcion;
 
-    public Producto(int idProducto, int cantidad, int tipo, double precio, String descripcion) {
+    public Producto(int idProducto, String descripcion, double precio, int cantidad, int tipo) {
         this.idProducto = idProducto;
         this.cantidad = cantidad;
         this.tipo = tipo;
@@ -66,8 +68,11 @@ public class Producto {
     public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append("Id: ").append(idProducto);
+        sb.append('\t');
         sb.append("Descripcion: ").append(descripcion);
+        sb.append('\t');
         sb.append("Precio: ").append(precio);
+        sb.append('\t');
         return sb.toString();
     }
 

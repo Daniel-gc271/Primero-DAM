@@ -189,6 +189,38 @@ BEGIN
 END;
 
 
+
+create table datos (emp_no NUMBER(4) PRIMARY KEY);
+insert into DATOS values (7566);
+select * EMPLE;
+
+
+declare
+    v_empno emple.EMP_NO%TYPE;
+    v_salarioActual emple.SALARIO%TYPE;
+    v_job emple.OFICIO%TYPE;
+    v_empls NUMBER;
+    v_incre number := 0;
+begin
+  select EMP_NO into v_empno from datos;
+
+  select SALARIO,OFICIO into v_salarioActual,v_job from datos where EMP_NO = v_empno;
+  select count(*) v_empls;
+  from EMPLE where DIR=v_empno;
+  if v_empls = 0 then 
+    v_incre := 50;
+  else if v_empls = 1 then 
+    v_incre := 80;
+   else if v_empls = 2 or v_empls = 3 then 
+    v_incre := 100;
+  else  v_incre := 110;
+  end if;
+
+  if v_job = "PRESIDENTE" then v_incre := v_incre + 30;
+  
+
+ end;
+
 select * from hr.DEPARTMENTS;
 
 create or replace PROCEDURE eliminarDepartamento (numDpt NUMBER)
@@ -219,6 +251,76 @@ EXCEPTION
   When no_data_found then 
   DBMS_OUTPUT.PUT_LINE('No hay empleados en la tabla');
   When others then 
-  DBMS_OUTPUT.PUT_LINE('Error inesperado');
-    
+  DBMS_OUTPUT.PUT_LINE('Error inesperado');  
 END;
+
+
+/**
+* 
+*
+*/
+
+
+declare
+  v_cadena varchar2(100) := 'fernandez gurierrez';
+  v_apellido varchar2(100) := '';
+  v_char char(1);
+begin
+  for i in 1..length(v_cadena) loop
+        v_char:=susbtr(v_cadena,i,1);
+        if (regexp_like(v_char, '^[A-Za-z+$]')) -- \S
+        then v_apellido = v_apellido || v_char;
+        else exit;
+        end if;
+
+  end loop;
+  dbms_output.put_line('Apellido: '|| v_apellido);
+end;
+
+
+/**
+* Crear la funcion 
+*
+*/
+create or replace FUNCTION sumar (
+  numA in number, numB in number
+
+)  return number
+IS
+V_SUMA NUMBER
+
+begin 
+  V_SUMA:= numA+numB;
+  DBMS_OUTPUT.PUT_LINE('La suma es'|| V_SUMA)
+  return V_SUMA;
+end;
+
+/*
+* Ejecutar funcion
+*/
+declare
+v_result number
+
+begin
+    v_result:=sumar(10,20);
+end;
+
+
+create or replace procedure alternacaracteres (
+  texto varchar2(100)
+
+) 
+
+is
+  v_result varchar2(100);
+  v_char(1) char;
+  v_position number;
+  begin
+   for i in 1..length(texto) loop
+      v_char:=substr(texto,i,1);
+      if mod(i,2) =0 then v_result:=v_result || UPPER(v_char);
+      else  mod(i,2) =1 then v_result:=v_result || LOWER(v_char);
+      end if;
+      end loop;
+      DBMS_OUTPUT.PUT_LINE('La cadena modificada es: '|| v_result);
+   end; 
