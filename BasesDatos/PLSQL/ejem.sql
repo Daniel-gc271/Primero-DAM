@@ -268,11 +268,59 @@ declare
 begin
   for i in 1..length(v_cadena) loop
         v_char:=susbtr(v_cadena,i,1);
-        if (regexp_like(v_char, '^[A-Za-z+$]')) -- \s
-        then  v_apellido = v_apellido || v_char;
+        if (regexp_like(v_char, '^[A-Za-z+$]')) -- \S
+        then v_apellido = v_apellido || v_char;
         else exit;
         end if;
 
   end loop;
   dbms_output.put_line('Apellido: '|| v_apellido);
 end;
+
+
+/**
+* Crear la funcion 
+*
+*/
+create or replace FUNCTION sumar (
+  numA in number, numB in number
+
+)  return number
+IS
+V_SUMA NUMBER
+
+begin 
+  V_SUMA:= numA+numB;
+  DBMS_OUTPUT.PUT_LINE('La suma es'|| V_SUMA)
+  return V_SUMA;
+end;
+
+/*
+* Ejecutar funcion
+*/
+declare
+v_result number
+
+begin
+    v_result:=sumar(10,20);
+end;
+
+
+create or replace procedure alternacaracteres (
+  texto varchar2(100)
+
+) 
+
+is
+  v_result varchar2(100);
+  v_char(1) char;
+  v_position number;
+  begin
+   for i in 1..length(texto) loop
+      v_char:=substr(texto,i,1);
+      if mod(i,2) =0 then v_result:=v_result || UPPER(v_char);
+      else  mod(i,2) =1 then v_result:=v_result || LOWER(v_char);
+      end if;
+      end loop;
+      DBMS_OUTPUT.PUT_LINE('La cadena modificada es: '|| v_result);
+   end; 
