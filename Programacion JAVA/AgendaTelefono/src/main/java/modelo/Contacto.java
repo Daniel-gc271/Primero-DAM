@@ -245,14 +245,16 @@ public class Contacto {
         Contacto contactoAñadir = new Contacto();
         // --- Validación de nombre ---
         if (nombreString == null || nombreString.isBlank()) {
-        } else contactoAñadir.setNombre(nombre);
+        } else {
+            contactoAñadir.setNombre(nombre);
+        }
         // --- Validación apellidos ---
         if (app1String.isBlank() && !app2String.isBlank()) {
             throw new DatosInvalidosException("Debes introducir antes el primer apellido");
-        } else {contactoAñadir.setApellido1(apellido1); contactoAñadir.setApellido2(apellido2);}
-
-        
-
+        } else {
+            contactoAñadir.setApellido1(apellido1);
+            contactoAñadir.setApellido2(apellido2);
+        }
         // --- Procesar teléfonos ---
         ArrayList<String> telefonosInvalidos = new ArrayList<>();
         LinkedHashSet<String> telefonos = new LinkedHashSet<>();
@@ -284,7 +286,6 @@ public class Contacto {
             throw new DatosInvalidosException("Hay teléfonos inválidos en la lista");
         }
 
-     
         if (!emailString.isBlank()) {
             try {
                 contactoAñadir.setCorreo(emailString);
@@ -364,7 +365,7 @@ public class Contacto {
         this.fechaNacimiento = fechacumpleaños;
     }
 
-    public void setNombre(String nombre) throws DatosInvalidosException  {
+    public void setNombre(String nombre) throws DatosInvalidosException {
         this.nombre = nombre;
         if (nombre == null || nombre.isBlank()) {
             throw new DatosInvalidosException("El nombre no puede estar vacío");
