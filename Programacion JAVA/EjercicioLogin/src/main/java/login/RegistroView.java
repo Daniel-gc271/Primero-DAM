@@ -5,7 +5,6 @@
  */
 package login;
 
-
 import java.net.URISyntaxException;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -23,6 +22,8 @@ import static login.LoginView.urlDB;
  */
 public class RegistroView extends javax.swing.JFrame {
 
+    private static final char pasMask = '\u2688';
+
     /**
      * Creates new form LoginView
      *
@@ -34,8 +35,10 @@ public class RegistroView extends javax.swing.JFrame {
     }
 
     private void setFrame() {
-        botonAceptar.setIcon(new javax.swing.ImageIcon(("./src/main/java/com/gf/images/aceptar.png")));
-        botonCancelar.setIcon(new javax.swing.ImageIcon(("./src/main/java/com/gf/images/cancelar.png")));
+        botonAceptar.setIcon(new javax.swing.ImageIcon(("./src/main/java/gf/local/Ejemplo/login/images/aceptar.png")));
+        botonCancelar.setIcon(new javax.swing.ImageIcon(("./src/main/java/gf/local/Ejemplo/login/images/cancelar.png")));
+        jButton2.setIcon(new javax.swing.ImageIcon(("./src/main/java/gf/local/Ejemplo/login/images/ojoAbierto.jpg")));
+        jButton1.setIcon(new javax.swing.ImageIcon(("./src/main/java/gf/local/Ejemplo/login/images/ojoAbierto.jpg")));
         this.setLocationRelativeTo(null);
     }
 
@@ -57,6 +60,8 @@ public class RegistroView extends javax.swing.JFrame {
         botonAceptar = new javax.swing.JButton();
         jPasswordFieldConfirmacion = new javax.swing.JPasswordField();
         jLabel3 = new javax.swing.JLabel();
+        jButton2 = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Registro");
@@ -86,12 +91,30 @@ public class RegistroView extends javax.swing.JFrame {
 
         jLabel3.setText("Confirmación:");
 
+        jButton2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jButton2MousePressed(evt);
+            }
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                jButton2MouseReleased(evt);
+            }
+        });
+
+        jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jButton1MousePressed(evt);
+            }
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                jButton1MouseReleased(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(78, Short.MAX_VALUE)
+                .addContainerGap(76, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addComponent(botonCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -112,8 +135,15 @@ public class RegistroView extends javax.swing.JFrame {
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                     .addComponent(jTextFieldUsuario)
                                     .addComponent(jPasswordFieldContrasena, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                        .addGap(86, 86, 86))))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                        .addGap(50, 50, 50))))
         );
+
+        jPanel1Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {botonAceptar, jButton1});
+
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
@@ -122,13 +152,15 @@ public class RegistroView extends javax.swing.JFrame {
                     .addComponent(jLabel1)
                     .addComponent(jTextFieldUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(9, 9, 9)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(jPasswordFieldContrasena, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
+                    .addComponent(jButton1)
+                    .addComponent(jPasswordFieldContrasena, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel2))
                 .addGap(11, 11, 11)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
+                    .addComponent(jLabel3)
                     .addComponent(jPasswordFieldConfirmacion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel3))
+                    .addComponent(jButton2))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(botonAceptar)
@@ -157,11 +189,67 @@ public class RegistroView extends javax.swing.JFrame {
         this.jTextFieldUsuario.requestFocus();
     }//GEN-LAST:event_botonCancelarActionPerformed
 
-    private void botonAceptarActionPerformed(java.awt.event.ActionEvent evt) {
+    private void jButton2MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton2MousePressed
+        // TODO add your handling code here:
+        this.jPasswordFieldConfirmacion.setEchoChar((char) 0);
+    }//GEN-LAST:event_jButton2MousePressed
 
+    private void jButton2MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton2MouseReleased
+        // TODO add your handling code here:
+
+        this.jPasswordFieldConfirmacion.setEchoChar(pasMask);
+
+    }//GEN-LAST:event_jButton2MouseReleased
+
+    private void jButton1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MousePressed
+        // TODO add your handling code here:
+        this.jPasswordFieldContrasena.setEchoChar((char) 0);
+
+    }//GEN-LAST:event_jButton1MousePressed
+
+    private void jButton1MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseReleased
+        // TODO add your handling code here:
+        this.jPasswordFieldContrasena.setEchoChar(pasMask);
+    }//GEN-LAST:event_jButton1MouseReleased
+
+    private void botonAceptarActionPerformed(java.awt.event.ActionEvent evt) {
+        
+        String passString = new String(this.jPasswordFieldContrasena.getPassword());
+        if (!passString.contentEquals(new String(this.jPasswordFieldConfirmacion.getPassword()))) {
+            JOptionPane.showMessageDialog(this, "Las contraseñas no coinciden", "ERROR", 0);
+            return;
+        }
+        String regexContraseña = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d).{3,8}$";
+        if (passString.length() > 8) {
+            JOptionPane.showMessageDialog(this, "La contraseña es muy larga", "ERROR", 0);
+            return;
+        }
+        if (passString.length() < 3) {
+            JOptionPane.showMessageDialog(this, "La contraseña es muy corta", "ERROR", 0);
+            return;
+        }
+        if (!passString.matches(regexContraseña)) {
+            JOptionPane.showMessageDialog(this, "La contraseña no es segura", "ERROR", 0);
+            return;
+        }
         String user = jTextFieldUsuario.getText();
-        String passString = String.valueOf(jPasswordFieldContrasena.getPassword());
-        String passConfString = String.valueOf(jPasswordFieldConfirmacion.getPassword());
+        if (user.isBlank()) {
+            JOptionPane.showMessageDialog(this, "El nombre está vacio", "ERROR", 0);
+            return;
+        }
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
 
         String selectUser = "SELECT login FROM usuario WHERE login=?";
         try (Connection conn = DriverManager.getConnection(urlDB, "root", "")) {
@@ -173,20 +261,14 @@ public class RegistroView extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(null, "Usuario ya existente", "Error", JOptionPane.ERROR_MESSAGE);
                 return;
             }
-            if (!passString.equals(passConfString)) {
-                JOptionPane.showMessageDialog(null, "Las contraseñas no coinciden", "Error", JOptionPane.ERROR_MESSAGE);
-                return;
-            }
+            
 
             if (user.length() > 15) {
                 JOptionPane.showMessageDialog(null, "El nombre de usuario es demasiado largo", "Error", JOptionPane.ERROR_MESSAGE);
                 return;
             }
 
-            if (passString.length() < 6 || passConfString.length() > 8) {
-
-                JOptionPane.showMessageDialog(null, "La contraseña no cumple los requisitos(Entre 6 y 8 caracteres)", "Error", JOptionPane.ERROR_MESSAGE);
-            }
+            
 
             Usuario nuevo = new Usuario();
             nuevo.setUser(user);
@@ -211,57 +293,58 @@ public class RegistroView extends javax.swing.JFrame {
     /**
      * @param args the command line arguments
      */
-    
-//    public static void main(String args[]) {
-//        /* Set the Nimbus look and feel */
-//        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-//        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-//         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-//         */
-//        try {
-//            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-//                if ("Nimbus".equals(info.getName())) {
-//                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-//                    break;
-//
-//                }
-//            }
-//        } catch (ClassNotFoundException ex) {
-//            java.util.logging.Logger.getLogger(RegistroView.class
-//                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
-//
-//        } catch (InstantiationException ex) {
-//            java.util.logging.Logger.getLogger(RegistroView.class
-//                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
-//
-//        } catch (IllegalAccessException ex) {
-//            java.util.logging.Logger.getLogger(RegistroView.class
-//                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
-//
-//        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-//            java.util.logging.Logger.getLogger(RegistroView.class
-//                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
-//        }
-//        //</editor-fold>
-//        //</editor-fold>
-//
-//        /* Create and display the form */
-//        java.awt.EventQueue.invokeLater(new Runnable() {
-//            public void run() {
-//                try {
-//                    new RegistroView().setVisible(true);
-//
-//                } catch (URISyntaxException ex) {
-//                    Logger.getLogger(RegistroView.class
-//                            .getName()).log(Level.SEVERE, null, ex);
-//                }
-//            }
-//        });
-//    }
-    
+    public static void main(String args[]) {
+        /* Set the Nimbus look and feel */
+        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         */
+        try {
+            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+                if ("Nimbus".equals(info.getName())) {
+                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                    break;
+
+                }
+            }
+        } catch (ClassNotFoundException ex) {
+            java.util.logging.Logger.getLogger(RegistroView.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
+
+        } catch (InstantiationException ex) {
+            java.util.logging.Logger.getLogger(RegistroView.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
+
+        } catch (IllegalAccessException ex) {
+            java.util.logging.Logger.getLogger(RegistroView.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
+
+        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+            java.util.logging.Logger.getLogger(RegistroView.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        }
+        //</editor-fold>
+        //</editor-fold>
+
+        /* Create and display the form */
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                try {
+                    new RegistroView().setVisible(true);
+
+                } catch (URISyntaxException ex) {
+                    Logger.getLogger(RegistroView.class
+                            .getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        });
+    }
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton botonAceptar;
     private javax.swing.JButton botonCancelar;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

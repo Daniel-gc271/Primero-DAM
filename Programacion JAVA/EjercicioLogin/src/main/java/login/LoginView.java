@@ -19,7 +19,8 @@ import javax.swing.JOptionPane;
  * @author macarena
  */
 public class LoginView extends javax.swing.JFrame {
-
+    
+    private static final char pasMask = '\u2688';
     public static final String urlDB = "jdbc:mysql://localhost:3306/usuarios";
 
     public LoginView() {
@@ -31,8 +32,7 @@ public class LoginView extends javax.swing.JFrame {
         //D:\Primero-DAM\Programacion JAVA\EjercicioLogin\src\main\java\gf\local\Ejemplo\login\images\aceptar.png
         botonAceptar.setIcon(new javax.swing.ImageIcon(("./src/main/java/gf/local/Ejemplo/login/images/aceptar.png")));
         botonCancelar.setIcon(new javax.swing.ImageIcon(("./src/main/java/gf/local/Ejemplo/login/images/cancelar.png")));
-        BtnShowPass.setIcon(new javax.swing.ImageIcon(("./src/main/java/gf/local/Ejemplo/login/images/ojo.jpg")));
-        BtnShowPass1.setIcon(new javax.swing.ImageIcon(("./src/main/java/gf/local/Ejemplo/login/images/ojo.jpg")));
+        BtnShowPass.setIcon(new javax.swing.ImageIcon(("./src/main/java/gf/local/Ejemplo/login/images/ojoAbierto.jpg")));
         this.labelRegistro.setText("<HTML> <FONT color=\"#000099\"><U>¿Todavía no te has registrado?</U></FONT> </HTML>");
         this.labelRegistro.setToolTipText("Pulsa para registrarte");
         this.labelRegistro.setCursor(new Cursor(Cursor.HAND_CURSOR));
@@ -57,7 +57,6 @@ public class LoginView extends javax.swing.JFrame {
         botonAceptar = new javax.swing.JButton();
         labelRegistro = new javax.swing.JLabel();
         BtnShowPass = new javax.swing.JButton();
-        BtnShowPass1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Login");
@@ -90,15 +89,17 @@ public class LoginView extends javax.swing.JFrame {
             }
         });
 
+        BtnShowPass.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                BtnShowPassMousePressed(evt);
+            }
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                BtnShowPassMouseReleased(evt);
+            }
+        });
         BtnShowPass.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BtnShowPassActionPerformed(evt);
-            }
-        });
-
-        BtnShowPass1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                BtnShowPass1ActionPerformed(evt);
             }
         });
 
@@ -129,20 +130,16 @@ public class LoginView extends javax.swing.JFrame {
                     .addComponent(jTextFieldUsuario)
                     .addComponent(jPasswordFieldContrasena, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(BtnShowPass, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(BtnShowPass1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(BtnShowPass, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(40, 40, 40))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(20, 20, 20)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jLabel1)
-                        .addComponent(jTextFieldUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(BtnShowPass1))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(jTextFieldUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(14, 14, 14)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -244,9 +241,15 @@ public class LoginView extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_BtnShowPassActionPerformed
 
-    private void BtnShowPass1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnShowPass1ActionPerformed
+    private void BtnShowPassMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BtnShowPassMousePressed
         // TODO add your handling code here:
-    }//GEN-LAST:event_BtnShowPass1ActionPerformed
+        this.jPasswordFieldContrasena.setEchoChar((char)0);
+    }//GEN-LAST:event_BtnShowPassMousePressed
+
+    private void BtnShowPassMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BtnShowPassMouseReleased
+        // TODO add your handling code here:
+        this.jPasswordFieldContrasena.setEchoChar(pasMask);
+    }//GEN-LAST:event_BtnShowPassMouseReleased
 
     private void resetIntentos(Connection conn, String user) throws SQLException {
         String sql = "UPDATE usuario SET intentos=0 WHERE login=?";
@@ -312,7 +315,6 @@ public class LoginView extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton BtnShowPass;
-    private javax.swing.JButton BtnShowPass1;
     private javax.swing.JButton botonAceptar;
     private javax.swing.JButton botonCancelar;
     private javax.swing.JLabel jLabel1;
