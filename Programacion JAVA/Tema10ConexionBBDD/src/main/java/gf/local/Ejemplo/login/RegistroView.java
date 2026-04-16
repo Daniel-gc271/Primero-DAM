@@ -170,43 +170,51 @@ public class RegistroView extends javax.swing.JFrame {
     private void botonAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonAceptarActionPerformed
         // TODO add your handling code here:
 
-        char[] contraseñaChars;
-        contraseñaChars = this.jPasswordField1.getPassword();
-        String contraseña = new String(contraseñaChars);
+        String contraseña = new String(this.jPasswordField1.getPassword());
         if (!contraseña.contentEquals(new String(this.jPasswordField2.getPassword()))) {
             JOptionPane.showMessageDialog(this, "Las contraseñas no coinciden", "ERROR", 0);
             return;
         }
-        String regexContraseña = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d).{8,}$";
+        String regexContraseña = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d).{3,8}$";
+        if (contraseña.length() > 8) {
+            JOptionPane.showMessageDialog(this, "La contraseña es muy larga", "ERROR", 0);
+            return;
+        }
+        if (contraseña.length() < 3) {
+            JOptionPane.showMessageDialog(this, "La contraseña es muy corta", "ERROR", 0);
+            return;
+        }
         if (!contraseña.matches(regexContraseña)) {
             JOptionPane.showMessageDialog(this, "La contraseña no es segura", "ERROR", 0);
             return;
         }
-        String nombre = new String(this.jTextField1.getText());
+        String nombre = this.jTextField1.getText();
         if (nombre.isBlank()) {
             JOptionPane.showMessageDialog(this, "El nombre está vacio", "ERROR", 0);
             return;
         }
-        Usuario u = new Usuario();
-        u.setUser(nombre);
-        u.setPassword(contraseña);
-        registrarUsuario(u);
+
+        registrarUsuario(nombre, contraseña);
     }//GEN-LAST:event_botonAceptarActionPerformed
-    private void registrarUsuario(Usuario u) {
+    private void registrarUsuario(String uName, String uPassword) {
         conectarBBDD();
-        String stb = new String();
-        stb="insert into usuario (login, password, blocked) values (?,?,0)";
+        String stb = 
+                    """
+                    INSERT INTO usuario ( login, password, blocked) select ?, ?, 0
+                    where not exists (select 1 from usuario where login = ?)
+                    """;
         System.out.println(stb);
         PreparedStatement pst;
         try {
             pst = conn.prepareStatement(stb);
-            pst.setString(1, u.getUser());
-            pst.setString(2, u.getPassword());
-             pst.executeUpdate(stb);
+            pst.setString(1, uName);
+            pst.setString(2, uPassword);
+            pst.setString(3, uName);
+            pst.executeUpdate();
         } catch (SQLException ex) {
             System.err.println(ex.getMessage());
         }
-       
+
     }
 
     public static void conectarBBDD() {
