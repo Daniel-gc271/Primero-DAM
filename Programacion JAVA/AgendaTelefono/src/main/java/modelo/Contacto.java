@@ -32,6 +32,9 @@ public class Contacto {
     /**
      * Crea un contacto con el instante de creacion ya introducido
      *
+     * @param nombre nombre del contacto (requisito mínimo)
+     * @param numTelf lista de numeros de telefono (requisito mínimo)
+     *
      */
     public Contacto() {
 
@@ -229,8 +232,35 @@ public class Contacto {
         }
         return resultados;
     }
+
     // </editor-fold>
+    
+    
     // <editor-fold defaultstate="collapsed" desc="Metodo añadirContacto">
+    public static void añadirContacto(HashMap<?, Contacto> listaContactos, String nombre, String numTelf) throws Exception {
+        if (nombre == null || nombre.isBlank() || nombre.length() == 0) {
+            throw new ContactoException(ContactoMsgEnum.ERR_EMPTY_NAME);
+        }
+        if (!numTelf.matches("^\\d{9}(?:\\s*,s*\\d{9})*$")) {
+            throw new ContactoException(ContactoMsgEnum.ERR_EMPTY_PHONE);
+        }
+        boolean telfRepetido;
+        HashSet<String> numTel = new HashSet<>();
+        ArrayList<String> telRepetidos = new ArrayList<>();
+        for (StringTokenizer sepTelefonos = new StringTokenizer(numTelf, ","); sepTelefonos.hasMoreTokens();) {
+            String telValidar = sepTelefonos.nextToken().replaceAll("\\D", "");
+            //.add devuelve true cuando algo no se encuentra repetido
+            telfRepetido = !numTel.add(telValidar);
+            if (telfRepetido) {
+                telRepetidos.add(telValidar);
+            }
+        }
+        if (!telRepetidos.isEmpty()) {
+            throw new ContactoException(ContactoMsgEnum.ERR_CONTACTOS_REPETIDOS.toString(telRepetidos.size(),String.join(", ", telRepetidos)));
+        }
+
+    }
+
 
     public Contacto crearContacto(
             String nombreString,
