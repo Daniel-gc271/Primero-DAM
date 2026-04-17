@@ -26,31 +26,34 @@ public class VistaEncuesta extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanel5 = new javax.swing.JPanel();
+        GrupoBtnVotar = new javax.swing.ButtonGroup();
         jPanel4 = new javax.swing.JPanel();
         jRadioButtonYes = new javax.swing.JRadioButton();
         jRadioButtonNo = new javax.swing.JRadioButton();
         jRadioButtonMaybe = new javax.swing.JRadioButton();
         jLabel1 = new javax.swing.JLabel();
+        BotLat = new javax.swing.JPanel();
+        jButton1 = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jPanel5.setLayout(new java.awt.GridLayout());
-        getContentPane().add(jPanel5, java.awt.BorderLayout.PAGE_START);
+        jPanel4.setLayout(new java.awt.GridLayout(0, 3, 10, 0));
 
-        jPanel4.setLayout(new java.awt.GridLayout());
-
+        GrupoBtnVotar.add(jRadioButtonYes);
         jRadioButtonYes.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jRadioButtonYes.setText("Si");
         jRadioButtonYes.setAutoscrolls(true);
         jRadioButtonYes.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jPanel4.add(jRadioButtonYes);
 
+        GrupoBtnVotar.add(jRadioButtonNo);
         jRadioButtonNo.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jRadioButtonNo.setText("No");
         jRadioButtonNo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jPanel4.add(jRadioButtonNo);
 
+        GrupoBtnVotar.add(jRadioButtonMaybe);
         jRadioButtonMaybe.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jRadioButtonMaybe.setText("Puede");
         jRadioButtonMaybe.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -62,6 +65,16 @@ public class VistaEncuesta extends javax.swing.JFrame {
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("¿España va a ganar el mundial?");
         getContentPane().add(jLabel1, java.awt.BorderLayout.CENTER);
+
+        BotLat.setLayout(new java.awt.GridLayout(0, 1));
+
+        jButton1.setText("Confirmar");
+        BotLat.add(jButton1);
+
+        jButton2.setText("Borrrar");
+        BotLat.add(jButton2);
+
+        getContentPane().add(BotLat, java.awt.BorderLayout.LINE_END);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -103,9 +116,12 @@ public class VistaEncuesta extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JPanel BotLat;
+    private javax.swing.ButtonGroup GrupoBtnVotar;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel4;
-    private javax.swing.JPanel jPanel5;
     private javax.swing.JRadioButton jRadioButtonMaybe;
     private javax.swing.JRadioButton jRadioButtonNo;
     private javax.swing.JRadioButton jRadioButtonYes;
